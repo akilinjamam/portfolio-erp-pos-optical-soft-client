@@ -33,18 +33,21 @@ const Home = () => {
 
 
     return (
-        <div style={{width:'100%', height:'100vh'}}>
+        <div className="flex_center" style={{width:'100%', height:'100vh'}}>
             
-            {
+            {/* {
                 users?.result?.map(datas => {
                     return (
                         <p key={datas?.id}>{datas?.username}</p>
                     )
                 })
-            }
+            } */}
 
-            <div>
-                <button onClick={handleLogOut}>logout</button>
+            <div style={{textAlign:'center'}}>
+                <h1>welcome to optical soft.</h1>
+                <p>we are working on it....</p>
+                <br />
+                <p ><button onClick={handleLogOut}>logout</button></p>
             </div>
         </div>
     );
