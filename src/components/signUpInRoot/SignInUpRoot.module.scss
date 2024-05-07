@@ -1,0 +1,30 @@
+@use "../../global_style/reusable_variables/index" as v;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+$full: 100%;
+$font:"DM Sans", sans-serif;
+
+
+
+.main{
+    position: fixed;
+    top: 0;
+    width: $full;
+    height: 50px;
+    .container{
+        width: $full;
+        height: 50px;
+        .link{
+            margin-right: 30px;
+            font-family: $font;
+            color: v.$white;
+            
+        }
+        .active{
+            color: v.$pest;
+            background-color: v.$lightGray;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+@use '../../global_style//reusable_variables/index' as v;
+
+.main{
+    width: 100%;
+    height: 100vh;
+    background-color: v.$primary;
+}
