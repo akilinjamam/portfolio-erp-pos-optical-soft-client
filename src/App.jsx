@@ -6,6 +6,8 @@ import SignUpInRoot from './components/signUpInRoot/SignUpInRoot';
 import Home from './components/dashboard/home/Home';
 import { useEffect, useState } from 'react';
 import Loading from './components/loading/Loading';
+import DashboardHome from './components/dashboard/dashboard_home/DashboardHome';
+
 
 function App() {
 
@@ -39,7 +41,16 @@ function App() {
     },
     {
       path: '/dashboard',
-      element: <Home/>
+      element: <Home/>,
+      children: [
+        {index: true, element:<DashboardHome/> },
+        {
+          path: 'testDash',
+          element: <div>test</div>
+        },
+        
+        
+      ]
     }
   ])
   

@@ -4,11 +4,28 @@ import logo from '../../images/logo.png';
 import { allInputLoginData } from "./logInputItems";
 import { fetchPostLoginData } from "../../data/fetchedData/fetchLoginData";
 import { useNavigate } from "react-router-dom";
+// import useScanDetection from "use-scan-detection";
 
 import { toast } from "react-toastify";
+// import { useEffect, useState } from "react";
 
 const Login = () => {
 
+    // let [value, setValue] = useState('');
+    // const [filteredValue, setFilteredValue] = useState('');
+
+    // useScanDetection({
+    //     onComplete: setValue,
+    //     minLength: 13,
+       
+    // });
+
+    // useEffect(() => {
+    //     const filtered = value.replace(/Shift|Enter/g, "");
+    //     setFilteredValue(filtered)
+    // }, [value])
+
+   
     const [user, setUser, loading, setLoading, eye,setEye] = useLogin();
     const navigate = useNavigate();
 
@@ -47,6 +64,8 @@ const Login = () => {
         <div className={`${signin.main} flex_center`}>
             <div className={signin.container}>
                 <img src={logo} alt="" />
+                <p style={{color: 'white'}}></p>
+              
                 <div className={signin.registration_form}>
                     <h4>Sign in to start your session</h4>
                     <form onSubmit={handleSubmit}>

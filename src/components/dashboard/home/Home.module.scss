@@ -1,0 +1,70 @@
+@use '../../../global_style//reusable_variables/index' as v;
+
+.main{
+    width: 100%;
+    height: 100vh;
+    .iconBar{
+        width: 3%;
+        height: 100vh;
+        background-color: v.$lightPrimary;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+       
+        .navigation_icon {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            border-bottom: 1px solid white;
+            margin-bottom: 1px ;
+            i{
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        }
+        
+    }
+    .container{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        .part1{
+            width: 20%;
+            background-color: v.$primary;
+            transition: .3s ;
+            font-family: v.$fs;
+            .navigation_title{
+                color: white;
+                width: 100%;
+                height: 50px;
+                margin-bottom: 1px;
+                border-bottom: 1px solid white;
+                p{            
+                    margin-left: 20%;
+                    cursor: pointer;
+                }
+            }
+            .slideBtn{
+                position: absolute;
+                right: -15px;
+                top: 50%;
+                background-color: white;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                font-size: 28px;
+                border: 2px solid v.$lightGray;
+                cursor: pointer;
+            }
+        }
+        .part2{
+            height: 100vh;
+            transition: .3s ;
+            position: fixed;
+            top: 0;
+            right: 0;
+            // z-index: -1;
+        }
+    }
+}
