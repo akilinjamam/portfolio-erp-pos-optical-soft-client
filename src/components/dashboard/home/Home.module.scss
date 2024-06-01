@@ -1,15 +1,22 @@
 @use '../../../global_style//reusable_variables/index' as v;
 
+
 .main{
     width: 100%;
     height: 100vh;
+    .ifontColor{
+        color: white;
+    }
+    .iActive{
+        color: rgba(0, 255, 42, 0.822)
+    }
     .iconBar{
         width: 3%;
         height: 100vh;
         background-color: v.$lightPrimary;
         position: fixed;
         top: 0;
-        z-index: 10;
+        z-index: 2;
        
         .navigation_icon {
             width: 100%;
@@ -18,22 +25,21 @@
             border-bottom: 1px solid white;
             margin-bottom: 1px ;
             i{
-                color: white;
                 font-size: 20px;
                 cursor: pointer;
-            }
-        }
-        
+            }          
+        }        
     }
     .container{
         width: 100%;
-        height: 100vh;
         position: relative;
+        height: 100vh;
         .part1{
             width: 20%;
             background-color: v.$primary;
             transition: .3s ;
             font-family: v.$fs;
+            z-index: 1;
             .navigation_title{
                 color: white;
                 width: 100%;
@@ -56,7 +62,12 @@
                 font-size: 28px;
                 border: 2px solid v.$lightGray;
                 cursor: pointer;
+                opacity: 0;
+                transition: .5s ease-in-out;
             }
+        }
+        .part1:hover .slideBtn{
+            opacity: 1;
         }
         .part2{
             height: 100vh;
@@ -64,7 +75,9 @@
             position: fixed;
             top: 0;
             right: 0;
-            // z-index: -1;
+        }
+        .part2:hover .slideBtn{
+            z-index: -1;
         }
     }
 }

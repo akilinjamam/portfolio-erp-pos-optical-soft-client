@@ -1,0 +1,17 @@
+.main{
+    width: 100%;
+    position: absolute;
+    bottom: 50px;
+    padding: 0 10px;
+    .container{
+        width: 170px;
+        
+        .pageBox{
+            width: 25px;
+            height: 25px;
+            background-color: rgb(88, 87, 87);
+            color: white;
+            cursor: pointer;
+        }
+    }
+}

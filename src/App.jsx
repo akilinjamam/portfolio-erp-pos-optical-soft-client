@@ -7,6 +7,9 @@ import Home from './components/dashboard/home/Home';
 import { useEffect, useState } from 'react';
 import Loading from './components/loading/Loading';
 import DashboardHome from './components/dashboard/dashboard_home/DashboardHome';
+import SalesModule from './components/dashboard/salesModule/SalesModule';
+import Administration from './components/dashboard/administration_module/Administration';
+import ProductEntry from './components/dashboard/administration_module/product_entry/ProductEntry';
 
 
 function App() {
@@ -45,11 +48,19 @@ function App() {
       children: [
         {index: true, element:<DashboardHome/> },
         {
-          path: 'testDash',
-          element: <div>test</div>
+          path: 'sales_module',
+          element: <SalesModule/>
         },
-        
-        
+        {
+          path: 'administration_module',
+          element: <Administration/>,
+          children: [
+            {
+              path:'product_entry',
+              element: <ProductEntry/>
+            }
+          ]
+        },
       ]
     }
   ])
