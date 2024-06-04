@@ -68,7 +68,7 @@ export const homeNavigator = [
         routes: {
             one: '/dashboard/administration_module',
             two: '/dashboard/administration_module/product_entry',
-            three: '',
+            three: '/dashboard/administration_module/product_list',
             four: '',
             five: ''
         }

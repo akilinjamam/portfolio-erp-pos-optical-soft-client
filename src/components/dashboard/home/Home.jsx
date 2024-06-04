@@ -28,9 +28,6 @@ const Home = () => {
          return active ? `${home.iActive}` : `${home.ifontColor}`
     }
 
-    
-
-
     return (
         <div className={`${home.main}`}>
             <div className={`${home.iconBar}`}>
