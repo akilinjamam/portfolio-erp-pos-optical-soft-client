@@ -3,19 +3,26 @@ import { useDispatch } from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import { calculateTotalPrice } from '../../../calculation/calculateSum';
 // import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 // 
-const ProductListTable = ({paginatedDataContainer, isLoading, paginatedIndex, setEdit, edit}) => {
-    console.log(paginatedDataContainer)
+const ProductListTable = ({paginatedDataContainer, isLoading, paginatedIndex, setEdit, edit, showData}) => {
+   
 
   
   const dispatch = useDispatch();
 
   const handleModal = (img) => {
-    dispatch(openModal());
+    dispatch(openModal('img'));
     dispatch(openImg(img))
   }
 
+  const totalSales = showData?.map(data => data?.salesPrice);
+  const totalPurchase = showData?.map(data => data?.purchasePrice);
+  const totalQuantity = showData?.map(data => data?.quantity);
+  const totalSalesPrice = calculateTotalPrice(totalSales);
+  const totalPurchasePrice = calculateTotalPrice(totalPurchase);
+  const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
 
 
 if(isLoading){
@@ -28,8 +35,8 @@ if(isLoading){
               <tr>
                   <th>SL</th>
                   <th>Product Name</th>
-                  <th>Purchase Price</th>
                   <th>Sales Price</th>
+                  <th>Purchase Price</th>
                   <th>Quantity</th>
                   <th>Category</th>
                   <th>Date</th>
@@ -49,8 +56,8 @@ if(isLoading){
                 <tr style={{background: `${data?._id === edit ? 'lightgray' : ''}`}} key={index+1} >
                     <td>{(((index + 1) === 10) && (paginatedIndex === 1)) ? 1 : '' }{(paginatedIndex-1) === 0 ? '' : ((index+1) === 10 ? paginatedIndex : (paginatedIndex-1) ) }{(index+1) === 10 ? 0 : (index+1)} </td>
                     <td title={data?.productName}>{data?.productName?.length > 20 ? (data?.productName?.slice(0,20) + '...') : data?.productName}</td>
-                    <td>{data?.purchasePrice}</td>
                     <td>{data?.salesPrice}</td>
+                    <td>{data?.purchasePrice}</td>
                     <td>{data?.quantity}</td>
                     <td>{data?.category}</td>
                     <td>{data?.date?.slice(0,10)}</td>
@@ -65,7 +72,21 @@ if(isLoading){
               )
             } )
            }
-           
+           <tr>
+              <td>Total</td>
+              <td>=</td>
+              <td>{totalSalesPrice}</td>
+              <td>{totalPurchasePrice}</td>
+              <td>{totalAmountOfQuantity}</td>
+              <td>Profit = {totalSalesPrice - totalPurchasePrice}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+           </tr>
         </tbody>
       </table>
     );

@@ -111,7 +111,7 @@ const ProductList = () => {
               </div>
             </div>
           </div>
-            <ProductListTable isLoading={isLoading} paginatedIndex={paginatedIndex} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit}/>
+            <ProductListTable isLoading={isLoading} paginatedIndex={paginatedIndex} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData}/>
            {
             !isLoading 
             &&

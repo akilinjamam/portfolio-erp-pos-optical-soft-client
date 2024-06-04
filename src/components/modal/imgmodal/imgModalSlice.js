@@ -4,11 +4,13 @@ export const imgModalSlice = createSlice({
     name: "imgModal",
     initialState: {
         open: false,
+        type: '',
         img: '',
     },
     reducers: {
-        openModal: (state) => {
-            state.open = true
+        openModal: (state, action) => {
+            state.open = true;
+            state.type = action.payload;
         },
         closeModal: (state) => {
             state.open = false

@@ -8,17 +8,20 @@ const ImgModal = () => {
 
         const open = useSelector((state) => state.imgModal.open );
         const img = useSelector((state) => state.imgModal.img );
+        const type = useSelector((state) => state.imgModal.type );
         const dispatch = useDispatch();
    
     return (
-        <div className={`${imgmodal.main} flex_center  ${open ? imgmodal.open : imgmodal.close}`}>
-           <section className={`${imgmodal.container}`}>
-               <div className={`${imgmodal.cancelBtn} flex_right`}>
-                    <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
-               </div>
-               <br />
-               <img width={530} height={330} src={img} alt="" />
-           </section>
+        <div>
+            <div className={`${imgmodal.main} flex_center  ${(open && type === 'img' ) ? imgmodal.open : imgmodal.close}`} >
+                <section className={`${imgmodal.container}`}>
+                    <div className={`${imgmodal.cancelBtn} flex_right`}>
+                            <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
+                    </div>
+                    <br />
+                    <img width={530} height={330} src={img} alt="" />
+                </section>
+            </div>
         </div>
     );
 };
