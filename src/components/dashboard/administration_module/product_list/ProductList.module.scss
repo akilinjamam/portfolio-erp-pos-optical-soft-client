@@ -1,0 +1,119 @@
+@use '../../../../global_style//reusable_variables/index' as v;
+.main{
+    font-family: v.$fs;
+    div{
+        .inputAreaOne, .inputAreaTwo{
+        
+            height: 175px;
+            position: relative;
+            // background-color: green;
+            .container{
+                width: 100%;
+                height: 150px;
+                background-color: rgb(209, 222, 247);
+                border-radius: 10px;
+                border: 1px solid gray;
+                padding: 10px 10px;
+                .titleName{
+                    font-weight: bold;
+                    position: absolute;
+                    top: 2px;
+                    left: 26px;
+                    z-index: 4;
+                }
+                .border_remover{
+                    // width: 120px;
+                    height: 10px;
+                    background-color: white;
+                    position: absolute;
+                    top: 13px;
+                    left: 20px;
+                    background-color: rgb(209, 222, 247);
+                }
+                .inputFields{
+                    width: 100%;
+                    margin-bottom: 2px;
+                    font-family: v.$fs;
+                    font-size: 13px;
+                }
+
+                input{
+                    width: 70%;
+                }
+                select{
+                    width: 50%;
+                }
+            }
+
+            .inputAreaOne_footer{
+                width: 100%;
+                height: 20px;
+                margin-top: 7px;
+                .inputAreaOne_footer_container{
+                    width: 230px;
+                    // background-color: red;
+                    height: 20px;
+                    
+                }
+            }
+        }
+        .inputAreaOne{
+            width: 79%;
+        }
+        .inputAreaTwo{
+            width: 20%;
+            position: relative;
+            .inputAreaTwoContainer{
+                width: 100%;
+                height: 100%;
+                i{
+                    font-size: 80px;
+                    color: rgb(167, 167, 167);
+                   
+                    position: absolute;
+                    top: 20%;
+                    left: 30%;
+            
+                }
+                input{
+                    position: absolute;
+                    top: 20%;
+                    left: 15%;
+                    opacity: 0;
+                }
+                img{
+                    
+                    display: block;
+                    margin: auto;
+                    border-radius: 10px;
+                }
+                .uploading{
+                    position: absolute;
+                    bottom: 13px;
+                    left: 36%;
+                    font-style: italic;
+                    font-size: 11px;
+                    font-weight: bold;
+                    color: green;
+                }
+            }
+        }
+    }
+
+    table {
+        width: 99%;
+        border-collapse: collapse;
+        margin: 5px 5px;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        font-size: 12px;
+    }
+    th, td {
+        padding: 4px;
+        border: 1px solid #dddddd;
+        text-align: left;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+
+}

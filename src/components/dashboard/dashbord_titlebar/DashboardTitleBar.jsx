@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import useHome from '../home/useHome';
 import dashboardTitle from './DashboardTitleBar.module.scss';
 const DashboardTitleBar = () => {
-    const [date, setDate] = useState({
-        day:'',
-        monthDate: '',
-        monthName: '',
-        year: '',
-        hour: '',
-        minute:'',
-        second: ''
-    });
+    // const [date, setDate] = useState({
+    //     day:'',
+    //     monthDate: '',
+    //     monthName: '',
+    //     year: '',
+    //     hour: '',
+    //     minute:'',
+    //     second: ''
+    // });
     const {location} = useHome();
   
     // useEffect(() => {

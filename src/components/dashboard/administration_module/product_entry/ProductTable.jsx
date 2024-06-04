@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useDispatch} from 'react-redux';
 import '../../../../global_style/global_style.css'
+import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit}) => {
 
+
+
+  const dispatch = useDispatch();
+
+
   const handleDelete = (value) => {
-  
     const deletedId = ((value+1)+((paginatedIndex-1)*10))
-    
     const deleteDataActual = showData.filter((f,i) => (i+1) !== deletedId )
     setShowData(deleteDataActual);
   }
@@ -13,6 +18,11 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
   const handleEdit = (value) => {
     const deletedId = ((value+1)+((paginatedIndex-1)*10))
     setEdit(deletedId)
+  }
+
+  const handleModal = (img) => {
+    dispatch(openModal());
+    dispatch(openImg(img))
   }
 
     return (
@@ -52,7 +62,7 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                     <td>{data.frameType}</td>
                     <td>{data.shape}</td>
                     <td>{data.barcode}</td>
-                    <td>{data?.img ? <img style={{margin:'auto', display:'block', borderRadius:'5px'}} height={20} width={20} src={data?.img} alt="" /> : 'image not added'}</td>
+                    <td>{data?.img ? <img onClick={ () => handleModal(data?.img)} style={{margin:'auto', display:'block', borderRadius:'5px', cursor:'pointer'}} height={20} width={20} src={data?.img} alt="" /> : 'image not added'}</td>
                     <td  className={`flex_around`}><i onClick={() => handleDelete(index)} style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> <i onClick={() => handleEdit(index)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>
                 </tr>
               )

@@ -28,14 +28,14 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) =>
     ]
     
     useEffect(() => {
-        const paginatedData = showData.slice((pageNumber*10) - 10, pageNumber*10);
+        const paginatedData = showData?.slice((pageNumber*10) - 10, pageNumber*10);
         setPaginatedDataContainer(paginatedData)
         setPaginatedIndex(pageNumber)
     },[pageNumber,setPaginatedDataContainer,setPaginatedIndex, showData ])
 
     const handleNav = (nav) => {
         if(nav.link === 'increase'){
-           if(count <= (Math.ceil((showData.length/10)-3))){
+           if(count <= (Math.ceil((showData?.length/10)-3))){
             setCount(prevCount => prevCount+1)
            }
         }
@@ -63,7 +63,7 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) =>
     const hide = (value) => {
        
        if(value.link === 'three'){
-            if((showData.length <20)){
+            if((showData?.length <20)){
             return 'none'
         }else{
             return 'block'
@@ -74,7 +74,7 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) =>
 
     return (
         <div className={`${pagination.main} flex_left`}>
-           <div style={{opacity: `${showData.length < 10 ? 0 : 1}`}} className={`${pagination.container} flex_between`}>
+           <div style={{opacity: `${showData?.length < 10 ? 0 : 1}`}} className={`${pagination.container} flex_between`}>
                 {
                     navigation.slice(0,4).map((nav, index) => {
                         return (
@@ -88,7 +88,7 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) =>
                 }
                 <p>....</p>
                 <div className={`${pagination.pageBox} flex_center`}>
-                    {Math.ceil(showData.length/10) === 0 ? 1 : Math.ceil(showData.length/10)}
+                    {Math.ceil(showData?.length/10) === 0 ? 1 : Math.ceil(showData?.length/10)}
                 </div>
                 {
                     navigation.slice(4,5).map((nav, index) => {

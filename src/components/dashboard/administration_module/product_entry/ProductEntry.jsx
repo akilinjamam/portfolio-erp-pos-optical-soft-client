@@ -1,4 +1,3 @@
-
 import '../../../../global_style/global_style.css'
 import { updloadCloudinaryImage } from '../../../uploadCloudinaryImg';
 import DashboardFooter from '../../dashboard_footer/DashboardFooter';
@@ -7,9 +6,10 @@ import productEntry from './ProductEntry.module.scss';
 import ProductTable from './ProductTable';
 import { optionField, textInput } from './productInput';
 import useProductEntry from './useProductEntry';
+
 const ProductEntry = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading} = useProductEntry();
-  
+  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useProductEntry();
+
     return (
         <div className={`${productEntry.main} full_width`}>
           <div  className={`flex_around`}>
@@ -28,6 +28,7 @@ const ProductEntry = () => {
                                     <label htmlFor="">{input.placeholder}:</label>
                                     <input value={productData[input.name]}   type={input.type} 
                                         onChange={(e) => {setProductData({...productData, [input.value]: e.target.value})}}
+                                        required
                                     />
                                 </div>
                                 )
@@ -42,6 +43,7 @@ const ProductEntry = () => {
                                       <label htmlFor="">{select.placeholder}:</label>
                                       <select name="" id="" value={productData[select.variable]}
                                       onChange={(e) => {setProductData({...productData, [select.variable] : e.target.value})}}
+                                      required
                                       >
                                         <option value="">{select.placeholder}</option>
                                         {
@@ -69,7 +71,10 @@ const ProductEntry = () => {
                                     ?
                                     <button onClick={editProduct} className={`commonButton btnColor_green`}>SAVE</button>
                                     :
-                                  <button className={`commonButton btnColor_green`}>SUBMIT</button>
+                                  <button onClick={(e) => {
+                                    e.preventDefault()
+                                    handlePost()
+                                  }} className={`commonButton btnColor_green`}>SUBMIT</button>
                                   }
                                   {
                                     edit

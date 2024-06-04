@@ -7,7 +7,7 @@ export const administrationRoute = [
     },
     {
         value: 'Product List',
-        link: '',
+        link: '/dashboard/administration_module/product_list',
         icon: 'uil uil-file-info-alt',
         color: 'rgb(243, 231, 209)'
     },

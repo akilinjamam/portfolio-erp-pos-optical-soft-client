@@ -1,0 +1,29 @@
+@use '../../../global_style/reusable_variables/index' as v;
+.main{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+   
+    .container{
+        width: 550px;
+        height: 400px;
+        background-color: rgb(219, 219, 219);
+        border-top: 5px solid v.$lightPrimary ;
+        padding: 5px 10px;
+        .cancelBtn{
+            width: 100%;
+            padding: 5px 0;
+            border-bottom: 1px solid gray;
+            cursor: pointer;
+        }
+    }
+}
+.open{
+    display: flex;
+}
+
+.close{
+    display: none;
+}

@@ -4,23 +4,32 @@ import useHome from './useHome';
 import { homeNavigator } from './homeNavigator';
 import DashboardTitleBar from '../dashbord_titlebar/DashboardTitleBar';
 import { ToastContainer } from 'react-toastify';
+import ImgModal from '../../modal/imgmodal/ImgModal';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../../modal/imgmodal/imgModalSlice';
 const Home = () => {
+    
+    const dispath = useDispatch()
  
     const {slide, setSlide, error,navigate, location } = useHome()
 
     const handleSlide = () => {
         setSlide(!slide)
     }
+    
 
     if(error){
         return navigate('/login')
     }
 
     const activeRoute = (routes) => {  
-    const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];
-    const active = links.some(path => location === path)
-     return active ? `${home.iActive}` : `${home.ifontColor}`
+        const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];
+        const active = links.some(path => location === path)
+         return active ? `${home.iActive}` : `${home.ifontColor}`
     }
+
+    
+
 
     return (
         <div className={`${home.main}`}>
@@ -34,7 +43,12 @@ const Home = () => {
                             {
                                 homeNavigator?.map((values, index) => 
                                 <div className={`${home.navigation_title} flex_left`} key={index + 1}>
-                                    <p className={`${activeRoute(values.routes)}`} onClick={() => navigate(values.route)}>{values.value}</p>
+                                    <p className={`${activeRoute(values.routes)}`} onClick={() => {
+                                        navigate(values.route)
+                                        dispath(closeModal())
+                                    }}>
+                                    {values.value}
+                                    </p>
                                 </div> )
                             }
                             <div className={`${home.slideBtn} flex_center`} onClick={handleSlide}> 
@@ -43,9 +57,9 @@ const Home = () => {
                     </div>
                     <div style={{width: `${slide ? '95%' : '80%'}`}} className={`${home.part2}`}>
                         <ToastContainer style={{marginTop:'40px'}}/>
+                        <ImgModal/>
                         <DashboardTitleBar/>
-                        <Outlet/>
-                      
+                        <Outlet/>                    
                     </div>
                 </div>
         </div>

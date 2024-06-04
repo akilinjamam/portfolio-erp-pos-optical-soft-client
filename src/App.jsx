@@ -10,6 +10,7 @@ import DashboardHome from './components/dashboard/dashboard_home/DashboardHome';
 import SalesModule from './components/dashboard/salesModule/SalesModule';
 import Administration from './components/dashboard/administration_module/Administration';
 import ProductEntry from './components/dashboard/administration_module/product_entry/ProductEntry';
+import ProductList from './components/dashboard/administration_module/product_list/ProductList';
 
 
 function App() {
@@ -58,7 +59,11 @@ function App() {
             {
               path:'product_entry',
               element: <ProductEntry/>
-            }
+            },
+            {
+              path:'product_list',
+              element: <ProductList/>
+            },
           ]
         },
       ]
