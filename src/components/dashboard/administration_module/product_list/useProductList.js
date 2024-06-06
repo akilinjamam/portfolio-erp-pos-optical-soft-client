@@ -50,7 +50,6 @@ const useProductList = () => {
 
         const img = imgHolder ? imgHolder : updateProductData?.img
 
-
         const updatedData = {
             productName: updateProductData?.productName,
             salesPrice: updateProductData?.salesPrice,
@@ -68,6 +67,7 @@ const useProductList = () => {
 
         await fetchUpdateProductData(edit, updatedData, refetch, toast)
         setImgHolder('')
+        setEdit('')
     }
 
     return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct }

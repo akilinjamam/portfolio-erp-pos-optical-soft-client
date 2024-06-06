@@ -37,18 +37,18 @@ const ProductList = () => {
                           </div>
                           <div style={{width:'49%', marginLeft:'15px'}}>
                             {
-                              optionField.map((select, index) => {
+                              optionField?.map((select, index) => {
                                 return (
                                 <div key={index+1} className={`${productList.inputFields} flex_between`} >
                                       <label htmlFor="">{select?.placeholder}:</label>
-                                      <select value={updateProductData[select?.variable]}  name="" id="" 
-                                      onChange={(e) => {setUdpateProductData({...productData, [select?.variable] : e.target.value})}}
+                                      <select value={updateProductData[select.variable]}  name="" id="" 
+                                      onChange={(e) => {setUdpateProductData({...updateProductData, [select.variable] : e.target.value})}}
                                       required
                                       >
                                         <option value="">{select?.placeholder}</option>
                                         {
-                                          Object.keys(select?.options).map((objectKey, objectIndex) => (
-                                            <option value={select?.options[objectKey]} key={objectIndex}>
+                                          Object.keys(select.options).map((objectKey, objectIndex) => (
+                                            <option value={select.options[objectKey]} key={objectIndex}>
                                               {select?.options[objectKey]}
                                             </option>
                                           ))
@@ -64,6 +64,7 @@ const ProductList = () => {
                         <div className={`${productList.inputAreaOne_footer} flex_right`}>
                               <div className={`${productList.inputAreaOne_footer_container} flex_around`}>                                            
                                     {edit ? <button onClick={editProduct}  className={`commonButton btnColor_green`}>SAVE</button> : ''}
+
                                     {edit ? <button onClick={() => {
                                       setUdpateProductData(initialProductData)
                                       setEdit('')

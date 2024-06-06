@@ -15,10 +15,12 @@ const useProductData = () => {
     //     dispatch(updateData())
     // }, [dispatch]);
 
+
     const query = useQuery({ queryKey: ['fetchGetProductData'], queryFn: fetchGetProductData })
     const products = query.data
     const isLoading = query.isLoading
     const error = query.error
+
     const refetch = query.refetch()
 
     return { products, isLoading, error, refetch }

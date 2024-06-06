@@ -4,7 +4,6 @@ export const customCode = (updateProductData) => {
     const month = date.getMonth();
     const monthDate = date.getDate();
     const ddmmyy = `${monthDate}-${month}-${year}`
-
     const alphabetMap = {
         '1': 'K',
         '2': 'E',
@@ -31,6 +30,7 @@ export const customCode = (updateProductData) => {
     }
 
     const generatedCode = `${convertedString}${updateProductData?.material?.slice(0, 1)}${updateProductData?.frameType?.slice(0, 1)}${updateProductData?.size?.slice(0, 1)}${updateProductData?.shape?.slice(0, 1)}${date.getTime()}`
+
 
 
     return { generatedCode, ddmmyy }
