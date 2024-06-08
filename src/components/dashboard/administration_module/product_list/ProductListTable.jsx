@@ -6,7 +6,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 // import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 // 
-const ProductListTable = ({paginatedDataContainer, isLoading, paginatedIndex, setEdit, edit, showData}) => {
+const ProductListTable = ({paginatedDataContainer, isLoading, paginatedIndex, setEdit, edit, showData, fullScr}) => {
    
 
   
@@ -23,6 +23,8 @@ const ProductListTable = ({paginatedDataContainer, isLoading, paginatedIndex, se
   const totalSalesPrice = calculateTotalPrice(totalSales);
   const totalPurchasePrice = calculateTotalPrice(totalPurchase);
   const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
+
+  const data = fullScr ? showData : paginatedDataContainer
 
 
 if(isLoading){
@@ -51,7 +53,7 @@ if(isLoading){
           </thead>
         <tbody>
            {
-            paginatedDataContainer?.map((data, index) => {
+            data?.map((data, index) => {
               return(
                 <tr style={{background: `${data?._id === edit ? 'lightgray' : ''}`}} key={index+1} >
                     <td>{(((index + 1) === 10) && (paginatedIndex === 1)) ? 1 : '' }{(paginatedIndex-1) === 0 ? '' : ((index+1) === 10 ? paginatedIndex : (paginatedIndex-1) ) }{(index+1) === 10 ? 0 : (index+1)} </td>

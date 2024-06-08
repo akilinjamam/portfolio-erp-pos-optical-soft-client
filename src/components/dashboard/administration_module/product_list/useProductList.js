@@ -15,6 +15,7 @@ const useProductList = () => {
     const [edit, setEdit] = useState('');
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
+    const [fullScr, setFullScr] = useState(false)
     const initialProductData = {
         productName: '',
         salesPrice: '',
@@ -70,6 +71,6 @@ const useProductList = () => {
         setEdit('')
     }
 
-    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct }
+    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr }
 };
 export default useProductList;
