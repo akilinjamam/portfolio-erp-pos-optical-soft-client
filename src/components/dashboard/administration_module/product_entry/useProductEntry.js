@@ -56,22 +56,22 @@ const useProductEntry = () => {
     }
 
     const handleSubmit = (e) => {
-        console.log(showData)
         e.preventDefault();
         setShowData((prevData) => [...prevData, productData]);
-        console.log(productData)
         // setProductData(initialProductData)
 
     }
 
     const handlePost = async () => {
-        const data = showData;
+        console.log(showData)
         if (showData.length >= 1) {
-            setProductData(initialProductData)
-            await fetchPostProductData(data).then(res => {
+
+            await fetchPostProductData(showData).then(res => {
                 if (res?.data?.success === true) {
                     toast.success('product added successfully');
                     setShowData([])
+                    setImgHolder(undefined)
+                    setProductData(initialProductData)
                 }
                 if (res?.data?.error) {
                     console.log(res?.data)

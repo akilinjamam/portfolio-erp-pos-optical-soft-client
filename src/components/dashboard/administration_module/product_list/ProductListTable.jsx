@@ -59,7 +59,11 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
                       {data?.indexId}
                     </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}} title={data?.productName}>{data?.productName?.length > 20 ? (data?.productName?.slice(0,20) + '...') : data?.productName}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}} title={data?.productName}>
+                    <div style={{maxWidth:"100px"}}>
+                    {data?.productName} 
+                    </div>  
+                    </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.salesPrice}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.purchasePrice}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.quantity}</td>
