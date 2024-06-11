@@ -8,7 +8,10 @@ import { customCode } from "../../../customCode/customcode";
 const useProductList = () => {
 
     const { products, isLoading, refetch } = useProductData();
+    // const [modifiedProductData, setModifiedProductData] = useState([])
+
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
+    const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
     const [newCustomCode, setNewCustomCode] = useState('');
     const [newDate, setNewDate] = useState('')
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -31,6 +34,7 @@ const useProductList = () => {
         img: ''
     }
 
+
     const [updateProductData, setUdpateProductData] = useState(initialProductData);
     const findProductList = products?.result?.find(f => f?._id === edit)
 
@@ -40,7 +44,7 @@ const useProductList = () => {
 
     // converting number to alphubet and generating unique code using Date
     useEffect(() => {
-        const newCode = customCode(updateProductData)
+        const newCode = customCode()
         setNewCustomCode(newCode.generatedCode)
         setNewDate(newCode.ddmmyy)
 
@@ -71,6 +75,14 @@ const useProductList = () => {
         setEdit('')
     }
 
-    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr }
+    useEffect(() => {
+        const productAddedWithIndexId = products?.result?.map((d, i) => ({
+            ...d, indexId: i + 1
+        }))
+        setModifiedProductWithIndexId(productAddedWithIndexId)
+    }, [products])
+
+    console.log(modifiedProductDataWithIndexId)
+    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId }
 };
 export default useProductList;

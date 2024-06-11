@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import ImgModal from '../../modal/imgmodal/ImgModal';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../modal/imgmodal/imgModalSlice';
+import DashboardFooter from '../dashboard_footer/DashboardFooter';
 const Home = () => {
     
     const dispath = useDispatch()
@@ -56,7 +57,8 @@ const Home = () => {
                         <ToastContainer style={{marginTop:'40px'}}/>
                         <ImgModal/>
                         <DashboardTitleBar/>
-                        <Outlet/>                    
+                        <Outlet/> 
+                        <DashboardFooter/>                  
                     </div>
                 </div>
         </div>

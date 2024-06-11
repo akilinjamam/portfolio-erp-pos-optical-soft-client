@@ -1,14 +1,32 @@
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
+import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import DashboardFooter from "../../dashboard_footer/DashboardFooter";
 import Pagination from "../../pagination/Pagination";
 import { optionField, textInput } from "../product_entry/productInput";
 import productList from './ProductList.module.scss';
 import ProductListTable from "./ProductListTable";
 import useProductList from "./useProductList";
+import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 const ProductList = () => {
-    const {paginatedDataContainer,products,isLoading, setPaginatedDataContainer, setPaginatedIndex, paginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr} = useProductList();
-    const productData = products?.result;
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId} = useProductList();
+    const productData = modifiedProductDataWithIndexId
+
+    const dispatch = useDispatch();
+
+    const handlBarcode = () => {
+      dispatch(openModal('barcode'));
+      dispatch(openBarcode(productData))
+    }
+
+    const contentToPrint = useRef(null);
+    const handlePrint = useReactToPrint({
+        documentTitle: "Print This Document",
+        onBeforePrint: () => console.log("before printing..."),
+        onAfterPrint: () => console.log("after printing..."),
+        removeAfterPrint: true,
+    });
   
     return (
         <div   className={`${productList.main} full_width`}>
@@ -112,30 +130,33 @@ const ProductList = () => {
                   </div>
                 </div>
             </div>
-          <section className={`${productList.navigationIcon} flex_${fullScr ? 'between' : 'right'}`}>
-                { fullScr &&
+          <section className={`${productList.navigationIcon} flex_between`}>
+                { 
                   <div className={productList.inputPart}>
-                  <label htmlFor="">From:</label>
-                   <input placeholder="from" type="date" name="" id="" />
-                   <label htmlFor="">To:</label>
-                   <input placeholder="from" type="date" name="" id="" />
-                   <i className="uil uil-search"></i>
+                    <input type="text" name="" id="" placeholder="search" />
+                    <i className="uil uil-search"></i>
+                    <label htmlFor="">From:</label>
+                    <input placeholder="from" type="date" name="" id="" />
+                    <label htmlFor="">To:</label>
+                    <input placeholder="from" type="date" name="" id="" />
+                    <i className="uil uil-search"></i>
                 </div>
                 }
                 <div className={productList.btnPart}>
-                    {fullScr ? <i className="uil uil-print"></i> : ''}
-                    { fullScr ? <i onClick={() => setFullScr(false)} className="uil uil-compress-arrows"></i> : <i onClick={() => setFullScr(true)} className="uil uil-expand-arrows-alt"></i>}
+                    {fullScr ? <i title="barcode" onClick={handlBarcode} className="uil uil-qrcode-scan"></i> : ''}
+                    {fullScr ? <i onClick={() => {handlePrint(null, () => contentToPrint.current)}} title="print" className="uil uil-print"></i> : ''}
+                    { fullScr ? <i title="exit full screen" onClick={() => setFullScr(false)} className="uil uil-compress-arrows"></i> : <i title="full screen" onClick={() => setFullScr(true)} className="uil uil-expand-arrows-alt"></i>}
                 </div>
           </section>
-          <section className={`${productList.tableArea}`}>
-              <ProductListTable isLoading={isLoading} paginatedIndex={paginatedIndex} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
+          <section style={{height: `${fullScr ? '80vh' : '50vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
+              <ProductListTable isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
           </section>
            {
             !isLoading && !fullScr 
             &&
             <Pagination showData={productData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex}/>
            }
-            <DashboardFooter/>
+           
         </div>
     );
 };

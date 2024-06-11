@@ -14,10 +14,12 @@
     "@tanstack/react-query": "^5.40.0",
     "axios": "^1.6.8",
     "react": "^18.2.0",
+    "react-barcode": "^1.5.3",
     "react-dom": "^18.2.0",
     "react-lottie": "^1.2.4",
     "react-redux": "^9.1.1",
     "react-router-dom": "^6.23.0",
+    "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5"
   },
   "devDependencies": {

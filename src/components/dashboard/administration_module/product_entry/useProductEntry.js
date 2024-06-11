@@ -56,8 +56,10 @@ const useProductEntry = () => {
     }
 
     const handleSubmit = (e) => {
+        console.log(showData)
         e.preventDefault();
         setShowData((prevData) => [...prevData, productData]);
+        console.log(productData)
         // setProductData(initialProductData)
 
     }
@@ -72,6 +74,7 @@ const useProductEntry = () => {
                     setShowData([])
                 }
                 if (res?.data?.error) {
+                    console.log(res?.data)
                     toast.error(`${res.data.error?.map(err => err.message.slice(4))}`)
 
                 }
