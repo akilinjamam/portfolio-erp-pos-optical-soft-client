@@ -9,8 +9,9 @@ import useProductList from "./useProductList";
 import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
+import { calculateTotalPrice } from "../../../calculation/calculateSum";
 const ProductList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId} = useProductList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete} = useProductList();
     const productData = modifiedProductDataWithIndexId
 
     const dispatch = useDispatch();
@@ -27,7 +28,9 @@ const ProductList = () => {
         onAfterPrint: () => console.log("after printing..."),
         removeAfterPrint: true,
     });
-  
+
+    const calculateQuantity = productData?.map(q => Number(q?.quantity))
+    const totalQuantity = calculateTotalPrice(calculateQuantity)
     return (
         <div   className={`${productList.main} full_width`}>
              <div style={{display:`${fullScr ? 'none' : 'flex'}`}}  className={`flex_around`}>
@@ -86,7 +89,9 @@ const ProductList = () => {
                                         {edit ? <button onClick={() => {
                                           setUdpateProductData(initialProductData)
                                           setEdit('')
-                                        }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}            
+                                        }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}  
+
+                                        { idsForDelete?.length > 0 ?  <button style={{backgroundColor:'red', color:'white', border:'none', padding:'3px', borderRadius:'5px', width:'auto'}} className="">DELETE {`(${idsForDelete?.length})`} </button> : '' }          
                                   </div>
                             </div>
                       </form>
@@ -133,13 +138,11 @@ const ProductList = () => {
           <section className={`${productList.navigationIcon} flex_between`}>
                 { 
                   <div className={productList.inputPart}>
-                    <input type="text" name="" id="" placeholder="search" />
-                    <i className="uil uil-search"></i>
-                    <label htmlFor="">From:</label>
-                    <input placeholder="from" type="date" name="" id="" />
-                    <label htmlFor="">To:</label>
-                    <input placeholder="from" type="date" name="" id="" />
-                    <i className="uil uil-search"></i>
+                  
+                      <input type="text" name="query" id="" value={query} placeholder="search" onChange={(e) => setQuery(e.target.value)} />
+                      <i onClick={() => setQuery('')} className="uil uil-times"></i>
+                      <span>Total Products : {productData?.length}</span>
+                      <span> Total Quantities : {totalQuantity}</span>
                 </div>
                 }
                 <div className={productList.btnPart}>
@@ -149,14 +152,13 @@ const ProductList = () => {
                 </div>
           </section>
           <section style={{height: `${fullScr ? '80vh' : '50vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
-              <ProductListTable isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
+              <ProductListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
           </section>
            {
             !isLoading && !fullScr 
             &&
             <Pagination showData={productData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex}/>
-           }
-           
+           }      
         </div>
     );
 };

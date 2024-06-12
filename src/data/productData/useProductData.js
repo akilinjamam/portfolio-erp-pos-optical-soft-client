@@ -4,7 +4,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchGetProductData } from '../fetchedData/fetchProductData';
 
-const useProductData = () => {
+const useProductData = (query) => {
 
     // const { products, isLoading, error } = useSelector(state => state.products);
 
@@ -16,12 +16,12 @@ const useProductData = () => {
     // }, [dispatch]);
 
 
-    const query = useQuery({ queryKey: ['fetchGetProductData'], queryFn: fetchGetProductData })
-    const products = query.data
-    const isLoading = query.isLoading
-    const error = query.error
+    const getAllData = useQuery({ queryKey: ['fetchGetProductData'], queryFn: () => fetchGetProductData(query) })
+    const products = getAllData?.data
+    const isLoading = getAllData?.isLoading
+    const error = getAllData?.error
 
-    const refetch = query.refetch()
+    const refetch = getAllData?.refetch()
 
     return { products, isLoading, error, refetch }
 

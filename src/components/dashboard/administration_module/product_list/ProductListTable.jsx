@@ -4,10 +4,11 @@ import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
-// import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
-// 
-const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr}) => {
-   
+ 
+const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+
+
+  
 
   
   const dispatch = useDispatch();
@@ -17,14 +18,37 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
     dispatch(openImg(img))
   }
 
-  const totalSales = showData?.map(data => data?.salesPrice);
-  const totalPurchase = showData?.map(data => data?.purchasePrice);
-  const totalQuantity = showData?.map(data => data?.quantity);
+  const totalSales = showData?.map(data => Number(data?.salesPrice));
+  const totalPurchase = showData?.map(data => Number(data?.purchasePrice));
+  const totalQuantity = showData?.map(data => Number(data?.quantity));
   const totalSalesPrice = calculateTotalPrice(totalSales);
   const totalPurchasePrice = calculateTotalPrice(totalPurchase);
   const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
 
   const data = fullScr ? showData : paginatedDataContainer
+  console.log(idsForDelete)
+
+  const handleDelete = (id, e) => {
+    console.log(e.target.checked)
+    setSelectDeleted(true)
+    if(e.target.checked){
+      setIdsForDelete((prevId) => [...prevId, id] )
+    }else{
+      const deleteId =idsForDelete?.filter(f => f !== id)
+      setIdsForDelete(deleteId)
+    }
+    }
+
+  const handleAllDelete = () => {
+    const allIds = showData?.map(all => all?._id)
+    if(idsForDelete?.length === showData?.length){
+     setIdsForDelete([])
+    }else{
+      setIdsForDelete(allIds)
+    }
+  }
+
+
 
 
 if(isLoading){
@@ -33,7 +57,29 @@ if(isLoading){
 
     return (
         <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+          
           <thead>
+          <tr> 
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Total</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}> Sales =</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalSalesPrice}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Purchase =</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalPurchasePrice}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Quantity =</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalAmountOfQuantity}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit = </td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalSalesPrice - totalPurchasePrice}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
+              {
+                fullScr ? '' : <td></td>
+              }
+              {
+                fullScr ? '' : <td></td>
+              }
+             
+           </tr>
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Product Name</th>
@@ -52,12 +98,14 @@ if(isLoading){
               </tr>
           </thead>
         <tbody>
+          
            {
             data?.map((data, index) => {
               return(
                 <tr style={{background: `${data?._id === edit ? 'lightgray' : ''}`}} key={index+1} >
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
-                      {data?.indexId}
+                    <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
+                      {(selectDeleted && !fullScr) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
+                      <span>{data?.indexId}</span>
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}} title={data?.productName}>
                     <div style={{maxWidth:"100px"}}>
@@ -77,38 +125,21 @@ if(isLoading){
                     { fullScr ?
                       ''
                       :
-                      <td><img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /></td>
+                      <td>{data?.img ? <img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /> : <p style={{textAlign:'center',fontStyle:'italic'}}>blank</p> }</td>
                     }
                     { fullScr ?
                     ''
                     :
-                    <td  className={`flex_around`}><i  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> <i onClick={() => setEdit(data?._id)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>
+                    <td  className={`flex_around`}>
+                    
+                      <i onClick={() => setSelectDeleted(!selectDeleted)}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
+                      <i onClick={() => setEdit(data?._id)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>
                     }
                 </tr>
               )
             } )
            }
-           <tr>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Total</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>=</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalSalesPrice}</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalPurchasePrice}</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalAmountOfQuantity}</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit = {totalSalesPrice - totalPurchasePrice}</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              {
-                fullScr ? '' : <td></td>
-              }
-              {
-                fullScr ? '' : <td></td>
-              }
-             
-           </tr>
+           
         </tbody>
       </table>
     );

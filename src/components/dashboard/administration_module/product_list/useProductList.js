@@ -7,9 +7,8 @@ import { customCode } from "../../../customCode/customcode";
 
 const useProductList = () => {
 
-    const { products, isLoading, refetch } = useProductData();
-    // const [modifiedProductData, setModifiedProductData] = useState([])
-
+    const [query, setQuery] = useState('');
+    const { products, isLoading, refetch } = useProductData(query);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
     const [newCustomCode, setNewCustomCode] = useState('');
@@ -19,6 +18,10 @@ const useProductList = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
     const [fullScr, setFullScr] = useState(false)
+    const [selectDeleted, setSelectDeleted] = useState(false)
+    const [idsForDelete, setIdsForDelete] = useState([]);
+
+
     const initialProductData = {
         productName: '',
         salesPrice: '',
@@ -76,13 +79,18 @@ const useProductList = () => {
     }
 
     useEffect(() => {
-        const productAddedWithIndexId = products?.result?.map((d, i) => ({
+        const productAddedWithIndexId = products?.result?.slice()?.reverse()?.map((d, i) => ({
             ...d, indexId: i + 1
         }))
         setModifiedProductWithIndexId(productAddedWithIndexId)
     }, [products])
 
-    console.log(modifiedProductDataWithIndexId)
-    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId }
+    useEffect(() => {
+        setQuery(query)
+    }, [query])
+
+    console.log(idsForDelete)
+
+    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete }
 };
 export default useProductList;

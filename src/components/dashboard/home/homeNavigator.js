@@ -15,7 +15,7 @@ export const homeNavigator = [
     },
     {
         route: '/dashboard/sales_module',
-        value: 'Purchase Module',
+        value: 'Sales Module',
         icon: 'uil uil-shopping-cart',
         routes: {
             one: '/dashboard/sales_module',

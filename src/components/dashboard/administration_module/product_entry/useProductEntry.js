@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import { fetchPostProductData } from "../../../../data/fetchedData/fetchProductData";
 import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
+import useUserData from "../../../../data/userData/useUserData";
 
 const useProductEntry = () => {
+    const { users } = useUserData()
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [paginatedIndex, setPaginatedIndex] = useState();
     const [edit, setEdit] = useState();
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
+
+    const recorderEmail = localStorage.getItem('userEmail')
+    const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
 
 
     const initialProductData = {
@@ -56,14 +61,20 @@ const useProductEntry = () => {
     }
 
     const handleSubmit = (e) => {
+        const allData = {
+            ...productData,
+            recorderEmail,
+            recorderName
+        }
+
         e.preventDefault();
-        setShowData((prevData) => [...prevData, productData]);
+        setShowData((prevData) => [...prevData, allData]);
         // setProductData(initialProductData)
 
     }
 
     const handlePost = async () => {
-        console.log(showData)
+
         if (showData.length >= 1) {
 
             await fetchPostProductData(showData).then(res => {

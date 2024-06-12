@@ -50,7 +50,8 @@
                 height: 20px;
                 margin-top: 7px;
                 .inputAreaOne_footer_container{
-                    width: 230px;
+                    min-width: 250px;
+                    max-width: auto;
                     // background-color: red;
                     height: 20px;
                     
@@ -115,6 +116,10 @@
             i{
                 cursor: pointer;
                 margin-right: 20px;
+            }
+            span{
+                margin-left: 20px;
+                font-size: 13px;
             }
         }
         .btnPart{
