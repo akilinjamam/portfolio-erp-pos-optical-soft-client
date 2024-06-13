@@ -2,6 +2,7 @@
 import { useDispatch} from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { customCode } from '../../../customCode/customcode';
 const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit}) => {
 
 
@@ -24,6 +25,8 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
     dispatch(openModal());
     dispatch(openImg(img))
   }
+
+  const todaysDate = customCode()?.ddmmyy
 
     return (
         <table>
@@ -56,7 +59,7 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                     <td>{data.salesPrice}</td>
                     <td>{data.quantity}</td>
                     <td>{data.category}</td>
-                    <td>{data?.date}</td>
+                    <td>{todaysDate}</td>
                     <td>{data.size}</td>
                     <td>{data.material}</td>
                     <td>{data.frameType}</td>

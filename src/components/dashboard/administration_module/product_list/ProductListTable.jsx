@@ -26,17 +26,17 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
   const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
 
   const data = fullScr ? showData : paginatedDataContainer
-  console.log(idsForDelete)
+ 
 
   const handleDelete = (id, e) => {
     console.log(e.target.checked)
     setSelectDeleted(true)
-    if(e.target.checked){
-      setIdsForDelete((prevId) => [...prevId, id] )
-    }else{
-      const deleteId =idsForDelete?.filter(f => f !== id)
-      setIdsForDelete(deleteId)
-    }
+      if(e.target.checked){
+        setIdsForDelete((prevId) => [...prevId, id] )
+      }else{
+        const deleteId =idsForDelete?.filter(f => f !== id)
+        setIdsForDelete(deleteId)
+      }
     }
 
   const handleAllDelete = () => {
@@ -102,7 +102,7 @@ if(isLoading){
            {
             data?.map((data, index) => {
               return(
-                <tr style={{background: `${data?._id === edit ? 'lightgray' : ''}`}} key={index+1} >
+                <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
                     <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
                       {(selectDeleted && !fullScr) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
                       <span>{data?.indexId}</span>
@@ -116,7 +116,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.purchasePrice}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.quantity}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.category}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date?.slice(0,10)}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.size}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.material}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.frameType}</td>
@@ -132,8 +132,20 @@ if(isLoading){
                     :
                     <td  className={`flex_around`}>
                     
-                      <i onClick={() => setSelectDeleted(!selectDeleted)}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
-                      <i onClick={() => setEdit(data?._id)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>
+                      <i onClick={() => {
+                        setSelectDeleted(!selectDeleted)
+                        setEdit('')
+                        if(selectDeleted){
+                          setIdsForDelete([])
+                        }
+                      }}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
+
+
+                      <i onClick={() => {
+                        setEdit(data?._id)
+                        setSelectDeleted(false)
+                        setIdsForDelete([])
+                      }} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>
                     }
                 </tr>
               )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useProductData from "../../../../data/productData/useProductData";
-import { fetchUpdateProductData } from "../../../../data/fetchedData/fetchProductData";
+import { fetchDeleteProductData, fetchUpdateProductData } from "../../../../data/fetchedData/fetchProductData";
 import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
 
@@ -12,7 +12,6 @@ const useProductList = () => {
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
     const [newCustomCode, setNewCustomCode] = useState('');
-    const [newDate, setNewDate] = useState('')
     const [paginatedIndex, setPaginatedIndex] = useState();
     const [edit, setEdit] = useState('');
     const [imgHolder, setImgHolder] = useState();
@@ -49,8 +48,6 @@ const useProductList = () => {
     useEffect(() => {
         const newCode = customCode()
         setNewCustomCode(newCode.generatedCode)
-        setNewDate(newCode.ddmmyy)
-
     }, [updateProductData])
 
     const editProduct = async (e) => {
@@ -64,7 +61,6 @@ const useProductList = () => {
             purchasePrice: updateProductData?.purchasePrice,
             category: updateProductData?.category,
             quantity: updateProductData?.quantity,
-            date: newDate,
             barcode: newCustomCode,
             material: updateProductData?.material,
             frameType: updateProductData?.frameType,
@@ -72,6 +68,8 @@ const useProductList = () => {
             shape: updateProductData?.shape,
             img: img
         }
+
+        console.log(updatedData.date)
 
         await fetchUpdateProductData(edit, updatedData, refetch, toast)
         setImgHolder('')
@@ -87,10 +85,19 @@ const useProductList = () => {
 
     useEffect(() => {
         setQuery(query)
-    }, [query])
+        refetch
+    }, [query, refetch])
 
-    console.log(idsForDelete)
+    const deleteProducts = async (e) => {
+        e.preventDefault()
+        await fetchDeleteProductData(idsForDelete, refetch, toast)
+        setIdsForDelete([])
+        setSelectDeleted(false)
 
-    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete }
+    }
+
+
+
+    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts }
 };
 export default useProductList;

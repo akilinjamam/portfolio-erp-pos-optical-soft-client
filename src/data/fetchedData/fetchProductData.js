@@ -30,9 +30,21 @@ export const fetchUpdateProductData = async (id, data, refetch, toast) => {
     try {
         const result = await axios.patch(`${url}/products/${id}`, data)
         toast.success('product updated successfully')
-        refetch()
+        refetch
         return result;
     } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+export const fetchDeleteProductData = async (ids, refetch, toast) => {
+    try {
+        const result = await axios.post(`${url}/products/bulk-delete`, ids)
+        toast.success('product deleted successfully')
+        refetch
+        return result;
+    } catch (error) {
+        console.log(error)
         return error
     }
 }

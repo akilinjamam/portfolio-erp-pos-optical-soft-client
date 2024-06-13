@@ -11,7 +11,7 @@ import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 const ProductList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete} = useProductList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts} = useProductList();
     const productData = modifiedProductDataWithIndexId
 
     const dispatch = useDispatch();
@@ -91,7 +91,7 @@ const ProductList = () => {
                                           setEdit('')
                                         }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}  
 
-                                        { idsForDelete?.length > 0 ?  <button style={{backgroundColor:'red', color:'white', border:'none', padding:'3px', borderRadius:'5px', width:'auto'}} className="">DELETE {`(${idsForDelete?.length})`} </button> : '' }          
+                                        { idsForDelete?.length > 0 ?  <button onClick={deleteProducts} style={{backgroundColor:'red', color:'white', border:'none', padding:'3px', borderRadius:'5px', width:'auto'}} className="">DELETE {`(${idsForDelete?.length})`} </button> : '' }          
                                   </div>
                             </div>
                       </form>

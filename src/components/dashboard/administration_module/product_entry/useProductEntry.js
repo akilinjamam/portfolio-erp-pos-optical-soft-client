@@ -23,7 +23,6 @@ const useProductEntry = () => {
         purchasePrice: '',
         category: '',
         quantity: '',
-        date: '',
         barcode: '',
         material: '',
         frameType: '',
@@ -44,8 +43,8 @@ const useProductEntry = () => {
 
     // converting number to alphubet and generating unique code using Date
     useEffect(() => {
-        const newCode = customCode(productData)
-        setProductData({ ...productData, 'barcode': newCode.generatedCode, 'date': newCode.ddmmyy, 'img': findProduct?.img ? findProduct?.img : imgHolder })
+        const newCode = customCode()
+        setProductData({ ...productData, 'barcode': newCode.generatedCode, 'img': findProduct?.img ? findProduct?.img : imgHolder })
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productData, imgHolder])
