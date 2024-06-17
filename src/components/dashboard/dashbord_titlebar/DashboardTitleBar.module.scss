@@ -9,11 +9,14 @@
             background-color:v.$pest;
             border-radius: 5px;
             padding: 9px;
-            p{
+            .mappedRoute{
                 font-family: v.$fs;
                 color: v.$white;
                 font-weight: bold;
                 font-size: 16px;
+                span{
+                    cursor: pointer;
+                }
             }
        }
     }
