@@ -9,8 +9,9 @@ import Loading from './components/loading/Loading';
 import DashboardHome from './components/dashboard/dashboard_home/DashboardHome';
 import SalesModule from './components/dashboard/salesModule/SalesModule';
 import Administration from './components/dashboard/administration_module/Administration';
-import ProductEntry from './components/dashboard/administration_module/product_entry/ProductEntry';
-import ProductList from './components/dashboard/administration_module/product_list/ProductList';
+import administrationRoute from './sub-routes/administration.route';
+import salesRoute from './sub-routes/sales.route';
+
 
 
 function App() {
@@ -50,21 +51,13 @@ function App() {
         {index: true, element:<DashboardHome/> },
         {
           path: 'sales_module',
-          element: <SalesModule/>
+          element: <SalesModule/>,
+          children: salesRoute
         },
         {
           path: 'administration_module',
           element: <Administration/>,
-          children: [
-            {
-              path:'product_entry',
-              element: <ProductEntry/>
-            },
-            {
-              path:'product_list',
-              element: <ProductList/>
-            },
-          ]
+          children: administrationRoute
         },
       ]
     }

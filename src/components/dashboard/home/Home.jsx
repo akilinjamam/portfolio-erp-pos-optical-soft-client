@@ -11,14 +11,11 @@ import DashboardFooter from '../dashboard_footer/DashboardFooter';
 const Home = () => {
     
     const dispath = useDispatch()
- 
     const {slide, setSlide, error,navigate, location } = useHome()
 
     const handleSlide = () => {
         setSlide(!slide)
     }
-    
-
     if(error){
         return navigate('/login')
     }

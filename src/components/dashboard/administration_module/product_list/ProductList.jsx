@@ -32,7 +32,7 @@ const ProductList = () => {
     const calculateQuantity = productData?.map(q => Number(q?.quantity))
     const totalQuantity = calculateTotalPrice(calculateQuantity)
     return (
-        <div   className={`${productList.main} full_width`}>
+        <div className={`${productList.main} full_width`}>
              <div style={{display:`${fullScr ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${productList.inputAreaOne} flex_center`}>
                   <div className={`${productList.container} `}>
@@ -134,7 +134,7 @@ const ProductList = () => {
                             </div>
                   </div>
                 </div>
-            </div>
+              </div>
           <section className={`${productList.navigationIcon} flex_between`}>
                 { 
                   <div className={productList.inputPart}>
