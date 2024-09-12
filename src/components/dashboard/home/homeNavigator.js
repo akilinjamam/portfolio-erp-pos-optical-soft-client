@@ -19,7 +19,7 @@ export const homeNavigator = [
         icon: 'uil uil-shopping-cart',
         routes: {
             one: '/dashboard/sales_module',
-            two: '',
+            two: '/dashboard/sales_module/pos',
             three: '',
             four: '',
             five: ''

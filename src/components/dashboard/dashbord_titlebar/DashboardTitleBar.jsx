@@ -1,5 +1,3 @@
-// import { useEffect, useState } from 'react';
-
 import useHome from '../home/useHome';
 import dashboardTitle from './DashboardTitleBar.module.scss';
 const DashboardTitleBar = () => {
@@ -34,6 +32,14 @@ const DashboardTitleBar = () => {
     //     const getMonthNames = monthNames[(getTime.getMonth())]
     //    setDate({...date, day: dayOfWeek, monthDate: getTime.getDate() ,monthName: getMonthNames, year: getTime.getFullYear(), hour: getTime.getHours(), minute: getTime.getMinutes(), second: getTime.getSeconds()  })
     // },[date])
+
+    const handleLogOut = () => {
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('user');
+        navigate('/login')
+    }
+
+
     return (
         <div className={`${dashboardTitle.main}`}>
            <div className={`${dashboardTitle.titleBar} flex_center `}>
@@ -44,6 +50,9 @@ const DashboardTitleBar = () => {
                      }
                      </div>
                     {/* <p>{date.day}, {date.monthDate}  {date.monthName} {date.year}, {date.hour > 12 ? (date.hour - 12): date.hour === 0 ? 12 : date.hour}:{date.minute + 1}:{date.second < 10 ? ('0'+date.second) : date.second}  {date.hour >= 12 ? 'PM' : 'AM' }</p>  */}
+                    <div onClick={handleLogOut} className={`${dashboardTitle.mappedRoute}`}>
+                        <p>LOGOUT</p>
+                    </div>
                 </div>
             </div>  
         </div>
