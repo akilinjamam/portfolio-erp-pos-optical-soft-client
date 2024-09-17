@@ -189,14 +189,14 @@ const Pos = () => {
                                 setQuantity(true)
                                 setPrice(false)
                                 setIsScanned(false)
-                            }} style={{border: `${quantity ? '2px solid black' : 'none'}`}} className={`${pos.quantityBtn} flex_center`}>
+                            }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
                                 Quantity
                             </div>
                             <div onClick={() => {
                                 setPrice(true)
                                 setQuantity(false)
                                 setIsScanned(false)
-                            }} style={{border: `${price ? '2px solid black' : 'none'}`}} className={`${pos.priceBtn} flex_center`}>
+                            }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
                                 Price
                             </div>
                             <div onClick={() => {
@@ -205,7 +205,7 @@ const Pos = () => {
                                 setQuantity(false)
                                 setPriceArray([])
                                 setQuantityArray([])
-                            }} style={{border: `${isScanned ? '2px solid black' : 'none'}`}} className={`${pos.scanBtn} flex_center`}>
+                            }} style={{border: `${isScanned ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.scanBtn} flex_center`}>
                                 Scan
                             </div>
                         </div>
@@ -228,7 +228,7 @@ const Pos = () => {
                     }
                 </div>
             </div>
-      </div>
+        </div>
        </div>
     );
 };
