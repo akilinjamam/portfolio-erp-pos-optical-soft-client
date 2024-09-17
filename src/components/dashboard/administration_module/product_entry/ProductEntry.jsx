@@ -8,7 +8,7 @@ import { optionField, textInput } from './productInput';
 import useProductEntry from './useProductEntry';
 
 const ProductEntry = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useProductEntry();
+  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useProductEntry();
 
     return (
         <div className={`${productEntry.main} full_width`}>
@@ -22,7 +22,7 @@ const ProductEntry = () => {
                         <div className='flex_top'>
                           <div style={{width:'49%'}}>
                             {
-                              textInput?.slice(0,5).map((input, index) => {
+                              textInput?.slice(0,4).map((input, index) => {
                                 return (
                                   <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
@@ -34,9 +34,22 @@ const ProductEntry = () => {
                                 )
                               })
                             }
+                            <div className={`${productEntry.inputFields} flex_between`}>
+                            <label htmlFor="">Categories:</label>
+                            <select value={category} style={{width: '70%'}} name="" id="" required 
+                            onChange={(e) => setCategory(e.target.value)}
+                            >
+                              <option value="">select category</option>
+                              {
+                                textInput[4].options?.map((option, index) => (
+                                  <option key={index+1} value={option}>{option}</option>
+                                ))
+                              }
+                            </select>
+                            </div>
                           </div>
                           <div style={{width:'49%', marginLeft:'15px'}}>
-                            {
+                            { category === 'glass' &&
                               optionField.map((select, index) => {
                                 return (
                                 <div key={index+1} className={`${productEntry.inputFields} flex_between`} >
@@ -89,7 +102,7 @@ const ProductEntry = () => {
                                       e.preventDefault();
                                       setShowData([]);
                                       setProductData(initialProductData)
-
+                                      setCategory('')
                                       setImgHolder('')
                                       setUploading(false)
                                     }} className={`commonButton btnColor_orangeRed`}>

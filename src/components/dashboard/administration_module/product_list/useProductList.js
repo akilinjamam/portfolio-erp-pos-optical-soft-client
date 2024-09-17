@@ -49,6 +49,7 @@ const useProductList = () => {
         const newCode = customCode()
         setNewCustomCode(newCode.generatedCode)
     }, [updateProductData])
+    console.log(newCustomCode)
 
     const editProduct = async (e) => {
         e.preventDefault()
@@ -61,16 +62,13 @@ const useProductList = () => {
             purchasePrice: updateProductData?.purchasePrice,
             category: updateProductData?.category,
             quantity: updateProductData?.quantity,
-            barcode: newCustomCode,
+            barcode: updateProductData?.barcode,
             material: updateProductData?.material,
             frameType: updateProductData?.frameType,
             size: updateProductData?.size,
             shape: updateProductData?.shape,
             img: img
         }
-
-        console.log(updatedData.date)
-
         await fetchUpdateProductData(edit, updatedData, refetch, toast)
         setImgHolder('')
         setEdit('')

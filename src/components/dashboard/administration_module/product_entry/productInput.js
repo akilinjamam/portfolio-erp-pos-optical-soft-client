@@ -91,7 +91,8 @@ export const textInput = [
         placeholder: 'Category',
         type: 'text',
         name: 'category',
-        id: ''
+        id: '',
+        options: ['glass', 'lense', 'solution', 'kit', 'cleaner', 'hand box', 'other']
     },
     {
         value: 'img',

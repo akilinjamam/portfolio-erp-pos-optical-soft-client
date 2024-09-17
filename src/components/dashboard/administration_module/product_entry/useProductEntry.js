@@ -24,13 +24,15 @@ const useProductEntry = () => {
         category: '',
         quantity: '',
         barcode: '',
-        material: '',
-        frameType: '',
-        size: '',
-        shape: '',
-        img: ''
+        material: 'blank',
+        frameType: 'blank',
+        size: 'blank',
+        shape: 'blank',
+        img: 'not added'
     }
     const [productData, setProductData] = useState(initialProductData);
+
+    const [category, setCategory] = useState('');
 
 
     const findProduct = showData.find((f, i) => (i + 1) === edit);
@@ -53,7 +55,7 @@ const useProductEntry = () => {
 
     const editProduct = (e) => {
         e.preventDefault();
-
+        setEdit(false)
         setShowData(showData.map((product, index) => {
             return (index + 1) === edit ? productData : product
         }))
@@ -62,13 +64,15 @@ const useProductEntry = () => {
     const handleSubmit = (e) => {
         const allData = {
             ...productData,
+            category,
             recorderEmail,
             recorderName
         }
 
         e.preventDefault();
         setShowData((prevData) => [...prevData, allData]);
-        // setProductData(initialProductData)
+        setProductData(initialProductData)
+        setCategory('')
 
     }
 
@@ -92,7 +96,7 @@ const useProductEntry = () => {
         }
     }
 
-    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost }
+    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost }
 };
 
 

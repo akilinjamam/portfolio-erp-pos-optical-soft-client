@@ -57,7 +57,7 @@ const ProductList = () => {
                                 }
                               </div>
                               <div style={{width:'49%', marginLeft:'15px'}}>
-                                {
+                                {(updateProductData?.category === 'glass') &&
                                   optionField?.map((select, index) => {
                                     return (
                                     <div key={index+1} className={`${productList.inputFields} flex_between`} >
@@ -91,7 +91,7 @@ const ProductList = () => {
                                           setEdit('')
                                         }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}  
 
-                                        { idsForDelete?.length > 0 ?  <button onClick={deleteProducts} style={{backgroundColor:'red', color:'white', border:'none', padding:'3px', borderRadius:'5px', width:'auto'}} className="">DELETE {`(${idsForDelete?.length})`} </button> : '' }          
+                                        { idsForDelete?.length > 0 ?  <button onClick={deleteProducts} style={{backgroundColor:'red', color:'white', border:'none', padding:'3px', borderRadius:'5px', width:'auto', cursor:'pointer'}} className="">DELETE {`(${idsForDelete?.length})`} </button> : '' }          
                                   </div>
                             </div>
                       </form>
