@@ -9,8 +9,9 @@ const Pos = () => {
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
     const finProduct = allProducts?.find(f => f?.barcode === barcodeId)
-    console.log(isScanned)
-
+   
+    console.log('priceArray:', priceArray)
+    console.log('quantityArray:', quantityArray)
 
   useEffect(() => {
       let barcode = '';
@@ -54,6 +55,7 @@ const Pos = () => {
         const findKey = calculationValue.find(value => value === key);
 
         if (findKey !== undefined) {
+            // console.log('quantity-working')
             setQuantityArray(prevArray => [...prevArray, findKey]);
         }
 
@@ -74,6 +76,7 @@ const Pos = () => {
         const findKey = calculationValue.find(value => value === key);
 
         if (findKey !== undefined) {
+            // console.log('price-working')
             setPriceArray(prevArray => [...prevArray, findKey]);
         }
 
@@ -97,6 +100,11 @@ const Pos = () => {
 
     useEffect(() => {
         document.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter'){
+                setQuantity(false)
+                setPrice(false)
+                setIsScanned(true)
+            }
             if(e.key === 'q'){
                 setQuantity(true)
                 setPrice(false)
@@ -140,6 +148,15 @@ const Pos = () => {
         }
     }
 
+    useEffect(() => {
+     document.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter'){
+            setPriceArray([])
+            setQuantityArray([])
+        }
+     })   
+    },[setQuantityArray, setPriceArray])
+
     return (
        <div className={`${pos.main}`}>
          <div  className={`flex_around`}>
@@ -173,14 +190,14 @@ const Pos = () => {
                                     <p>Quantity: </p>
                             </div>
                             <div>
-                                    <p>{priceArray.join('')}</p>
-                                    <p>{quantityArray.join('')}</p>
+                                    <p>{priceArray?.length === 0 ? 0 : priceArray.join('')}</p>
+                                    <p>{quantityArray?.length === 0 ? 0 : quantityArray.join('')}</p>
                             </div>
                        </div>
                        <hr />
                        <div className={`${pos.totalPriceQuantityValue} flex_between`}>
                         <p>Total :</p>
-                          <p>{parseInt(quantityArray.join('')) * parseInt(priceArray.join(''))}</p> 
+                          <p>{(priceArray?.length !== 0 && quantityArray?.length !== 0) ? (parseInt(quantityArray.join('')) * parseInt(priceArray.join(''))) : 0}</p> 
                        </div>
                    </div>
                     <div className={`${pos.productCalculation} flex_between`}>
