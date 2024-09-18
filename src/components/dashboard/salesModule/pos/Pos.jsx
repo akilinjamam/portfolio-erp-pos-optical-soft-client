@@ -2,17 +2,20 @@
 import { useEffect, useState } from 'react';
 import pos from './Pos.module.scss';
 import usePos from './usePos';
+import { toast } from 'react-toastify';
+import PosListTable from './posListTable/PosListTable';
 const Pos = () => {
     const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()
+
+    const date = new Date();
+    console.log(date)
+
     const [barcodeId, setBarcodeId] = useState();
     const [isScanned, setIsScanned] = useState(false)
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
     const finProduct = allProducts?.find(f => f?.barcode === barcodeId)
    
-    console.log('priceArray:', priceArray)
-    console.log('quantityArray:', quantityArray)
-
   useEffect(() => {
       let barcode = '';
       let interval;
@@ -44,7 +47,7 @@ const Pos = () => {
   },[isScanned])
   
 
-  const calculationValue = [1,2,3,4,5,6,7,8,9,'Delete',0,'submit']
+  const calculationValue = [1,2,3,4,5,6,7,8,9,'Delete',0,'Add Item']
   useEffect(() => {
     const handleKeyPress = (e) => {
        if(quantity){
@@ -125,6 +128,28 @@ const Pos = () => {
         } )
     })
 
+    const salesItem = {
+        id: finProduct?._id,
+        productName: finProduct?.productName,
+        actualSalesPrice: Number(priceArray?.join('')),
+        purchasePrice: finProduct?.purchasePrice,
+        category: finProduct?.category,
+        quantity: Number(quantityArray?.join('')),
+        material: finProduct?.material,
+        frameType: finProduct?.frameType,
+        size: finProduct?.size,
+        shape: finProduct?.shape,
+        recorderName:finProduct?.recorderName,
+        recorderEmail:finProduct?.recorderEmail,
+        barcode: finProduct?.barcode,
+        inStock: Number(quantityArray.join('')) === Number(finProduct?.quantity) ? false : true
+    }
+
+    const [listOfSalesItem, setListOfSalesItem] = useState([])
+    console.log('list of sales :', listOfSalesItem)
+
+    const isExistsId = listOfSalesItem?.find(f => f?.id === finProduct?._id);
+
     const handleNumber = (value) => {
         if(price){
             if((typeof value) === 'number' ){
@@ -146,6 +171,26 @@ const Pos = () => {
             lastValue.pop()
             setQuantityArray(lastValue)
         }
+    
+        if(value === 'Add Item'){
+            if(barcodeId){
+                if(!isExistsId?.id){
+                     if(Number(priceArray?.join('')) > 0 && Number(quantityArray?.join('')) > 0 ){
+                         if(Number(quantityArray?.join('')) <= Number(finProduct?.quantity)){
+                             setListOfSalesItem((prevItem => [...prevItem, salesItem ]))
+                         }else{
+                             toast.error('given quantity is out of stock')
+                         }
+                     }else{
+                         toast.error('please add price and quantity')
+                     }
+                }else{
+                 toast.error('this item already listed to sales item')
+                }
+             }else{
+                 toast.error('please scan first')
+             }
+        }
     }
 
     useEffect(() => {
@@ -157,6 +202,64 @@ const Pos = () => {
      })   
     },[setQuantityArray, setPriceArray])
 
+
+    useEffect(() => {
+        const salesItemForKeyDown = {
+            id: finProduct?._id,
+            productName: finProduct?.productName,
+            actualSalesPrice: Number(priceArray?.join('')),
+            purchasePrice: finProduct?.purchasePrice,
+            category: finProduct?.category,
+            quantity: Number(quantityArray?.join('')),
+            material: finProduct?.material,
+            frameType: finProduct?.frameType,
+            size: finProduct?.size,
+            shape: finProduct?.shape,
+            recorderName:finProduct?.recorderName,
+            recorderEmail:finProduct?.recorderEmail,
+            barcode: finProduct?.barcode,
+            inStock: Number(quantityArray.join('')) === Number(finProduct?.quantity) ? false : true
+        }
+
+        
+
+        const handleKeyDowns = (e) => {
+            if(e.key === 'l' || e.key === 'L'){
+                if(barcodeId){
+                   if(!isExistsId?.id){
+                        if(Number(priceArray?.join('')) > 0 && Number(quantityArray?.join('')) > 0 ){
+                            if(Number(quantityArray?.join('')) <= Number(finProduct?.quantity)){
+                                setListOfSalesItem((prevItem => [...prevItem, salesItemForKeyDown ]))
+                            }else{
+                                toast.error('given quantity is out of stock')
+                            }
+                        }else{
+                            toast.error('please add price and quantity')
+                        }
+                   }else{
+                    toast.error('this item already listed to sales item')
+                   }
+                }else{
+                    toast.error('please scan first')
+                }
+            }
+        };
+    
+        // Add event listener
+        document.addEventListener('keydown', handleKeyDowns);
+    
+        // Cleanup event listener when component unmounts
+        return () => {
+            document.removeEventListener('keydown', handleKeyDowns);
+        };
+    }, [finProduct, priceArray, quantityArray, barcodeId, isExistsId]);  // Add relevant dependencies here
+
+    const handleDeleteSale = (deletedId) => {
+        const restItems = listOfSalesItem?.filter(f => f?.id !== deletedId);
+        setListOfSalesItem(restItems)
+    }
+
+
     return (
        <div className={`${pos.main}`}>
          <div  className={`flex_around`}>
@@ -166,6 +269,8 @@ const Pos = () => {
                         <div>
                             <p>Product Name: </p>
                             <p>Quantity: </p>
+                            <p>Purchase price: </p>
+                            <p>Category: </p>
                             <p>Barcode NO: </p>
                             <p>Material: </p>
                             <p>Frame: </p>
@@ -175,31 +280,36 @@ const Pos = () => {
                         <div>
                             <p>{finProduct?.productName}</p>
                             <p>{finProduct?.quantity}</p>
+                            <p>{finProduct?.purchasePrice}</p>
+                            <p>{finProduct?.category}</p>
                             <p>{finProduct?.barcode}</p>
-                            <p>{finProduct?.material}</p>
+                            <p>{finProduct?.material }</p>
                             <p>{finProduct?.frameType}</p>
                             <p>{finProduct?.size}</p>
                             <p>{finProduct?.shape}</p>
                 
                         </div>
                     </div>
-                   <div  className={`${pos.showQuantityAndPrice}`}>
-                       <div className={`${pos.showQuantityAndPriceContainer}`}>
-                            <div>
-                                    <p>Price: </p>
-                                    <p>Quantity: </p>
+                   { (price || quantity)
+                        &&
+                        <div  className={`${pos.showQuantityAndPrice}`}>
+                            <div className={`${pos.showQuantityAndPriceContainer}`}>
+                                    <div>
+                                            <p>Sales Price: </p>
+                                            <p>Quantity: </p>
+                                    </div>
+                                    <div>
+                                            <p>{priceArray?.length === 0 ? 0 : priceArray.join('')}</p>
+                                            <p>{quantityArray?.length === 0 ? 0 : quantityArray.join('')}</p>
+                                    </div>
                             </div>
-                            <div>
-                                    <p>{priceArray?.length === 0 ? 0 : priceArray.join('')}</p>
-                                    <p>{quantityArray?.length === 0 ? 0 : quantityArray.join('')}</p>
+                            <hr />
+                            <div className={`${pos.totalPriceQuantityValue} flex_between`}>
+                                <p>Total :</p>
+                                <p>{(priceArray?.length !== 0 && quantityArray?.length !== 0) ? (parseInt(quantityArray.join('')) * parseInt(priceArray.join(''))) : 0}</p> 
                             </div>
-                       </div>
-                       <hr />
-                       <div className={`${pos.totalPriceQuantityValue} flex_between`}>
-                        <p>Total :</p>
-                          <p>{(priceArray?.length !== 0 && quantityArray?.length !== 0) ? (parseInt(quantityArray.join('')) * parseInt(priceArray.join(''))) : 0}</p> 
-                       </div>
-                   </div>
+                        </div>
+                   }
                     <div className={`${pos.productCalculation} flex_between`}>
                         <div className={`${pos.priceQuantityCalculation}`}>
                             <div onClick={() => {
@@ -246,6 +356,7 @@ const Pos = () => {
                 </div>
             </div>
         </div>
+        <PosListTable listOfSalesItem={listOfSalesItem} handleDeleteSale={handleDeleteSale}/>
        </div>
     );
 };
