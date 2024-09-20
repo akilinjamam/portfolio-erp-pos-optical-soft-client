@@ -4,17 +4,19 @@ import pos from './Pos.module.scss';
 import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../../../modal/imgmodal/imgModalSlice';
 const Pos = () => {
+    const customerInfo = useSelector(state => state.imgModal.customerInfo)
+    const dispatch = useDispatch();
     const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()
-
-    const date = new Date();
-    console.log(date)
 
     const [barcodeId, setBarcodeId] = useState();
     const [isScanned, setIsScanned] = useState(false)
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
     const finProduct = allProducts?.find(f => f?.barcode === barcodeId)
+    console.log(finProduct)
    
   useEffect(() => {
       let barcode = '';
@@ -146,7 +148,7 @@ const Pos = () => {
     }
 
     const [listOfSalesItem, setListOfSalesItem] = useState([])
-    console.log('list of sales :', listOfSalesItem)
+   
 
     const isExistsId = listOfSalesItem?.find(f => f?.id === finProduct?._id);
 
@@ -211,6 +213,7 @@ const Pos = () => {
             purchasePrice: finProduct?.purchasePrice,
             category: finProduct?.category,
             quantity: Number(quantityArray?.join('')),
+            remainingQuantity: Number(finProduct?.quantity) - Number(quantityArray?.join('')),
             material: finProduct?.material,
             frameType: finProduct?.frameType,
             size: finProduct?.size,
@@ -259,6 +262,20 @@ const Pos = () => {
         setListOfSalesItem(restItems)
     }
 
+    const handleSale = () => {
+        const saleData = {
+            customerName:customerInfo?.customerName === '' ? 'unknown' : customerInfo?.customerName,
+            phoneNumber:customerInfo?.phoneNumber === '' ? 'blank' : customerInfo?.phoneNumber,
+            address:customerInfo?.address === '' ? 'blank' : customerInfo?.address,
+            products: listOfSalesItem
+        }
+        if(listOfSalesItem?.length > 0){
+            console.log(saleData)
+            toast.success('products added to Sale list')
+        }else{
+            toast.error('please add products to sale')
+        }
+    }
 
     return (
        <div className={`${pos.main}`}>
@@ -310,48 +327,57 @@ const Pos = () => {
                             </div>
                         </div>
                    }
-                    <div className={`${pos.productCalculation} flex_between`}>
-                        <div className={`${pos.priceQuantityCalculation}`}>
-                            <div onClick={() => {
-                                setQuantity(true)
-                                setPrice(false)
-                                setIsScanned(false)
-                            }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
-                                Quantity
+                    <div className={`${pos.calculationAndSubmit}`}>
+                       <div className={`${pos.productCalculation} flex_between`}>
+                            <div className={`${pos.priceQuantityCalculation}`}>
+                                <div onClick={() => {
+                                    setQuantity(true)
+                                    setPrice(false)
+                                    setIsScanned(false)
+                                }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
+                                    Quantity
+                                </div>
+                                <div onClick={() => {
+                                    setPrice(true)
+                                    setQuantity(false)
+                                    setIsScanned(false)
+                                }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
+                                    Price
+                                </div>
+                                <div onClick={() => {
+                                    setIsScanned(true)
+                                    setPrice(false)
+                                    setQuantity(false)
+                                    setPriceArray([])
+                                    setQuantityArray([])
+                                }} style={{border: `${isScanned ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.scanBtn} flex_center`}>
+                                    Scan
+                                </div>
                             </div>
-                            <div onClick={() => {
-                                setPrice(true)
-                                setQuantity(false)
-                                setIsScanned(false)
-                            }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
-                                Price
+                            <div style={{backgroundColor: `${quantity ? 'orange': 'green'}`}} className={`${pos.numberCalculation}`}>
+                                {
+                                    calculationValue.map((item, index) => {
+                                        return (
+                                        <div onClick={() => handleNumber(item)} key={index+1}><p>{item}</p></div>
+                                    )
+                                    })
+                                }
                             </div>
-                            <div onClick={() => {
-                                setIsScanned(true)
-                                setPrice(false)
-                                setQuantity(false)
-                                setPriceArray([])
-                                setQuantityArray([])
-                            }} style={{border: `${isScanned ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.scanBtn} flex_center`}>
-                                Scan
-                            </div>
-                        </div>
-                        <div style={{backgroundColor: `${quantity ? 'orange': 'green'}`}} className={`${pos.numberCalculation}`}>
-                            {
-                                calculationValue.map((item, index) => {
-                                    return (
-                                    <div onClick={() => handleNumber(item)} key={index+1}><p>{item}</p></div>
-                                )
-                                })
-                            }
-                        </div>
+                       </div>
+                       <div className={`${pos.submitSale} flex_between`}>
+                            <button onClick={() => {
+                                dispatch(openModal('customer'))
+                            }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
+                            <button onClick={handleSale} className={`${pos.submitSaleAddSale}`}>Add to Sale</button>
+                       </div>
                     </div>
+                    
                 </div>
             </div>
             <div className={`${pos.inputAreaTwo} flex_center`}>
                 <div id='last-barcode' className={`${pos.container} flex_center`}>
                     {
-                        finProduct?.img ? <img width={130} height={130} src={finProduct?.img} alt="" /> : barcodeId ? <p>Image not added !</p> : ''
+                        finProduct?.img ? <img width={200} height={160} src={finProduct?.img} alt="" /> : barcodeId ? <p>Image not added !</p> : ''
                     }
                 </div>
             </div>

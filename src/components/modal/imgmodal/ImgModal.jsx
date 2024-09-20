@@ -1,11 +1,12 @@
-
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import imgmodal from './ImgModal.module.scss';
 import '../../../global_style/global_style.css';
-import { closeModal } from './imgModalSlice';
+import { closeModal, customerInfo } from './imgModalSlice';
 import Barcode from 'react-barcode';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import { toast } from 'react-toastify';
 
 const ImgModal = () => {
 
@@ -21,12 +22,23 @@ const ImgModal = () => {
         const img = useSelector((state) => state.imgModal.img );
         const type = useSelector((state) => state.imgModal.type );
         const barcode = useSelector((state) => state.imgModal.barcode );
-        console.log(barcode)
+        const customerinfor = useSelector((state) => state.imgModal.customerInfo)
+        console.log(customerinfor)
         const dispatch = useDispatch();
 
 
-
-   
+        const {
+            register,
+            handleSubmit,
+          } = useForm()
+        
+          const onSubmit = (data) => {
+            console.log(data)
+            dispatch(customerInfo(data))
+            toast.success('customer info added successfully')
+            dispatch(closeModal())
+          }
+        
     return (
         <div>
             <div className={`${imgmodal.main} flex_center  ${(open && type === 'img' ) ? imgmodal.open : imgmodal.close}`} >
@@ -63,6 +75,34 @@ const ImgModal = () => {
                         })
                     }
                     </div>
+                </section>
+            </div>
+            <div className={`${imgmodal.main} flex_center  ${(open && type === 'customer' ) ? imgmodal.open : imgmodal.close}`} >
+                <section className={`${imgmodal.container}  ${imgmodal.sizeImg}`}>
+                    <div className={`${imgmodal.cancelBtn}  flex_right`}>
+                        <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
+                    </div>
+                    <br />
+                    <form className={imgmodal.useFont} onSubmit={handleSubmit(onSubmit)}>
+                        <h4>Add Customer Information:</h4>
+                        <br />
+                        <label htmlFor="">Customer Name: </label>
+                        <br />
+                        <input type="text" name="" id="" {...register('customerName')}/>
+                        <br />
+                        <br />
+                        <label htmlFor="">Phone Number: </label>
+                        <br />
+                        <input type="text" name="" id="" {...register('phoneNumber')}/>
+                        <br />
+                        <br />
+                        <label htmlFor="">Address: </label>
+                        <br />
+                        <input type="text" name="" id="" {...register('address')}/>
+                        <br />
+                        <br />
+                        <input type="submit" value="save" />
+                    </form>
                 </section>
             </div>
         </div>

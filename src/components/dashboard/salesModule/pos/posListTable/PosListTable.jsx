@@ -5,12 +5,11 @@ import { customCode } from '../../../../customCode/customcode';
 
 const PosListTable = ({listOfSalesItem, handleDeleteSale}) => {
     const date = customCode()?.ddmmyy;
-    console.log(date)
-    console.log(listOfSalesItem)
+   
 
     const totalSales = listOfSalesItem?.map(item =>( item?.actualSalesPrice * item?.quantity))
     const totalSalesValue = calculateTotalPrice(totalSales);
-    console.log(totalSalesValue)
+   
 
     return (
         <div style={{overflowX:'hidden', overflowY:'scroll', height:'700px'}}>
