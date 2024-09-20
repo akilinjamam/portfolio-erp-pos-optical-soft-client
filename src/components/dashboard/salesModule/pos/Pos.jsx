@@ -224,8 +224,6 @@ const Pos = () => {
             inStock: Number(quantityArray.join('')) === Number(finProduct?.quantity) ? false : true
         }
 
-        
-
         const handleKeyDowns = (e) => {
             if(e.key === 'l' || e.key === 'L'){
                 if(barcodeId){
