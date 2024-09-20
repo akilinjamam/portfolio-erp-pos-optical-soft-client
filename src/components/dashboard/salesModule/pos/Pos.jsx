@@ -9,7 +9,7 @@ import { openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 const Pos = () => {
-
+    // fetching data using tanstack query:
     const mutation = useMutation({
         mutationFn: async (data) => {
             return await fetchPostSaleData(data)
@@ -21,7 +21,6 @@ const Pos = () => {
             console.log('failed to add to sale list: ', data)
         }
     })
-
 
     const customerInfo = useSelector(state => state.imgModal.customerInfo)
     const dispatch = useDispatch();
