@@ -43,7 +43,7 @@ const Pos = () => {
     })
  
      const handleBarcode = (scanned_barcode) => {
-        //  document.querySelector('#last-barcode').innerHTML = scanned_barcode
+       
          setBarcodeId(scanned_barcode)
      }
   },[isScanned])
@@ -60,7 +60,7 @@ const Pos = () => {
         const findKey = calculationValue.find(value => value === key);
 
         if (findKey !== undefined) {
-            // console.log('quantity-working')
+          
             setQuantityArray(prevArray => [...prevArray, findKey]);
         }
 
@@ -81,7 +81,7 @@ const Pos = () => {
         const findKey = calculationValue.find(value => value === key);
 
         if (findKey !== undefined) {
-            // console.log('price-working')
+           
             setPriceArray(prevArray => [...prevArray, findKey]);
         }
 
