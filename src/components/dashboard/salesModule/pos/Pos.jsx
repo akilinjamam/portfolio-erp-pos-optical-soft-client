@@ -6,7 +6,23 @@ import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { useMutation } from '@tanstack/react-query';
+import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 const Pos = () => {
+
+    const mutation = useMutation({
+        mutationFn: (data) => {
+            return fetchPostSaleData(data)
+        },
+        onSuccess: (data) => {
+            console.log('product successfully added to sale list :', data)
+        },
+        onError: (data) => {
+            console.log('failed to add to sale list: ', data)
+        }
+    })
+
+
     const customerInfo = useSelector(state => state.imgModal.customerInfo)
     const dispatch = useDispatch();
     const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()
@@ -262,22 +278,51 @@ const Pos = () => {
         setListOfSalesItem(restItems)
     }
 
-
-    
     const handleSale = () => {
         const saleData = {
-            customerName:customerInfo?.customerName === '' ? 'unknown' : customerInfo?.customerName,
-            phoneNumber:customerInfo?.phoneNumber === '' ? 'blank' : customerInfo?.phoneNumber,
-            address:customerInfo?.address === '' ? 'blank' : customerInfo?.address,
+            customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
+            phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
+            address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
             products: listOfSalesItem
         }
         if(listOfSalesItem?.length > 0){
+            mutation.mutate(saleData)
             console.log(saleData)
             toast.success('products added to Sale list')
         }else{
             toast.error('please add products to sale')
         }
     }
+
+
+    useEffect(() => {
+        const handleSalePress = (e) => {
+
+            if(e.key === 'i' || e.key === 'I'){
+                const saleData = {
+                    customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
+                    phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
+                    address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
+                    products: listOfSalesItem
+                }
+                if(listOfSalesItem?.length > 0){
+                    
+                    console.log(saleData)
+                    toast.success('products added to Sale list')
+                }else{
+                    toast.error('please add products to sale')
+                }
+            }
+            
+        }
+
+        document.addEventListener('keydown', handleSalePress);
+
+        // Cleanup event listener when component unmounts
+        return () => {
+            document.removeEventListener('keydown', handleSalePress);
+        };
+    },[customerInfo,listOfSalesItem])
 
     return (
        <div className={`${pos.main}`}>
@@ -370,7 +415,7 @@ const Pos = () => {
                             <button onClick={() => {
                                 dispatch(openModal('customer'))
                             }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
-                            <button onClick={handleSale} className={`${pos.submitSaleAddSale}`}>Add to Sale</button>
+                            <button onClick={handleSale} className={`${pos.submitSaleAddSale}`}>{mutation.isPending ? 'Loading...': 'Add to Sale'}</button>
                        </div>
                     </div>
                     
