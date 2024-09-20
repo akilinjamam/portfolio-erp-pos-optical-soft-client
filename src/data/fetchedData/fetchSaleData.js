@@ -1,6 +1,6 @@
 import axios from "axios"
 
-// const url = import.meta.env.VITE_DATA_URL;
+const url = import.meta.env.VITE_DATA_URL;
 
 // export const fetchGetProductData = async (query) => {
 //     try {
@@ -18,7 +18,7 @@ import axios from "axios"
 // }
 export const fetchPostSaleData = async (data) => {
     try {
-        const result = await axios.post(`http://localhost:5000/api/v1/sales/create-sale`, data)
+        const result = await axios.post(`${url}/sales/create-sale`, data)
         return result;
     } catch (error) {
         return error
