@@ -11,8 +11,8 @@ import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 const Pos = () => {
 
     const mutation = useMutation({
-        mutationFn: (data) => {
-            return fetchPostSaleData(data)
+        mutationFn: async (data) => {
+            return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {
             console.log('product successfully added to sale list :', data)
