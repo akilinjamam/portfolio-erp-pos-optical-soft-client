@@ -262,6 +262,8 @@ const Pos = () => {
         setListOfSalesItem(restItems)
     }
 
+
+    
     const handleSale = () => {
         const saleData = {
             customerName:customerInfo?.customerName === '' ? 'unknown' : customerInfo?.customerName,
