@@ -18,7 +18,7 @@ const SalesRecord = () => {
             <div className={`${salesRecord.title} flex_left`}>
                 <i onClick={() => {handlePrint(null, () => contentToPrint.current)}} title="print" className="uil uil-print"></i>
             </div>
-            <div style={{overflowX:'hidden', overflowY:'scroll', height:'700px'}}>
+            <div style={{overflowX:'hidden', overflowY:'scroll', minHeight:'auto', maxHeight:'700px'}}>
                 <SalesRecordTable contentToPrint={contentToPrint}/>
             </div>
         </div>

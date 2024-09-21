@@ -20,7 +20,7 @@ export const homeNavigator = [
         routes: {
             one: '/dashboard/sales_module',
             two: '/dashboard/sales_module/pos',
-            three: '',
+            three: '/dashboard/sales_module/sales_record',
             four: '',
             five: ''
         }

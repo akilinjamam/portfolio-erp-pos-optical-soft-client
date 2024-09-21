@@ -1,16 +1,24 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
+import CommonLoading from '../../../commonLoagin/CommonLoading';
 import useSalesRecord from './useSalesRecord';
 
 const SalesRecordTable = ({contentToPrint}) => {
 
-    const {saleData} = useSalesRecord()
+    const {saleData, isPending} = useSalesRecord()
 
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
 
-    
+    if(isPending){
+        return (
+        <div className='flex_center' style={{width:'100%', height:'500px'}}>
+            <CommonLoading/>
+        </div>
+    )
+    }
+
     return (
         <div ref={contentToPrint} style={{marginTop:'10px'}}>
             <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
