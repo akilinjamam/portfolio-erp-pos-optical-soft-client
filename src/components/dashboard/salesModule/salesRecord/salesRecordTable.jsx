@@ -10,6 +10,7 @@ const SalesRecordTable = ({contentToPrint}) => {
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
 
+    
     return (
         <div ref={contentToPrint} style={{marginTop:'10px'}}>
             <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
