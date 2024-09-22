@@ -26,11 +26,14 @@ export const fetchPostProductData = async (data) => {
         return error
     }
 }
-export const fetchUpdateProductData = async (id, data, refetch, toast) => {
+export const fetchUpdateProductData = async (id, data, refetch, toast, setUdpateProductData, initialProductData) => {
     try {
         const result = await axios.patch(`${url}/products/${id}`, data)
-        toast.success('product updated successfully')
         refetch
+        if (result?.data?.success) {
+            setUdpateProductData(initialProductData)
+            toast.success('product updated successfully')
+        }
         return result;
     } catch (error) {
         console.log(error)

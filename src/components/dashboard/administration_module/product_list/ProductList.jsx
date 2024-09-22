@@ -32,7 +32,7 @@ const ProductList = () => {
     const calculateQuantity = productData?.map(q => Number(q?.quantity))
     const totalQuantity = calculateTotalPrice(calculateQuantity)
     return (
-        <div className={`${productList.main} full_width`}>
+        <div  className={`${productList.main} full_width`}>
              <div style={{display:`${fullScr ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${productList.inputAreaOne} flex_center`}>
                   <div className={`${productList.container} `}>
@@ -157,7 +157,7 @@ const ProductList = () => {
            {
             !isLoading && !fullScr 
             &&
-            <Pagination showData={productData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex}/>
+            <Pagination showData={productData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={50}/>
            }      
         </div>
     );

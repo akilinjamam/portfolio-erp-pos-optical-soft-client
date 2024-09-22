@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import pagination from './Pagination.module.scss';
-const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) => {
+const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex, limit=10}) => {
     const [count, setCount] = useState(1);
     const [pageNumber, setPageNumber] = useState(1);
     const navigation = [
@@ -28,14 +28,14 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) =>
     ]
     
     useEffect(() => {
-        const paginatedData = showData?.slice((pageNumber*10) - 10, pageNumber*10);
+        const paginatedData = showData?.slice((pageNumber*limit) - limit, pageNumber*limit);
         setPaginatedDataContainer(paginatedData)
         setPaginatedIndex(pageNumber)
-    },[pageNumber,setPaginatedDataContainer,setPaginatedIndex, showData ])
+    },[pageNumber,setPaginatedDataContainer,setPaginatedIndex, showData, limit ])
 
     const handleNav = (nav) => {
         if(nav.link === 'increase'){
-           if(count <= (Math.ceil((showData?.length/10)-3))){
+           if(count <= (Math.ceil((showData?.length/limit)-3))){
             setCount(prevCount => prevCount+1)
            }
         }
@@ -88,7 +88,7 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex}) =>
                 }
                 <p>....</p>
                 <div className={`${pagination.pageBox} flex_center`}>
-                    {Math.ceil(showData?.length/10) === 0 ? 1 : Math.ceil(showData?.length/10)}
+                    {Math.ceil(showData?.length/limit) === 0 ? 1 : Math.ceil(showData?.length/limit)}
                 </div>
                 {
                     navigation.slice(4,5).map((nav, index) => {

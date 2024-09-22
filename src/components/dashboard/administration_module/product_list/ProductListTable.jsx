@@ -8,9 +8,6 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
 
 
-  
-
-  
   const dispatch = useDispatch();
 
   const handleModal = (img) => {
@@ -102,7 +99,7 @@ if(isLoading){
            {
             data?.map((data, index) => {
               return(
-                <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '') || (!data?.inStock ? 'rgb(202, 0, 51)' : '')}`}} key={index+1} >
+                <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '') || (!data?.inStock ? 'rgb(102, 0, 51)' : '')}`, color: `${!data?.inStock ? 'white' : ''}`}} key={index+1} >
                     <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
                       {(selectDeleted && !fullScr) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
                       <span>{data?.indexId}</span>

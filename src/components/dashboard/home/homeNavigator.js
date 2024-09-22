@@ -21,8 +21,8 @@ export const homeNavigator = [
             one: '/dashboard/sales_module',
             two: '/dashboard/sales_module/pos',
             three: '/dashboard/sales_module/sales_record',
-            four: '',
-            five: ''
+            four: '/dashboard/sales_module/stock',
+            five: '/dashboard/sales_module/sales_invoice'
         }
     },
     {

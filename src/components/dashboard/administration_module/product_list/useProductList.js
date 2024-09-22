@@ -44,6 +44,8 @@ const useProductList = () => {
         setUdpateProductData(findProductList || '')
     }, [findProductList])
 
+
+
     // converting number to alphubet and generating unique code using Date
     useEffect(() => {
         const newCode = customCode()
@@ -53,8 +55,14 @@ const useProductList = () => {
 
     const editProduct = async (e) => {
         e.preventDefault()
-
         const img = imgHolder ? imgHolder : updateProductData?.img
+
+        const stock = Number(updateProductData?.quantity) > 0 ? true : false
+
+        if (Number(updateProductData?.quantity) < 0) {
+            toast.error('you can not decrease quantity less then 0')
+            return
+        }
 
         const updatedData = {
             productName: updateProductData?.productName,
@@ -67,9 +75,10 @@ const useProductList = () => {
             frameType: updateProductData?.frameType,
             size: updateProductData?.size,
             shape: updateProductData?.shape,
-            img: img
+            img: img,
+            inStock: stock
         }
-        await fetchUpdateProductData(edit, updatedData, refetch, toast)
+        await fetchUpdateProductData(edit, updatedData, refetch, toast, setUdpateProductData, initialProductData)
         setImgHolder('')
         setEdit('')
     }
