@@ -11,14 +11,16 @@ const Stock = () => {
     const [stocks, setStocks] = useState(true);
     // eslint-disable-next-line no-unused-vars
     const [paginatedIndex, setPaginatedIndex] = useState();
+    console.log(stocks)
    
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductDataWithIndexId] = useState([])
-    const filteredByStock = products?.result?.filter(f => f?.inStock == stocks);
+
+    
     useEffect(() => {
-        const modified = filteredByStock?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
+        const modified = products?.result?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
-    },[products, filteredByStock, stocks])
+    },[products])
 
 
     return (
