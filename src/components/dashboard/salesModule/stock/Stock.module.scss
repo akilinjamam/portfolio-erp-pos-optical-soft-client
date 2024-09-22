@@ -13,7 +13,16 @@
             }
             select{
                 margin-left: 10px;
+                margin-right: 10px;
                 width: 150px;
+            }
+            label{
+                margin-left: 10px;
+                margin-right: 10px;
+                font-size: 14px;
+            }
+            input{
+                width: 220px;
             }
         }
     }

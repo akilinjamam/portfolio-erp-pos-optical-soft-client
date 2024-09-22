@@ -8,7 +8,9 @@ export const fetchGetSaleData = async () => {
 
         const result = await axios.get(`${url}/sales/`, {
             headers: {
-                Authorization: token
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
             }
         })
         return result?.data;
