@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useRef } from 'react';
-import '../../../global_style/global_style.css'
-import StockTable from '../../dashboard/salesModule/stock/StockTable';
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
+import SalesRecordTable from '../../dashboard/salesModule/salesRecord/salesRecordTable';
+import useSalesRecord from '../../dashboard/salesModule/salesRecord/useSalesRecord';
 
-const StockModal = ({type, open, dispatch, closeModal, stockData}) => {
+
+const SalesModal = ({open, type, dispatch, closeModal }) => {
+
+    const {saleData} = useSalesRecord()
 
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
@@ -14,13 +17,13 @@ const StockModal = ({type, open, dispatch, closeModal, stockData}) => {
         onAfterPrint: () => console.log("after printing..."),
         removeAfterPrint: true,
     });
-    
+
     return (
-        <div className={`${imgmodal.main} flex_center  ${(open && type === 'stock' ) ? imgmodal.open : imgmodal.close}`} >
+        <div className={`${imgmodal.main} flex_center  ${(open && type === 'sales' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container} ${imgmodal.sizeStock}`}>
                     <div className={`${imgmodal.cancelBtn} flex_between`}>
                         <div>
-                        <button>Total Stock Data : {stockData?.length} </button>
+                        <button>Total Sale Data : {saleData?.result?.length} </button>
                         <button 
                         onClick={() => {
                         handlePrint(null, () => contentToPrint.current);
@@ -31,12 +34,12 @@ const StockModal = ({type, open, dispatch, closeModal, stockData}) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                    <StockTable paginatedDataContainer={stockData}/>
+                    <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
+                    <SalesRecordTable contentToPrint={contentToPrint}/>
                     </div>        
                 </section>
         </div>
     );
 };
 
-export default StockModal;
+export default SalesModal;

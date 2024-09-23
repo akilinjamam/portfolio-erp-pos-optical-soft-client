@@ -7,6 +7,7 @@ import ImgContainer from './ImgContainer';
 import BarcodeContainer from './BarcodeContainer';
 import CustomerContainer from './CustomerContainer';
 import StockModal from './StockModal';
+import SalesModal from './SalesModal';
 
 const ImgModal = () => {
 
@@ -25,6 +26,8 @@ const ImgModal = () => {
             <BarcodeContainer open={open} type={type} barcode={barcode} closeModal={closeModal}  dispatch={dispatch} />
             <CustomerContainer closeModal={closeModal} dispatch={dispatch} open={open} customerInfo={customerInfo} type={type}/>
             <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
+            <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
+
         </div>
     );
 };

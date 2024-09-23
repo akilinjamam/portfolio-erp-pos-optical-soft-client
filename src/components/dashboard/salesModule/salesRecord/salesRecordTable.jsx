@@ -7,7 +7,7 @@ import useSalesRecord from './useSalesRecord';
 const SalesRecordTable = ({contentToPrint}) => {
 
     const {saleData, isPending} = useSalesRecord()
-    console.log(saleData)
+
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
 
@@ -27,7 +27,7 @@ const SalesRecordTable = ({contentToPrint}) => {
                   <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Phone Number</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Address</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Address</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total</th>
@@ -42,7 +42,7 @@ const SalesRecordTable = ({contentToPrint}) => {
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.address}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.createdAt?.slice(0,10)}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
                         {sale?.products?.map((item, index) => <p key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
