@@ -4,7 +4,7 @@ export const fetchGetSaleData = async () => {
     try {
         const token = localStorage.getItem('user')
 
-        const result = await axios.get(`${url}/api/v1/sales/`, {
+        const result = await axios.get(`${url}/sales/`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",
