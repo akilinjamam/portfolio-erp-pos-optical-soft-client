@@ -18,33 +18,13 @@ export const fetchGetSaleData = async () => {
 }
 export const fetchPostSaleData = async (data) => {
     try {
-        const result = await axios.post(`/api/v1/sales/create-sale`, data)
+        const result = await axios.post(`${url}/sales/create-sale`, data)
         return result;
     } catch (error) {
         return error
     }
 }
-// export const fetchUpdateProductData = async (id, data, refetch, toast) => {
-//     try {
-//         const result = await axios.patch(`${url}/products/${id}`, data)
-//         toast.success('product updated successfully')
-//         refetch
-//         return result;
-//     } catch (error) {
-//         console.log(error)
-//         return error
-//     }
-// }
-// export const fetchDeleteProductData = async (ids, refetch, toast) => {
-//     try {
-//         const result = await axios.post(`${url}/products/bulk-delete`, ids)
-//         toast.success('product deleted successfully')
-//         refetch
-//         return result;
-//     } catch (error) {
-//         console.log(error)
-//         return error
-//     }
-// }
+
+
 
 
