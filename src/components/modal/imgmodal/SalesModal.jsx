@@ -18,6 +18,8 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
         removeAfterPrint: true,
     });
 
+
+    
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'sales' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container} ${imgmodal.sizeStock}`}>
