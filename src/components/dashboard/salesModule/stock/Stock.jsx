@@ -70,7 +70,7 @@ const Stock = () => {
                 </div>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll',width:"99.5%", minHeight:'auto', maxHeight:'700px'}}>
-                <StockTable paginatedDataContainer={paginatedDataContainer} stockValue={stocks}/>
+                <StockTable paginatedDataContainer={paginatedDataContainer}/>
             </div>
             <Pagination showData={modifiedProductDataWithIndexId} setPaginatedIndex={setPaginatedIndex} setPaginatedDataContainer={setPaginatedDataContainer} limit={50}  />
         </div>
