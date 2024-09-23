@@ -5,8 +5,14 @@ import { useState } from "react";
 import useProductData from "../../../../data/productData/useProductData";
 import { useEffect } from "react";
 import CommonLoading from "../../../commonLoagin/CommonLoading";
+import { useDispatch } from "react-redux";
+import { addStockData, openModal } from "../../../modal/imgmodal/imgModalSlice";
+
 
 const Stock = () => {
+
+   const dispatch = useDispatch();
+
     const [query, setQuery] = useState('');
     const [range, setRange] = useState({
         from: '',
@@ -37,11 +43,18 @@ const Stock = () => {
         return <CommonLoading/>
     }
     
-
     return (
         <div className={`${stock.main}`} >
             <div className={`${stock.titleBar} flex_left`}>
                 <div className={`${stock.titleBarContainer}`}>
+                    <i 
+                    title="print preview"
+                    className="uil uil-print"
+                    onClick={() => {
+                        dispatch(addStockData(filteredStock))
+                        dispatch(openModal('stock'))
+                    }}
+                    ></i>
                     <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
                     <i onClick={() => setQuery('')} className="uil uil-times"></i>
                     <select value={stocks} name="" id="" onChange={(e) => setStocks(e?.target?.value === 'true') }>

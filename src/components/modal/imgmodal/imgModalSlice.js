@@ -8,12 +8,14 @@ export const imgModalSlice = createSlice({
         type: '',
         img: '',
         barcode: [],
-        customerInfo: {}
+        customerInfo: {},
+        stockData: []
     },
     reducers: {
         openModal: (state, action) => {
             state.open = true;
             state.lock = true
+            console.log(action.payload)
             state.type = action.payload;
         },
         closeModal: (state) => {
@@ -28,11 +30,14 @@ export const imgModalSlice = createSlice({
         },
         customerInfo: (state, action) => {
             state.customerInfo = action.payload
+        },
+        addStockData: (state, action) => {
+            state.stockData = action.payload
         }
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

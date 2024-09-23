@@ -1,12 +1,10 @@
 import axios from "axios"
 
-const url = import.meta.env.VITE_DATA_URL;
-
 export const fetchGetSaleData = async () => {
     try {
         const token = localStorage.getItem('user')
 
-        const result = await axios.get(`${url}/sales/`, {
+        const result = await axios.get(`/api/v1/sales/`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",
@@ -20,7 +18,7 @@ export const fetchGetSaleData = async () => {
 }
 export const fetchPostSaleData = async (data) => {
     try {
-        const result = await axios.post(`${url}/sales/create-sale`, data)
+        const result = await axios.post(`/api/v1/sales/create-sale`, data)
         return result;
     } catch (error) {
         return error

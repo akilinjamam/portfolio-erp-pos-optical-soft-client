@@ -7,7 +7,7 @@ import useSalesRecord from './useSalesRecord';
 const SalesRecordTable = ({contentToPrint}) => {
 
     const {saleData, isPending} = useSalesRecord()
-
+    console.log(saleData)
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
 

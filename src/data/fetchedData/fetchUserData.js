@@ -5,9 +5,11 @@ const url = import.meta.env.VITE_DATA_URL;
 export const fetchGetUserData = async () => {
     const token = localStorage.getItem('user')
 
-    const result = await axios.get(`https://opticalsoft-server.vercel.app/api/v1/login`, {
+    const result = await axios.get(`${url}/login`, {
         headers: {
-            Authorization: token
+            Authorization: token,
+            "Accepts": "application/json",
+            "Access-Control-Allow-Origin": "*"
         }
     })
     return result?.data;
