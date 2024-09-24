@@ -26,6 +26,8 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex, lim
             link: 'increase'
         },
     ]
+
+    console.log(Math.ceil(showData?.length/limit))
     
     useEffect(() => {
         const paginatedData = showData?.slice((pageNumber*limit) - limit, pageNumber*limit);
@@ -74,9 +76,9 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex, lim
 
     return (
         <div className={`${pagination.main} flex_left`}>
-           <div style={{opacity: `${showData?.length < 10 ? 0 : 1}`}} className={`${pagination.container} flex_between`}>
+           <div style={{opacity: `${showData?.length < limit ? 0 : 1}`}} className={`${pagination.container} flex_between`}>
                 {
-                    navigation.slice(0,4).map((nav, index) => {
+                    navigation.slice(0, (showData?.length <= (limit *3)) ? (Math.ceil(showData?.length/limit)+1) : 4  ).map((nav, index) => {
                         return (
                             <div style={{ display:`${hide(nav)}`}}  key={index+1} >
                                 <div style={{backgroundColor: `${active(nav.value)}`}} onClick={() => handleNav(nav)} className={`${pagination.pageBox} flex_center`}>

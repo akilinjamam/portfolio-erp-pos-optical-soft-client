@@ -4,9 +4,12 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import useSalesRecord from './useSalesRecord';
 
-const SalesRecordTable = ({contentToPrint}) => {
+const SalesRecordTable = ({contentToPrint, paginatedDataContainer}) => {
 
     const {saleData, isPending} = useSalesRecord()
+
+    // const paginatedtotal = paginatedDataContainer?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    // const salesValue = calculateTotalPrice(paginatedtotal)
 
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
@@ -35,9 +38,9 @@ const SalesRecordTable = ({contentToPrint}) => {
           </thead>
         <tbody>
           {
-            saleData?.result?.map((sale, index) => (
+            paginatedDataContainer?.map((sale, index) => (
                 <tr key={index+1}>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{index+1}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.indexId ? sale?.indexId : index+1}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.customerName}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.address}</td>
@@ -51,13 +54,14 @@ const SalesRecordTable = ({contentToPrint}) => {
                 </tr>
             ))
           }
+          
           <tr style={{fontWeight:'bold'}}>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value :</td>
+            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value({saleData?.result?.length})  :</td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</td>
           </tr>
         </tbody>

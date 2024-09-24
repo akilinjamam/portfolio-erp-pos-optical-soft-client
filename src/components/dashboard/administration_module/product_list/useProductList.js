@@ -8,7 +8,11 @@ import { customCode } from "../../../customCode/customcode";
 const useProductList = () => {
 
     const [query, setQuery] = useState('');
-    const { products, isLoading, refetch } = useProductData(query);
+    const [range, setRange] = useState({
+        from: '',
+        to: ''
+    })
+    const { products, isLoading, refetch } = useProductData(query, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
     const [newCustomCode, setNewCustomCode] = useState('');
@@ -19,6 +23,8 @@ const useProductList = () => {
     const [fullScr, setFullScr] = useState(false)
     const [selectDeleted, setSelectDeleted] = useState(false)
     const [idsForDelete, setIdsForDelete] = useState([]);
+    const [stocks, setStocks] = useState('');
+
 
 
     const initialProductData = {
@@ -82,13 +88,21 @@ const useProductList = () => {
         setImgHolder('')
         setEdit('')
     }
+    const [filteredByStock, setFilteredByStock] = useState([]);
+    useEffect(() => {
+        const filtered = products?.result?.filter(f => f?.inStock === stocks);
+        setFilteredByStock(filtered)
+    }, [products, stocks])
+
+
+    const data = stocks === '' ? products?.result : filteredByStock
 
     useEffect(() => {
-        const productAddedWithIndexId = products?.result?.slice()?.reverse()?.map((d, i) => ({
+        const productAddedWithIndexId = data?.slice()?.reverse()?.map((d, i) => ({
             ...d, indexId: i + 1
         }))
         setModifiedProductWithIndexId(productAddedWithIndexId)
-    }, [products])
+    }, [products, data])
 
     useEffect(() => {
         setQuery(query)
@@ -105,6 +119,6 @@ const useProductList = () => {
 
 
 
-    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts }
+    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, setStocks, range, setRange }
 };
 export default useProductList;

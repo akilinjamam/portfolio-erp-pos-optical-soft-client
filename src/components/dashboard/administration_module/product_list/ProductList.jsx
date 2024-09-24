@@ -9,9 +9,8 @@ import useProductList from "./useProductList";
 import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { calculateTotalPrice } from "../../../calculation/calculateSum";
 const ProductList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts} = useProductList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, setStocks, range ,setRange} = useProductList();
     const productData = modifiedProductDataWithIndexId
 
     const dispatch = useDispatch();
@@ -28,9 +27,6 @@ const ProductList = () => {
         onAfterPrint: () => console.log("after printing..."),
         removeAfterPrint: true,
     });
-
-    const calculateQuantity = productData?.map(q => Number(q?.quantity))
-    const totalQuantity = calculateTotalPrice(calculateQuantity)
     return (
         <div  className={`${productList.main} full_width`}>
              <div style={{display:`${fullScr ? 'none' : 'flex'}`}}  className={`flex_around`}>
@@ -142,7 +138,24 @@ const ProductList = () => {
                       <input type="text" name="query" id="" value={query} placeholder="search" onChange={(e) => setQuery(e.target.value)} />
                       <i onClick={() => setQuery('')} className="uil uil-times"></i>
                       <span>Total Products : {productData?.length}</span>
-                      <span> Total Quantities : {totalQuantity}</span>
+
+                      <select name="" id="" onChange={(e) => {
+                        if(e.target.value === 'true' || e.target.value === 'false'){
+                          setStocks(e.target.value === 'true')
+                        }
+                        if(e.target.value === ''){
+                          setStocks('')
+                        }
+                      } }>
+                        <option value="">stock-in & stock-out</option>
+                        <option value="true">stock-in</option>
+                        <option value="false">stock-out</option>
+                      </select>
+                      <label htmlFor="">From: </label>
+                      <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
+                      <label htmlFor="">To: </label>
+                      <input value={range.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
+                      <i onClick={() => setRange({from:'', to:''})} className="uil uil-times"></i>
                 </div>
                 }
                 <div className={productList.btnPart}>

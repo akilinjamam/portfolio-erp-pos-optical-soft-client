@@ -37,7 +37,7 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                    <SalesRecordTable contentToPrint={contentToPrint}/>
+                    <SalesRecordTable contentToPrint={contentToPrint} paginatedDataContainer={saleData?.result}/>
                     </div>        
                 </section>
         </div>
