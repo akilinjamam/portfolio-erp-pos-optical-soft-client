@@ -8,7 +8,7 @@ export const fetchGetProductData = async (query, from, to) => {
         const value = query ? query : '';
         const fromDate = from ? from : '';
         const toDate = to ? to : '';
-        console.log(from)
+
         const result = await axios.get(`${url}/products?searchTerm=${value}&from=${fromDate}&to=${toDate}`, {
             headers: {
                 Authorization: token,

@@ -1,14 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
+import useSaleData from "../../../../data/saleData/useSaleData";
 
-
-const useSalesRecord = () => {
-
-    const { isPending, isError, data: saleData, error } = useQuery({
-        queryKey: ['getSaleData'],
-        queryFn: fetchGetSaleData,
-    });
-    return { saleData, isError, isPending, error }
+const useSalesRecord = (query, from, to) => {
+    const { saleData, error, isLoading } = useSaleData(query, from, to)
+    return { saleData, error, isLoading }
 };
 
 export default useSalesRecord;

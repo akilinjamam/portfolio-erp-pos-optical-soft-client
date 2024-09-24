@@ -2,19 +2,11 @@
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-import useSalesRecord from './useSalesRecord';
 
-const SalesRecordTable = ({contentToPrint, paginatedDataContainer}) => {
 
-    const {saleData, isPending} = useSalesRecord()
+const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem}) => {
 
-    // const paginatedtotal = paginatedDataContainer?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
-    // const salesValue = calculateTotalPrice(paginatedtotal)
-
-    const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
-    const totalSalesValue = calculateTotalPrice(total)
-
-    if(isPending){
+    if(isLoading){
         return (
         <div className='flex_center' style={{width:'100%', height:'500px'}}>
             <CommonLoading/>
@@ -61,7 +53,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer}) => {
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value({saleData?.result?.length})  :</td>
+            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value({totalSalesItem})  :</td>
             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</td>
           </tr>
         </tbody>
