@@ -4,28 +4,12 @@ import logo from '../../images/logo.png';
 import { allInputLoginData } from "./logInputItems";
 import { fetchPostLoginData } from "../../data/fetchedData/fetchLoginData";
 import { useNavigate } from "react-router-dom";
-// import useScanDetection from "use-scan-detection";
 
 import { toast } from "react-toastify";
-// import { useEffect, useState } from "react";
+
 
 const Login = () => {
 
-    // let [value, setValue] = useState('');
-    // const [filteredValue, setFilteredValue] = useState('');
-
-    // useScanDetection({
-    //     onComplete: setValue,
-    //     minLength: 13,
-       
-    // });
-
-    // useEffect(() => {
-    //     const filtered = value.replace(/Shift|Enter/g, "");
-    //     setFilteredValue(filtered)
-    // }, [value])
-
-   
     const [user, setUser, loading, setLoading, eye,setEye] = useLogin();
     const navigate = useNavigate();
 

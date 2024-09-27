@@ -57,7 +57,7 @@ const Home = () => {
                         <Outlet/> 
                         <DashboardFooter/>                  
                     </div>
-                </div>
+            </div>
         </div>
     );
 };

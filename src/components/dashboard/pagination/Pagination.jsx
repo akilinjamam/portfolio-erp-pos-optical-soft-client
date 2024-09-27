@@ -65,7 +65,7 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex, lim
     const hide = (value) => {
        
        if(value.link === 'three'){
-            if((showData?.length <20)){
+            if((showData?.length < limit )){
             return 'none'
         }else{
             return 'block'

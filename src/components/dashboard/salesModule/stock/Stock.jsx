@@ -69,7 +69,7 @@ const Stock = () => {
                     <i onClick={() => setRange({from: '', to: ''})} className="uil uil-times"></i>
                 </div>
             </div>
-            <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none' ,width:"99.5%", minHeight:'auto', maxHeight:'700px'}}>
+            <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none' ,width:"99.5%", minHeight:'auto', maxHeight:'70vh'}}>
                 <StockTable paginatedDataContainer={paginatedDataContainer}/>
             </div>
             <Pagination showData={modifiedProductDataWithIndexId} setPaginatedIndex={setPaginatedIndex} setPaginatedDataContainer={setPaginatedDataContainer} limit={50}  />

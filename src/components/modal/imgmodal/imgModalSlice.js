@@ -42,10 +42,13 @@ export const imgModalSlice = createSlice({
             state.totalSalesValue = action.payload.totalSalesValue;
             state.totalSalesItem = action.payload.totalSalesItem;
         },
+        customerList: (state, action) => {
+            state.salesData = action.payload;
+        },
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

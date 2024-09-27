@@ -7,7 +7,7 @@ export const routeCarts = [
     },
     {
         value: 'HR & Payroll',
-        link: '',
+        link: '/dashboard/hr_and_payroll_module',
         icon: 'uil uil-users-alt',
         color: 'rgb(243, 231, 209)'
     },

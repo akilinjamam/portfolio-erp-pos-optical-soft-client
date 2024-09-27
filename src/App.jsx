@@ -11,8 +11,9 @@ import SalesModule from './components/dashboard/salesModule/SalesModule';
 import Administration from './components/dashboard/administration_module/Administration';
 import administrationRoute from './sub-routes/administration.route';
 import salesRoute from './sub-routes/sales.route';
-
-
+import HrAndPayroll from './components/dashboard/hrAndPayroll/HrAndPayrol';
+import hrAndPayrollRoute from './sub-routes/hrAndPayroll.route';
+import Layout from './components/Layout/Layout';
 
 function App() {
 
@@ -46,7 +47,7 @@ function App() {
     },
     {
       path: '/dashboard',
-      element: <Home/>,
+      element: <Layout><Home/></Layout>,
       children: [
         {index: true, element:<DashboardHome/> },
         {
@@ -58,6 +59,11 @@ function App() {
           path: 'administration_module',
           element: <Administration/>,
           children: administrationRoute
+        },
+        {
+          path: 'hr_and_payroll_module',
+          element: <HrAndPayroll/>,
+          children: hrAndPayrollRoute
         },
       ]
     }

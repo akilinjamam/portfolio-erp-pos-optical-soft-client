@@ -38,15 +38,15 @@ export const homeNavigator = [
         }
     },
     {
-        route: '',
+        route: '/dashboard/hr_and_payroll_module',
         value: 'HR & Payroll',
         icon: 'uil uil-users-alt',
         routes: {
-            one: '',
-            two: '',
-            three: '',
-            four: '',
-            five: ''
+            one: '/dashboard/hr_and_payroll_module',
+            two: '/dashboard/hr_and_payroll_module/controll_user_access',
+            three: '/dashboard/hr_and_payroll_module/employee_list',
+            four: '/dashboard/hr_and_payroll_module/payroll',
+            five: '/dashboard/hr_and_payroll_module/user_list'
         }
     },
     {
@@ -69,7 +69,7 @@ export const homeNavigator = [
             one: '/dashboard/administration_module',
             two: '/dashboard/administration_module/product_entry',
             three: '/dashboard/administration_module/product_list',
-            four: '',
+            four: '/dashboard/administration_module/customer_list',
             five: ''
         }
     },

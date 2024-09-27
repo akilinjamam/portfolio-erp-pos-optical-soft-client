@@ -13,7 +13,7 @@ export const administrationRoute = [
     },
     {
         value: 'Customer List',
-        link: '',
+        link: '/dashboard/administration_module/customer_list',
         icon: 'uil uil-file-graph',
         color: 'rgb(219, 209, 243)'
     },
