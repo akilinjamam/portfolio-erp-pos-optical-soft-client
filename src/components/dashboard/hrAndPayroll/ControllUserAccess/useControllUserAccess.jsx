@@ -34,8 +34,6 @@ const useControllUserAccess = (id) => {
         }
     })
 
-    console.log(mutation.data)
-
     const handleUpdate = () => {
                
         mutation.mutate(access)

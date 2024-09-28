@@ -27,7 +27,6 @@ const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex, lim
         },
     ]
 
-    console.log(Math.ceil(showData?.length/limit))
     
     useEffect(() => {
         const paginatedData = showData?.slice((pageNumber*limit) - limit, pageNumber*limit);

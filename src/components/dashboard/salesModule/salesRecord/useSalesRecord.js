@@ -1,3 +1,4 @@
+
 import useSaleData from "../../../../data/saleData/useSaleData";
 
 const useSalesRecord = (query, from, to) => {

@@ -48,3 +48,15 @@ export const fetchUpdateUserData = async (data, id) => {
 
     return result;
 }
+export const fetchDeleteUserData = async (id) => {
+    const token = localStorage.getItem('user')
+    const result = await axios.delete(`${url}/registration/remove-user/${id}`, {
+        headers: {
+            Authorization: token,
+            "Accepts": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+    });
+
+    return result;
+}

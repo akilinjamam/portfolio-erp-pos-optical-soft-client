@@ -7,20 +7,26 @@ import Pagination from "../../pagination/Pagination";
 import useSalesRecord from "./useSalesRecord";
 import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
+import handleDebounce from "../../../handleDebounce/handleDebounce";
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const SalesRecord = () => {
+
     const dispatch = useDispatch();
     const [query, setQuery] = useState('');
+    const [handleQuery, setHandleQuery] = useState('');
+    console.log(handleQuery)
     const [range, setRange] = useState({
         from: '',
         to: ''
     })
-    const {saleData, isLoading} = useSalesRecord(query, range.from, range.to);
+
+    const {saleData, isLoading} = useSalesRecord(handleQuery, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [paginatedIndex,setPaginatedIndex] = useState()
-    console.log(paginatedIndex)
+  
 
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
@@ -39,7 +45,10 @@ const SalesRecord = () => {
                     dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {saleData?.total}</span>
-                <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
+                <input value={query} type="text" name="" id="" onChange={(e) => {
+                    setQuery(e.target.value)
+                    handleDebounce(setHandleQuery, e.target.value)   
+                }}/>
                 <i onClick={() => setQuery('')} className="uil uil-times"></i>
                 <label htmlFor="">From: </label>
                 <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>

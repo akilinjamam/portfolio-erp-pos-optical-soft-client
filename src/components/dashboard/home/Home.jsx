@@ -8,6 +8,7 @@ import ImgModal from '../../modal/imgmodal/ImgModal';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../modal/imgmodal/imgModalSlice';
 import DashboardFooter from '../dashboard_footer/DashboardFooter';
+import { useEffect } from 'react';
 const Home = () => {
     
     const dispath = useDispatch()
@@ -16,9 +17,12 @@ const Home = () => {
     const handleSlide = () => {
         setSlide(!slide)
     }
-    if(error){
-        return navigate('/login')
-    }
+
+    useEffect(() => {
+        if(error){
+            return navigate('/login')
+        }
+    },[error, navigate])
 
     const activeRoute = (routes) => {  
         const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];

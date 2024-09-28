@@ -84,19 +84,20 @@ export const homeNavigator = [
             four: '',
             five: ''
         }
-    },
-    {
-        route: '',
-        value: 'Billing Module',
-        icon: 'uil uil-money-bill',
-        routes: {
-            one: '',
-            two: '',
-            three: '',
-            four: '',
-            five: ''
-        }
-    },
+    }
 ]
+
+// {
+//     route: '',
+//     value: 'Billing Module',
+//     icon: 'uil uil-money-bill',
+//     routes: {
+//         one: '',
+//         two: '',
+//         three: '',
+//         four: '',
+//         five: ''
+//     }
+// },
 
 
