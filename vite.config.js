@@ -7,6 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
+        ws: true,
         target: 'https://opticalsoft-server.vercel.app',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
@@ -17,6 +18,7 @@ export default defineConfig({
   },
   preview: {
     proxy: {
+      ws: true,
       "/api": {
         target: 'https://opticalsoft-server.vercel.app',
         changeOrigin: true,

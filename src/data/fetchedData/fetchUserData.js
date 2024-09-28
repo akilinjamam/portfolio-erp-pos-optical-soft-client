@@ -5,7 +5,7 @@ const url = import.meta.env.VITE_DATA_URL;
 export const fetchGetUserData = async () => {
     const token = localStorage.getItem('user')
 
-    const result = await axios.get(`${url}/login`, {
+    const result = await axios.get(`/api/v1/login`, {
         headers: {
             Authorization: token,
             "Accepts": "application/json",
