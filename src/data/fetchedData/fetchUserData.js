@@ -1,17 +1,12 @@
 import axios from "axios"
+import axiosInstance from "../../plugins/axios";
 
 const url = import.meta.env.VITE_DATA_URL;
 
 export const fetchGetUserData = async () => {
-    const token = localStorage.getItem('user')
+    // const token = localStorage.getItem('user')
 
-    const result = await axios.get(`/api/v1/login`, {
-        headers: {
-            Authorization: token,
-            "Accepts": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        }
-    })
+    const result = await axiosInstance.get(`/api/v1/login`)
     return result?.data;
 }
 export const fetchGetUserDataById = async (id) => {

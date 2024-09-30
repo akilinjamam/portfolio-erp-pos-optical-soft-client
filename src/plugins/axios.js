@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const baseURL = import.meta.VITE_DATA_URL;
+const baseURL = 'https://opticalsoft-server.vercel.app';
 const token = localStorage.getItem('user')
 const axiosInstance = axios.create({
+    baseURL: baseURL,
     headers: {
         'Accepts': 'application/json',
         "Access-Controll-Allow-Origin": "*",
         Authorization: token
     },
 
-    baseURL: baseURL
 
 })
 
