@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const useControllUserAccess = (id) => {
 
     const {data, isLoading, error, refetch} = useQuery({queryKey: ['updateControllUserAccess'], queryFn: fetchGetUserData})
-
+    console.log(data)
     const [access, setAccess] = useState({
         pos: false,
         sales_record: false,
