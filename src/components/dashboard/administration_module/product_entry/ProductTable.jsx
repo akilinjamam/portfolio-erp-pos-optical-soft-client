@@ -65,7 +65,7 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                     <td>{data.frameType}</td>
                     <td>{data.shape}</td>
                     <td>{data.barcode}</td>
-                    <td>{data?.img ? <img onClick={ () => handleModal(data?.img)} style={{margin:'auto', display:'block', borderRadius:'5px', cursor:'pointer'}} height={20} width={20} src={data?.img} alt="" /> : 'image not added'}</td>
+                    <td>{data?.img !== 'not added' ? <img onClick={ () => handleModal(data?.img)} style={{margin:'auto', display:'block', borderRadius:'5px', cursor:'pointer'}} height={20} width={20} src={data?.img} alt="" /> : 'image not added'}</td>
                     <td  className={`flex_around`}><i onClick={() => handleDelete(index)} style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> <i onClick={() => handleEdit(index)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>
                 </tr>
               )

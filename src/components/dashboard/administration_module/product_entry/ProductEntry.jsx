@@ -96,6 +96,7 @@ const ProductEntry = () => {
                                       e.preventDefault()
                                       setEdit('')
                                       setImgHolder('')
+                                      setProductData(initialProductData)
                                     } } className={`commonButton btnColor_red`}>CANCEL</button>
                                     :
                                     <button onClick={(e) => {
@@ -119,7 +120,7 @@ const ProductEntry = () => {
                     <div className={`${productEntry.titleName} flex_center`}>{edit ? 'Update Image' : 'Upload Image'}</div>
                     <div style={{width: '120px'}} className={`${productEntry.border_remover}`}></div>
                         <div className={`${productEntry.inputAreaTwoContainer}`}>
-                          {edit ? findProduct?.img ? <img height={125} width={125} src={findProduct?.img} alt="" /> : <i className="uil uil-image-slash"></i> : <i className="uil uil-image-upload"></i> }
+                          {edit ? (findProduct?.img !== 'not added' ? <img height={125} width={125} src={findProduct?.img} alt="" /> : <i className="uil uil-image-slash"></i>) : <i className="uil uil-image-upload"></i> }
                               {
                                     textInput?.slice(5,6).map((input, index) => {
                                       return (

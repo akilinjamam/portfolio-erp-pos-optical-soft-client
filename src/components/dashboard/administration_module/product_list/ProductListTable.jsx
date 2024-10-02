@@ -23,8 +23,7 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
   const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
 
   const data = fullScr ? showData : paginatedDataContainer
- 
-
+  
   const handleDelete = (id, e) => {
     console.log(e.target.checked)
     setSelectDeleted(true)
@@ -44,9 +43,6 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
       setIdsForDelete(allIds)
     }
   }
-
-
-
 
 if(isLoading){
     return <CommonLoading/>
@@ -122,7 +118,7 @@ if(isLoading){
                     { fullScr ?
                       ''
                       :
-                      <td>{data?.img ? <img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /> : <p style={{textAlign:'center',fontStyle:'italic'}}>blank</p> }</td>
+                      <td>{data?.img !== 'not added' ? <img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /> : <p style={{textAlign:'center',fontStyle:'italic'}}>blank</p> }</td>
                     }
                     { fullScr ?
                     ''

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchPostProductData } from "../../../../data/fetchedData/fetchProductData";
 import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
@@ -13,11 +13,8 @@ const useProductEntry = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
 
-    // const recorderEmail = localStorage.getItem('userEmail')
-    // const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
-
-    const recorderEmail = useMemo(() => localStorage.getItem('userEmail'), []);
-    const recorderName = useMemo(() => users?.result?.find(f => f?.email === recorderEmail)?.username, [users, recorderEmail]);
+    const recorderEmail = localStorage.getItem('userEmail')
+    const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
 
 
     const initialProductData = {
@@ -43,31 +40,28 @@ const useProductEntry = () => {
         if (findProduct) {
             setProductData(findProduct)
         }
-    }, [findProduct])
-
-    // converting number to alphubet and generating unique code using Date
-    useEffect(() => {
-        const newCode = customCode();
-        setProductData(prevData => ({
-            ...prevData,
-            barcode: newCode.generatedCode,
-            img: findProduct?.img || imgHolder
-        }));
-    }, [imgHolder, findProduct]);
+    }, [setProductData, findProduct])
 
 
+    const newCode = customCode()
 
     const editProduct = (e) => {
+
+        let modifiedData = { ...productData, barcode: newCode.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
+        console.log(modifiedData)
         e.preventDefault();
         setEdit(false)
         setShowData(showData.map((product, index) => {
-            return (index + 1) === edit ? productData : product
+            return (index + 1) === edit ? modifiedData : product
         }))
+        setProductData(initialProductData)
+        setImgHolder('')
     }
 
     const handleSubmit = (e) => {
         const allData = {
             ...productData,
+            barcode: newCode.generatedCode,
             category,
             recorderEmail,
             recorderName
@@ -77,6 +71,7 @@ const useProductEntry = () => {
         setShowData((prevData) => [...prevData, allData]);
         setProductData(initialProductData)
         setCategory('')
+        setImgHolder('');
 
     }
 

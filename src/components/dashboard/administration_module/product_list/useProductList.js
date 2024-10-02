@@ -59,7 +59,6 @@ const useProductList = () => {
         setNewCustomCode(newCode.generatedCode)
     }, [updateProductData])
 
-
     const editProduct = async (e) => {
         e.preventDefault()
         const img = imgHolder ? imgHolder : updateProductData?.img

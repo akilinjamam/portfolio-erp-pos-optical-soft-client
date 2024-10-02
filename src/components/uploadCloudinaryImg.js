@@ -15,9 +15,6 @@ export const updloadCloudinaryImage = (imgFile, setImgHolder, setUploading) => {
     })
         .then(res => res.json())
         .then(res => {
-
-            console.log(res)
-            console.log(res?.url)
             setImgHolder(res?.url)
             setUploading(false)
             toast.success('image successfully added')
