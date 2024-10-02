@@ -6,13 +6,15 @@ import useUserData from "../../data/userData/useUserData";
 import { toast } from "react-toastify";
 
 const Layout = ({ children }) => {
+
+    const token = localStorage.getItem('user');
+    
+    const splitToken = token?.split(' ')[1]; // Handle potential null value
+    const getUser = decodeJwt(splitToken);
+
     const location = useLocation().pathname;
     const { users } = useUserData();
     const navigate = useNavigate();
-    
-    const token = localStorage.getItem('user');
-    const splitToken = token?.split(' ')[1]; // Handle potential null value
-    const getUser = decodeJwt(splitToken);
 
     
     const findUser = users?.result?.find(f => f?.email === getUser?.email);

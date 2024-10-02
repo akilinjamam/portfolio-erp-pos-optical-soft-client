@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
-
 const Login = () => {
 
     const [user, setUser, loading, setLoading, eye,setEye] = useLogin();
@@ -32,9 +31,10 @@ const Login = () => {
                 })
             }
             setLoading(false)
-            toast.error(res?.data?.result)
+            toast.success(res?.data?.result)
            
             if(res?.data?.status == 200){
+                toast(res?.data?.result)
                 setLoading(false)
                 navigate('/dashboard')
             }

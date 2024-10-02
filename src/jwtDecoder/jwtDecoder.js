@@ -2,8 +2,12 @@ import { jwtDecode } from "jwt-decode"
 
 
 const decodeJwt = (token) => {
-    const decoded = jwtDecode(token);
-    return decoded
+    if (token) {
+        const decoded = jwtDecode(token);
+        return decoded
+    } else {
+        return null
+    }
 }
 
 
