@@ -15,6 +15,7 @@ const useProductList = () => {
     const { products, isLoading, refetch } = useProductData(query, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [newCustomCode, setNewCustomCode] = useState('');
     const [paginatedIndex, setPaginatedIndex] = useState();
     const [edit, setEdit] = useState('');
@@ -57,7 +58,7 @@ const useProductList = () => {
         const newCode = customCode()
         setNewCustomCode(newCode.generatedCode)
     }, [updateProductData])
-    console.log(newCustomCode)
+
 
     const editProduct = async (e) => {
         e.preventDefault()

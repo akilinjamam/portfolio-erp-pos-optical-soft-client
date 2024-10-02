@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetchPostProductData } from "../../../../data/fetchedData/fetchProductData";
 import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
@@ -13,8 +13,11 @@ const useProductEntry = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
 
-    const recorderEmail = localStorage.getItem('userEmail')
-    const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
+    // const recorderEmail = localStorage.getItem('userEmail')
+    // const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
+
+    const recorderEmail = useMemo(() => localStorage.getItem('userEmail'), []);
+    const recorderName = useMemo(() => users?.result?.find(f => f?.email === recorderEmail)?.username, [users, recorderEmail]);
 
 
     const initialProductData = {
@@ -40,16 +43,17 @@ const useProductEntry = () => {
         if (findProduct) {
             setProductData(findProduct)
         }
-    }, [setProductData, findProduct])
-
+    }, [findProduct])
 
     // converting number to alphubet and generating unique code using Date
     useEffect(() => {
-        const newCode = customCode()
-        setProductData({ ...productData, 'barcode': newCode.generatedCode, 'img': findProduct?.img ? findProduct?.img : imgHolder })
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [productData, imgHolder])
+        const newCode = customCode();
+        setProductData(prevData => ({
+            ...prevData,
+            barcode: newCode.generatedCode,
+            img: findProduct?.img || imgHolder
+        }));
+    }, [imgHolder, findProduct]);
 
 
 
