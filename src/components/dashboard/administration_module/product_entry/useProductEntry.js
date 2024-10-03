@@ -63,6 +63,7 @@ const useProductEntry = () => {
             ...productData,
             barcode: newCode.generatedCode,
             category,
+            img: imgHolder === '' ? 'not added' : imgHolder,
             recorderEmail,
             recorderName
         }
