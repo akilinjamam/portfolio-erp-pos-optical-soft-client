@@ -13,11 +13,11 @@ import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 const Home = () => {
     const token = localStorage.getItem('user');
     const userEmail = localStorage.getItem('userEmail');
-    console.log(userEmail)
+   
     const decodeToken = decodeJwt(token);
 
     const exp = decodeToken?.exp;
-    console.log(exp)
+   
     
     const currentTime = Math.floor(Date.now() / 1000);
     
