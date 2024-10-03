@@ -9,20 +9,34 @@ import { useDispatch } from 'react-redux';
 import { closeModal } from '../../modal/imgmodal/imgModalSlice';
 import DashboardFooter from '../dashboard_footer/DashboardFooter';
 import { useEffect } from 'react';
+import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 const Home = () => {
+    const token = localStorage.getItem('user');
     
+    const decodeToken = decodeJwt(token);
+
+    const exp = decodeToken.exp;
+    
+    const currentTime = Math.floor(Date.now() / 1000);
+    
+    const remainingTimeInSeconds = exp - currentTime;
+
+    const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
+    const remainingHourse = Math.floor(remainingMinutes / 60);
+
+
     const dispath = useDispatch()
-    const {slide, setSlide, error,navigate, location } = useHome()
+    const {slide, setSlide, navigate, location } = useHome()
 
     const handleSlide = () => {
         setSlide(!slide)
     }
 
     useEffect(() => {
-        if(error){
+        if(remainingHourse <= 0){
             return navigate('/login')
         }
-    },[error, navigate])
+    },[remainingHourse , navigate])
 
     const activeRoute = (routes) => {  
         const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];
