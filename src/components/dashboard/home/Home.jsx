@@ -15,7 +15,8 @@ const Home = () => {
     
     const decodeToken = decodeJwt(token);
 
-    const exp = decodeToken.exp;
+    const exp = decodeToken?.exp;
+    console.log(exp)
     
     const currentTime = Math.floor(Date.now() / 1000);
     
@@ -32,6 +33,8 @@ const Home = () => {
         setSlide(!slide)
     }
 
+    
+
     useEffect(() => {
         if(remainingHourse <= 0){
             return navigate('/login')
@@ -42,6 +45,10 @@ const Home = () => {
         const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];
         const active = links.some(path => location === path)
          return active ? `${home.iActive}` : `${home.ifontColor}`
+    }
+
+    if(exp === undefined){
+        return navigate('/login')
     }
 
     return (
