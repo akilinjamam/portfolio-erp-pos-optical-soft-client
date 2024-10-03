@@ -12,7 +12,8 @@ import { useEffect } from 'react';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 const Home = () => {
     const token = localStorage.getItem('user');
-    
+    const userEmail = localStorage.getItem('userEmail');
+    console.log(userEmail)
     const decodeToken = decodeJwt(token);
 
     const exp = decodeToken?.exp;
@@ -41,15 +42,24 @@ const Home = () => {
         }
     },[remainingHourse , navigate])
 
+    useEffect(() => {
+        if(exp === undefined){
+            return navigate('/login')
+        }
+    },[exp, navigate])
+
+    useEffect(() => {
+        if(userEmail === null){
+            return navigate('/login')
+        }
+    },[userEmail, navigate])
+
     const activeRoute = (routes) => {  
         const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];
         const active = links.some(path => location === path)
          return active ? `${home.iActive}` : `${home.ifontColor}`
     }
 
-    if(exp === undefined){
-        return navigate('/login')
-    }
 
     return (
         <div className={`${home.main}`}>
