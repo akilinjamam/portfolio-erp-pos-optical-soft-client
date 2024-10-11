@@ -24,6 +24,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Phone Number</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Address</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total</th>
                     </tr>
@@ -37,6 +38,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.address}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.createdAt?.slice(0,10)}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.referredBy}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
                                 {sale?.products?.map((item, index) => <p key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
                             </td>
@@ -55,6 +57,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value({totalSalesItem})  :</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                 </tr>
                 </tbody>
             </table>

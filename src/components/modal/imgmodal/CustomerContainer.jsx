@@ -42,6 +42,11 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open,  }) 
                         <input type="text" name="" id="" {...register('address')}/>
                         <br />
                         <br />
+                        <label htmlFor="">Reffered By:</label>
+                        <br />
+                        <input type="text" name="" id="" {...register('referredBy')}/>
+                        <br />
+                        <br />
                         <input type="submit" value="save" />
                     </form>
                 </section>

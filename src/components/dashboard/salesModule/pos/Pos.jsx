@@ -15,6 +15,7 @@ const Pos = () => {
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {
+            
             console.log(data)
             if(data?.data?.success){
                 toast.success('product added to sale list')
@@ -307,7 +308,8 @@ const Pos = () => {
             customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
             phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
             address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
-            products: listOfSalesItem
+            products: listOfSalesItem,
+            referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
         }
         if(listOfSalesItem?.length > 0){
             mutate(saleData)
@@ -327,9 +329,11 @@ const Pos = () => {
                         customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
                         phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
                         address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
-                        products: listOfSalesItem
+                        products: listOfSalesItem,
+                        referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                     }
                     if(listOfSalesItem?.length > 0){
+                        console.log(saleData)
                         mutate(saleData)
                     }else{
                         toast.error('please add products to sale')
