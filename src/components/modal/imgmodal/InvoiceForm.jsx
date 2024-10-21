@@ -2,13 +2,17 @@
 
 const InvoiceForm = () => {
     return (
-        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '20px', fontFamily: '"DM Sans", sans-serif' }}>
+        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '20px', fontFamily: '"DM Sans", sans-serif'}}>
       
       {/* Header Section */}
       <div style={{ textAlign: 'center', borderBottom: '2px solid #000', paddingBottom: '10px' }}>
-        <h1 style={{ margin: 0 }}>AL-ARAFAT OPTICAL</h1>
+        <div style={{display:'flex', width:'70%', margin:'auto'}}>
+            <span style={{width:'100px', textAlign:'right', fontWeight:'bold', fontSize:'13px', padding:'0 4px'}}>New</span>
+            <h2 style={{ margin: 'auto', position:'relative',textAlign:'left',width:"90%" }}> AL-ARAFAT OPTICAL</h2>
+        </div>
         <p style={{ fontSize: '12px' }}>
-          মিনহাজ কমপ্লেক্স (গ্রাউন্ড ফ্লোর), ১২-জামালখান রোড, চট্টগ্রাম<br />
+        
+          Minhaz Complex (Ground Floor), 12-Jamal Khan Road, Chittagong<br />
           Cell: 01841 631667, 01729 435335
         </p>
       </div>
@@ -51,7 +55,7 @@ const InvoiceForm = () => {
           <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
             <thead>
               <tr>
-                <th colSpan="3" style={{ padding: '10px', textAlign: 'center' }}>Right Eye</th>
+                <th colSpan="3" style={{ padding: '10px', textAlign: 'center' }}>Left Eye</th>
               </tr>
               <tr>
                 <th style={{ padding: '10px' }}>Sph.</th>
@@ -75,10 +79,10 @@ const InvoiceForm = () => {
           <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
             <thead>
               <tr>
-                <th colSpan="3" style={{ padding: '10px', textAlign: 'center' }}>Left Eye</th>
+                <th colSpan="3" style={{ padding: '10px', textAlign: 'center' }}>Right Eye</th>
               </tr>
               <tr>
-                <th style={{ padding: '10px' }}>Sph.</th>
+                <th style={{ padding: '10px', }}>Sph.</th>
                 <th style={{ padding: '10px' }}>Cyl.</th>
                 <th style={{ padding: '10px' }}>Axis</th>
               </tr>
@@ -108,23 +112,23 @@ const InvoiceForm = () => {
         <table style={{ width: '30%', borderCollapse: 'collapse' }} border="1">
           <tbody>
             <tr>
-              <td style={{ padding: '10px', backgroundColor:'lightgray' }}>SUBTOTAL</td>
+              <td style={{ padding: '10px', fontWeight:'bold'}}>SUBTOTAL</td>
               <td style={{ padding: '10px' }}>___________</td>
             </tr>
             <tr>
-              <td style={{ padding: '10px' }}>DISCOUNT</td>
+              <td style={{ padding: '10px',  fontWeight:'bold' }}>DISCOUNT</td>
               <td style={{ padding: '10px' }}>___________</td>
             </tr>
             <tr>
-              <td style={{ padding: '10px' }}>ADVANCE</td>
+              <td style={{ padding: '10px', fontWeight:'bold' }}>ADVANCE</td>
               <td style={{ padding: '10px' }}>___________</td>
             </tr>
             <tr>
-              <td style={{ padding: '10px' }}>DUE</td>
+              <td style={{ padding: '10px', fontWeight:'bold' }}>DUE</td>
               <td style={{ padding: '10px' }}>___________</td>
             </tr>
             <tr>
-              <td style={{ padding: '10px' }}>TOTAL</td>
+              <td style={{ padding: '10px', fontWeight:'bold' }}>TOTAL</td>
               <td style={{ padding: '10px' }}>___________</td>
             </tr>
           </tbody>
@@ -132,9 +136,12 @@ const InvoiceForm = () => {
       </div>
 
       {/* Footer Section */}
-      <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '12px' }}>
-        <p>নির্দেশ: ডেলিভারী বিক্রয় ও টাকা পরিশোধের ১৫ দিনের মধ্যে না হলে পণ্য হারানোর বা ক্ষতির দায়িত্ব নেই।</p>
-        <p style={{ borderTop: '1px solid #000', paddingTop: '10px' }}>Customer Copy</p>
+      <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '10px' }}>
+        <p>বিঃদ্রঃ ডেলিভারি বিকাল ৫ টার পর। ১৫ দিনের মধ্যে ডেলিভারি না নিলে পরে হারানো গেলে অথবা পুরানো জিনিস মেরামতের সময় নষ্ট হলে কোম্পানি দায়ী থাকবে না।</p>
+      </div>
+      <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '12px', width:'100%', height:'30px', backgroundColor:'black', display:'flex', alignItems:'center', justifyContent:"space-between",color:'white', padding: '0 5px' }}>
+            <p>Custoer Copy</p>
+            <p>Any Complain: 01521-484359</p>
       </div>
     </div>
     );
