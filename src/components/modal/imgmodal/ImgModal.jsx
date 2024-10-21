@@ -9,6 +9,7 @@ import CustomerContainer from './CustomerContainer';
 import StockModal from './StockModal';
 import SalesModal from './SalesModal';
 import CustomerListModal from './CustimerListModal';
+import InvoiceModal from './InvoiceModal';
 
 const ImgModal = () => {
 
@@ -28,6 +29,7 @@ const ImgModal = () => {
             <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <CustomerListModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
+            <InvoiceModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             
         </div>
     );

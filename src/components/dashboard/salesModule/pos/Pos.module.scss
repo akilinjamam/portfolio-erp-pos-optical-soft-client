@@ -4,12 +4,12 @@
     div{
         .inputAreaOne, .inputAreaTwo{
         
-            height: 195px;
+            height: 245px;
             position: relative;
             // background-color: green;
             .container{
                 width: 100%;
-                height: 190px;
+                height: 240px;
                 background-color: rgb(209, 222, 247);
                 border-radius: 10px;
                 border: 1px solid gray;
@@ -151,7 +151,12 @@
                         }
                         .submitSaleAddSale{
                             background-color:v.$primary;
+                            width: 100%;
                             padding: 10px 29px;
+                        }
+                        .submitInvoice{
+                            background-color:v.$primary;
+                            padding: 10px 25px;
                         }
                     }
                 }
@@ -175,7 +180,7 @@
             width: 79%;
             p{
                 font-size: 13px;
-                margin-bottom: 2px;
+                margin-bottom: 5px;
             }
         }
         .inputAreaTwo{

@@ -125,6 +125,11 @@
     align-items: center;
     justify-content: space-between;
 }
+.flex_between_items_baseline{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
 
 .flex_around{
     display: flex;

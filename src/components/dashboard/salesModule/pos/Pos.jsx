@@ -443,6 +443,12 @@ const Pos = () => {
                             <button onClick={() => {
                                 dispatch(openModal('customer'))
                             }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
+                            <button onClick={() => {
+                                dispatch(openModal('invoice'))
+                            }} className={`${pos.submitInvoice}`}>Print Invoice</button>
+                       </div>
+                       <div className={`${pos.submitSale} flex_center`}>
+    
                             <button onClick={handleSale} className={`${pos.submitSaleAddSale}`}>{isPending ? 'Loading...': 'Add to Sale'}</button>
                        </div>
                     </div>

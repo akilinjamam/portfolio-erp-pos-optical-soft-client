@@ -29,6 +29,20 @@
         height: 400px;
         background-color: rgb(236, 233, 233);
     }
+    .sizeCustomerContainer{
+        width: 650px;
+        height: 500px;
+        background-color: rgb(236, 233, 233);
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .sizeInvoiceContainer{
+        width: 750px;
+        height: 500px;
+        background-color: white;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
     .sizeBarcode{
         width: 950px;
         height: 550px;
