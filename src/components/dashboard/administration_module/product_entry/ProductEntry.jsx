@@ -22,7 +22,7 @@ const ProductEntry = () => {
                         <div className='flex_top'>
                           <div style={{width:'49%'}}>
                             {
-                              textInput?.slice(0,4).map((input, index) => {
+                              textInput?.slice(0,6).map((input, index) => {
                                 return (
                                   <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
@@ -41,7 +41,7 @@ const ProductEntry = () => {
                             >
                               <option value="">select category</option>
                               {
-                                textInput[4].options?.map((option, index) => (
+                                textInput[6].options?.map((option, index) => (
                                   <option key={index+1} value={option}>{option}</option>
                                 ))
                               }
@@ -49,7 +49,7 @@ const ProductEntry = () => {
                             </div>
                           </div>
                           <div style={{width:'49%', marginLeft:'15px'}}>
-                            { category === 'glass' &&
+                            { category === 'Optical Frame' &&
                               optionField.map((select, index) => {
                                 return (
                                 <div key={index+1} className={`${productEntry.inputFields} flex_between`} >
@@ -67,6 +67,20 @@ const ProductEntry = () => {
                                           ))
                                         }
                                       </select>
+                                </div>
+                                )
+                              })
+                            }
+                            { category === 'Glass'
+                              &&
+                              textInput?.slice(8,9).map((input, index) => {
+                                return (
+                                  <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
+                                    <label htmlFor="">{input.placeholder}:</label>
+                                    <input value={productData[input.name]}   type={input.type} 
+                                        onChange={(e) => {setProductData({...productData, [input.value]: e.target.value})}}
+                                        required
+                                    />
                                 </div>
                                 )
                               })

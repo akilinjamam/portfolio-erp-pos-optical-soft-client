@@ -34,6 +34,8 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
               <tr>
                   <th>SL</th>
                   <th>Product Name</th>
+                  <th>Supplier Name</th>
+                  <th>Collector Name</th>
                   <th>Purchase Price</th>
                   <th>Sales Price</th>
                   <th>Quantity</th>
@@ -43,6 +45,7 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                   <th>Material</th>
                   <th>Frame Type</th>
                   <th>Shape</th>
+                  <th>Power</th>
                   <th>Barcode</th>
                   <th>Image</th>
                   <th>Action</th>
@@ -55,6 +58,8 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                 <tr key={index+1} style={{backgroundColor: `${edit === (index+1)+((paginatedIndex-1)*10) ? 'lightgray': ''}`}}>
                     <td>{(((index + 1) === 10) && (paginatedIndex === 1)) ? 1 : '' }{(paginatedIndex-1) === 0 ? '' : ((index+1) === 10 ? paginatedIndex : (paginatedIndex-1) ) }{(index+1) === 10 ? 0 : (index+1)} </td>
                     <td title={data?.productName}>{data?.productName?.length > 20 ? (data?.productName?.slice(0,20) + '...') : data?.productName}</td>
+                    <td>{data.supplierName}</td>
+                    <td>{data.collectorName}</td>
                     <td>{data.purchasePrice}</td>
                     <td>{data.salesPrice}</td>
                     <td>{data.quantity}</td>
@@ -64,6 +69,7 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                     <td>{data.material}</td>
                     <td>{data.frameType}</td>
                     <td>{data.shape}</td>
+                    <td>{data.power}</td>
                     <td>{data.barcode}</td>
                     <td>{data?.img !== 'not added' ? <img onClick={ () => handleModal(data?.img)} style={{margin:'auto', display:'block', borderRadius:'5px', cursor:'pointer'}} height={20} width={20} src={data?.img} alt="" /> : 'image not added'}</td>
                     <td  className={`flex_around`}><i onClick={() => handleDelete(index)} style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> <i onClick={() => handleEdit(index)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>

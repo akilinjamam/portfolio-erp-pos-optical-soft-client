@@ -59,6 +59,20 @@ export const optionField = [
 
 export const textInput = [
     {
+        value: 'supplierName',
+        placeholder: 'Supplier Name',
+        type: 'text',
+        name: 'supplierName',
+        id: ''
+    },
+    {
+        value: 'collectorName',
+        placeholder: 'Collector Name',
+        type: 'text',
+        name: 'collectorName',
+        id: ''
+    },
+    {
         value: 'productName',
         placeholder: 'Product Name',
         type: 'text',
@@ -92,13 +106,20 @@ export const textInput = [
         type: 'text',
         name: 'category',
         id: '',
-        options: ['glass', 'lense', 'solution', 'kit', 'cleaner', 'hand box', 'other']
+        options: ['Optical Frame', 'Glass', 'Sun Glass', 'Lense', 'Solution', 'Kit', 'cleaner', 'Hand box', 'Other']
     },
     {
         value: 'img',
         placeholder: 'Image',
         type: 'file',
         name: 'img',
+        id: ''
+    },
+    {
+        value: 'power',
+        placeholder: 'Glass Power',
+        type: 'text',
+        name: 'power',
         id: ''
     },
 ]

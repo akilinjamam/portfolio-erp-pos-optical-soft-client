@@ -16,7 +16,6 @@ const useProductEntry = () => {
     const recorderEmail = localStorage.getItem('userEmail')
     const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
 
-
     const initialProductData = {
         productName: '',
         salesPrice: '',
@@ -28,7 +27,10 @@ const useProductEntry = () => {
         frameType: 'blank',
         size: 'blank',
         shape: 'blank',
-        img: 'not added'
+        img: 'not added',
+        power: '0',
+        supplierName: '',
+        collectorName: ''
     }
     const [productData, setProductData] = useState(initialProductData);
 
