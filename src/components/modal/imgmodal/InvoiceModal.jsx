@@ -4,28 +4,16 @@ import imgmodal from './ImgModal.module.scss';
 import InvoiceForm from "./InvoiceForm";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
-import { useSelector } from 'react-redux';
+import { invoiceCalculation } from '../../../invoiceCalculation/invoiceCalculation';
+import useSaleData from '../../../data/saleData/useSaleData';
 
-const InvoiceModal = ({dispatch, customerInfo, closeModal, type, open,  }) => {
-    console.log(customerInfo)
+const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerInfo  }) => {
     
-    //   const onSubmit = (data) => {
-    //     console.log(data)
-    //     dispatch(customerInfo(data))
-    //     toast.success('customer info added successfully')
-    //     dispatch(closeModal())
-    //   }
-
-    const salesList = useSelector(state => state.imgModal.salesList)
-  
-
-    const totalSalesList = useSelector(state => state.imgModal.salesList);
-    const getCustomerInfo = useSelector(state => state.imgModal.customerInfo);
-    console.log(totalSalesList)
+    const {saleData} = useSaleData()
 
       const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
-        documentTitle: "Invoice",
+        documentTitle: `invoice-${invoiceCalculation(saleData)}`,
         onBeforePrint: () => console.log("before printing..."),
         onAfterPrint: () => console.log("after printing..."),
         removeAfterPrint: true,

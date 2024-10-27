@@ -27,6 +27,11 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Paid</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Status</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold By</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +50,11 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                 {calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
                             </td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.advance}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(sale?.advance)}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
                         </tr>
                     ))
                 }
@@ -57,6 +67,11 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value({totalSalesItem})  :</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                 </tr>
                 </tbody>

@@ -1,8 +1,16 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
 import { calculateTotalPrice } from "../../calculation/calculateSum";
+import useSalesRecord from "../../dashboard/salesModule/salesRecord/useSalesRecord";
+import Barcode from "react-barcode";
+import { invoiceCalculation } from "../../../invoiceCalculation/invoiceCalculation";
 
 const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) => {
+
+    const {saleData} = useSalesRecord();
+
+    const invoiceNumber = invoiceCalculation(saleData)
+   
 
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '20px', fontFamily: '"DM Sans", sans-serif', fontSize:'12px',}}>
@@ -23,14 +31,17 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       {/* Invoice Details */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
         <div>
+          <p><strong>Sold By:</strong> {getCustomerInfo?.recorderName}</p>
           <p><strong>Order Date:</strong> {moment().format("YYYY-MM-DD")} </p>
           <p><strong>Name:</strong> {getCustomerInfo?.customerName}</p>
           <p><strong>Delivery Date:</strong> {getCustomerInfo?.deliveryDate}</p>
+          <p><strong>Delivery Status:</strong> {getCustomerInfo?.delivered}</p>
         </div>
         <div>
-          <p><strong>Invoice serial:</strong> 000001</p>
+          <p><strong>Invoice serial:</strong> {invoiceNumber}</p>
           <p><strong>Mobile:</strong> {getCustomerInfo?.phoneNumber}</p>
           <p ><strong>Address:</strong> {getCustomerInfo?.address}</p>
+          <p ><strong>Payment Method:</strong> {getCustomerInfo?.paymentMethod}</p>
         </div>
       </div>
 
@@ -126,7 +137,7 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
 
       {/* Total Section */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-        <table style={{ width: '30%', borderCollapse: 'collapse' }} border="1">
+        <table style={{ width: '35%', borderCollapse: 'collapse' }} border="1">
           <tbody>
             <tr>
               <td style={{ padding: '10px', fontWeight:'bold'}}>SUBTOTAL</td>
@@ -146,6 +157,11 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
             </tr>
           </tbody>
         </table>
+
+        <div style={{width:'280px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <Barcode width={1} height={60} value={`${moment().format("YYYYMMDD")}${invoiceNumber}`}/>
+            {/* <p>{`${moment().format("YYYYMMDD")}${invoiceNumber}`}</p> */}
+        </div>
       </div>
 
       {/* Footer Section */}

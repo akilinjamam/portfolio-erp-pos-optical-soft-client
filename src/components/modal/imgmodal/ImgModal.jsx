@@ -19,6 +19,10 @@ const ImgModal = () => {
         const img = useSelector((state) => state.imgModal.img );
         const type = useSelector((state) => state.imgModal.type );
         const barcode = useSelector((state) => state.imgModal.barcode );
+
+        const salesList = useSelector(state => state.imgModal.salesList)
+  
+    const getCustomerInfo = useSelector(state => state.imgModal.customerInfo);
         const dispatch = useDispatch();
         
     return (
@@ -29,7 +33,7 @@ const ImgModal = () => {
             <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <CustomerListModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
-            <InvoiceModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
+            <InvoiceModal salesList={salesList} getCustomerInfo={getCustomerInfo} closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             
         </div>
     );

@@ -8,14 +8,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSalesList, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
+import moment from 'moment';
+import useSaleData from '../../../../data/saleData/useSaleData';
+import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalculation';
 const Pos = () => {
-    // fetching data using tanstack query:
+    
+    const {saleData} = useSaleData()
+
+    const invoiceNumber = invoiceCalculation(saleData)
+
+    const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
     const {mutate, isPending} = useMutation({
         mutationFn: async (data) => {
             return await fetchPostSaleData(data)
         },
-        onSuccess: (data) => {
-            
+        onSuccess: (data) => {  
+
             console.log(data)
             if(data?.data?.success){
                 toast.success('product added to sale list')
@@ -311,7 +319,7 @@ const Pos = () => {
                 phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
                 address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
                 products: listOfSalesItem,
-                referredBy:customerInfo?.referredBy === undefined ? '0' : customerInfo?.referredBy,
+                referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                 advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
                 
                 discount:customerInfo?.discount === undefined ? 'blank' : customerInfo?.discount,
@@ -328,6 +336,7 @@ const Pos = () => {
                 comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
                 recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
                 paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,      
+                invoiceBarcode:invoice === undefined ? 'blank' : invoice      
             }
             if(listOfSalesItem?.length > 0){
                 mutate(saleData)
@@ -370,6 +379,7 @@ const Pos = () => {
                             comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
                             recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
                             paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,
+                            invoiceBarcode:invoice === undefined ? 'blank' : invoice
                         }
 
                         if(listOfSalesItem?.length > 0){

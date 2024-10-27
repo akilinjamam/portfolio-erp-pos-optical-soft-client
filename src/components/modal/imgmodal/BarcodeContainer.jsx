@@ -31,7 +31,7 @@ const BarcodeContainer = ({open, type, barcode, dispatch, closeModal}) => {
                         <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
                     </div>
                     <br />
-                    <div  style={{ display: 'flex', flexWrap: 'wrap' }} ref={contentToPrint} className={`${imgmodal.barcodeContainer}`}>
+                    <div  style={{ display: 'flex', flexWrap: 'wrap'}} ref={contentToPrint} className={`${imgmodal.barcodeContainer}`}>
                     {
                         barcode?.map((barcode, index) => {
                             return (
