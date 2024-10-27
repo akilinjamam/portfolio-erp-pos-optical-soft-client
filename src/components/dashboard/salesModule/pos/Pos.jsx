@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addSalesList, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 const Pos = () => {
@@ -220,6 +220,7 @@ const Pos = () => {
                      if(Number(priceArray?.join('')) > 0 && Number(quantityArray?.join('')) > 0 ){
                          if(Number(quantityArray?.join('')) <= Number(finProduct?.quantity)){
                              setListOfSalesItem((prevItem => [...prevItem, salesItem ]))
+                             
                          }else{
                              toast.error('given quantity is out of stock')
                          }
@@ -258,8 +259,6 @@ const Pos = () => {
             frameType: finProduct?.frameType,
             size: finProduct?.size,
             shape: finProduct?.shape,
-            recorderName:finProduct?.recorderName !== undefined ? finProduct?.recorderName : 'not-found',
-            recorderEmail:finProduct?.recorderEmai !== undefined ? finProduct?.recorderEmail : 'notfound@gmail.com',
             barcode: finProduct?.barcode,
             inStock: Number(quantityArray.join('')) === Number(finProduct?.quantity) ? false : true
         }
@@ -273,6 +272,7 @@ const Pos = () => {
                             if(Number(priceArray?.join('')) > 0 && Number(quantityArray?.join('')) > 0 ){
                                 if(Number(quantityArray?.join('')) <= Number(finProduct?.quantity)){
                                     setListOfSalesItem((prevItem => [...prevItem, salesItemForKeyDown ]))
+                                    
                                 }else{
                                     toast.error('given quantity is out of stock')
                                 }
@@ -296,7 +296,7 @@ const Pos = () => {
         return () => {
             document.removeEventListener('keydown', handleKeyDowns);
         };
-    }, [finProduct, priceArray, quantityArray, barcodeId, isExistsId, lock]);  // Add relevant dependencies here
+    }, [finProduct, priceArray, quantityArray, barcodeId, isExistsId, lock,listOfSalesItem, dispatch]);  // Add relevant dependencies here
 
     const handleDeleteSale = (deletedId) => {
         const restItems = listOfSalesItem?.filter(f => f?.id !== deletedId);
@@ -304,40 +304,84 @@ const Pos = () => {
     }
 
     const handleSale = () => {
-        const saleData = {
-            customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
-            phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
-            address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
-            products: listOfSalesItem,
-            referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
-        }
-        if(listOfSalesItem?.length > 0){
-            mutate(saleData)
-            console.log(saleData)
+        if(customerInfo?.delivered && customerInfo?.deliveryDate && customerInfo?.recorderName && customerInfo?.paymentMethod){
+
+            const saleData = {
+                customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
+                phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
+                address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
+                products: listOfSalesItem,
+                referredBy:customerInfo?.referredBy === undefined ? '0' : customerInfo?.referredBy,
+                advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
+                
+                discount:customerInfo?.discount === undefined ? 'blank' : customerInfo?.discount,
+                leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
+                leftCyl:customerInfo?.leftCyl === undefined ? 'blank' : customerInfo?.leftCyl,
+                leftSph:customerInfo?.leftSph === undefined ? 'blank' : customerInfo?.leftSph,
+                leftNear:customerInfo?.lefNear === undefined ? 'blank' : customerInfo?.leftNear,
+                rightAxis:customerInfo?.rightAxis === undefined ? 'blank' : customerInfo?.rightAxis,
+                rightCyl:customerInfo?.rightCyl === undefined ? 'blank' : customerInfo?.rightCyl,
+                rightSph:customerInfo?.rightSph === undefined ? 'blank' : customerInfo?.rightSph,
+                rightNear:customerInfo?.rightNear === undefined ? 'blank' : customerInfo?.rightNear,        
+                deliveryDate:customerInfo?.deliveryDate === undefined ? 'blank' : customerInfo?.deliveryDate,      
+                delivered:customerInfo?.delivered === undefined ? 'blank' : customerInfo?.delivered,      
+                comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
+                recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
+                paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,      
+            }
+            if(listOfSalesItem?.length > 0){
+                mutate(saleData)
+                console.log(saleData)
+    
+            }else{
+                toast.error('please add products to sale')
+            }
 
         }else{
-            toast.error('please add products to sale')
+            toast.error('please select add customer info')
         }
+        
     }
-
 
     useEffect(() => {
         const handleSalePress = (e) => {
             if(!lock){
                 if(e.key === 'i' || e.key === 'I'){
-                    const saleData = {
-                        customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
-                        phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
-                        address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
-                        products: listOfSalesItem,
-                        referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
-                    }
-                    if(listOfSalesItem?.length > 0){
-                        console.log(saleData)
-                        mutate(saleData)
+                    if(customerInfo?.delivered && customerInfo?.deliveryDate && customerInfo?.recorderName && customerInfo?.paymentMethod){
+                        const saleData = {
+                            customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
+                            phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
+                            address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
+                            products: listOfSalesItem,
+                            referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
+                            advance:customerInfo?.advance === undefined ? 'blank' : customerInfo?.advance,
+                           
+                            discount:customerInfo?.discount === undefined ? 'blank' : customerInfo?.discount,
+                            leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
+                            leftCyl:customerInfo?.leftCyl === undefined ? 'blank' : customerInfo?.leftCyl,
+                            leftSph:customerInfo?.leftSph === undefined ? 'blank' : customerInfo?.leftSph,
+                            leftNear:customerInfo?.lefNear === undefined ? 'blank' : customerInfo?.leftNear,
+                            rightAxis:customerInfo?.rightAxis === undefined ? 'blank' : customerInfo?.rightAxis,
+                            rightCyl:customerInfo?.rightCyl === undefined ? 'blank' : customerInfo?.rightCyl,
+                            rightSph:customerInfo?.rightSph === undefined ? 'blank' : customerInfo?.rightSph,
+                            rightNear:customerInfo?.rightNear === undefined ? 'blank' : customerInfo?.rightNear,
+                            deliveryDate:customerInfo?.deliveryDate === undefined ? 'blank' : customerInfo?.deliveryDate,
+                            delivered:customerInfo?.delivered === undefined ? 'blank' : customerInfo?.delivered,      
+                            comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
+                            recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
+                            paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,
+                        }
+
+                        if(listOfSalesItem?.length > 0){
+                            console.log(saleData)
+                            mutate(saleData)
+                        }else{
+                            toast.error('please add products to sale')
+                        }
                     }else{
-                        toast.error('please add products to sale')
+                        toast.error('please select add customer info')
                     }
+                    
                 }
             }
             
@@ -350,6 +394,11 @@ const Pos = () => {
             document.removeEventListener('keydown', handleSalePress);
         };
     },[customerInfo,listOfSalesItem, lock, mutate])
+
+
+    useEffect(() => {
+        dispatch(addSalesList(listOfSalesItem))
+    },[listOfSalesItem, dispatch])
 
 
     return (

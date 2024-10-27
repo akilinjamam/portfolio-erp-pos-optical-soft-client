@@ -4,6 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import InvoiceForm from "./InvoiceForm";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
+import { useSelector } from 'react-redux';
 
 const InvoiceModal = ({dispatch, customerInfo, closeModal, type, open,  }) => {
     console.log(customerInfo)
@@ -15,9 +16,16 @@ const InvoiceModal = ({dispatch, customerInfo, closeModal, type, open,  }) => {
     //     dispatch(closeModal())
     //   }
 
+    const salesList = useSelector(state => state.imgModal.salesList)
+  
+
+    const totalSalesList = useSelector(state => state.imgModal.salesList);
+    const getCustomerInfo = useSelector(state => state.imgModal.customerInfo);
+    console.log(totalSalesList)
+
       const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
-        documentTitle: "Print This Document",
+        documentTitle: "Invoice",
         onBeforePrint: () => console.log("before printing..."),
         onAfterPrint: () => console.log("after printing..."),
         removeAfterPrint: true,
@@ -43,8 +51,16 @@ const InvoiceModal = ({dispatch, customerInfo, closeModal, type, open,  }) => {
                     <br />
                     <div ref={contentToPrint} style={{width:'566px', margin:'auto'}}>
                         <br />
-                        <InvoiceForm/>
+                        <div style={{marginBottom:'320px'}}>
+                            <InvoiceForm getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy'/>
+                        </div>
+                        <br />
+                       
+                        <div>
+                            <InvoiceForm getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy'/>
+                        </div>
                     </div>
+                    
                 </section>
             </div>
     );
