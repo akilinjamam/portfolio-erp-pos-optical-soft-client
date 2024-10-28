@@ -65,6 +65,8 @@ if(isLoading){
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               {
                 fullScr ? '' : <td></td>
               }
@@ -78,6 +80,8 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Product Name</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Sales Price</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Purchase Price</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Supplier</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>collector</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Quantity</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Category</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
@@ -107,6 +111,8 @@ if(isLoading){
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.salesPrice}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.purchasePrice}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.supplierName}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.collectorName}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.quantity}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.category}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>

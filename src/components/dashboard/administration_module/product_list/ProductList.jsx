@@ -151,11 +151,6 @@ const ProductList = () => {
                         <option value="true">stock-in</option>
                         <option value="false">stock-out</option>
                       </select>
-                      <label htmlFor="">From: </label>
-                      <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                      <label htmlFor="">To: </label>
-                      <input value={range.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                      <i onClick={() => setRange({from:'', to:''})} className="uil uil-times"></i>
                 </div>
                 }
                 <div className={productList.btnPart}>
@@ -164,7 +159,28 @@ const ProductList = () => {
                     { fullScr ? <i title="exit full screen" onClick={() => setFullScr(false)} className="uil uil-compress-arrows"></i> : <i title="full screen" onClick={() => setFullScr(true)} className="uil uil-expand-arrows-alt"></i>}
                 </div>
           </section>
-          <section style={{height: `${fullScr ? '80vh' : '50vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
+          <section className={`${productList.navigationIcon} only_flex`}>
+                { 
+                  <div className={productList.inputPart}>
+                      <label htmlFor="">From: </label>
+                      <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
+                      <label htmlFor="">To: </label>
+                      <input value={range.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
+                      <i onClick={() => setRange({from:'', to:''})} className="uil uil-times"></i>
+                </div>
+                }
+                { 
+                  <div className={productList.inputPart}>
+                      <label htmlFor="">From: </label>
+                      <input placeholder="price" value={range.priceFrom} type="text" name="" id="" onChange={(e) => setRange({...range, priceFrom: e.target.value})} style={{padding: '0 2px'}}/>
+                      <label htmlFor="">To: </label>
+                      <input placeholder="price" value={range.priceTo} type="text" name="" id="" onChange={(e) => setRange({...range, priceTo: e.target.value})} style={{padding: '0 2px'}}/>
+                      <i onClick={() => setRange({priceFrom:'', priceTo:''})} className="uil uil-times"></i>
+                </div>
+                }
+                
+          </section>
+          <section style={{height: `${fullScr ? '80vh' : '45vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
               <ProductListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
           </section>
            {

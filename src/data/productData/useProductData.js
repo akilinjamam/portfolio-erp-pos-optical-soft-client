@@ -4,7 +4,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchGetProductData } from '../fetchedData/fetchProductData';
 
-const useProductData = (query, from, to) => {
+const useProductData = (query, from, to, priceFrom, priceTo) => {
 
     // const { products, isLoading, error } = useSelector(state => state.products);
 
@@ -16,7 +16,7 @@ const useProductData = (query, from, to) => {
     // }, [dispatch]);
 
 
-    const getAllData = useQuery({ queryKey: ['fetchGetProductData'], queryFn: () => fetchGetProductData(query, from, to) })
+    const getAllData = useQuery({ queryKey: ['fetchGetProductData'], queryFn: () => fetchGetProductData(query, from, to, priceFrom, priceTo) })
     const products = getAllData?.data
     const isLoading = getAllData?.isLoading
     const error = getAllData?.error

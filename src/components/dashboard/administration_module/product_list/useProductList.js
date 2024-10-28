@@ -10,9 +10,11 @@ const useProductList = () => {
     const [query, setQuery] = useState('');
     const [range, setRange] = useState({
         from: '',
-        to: ''
+        to: '',
+        priceFrom: '',
+        priceTo: ''
     })
-    const { products, isLoading, refetch } = useProductData(query, range.from, range.to);
+    const { products, isLoading, refetch } = useProductData(query, range.from, range.to, range.priceFrom, range.priceTo);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
