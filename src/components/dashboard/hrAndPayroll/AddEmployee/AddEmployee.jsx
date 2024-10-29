@@ -1,27 +1,26 @@
 import '../../../../global_style/global_style.css'
 import { updloadCloudinaryImage } from '../../../uploadCloudinaryImg';
 import Pagination from '../../pagination/Pagination';
-import productEntry from './ProductEntry.module.scss';
-import ProductTable from './ProductTable';
-import { optionField, textInput } from './productInput';
-import useProductEntry from './useProductEntry';
+import productEntry from './AddEmployee.module.scss';
+import AddEmployeTable from './AddEmployeTable';
+import { textInput } from './employeeInput';
+import useAddEmployee from './useAddEmployee';
 
-const ProductEntry = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useProductEntry();
+const AddEmployee = () => {
+  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useAddEmployee()
 
     return (
         <div className={`${productEntry.main} full_width`}>
           <div  className={`flex_around`}>
             <div className={`${productEntry.inputAreaOne} flex_center`}>
               <div className={`${productEntry.container} `}>
-                    <div className={`${productEntry.titleName}`}>{edit ? 'Product Update' : 'Product Entry'}</div>
+                    <div className={`${productEntry.titleName}`}>{edit ? 'Update Employee' : 'Add Employee'}</div>
                     <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${productEntry.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
-                        <div className='flex_top'>
-                          <div style={{width:'49%'}}>
+                  <div style={{width:'49%'}}>
                             {
-                              textInput?.slice(0,6).map((input, index) => {
+                              textInput?.slice(0,7).map((input, index) => {
                                 return (
                                   <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
@@ -34,58 +33,9 @@ const ProductEntry = () => {
                               })
                             }
                             <div className={`${productEntry.inputFields} flex_between`}>
-                            <label htmlFor="">Categories:</label>
-                            <select value={category} style={{width: '70%'}} name="" id="" required 
-                            onChange={(e) => setCategory(e.target.value)}
-                            >
-                              <option value="">select category</option>
-                              {
-                                textInput[6].options?.map((option, index) => (
-                                  <option key={index+1} value={option}>{option}</option>
-                                ))
-                              }
-                            </select>
+                            
                             </div>
                           </div>
-                          <div style={{width:'49%', marginLeft:'15px'}}>
-                            { category === 'Optical Frame' &&
-                              optionField.map((select, index) => {
-                                return (
-                                <div key={index+1} className={`${productEntry.inputFields} flex_between`} >
-                                      <label htmlFor="">{select.placeholder}:</label>
-                                      <select name="" id="" value={productData[select.variable]}
-                                      onChange={(e) => {setProductData({...productData, [select.variable] : e.target.value})}}
-                                      required
-                                      >
-                                        <option value="">{select.placeholder}</option>
-                                        {
-                                          Object.keys(select.options).map((objectKey, objectIndex) => (
-                                            <option value={select.options[objectKey]} key={objectIndex}>
-                                              {select.options[objectKey]}
-                                            </option>
-                                          ))
-                                        }
-                                      </select>
-                                </div>
-                                )
-                              })
-                            }
-                            { category === 'Glass'
-                              &&
-                              textInput?.slice(8,9).map((input, index) => {
-                                return (
-                                  <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
-                                    <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={productData[input.name]}   type={input.type} 
-                                        onChange={(e) => {setProductData({...productData, [input.value]: e.target.value})}}
-                                        required
-                                    />
-                                </div>
-                                )
-                              })
-                            }
-                          </div>
-                        </div>
                   
                         <div className={`${productEntry.inputAreaOne_footer} flex_right`}>
                               <div className={`${productEntry.inputAreaOne_footer_container} flex_around`}>
@@ -116,7 +66,6 @@ const ProductEntry = () => {
                                       e.preventDefault();
                                       setShowData([]);
                                       setProductData(initialProductData)
-                                      setCategory('')
                                       setImgHolder('')
                                       setUploading(false)
                                     }} className={`commonButton btnColor_orangeRed`}>
@@ -161,10 +110,10 @@ const ProductEntry = () => {
               </div>
             </div>
           </div> 
-            <ProductTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit}/>
+            <AddEmployeTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit}/>
             <Pagination showData={showData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex}/>
         </div>
     );
 };
 
-export default ProductEntry;
+export default AddEmployee;

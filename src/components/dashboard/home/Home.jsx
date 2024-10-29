@@ -55,7 +55,7 @@ const Home = () => {
     },[userEmail, navigate])
 
     const activeRoute = (routes) => {  
-        const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five];
+        const links = [routes?.one, routes?.two, routes?.three, routes?.four, routes?.five, routes?.six];
         const active = links.some(path => location === path)
          return active ? `${home.iActive}` : `${home.ifontColor}`
     }

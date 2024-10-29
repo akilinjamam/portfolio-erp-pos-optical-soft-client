@@ -17,7 +17,8 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             controll_user_access: paginatedDataContainer?.controll_user_access,
             employee_list: paginatedDataContainer?.employee_list,
             payroll: paginatedDataContainer?.payroll,
-            user_list: paginatedDataContainer?.user_list
+            user_list: paginatedDataContainer?.user_list,
+            add_employee: paginatedDataContainer?.add_employee,
 
         })
     },[paginatedDataContainer, setAccess])
@@ -64,7 +65,7 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.sales_invoice} type="checkbox" name="" id="" onClick={() => setAccess({...access, sales_invoice: access?.sales_invoice ? false : true })} />
                             <span style={{marginLeft:'5px'}}>Sales Invoice <i className={`uil uil-${access?.sales_invoice ? 'unlock' : 'lock'}`}></i></span>
-                    </div> 
+                        </div> 
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
                     <div className='only_flex'>
@@ -91,6 +92,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                     <div className='only_flex'>
                             <input checked={access?.controll_user_access} type="checkbox" name="" id="" onClick={() => setAccess({...access, controll_user_access: access?.controll_user_access ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Controll User Access <i className={`uil uil-${access?.controll_user_access ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.add_employee} type="checkbox" name="" id="" onClick={() => setAccess({...access, add_employee: access?.add_employee ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Add Employee <i className={`uil uil-${access?.add_employee ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                         <div className='only_flex'>
                             <input checked={access?.employee_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, employee_list: access?.employee_list ? false : true })}/>

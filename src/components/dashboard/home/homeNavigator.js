@@ -46,7 +46,8 @@ export const homeNavigator = [
             two: '/dashboard/hr_and_payroll_module/controll_user_access',
             three: '/dashboard/hr_and_payroll_module/employee_list',
             four: '/dashboard/hr_and_payroll_module/payroll',
-            five: '/dashboard/hr_and_payroll_module/user_list'
+            five: '/dashboard/hr_and_payroll_module/user_list',
+            six: '/dashboard/hr_and_payroll_module/add_employee',
         }
     },
     {
@@ -86,18 +87,5 @@ export const homeNavigator = [
         }
     }
 ]
-
-// {
-//     route: '',
-//     value: 'Billing Module',
-//     icon: 'uil uil-money-bill',
-//     routes: {
-//         one: '',
-//         two: '',
-//         three: '',
-//         four: '',
-//         five: ''
-//     }
-// },
 
 

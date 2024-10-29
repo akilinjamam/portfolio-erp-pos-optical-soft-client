@@ -6,6 +6,12 @@ export const hrAndPayrollRoute = [
         color: 'rgb(229, 243, 209)'
     },
     {
+        value: 'Add Employee',
+        link: '/dashboard/hr_and_payroll_module/add_employee',
+        icon: 'uil uil-file-info-alt',
+        color: 'rgb(243, 211, 209)'
+    },
+    {
         value: 'Employee List',
         link: '/dashboard/hr_and_payroll_module/employee_list',
         icon: 'uil uil-file-info-alt',

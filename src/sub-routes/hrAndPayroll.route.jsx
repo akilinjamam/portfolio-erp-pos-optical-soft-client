@@ -1,3 +1,4 @@
+import AddEmployee from "../components/dashboard/hrAndPayroll/AddEmployee/AddEmployee"
 import ControllUserAccess from "../components/dashboard/hrAndPayroll/ControllUserAccess/ControllUserAccess"
 import EmployeeList from "../components/dashboard/hrAndPayroll/EmployeeList/EmployeeList"
 import Payroll from "../components/dashboard/hrAndPayroll/Payroll/Payroll"
@@ -19,6 +20,10 @@ const hrAndPayrollRoute = [
       {
         path:'user_list',
         element: <UserList/>
+      },
+      {
+        path:'add_employee',
+        element: <AddEmployee/>
       },
 ]
 
