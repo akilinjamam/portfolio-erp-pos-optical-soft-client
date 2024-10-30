@@ -6,15 +6,6 @@ import { fetchGetProductData } from '../fetchedData/fetchProductData';
 
 const useProductData = (query, from, to, priceFrom, priceTo) => {
 
-    // const { products, isLoading, error } = useSelector(state => state.products);
-
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(fetchProducts());
-    //     dispatch(updateData())
-    // }, [dispatch]);
-
 
     const getAllData = useQuery({ queryKey: ['fetchGetProductData'], queryFn: () => fetchGetProductData(query, from, to, priceFrom, priceTo) })
     const products = getAllData?.data

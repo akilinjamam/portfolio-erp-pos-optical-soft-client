@@ -39,7 +39,7 @@ const ProductList = () => {
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  textInput?.slice(0,4).map((input, index) => {
+                                  textInput?.slice(0,6).map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${productList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
@@ -53,7 +53,7 @@ const ProductList = () => {
                                 }
                               </div>
                               <div style={{width:'49%', marginLeft:'15px'}}>
-                                {(updateProductData?.category === 'glass') &&
+                                {(updateProductData?.category === 'Optical Frame') &&
                                   optionField?.map((select, index) => {
                                     return (
                                     <div key={index+1} className={`${productList.inputFields} flex_between`} >
@@ -71,6 +71,19 @@ const ProductList = () => {
                                               ))
                                             }
                                           </select>
+                                    </div>
+                                    )
+                                  })
+                                }
+                                {(updateProductData?.category === 'Glass') &&
+                                  textInput?.slice(8,9)?.map((select, index) => {
+                                    return (
+                                    <div key={index+1} className={`${productList.inputFields} flex_between`} >
+                                          <label htmlFor="">{select?.placeholder}:</label>
+                                          <input value={updateProductData[select.value]} type="text" name="" id="" 
+                                          onChange={(e) => {setUdpateProductData({...updateProductData, [select.value] : e.target.value})}}
+                                          required
+                                          />
                                     </div>
                                     )
                                   })
@@ -97,10 +110,11 @@ const ProductList = () => {
                   <div className={`${productList.container} `}>
                         <div className={`${productList.titleName} flex_center`}>Update Image</div>
                         <div style={{width: '120px'}} className={`${productList.border_remover}`}></div>
+                        <br />
                             <div className={`${productList.inputAreaTwoContainer}`}>
                             {updateProductData?.img ? <img height={125} width={125} src={imgHolder ? imgHolder : updateProductData?.img} alt="" /> :  <i className="uil uil-image-upload"></i> }
                                   {
-                                        textInput?.slice(5,6).map((input, index) => {
+                                        textInput?.slice(7,8).map((input, index) => {
                                           return (
                                             <div key={index+1} className={`${productList.inputFields}`}>
                                             

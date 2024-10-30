@@ -1,44 +1,44 @@
 import '../../../../global_style/global_style.css'
 import { updloadCloudinaryImage } from '../../../uploadCloudinaryImg';
 import Pagination from '../../pagination/Pagination';
-import productEntry from './AddEmployee.module.scss';
+import addEmployee from './AddEmployee.module.scss';
 import AddEmployeTable from './AddEmployeTable';
 import { textInput } from './employeeInput';
 import useAddEmployee from './useAddEmployee';
 
 const AddEmployee = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useAddEmployee()
+  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useAddEmployee()
 
     return (
-        <div className={`${productEntry.main} full_width`}>
+        <div className={`${addEmployee.main} full_width`}>
           <div  className={`flex_around`}>
-            <div className={`${productEntry.inputAreaOne} flex_center`}>
-              <div className={`${productEntry.container} `}>
-                    <div className={`${productEntry.titleName}`}>{edit ? 'Update Employee' : 'Add Employee'}</div>
-                    <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${productEntry.border_remover} `}></div>
+            <div className={`${addEmployee.inputAreaOne} flex_center`}>
+              <div className={`${addEmployee.container} `}>
+                    <div className={`${addEmployee.titleName}`}>{edit ? 'Update Employee' : 'Add Employee'}</div>
+                    <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${addEmployee.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
                   <div style={{width:'49%'}}>
                             {
                               textInput?.slice(0,7).map((input, index) => {
                                 return (
-                                  <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
+                                  <div key={index+1} className={`${addEmployee.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={productData[input.name]}   type={input.type} 
-                                        onChange={(e) => {setProductData({...productData, [input.value]: e.target.value})}}
+                                    <input value={employeeData[input.name]}   type={input.type} 
+                                        onChange={(e) => {setEmployeeData({...employeeData, [input.value]: e.target.value})}}
                                         required
                                     />
                                 </div>
                                 )
                               })
                             }
-                            <div className={`${productEntry.inputFields} flex_between`}>
+                            <div className={`${addEmployee.inputFields} flex_between`}>
                             
                             </div>
                           </div>
                   
-                        <div className={`${productEntry.inputAreaOne_footer} flex_right`}>
-                              <div className={`${productEntry.inputAreaOne_footer_container} flex_around`}>
+                        <div className={`${addEmployee.inputAreaOne_footer} flex_right`}>
+                              <div className={`${addEmployee.inputAreaOne_footer_container} flex_around`}>
                                   { !edit
                                   &&
                                     <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
@@ -59,13 +59,13 @@ const AddEmployee = () => {
                                       e.preventDefault()
                                       setEdit('')
                                       setImgHolder('')
-                                      setProductData(initialProductData)
+                                      setEmployeeData(initialEmployeeData)
                                     } } className={`commonButton btnColor_red`}>CANCEL</button>
                                     :
                                     <button onClick={(e) => {
                                       e.preventDefault();
                                       setShowData([]);
-                                      setProductData(initialProductData)
+                                      setEmployeeData(initialEmployeeData)
                                       setImgHolder('')
                                       setUploading(false)
                                     }} className={`commonButton btnColor_orangeRed`}>
@@ -77,16 +77,16 @@ const AddEmployee = () => {
                   </form>
               </div>
             </div>
-            <div className={`${productEntry.inputAreaTwo} flex_center`}>
-              <div className={`${productEntry.container} `}>
-                    <div className={`${productEntry.titleName} flex_center`}>{edit ? 'Update Image' : 'Upload Image'}</div>
-                    <div style={{width: '120px'}} className={`${productEntry.border_remover}`}></div>
-                        <div className={`${productEntry.inputAreaTwoContainer}`}>
+            <div className={`${addEmployee.inputAreaTwo} flex_center`}>
+              <div className={`${addEmployee.container} `}>
+                    <div className={`${addEmployee.titleName} flex_center`}>{edit ? 'Update Image' : 'Upload Image'}</div>
+                    <div style={{width: '120px'}} className={`${addEmployee.border_remover}`}></div>
+                        <div className={`${addEmployee.inputAreaTwoContainer}`}>
                           {edit ? (findProduct?.img !== 'not added' ? <img height={125} width={125} src={findProduct?.img} alt="" /> : <i className="uil uil-image-slash"></i>) : <i className="uil uil-image-upload"></i> }
                               {
                                     textInput?.slice(7,8).map((input, index) => {
                                       return (
-                                        <div key={index+1} className={`${productEntry.inputFields}`}>
+                                        <div key={index+1} className={`${addEmployee.inputFields}`}>
                                         
                                           <input className='custom-file-input'  type={input.type} 
                                               onChange={(e) => {
@@ -101,7 +101,7 @@ const AddEmployee = () => {
                                     })
                               }
 
-                              <div className={`${productEntry.uploading}`}>
+                              <div className={`${addEmployee.uploading}`}>
                                   {uploading ? 'uploading...' : ''}
                               </div>
                               

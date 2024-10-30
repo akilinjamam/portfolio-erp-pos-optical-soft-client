@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchPostProductData } from "../../../../data/fetchedData/fetchProductData";
+import usePostEmployeeData from "../../../../data/employeeData/usePostEmployeeData";
 import { toast } from "react-toastify";
-import { customCode } from "../../../customCode/customcode";
-import useUserData from "../../../../data/userData/useUserData";
+// import { fetchPostemployeeData } from "../../../../data/fetchedData/fetchemployeeData";
+// import { toast } from "react-toastify";
 
 const useAddEmployee = () => {
-    const { users } = useUserData()
+    
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -13,10 +13,9 @@ const useAddEmployee = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
 
-    const recorderEmail = localStorage.getItem('userEmail')
-    const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
-
-    const initialProductData = {
+    const {mutate:postEmployeeData, isSuccess, isError} = usePostEmployeeData()
+    
+    const initialEmployeeData = {
         employeeName: '',
         joiningDate: '',
         address: '',
@@ -26,72 +25,80 @@ const useAddEmployee = () => {
         basicSalary: '',
         img: 'not added'
     }
-    const [productData, setProductData] = useState(initialProductData);
-    const [category, setCategory] = useState('');
+    const [employeeData, setEmployeeData] = useState(initialEmployeeData);
 
 
-    const findProduct = showData.find((f, i) => (i + 1) === edit);
+
+    const findEmployee = showData.find((f, i) => (i + 1) === edit);
     useEffect(() => {
-        if (findProduct) {
-            setProductData(findProduct)
+        if (findEmployee) {
+            setEmployeeData(findEmployee)
         }
-    }, [setProductData, findProduct])
+    }, [setEmployeeData, findEmployee])
 
 
-    const newCode = customCode()
+    
 
     const editProduct = (e) => {
 
-        let modifiedData = { ...productData, barcode: newCode.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
+        let modifiedData = { ...employeeData, img: imgHolder === '' ? 'not added' : imgHolder }
         console.log(modifiedData)
         e.preventDefault();
         setEdit(false)
         setShowData(showData.map((product, index) => {
             return (index + 1) === edit ? modifiedData : product
         }))
-        setProductData(initialProductData)
+        setEmployeeData(initialEmployeeData)
         setImgHolder('')
     }
 
     const handleSubmit = (e) => {
         const allData = {
-            ...productData,
-            barcode: newCode.generatedCode,
-            category,
-            img: imgHolder === '' ? 'not added' : imgHolder,
-            recorderEmail,
-            recorderName
+            ...employeeData,
+            img: imgHolder === '' ? 'not added' : imgHolder
         }
-
         e.preventDefault();
         setShowData((prevData) => [...prevData, allData]);
-        setProductData(initialProductData)
-        setCategory('')
+        setEmployeeData(initialEmployeeData)
+      
         setImgHolder('');
-
     }
 
     const handlePost = async () => {
 
         if (showData.length >= 1) {
 
-            await fetchPostProductData(showData).then(res => {
-                if (res?.data?.success === true) {
-                    toast.success('employee added successfully');
-                    setShowData([])
-                    setImgHolder(undefined)
-                    setProductData(initialProductData)
-                }
-                if (res?.data?.error) {
-                    console.log(res?.data)
-                    toast.error(`${res.data.error?.map(err => err.message.slice(4))}`)
+            postEmployeeData(showData)
 
-                }
-            })
+            // await fetchPostemployeeData(showData).then(res => {
+            //     if (res?.data?.success === true) {
+            //         toast.success('employee added successfully');
+            //         setShowData([])
+            //         setImgHolder(undefined)
+            //         setEmployeeData(initialEmployeeData)
+            //     }
+            //     if (res?.data?.error) {
+            //         console.log(res?.data)
+            //         toast.error(`${res.data.error?.map(err => err.message.slice(4))}`)
+
+            //     }
+            // })
         }
     }
 
-    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost }
+    useEffect(() => {
+        if(isSuccess){
+            setShowData([])
+            setImgHolder(undefined)
+            setEmployeeData(initialEmployeeData)
+        }
+    
+        if(isError){
+            toast.error(`something went wrong`)
+        }
+    },[isSuccess,isError])
+
+    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, setImgHolder, uploading, setUploading, handlePost }
 };
 
 

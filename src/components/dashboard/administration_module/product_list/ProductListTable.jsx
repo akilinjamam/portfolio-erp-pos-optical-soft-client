@@ -25,7 +25,7 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
   const data = fullScr ? showData : paginatedDataContainer
   
   const handleDelete = (id, e) => {
-    console.log(e.target.checked)
+    
     setSelectDeleted(true)
       if(e.target.checked){
         setIdsForDelete((prevId) => [...prevId, id] )
@@ -67,6 +67,7 @@ if(isLoading){
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               {
                 fullScr ? '' : <td></td>
               }
@@ -89,6 +90,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Material</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Frame Type</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Shape</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Power</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Barcode</th>
                   {fullScr ? '' : <th>Image</th>}
                   {fullScr ? '' : <th>Action</th>}
@@ -120,6 +122,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.material}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.frameType}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.shape}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.power}</td>
                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.barcode}</td>
                     { fullScr ?
                       ''

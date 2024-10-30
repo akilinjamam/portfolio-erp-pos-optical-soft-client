@@ -31,6 +31,8 @@ const useProductList = () => {
 
 
     const initialProductData = {
+        supplierName: '',
+        collectorName: '',
         productName: '',
         salesPrice: '',
         purchasePrice: '',
@@ -42,7 +44,8 @@ const useProductList = () => {
         frameType: '',
         size: '',
         shape: '',
-        img: ''
+        img: '',
+        power: ''
     }
 
 
@@ -73,6 +76,8 @@ const useProductList = () => {
         }
 
         const updatedData = {
+            supplierName: updateProductData?.supplierName,
+            collectorName: updateProductData?.collectorName,
             productName: updateProductData?.productName,
             salesPrice: updateProductData?.salesPrice,
             purchasePrice: updateProductData?.purchasePrice,
@@ -84,7 +89,8 @@ const useProductList = () => {
             size: updateProductData?.size,
             shape: updateProductData?.shape,
             img: img,
-            inStock: stock
+            inStock: stock,
+            power: updateProductData?.power
         }
         await fetchUpdateProductData(edit, updatedData, refetch, toast, setUdpateProductData, initialProductData)
         setImgHolder('')

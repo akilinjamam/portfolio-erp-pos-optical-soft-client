@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import pagination from './Pagination.module.scss';
 const Pagination = ({showData, setPaginatedDataContainer, setPaginatedIndex, limit=10}) => {
+    console.log(showData)
     const [count, setCount] = useState(1);
     const [pageNumber, setPageNumber] = useState(1);
     const navigation = [

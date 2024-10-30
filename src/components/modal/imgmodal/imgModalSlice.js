@@ -13,13 +13,13 @@ export const imgModalSlice = createSlice({
         salesData: [],
         salesList: [],
         totalSalesValue: 0,
-        totalSalesItem: 0
+        totalSalesItem: 0,
+        employeeData: []
     },
     reducers: {
         openModal: (state, action) => {
             state.open = true;
             state.lock = true
-            console.log(action.payload)
             state.type = action.payload;
         },
         closeModal: (state) => {
@@ -48,11 +48,14 @@ export const imgModalSlice = createSlice({
         },
         addSalesList: (state, action) => {
             state.salesList = action.payload
-        }
+        },
+        addEmployeeList: (state, action) => {
+            state.employeeData = action.payload
+        },
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer
