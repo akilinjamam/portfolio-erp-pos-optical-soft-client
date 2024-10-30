@@ -35,17 +35,17 @@ export const textInput = [
         id: ''
     },
     {
-        value: 'employeeId',
-        placeholder: 'Employee Id',
-        type: 'number',
-        name: 'employeeId',
-        id: ''
-    },
-    {
         value: 'basicSalary',
         placeholder: 'Basic Salary',
         type: 'number',
         name: 'basicSalary',
+        id: ''
+    },
+    {
+        value: 'employeeId',
+        placeholder: 'Employee Id',
+        type: 'number',
+        name: 'employeeId',
         id: ''
     },
     {

@@ -28,8 +28,6 @@ const useProductList = () => {
     const [idsForDelete, setIdsForDelete] = useState([]);
     const [stocks, setStocks] = useState('');
 
-
-
     const initialProductData = {
         supplierName: '',
         collectorName: '',

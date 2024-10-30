@@ -7,9 +7,14 @@ import useDeleteEmployeeData from "../../../../data/employeeData/useDeleteEmploy
 const useEmployeeList = () => {
 
     const [query, setQuery] = useState('');
+    const [range, setRange] = useState({
+        from: '',
+        to: '',
+    })
     
-    const {employeeData, refetch, isLoading} = useGetEmployeeData()
-   
+    const {employeeData, refetch, isLoading} = useGetEmployeeData(query, range.from, range.to)
+    
+    
    
    
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
@@ -66,10 +71,6 @@ const useEmployeeList = () => {
         }
 
         editEmployeeData(finalUpdatedData)
-
-        // await fetchUpdateProductData(edit, updatedData, refetch, toast, setUdpateEmployeeData, initialProductData)
-        // setImgHolder('')
-        // setEdit('')
         console.log(updatedData)
     }
     
@@ -82,23 +83,16 @@ const useEmployeeList = () => {
     }, [employeeData?.result])
 
     useEffect(() => {
-        setQuery(query)
-        refetch
-    }, [query, refetch])
+        refetch()
+    }, [refetch, query, range])
 
     const {mutate:deleteEmployees} = useDeleteEmployeeData(refetch, setIdsForDelete, setSelectDeleted)
 
     const deleteProducts = async (e) => {
         e.preventDefault()
-
         deleteEmployees(idsForDelete)
-
-        // await fetchDeleteProductData(idsForDelete, refetch, toast)
-        // setIdsForDelete([])
-        // setSelectDeleted(false)
-
     }
 
-    return { employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts}
+    return { employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange}
 };
 export default useEmployeeList;

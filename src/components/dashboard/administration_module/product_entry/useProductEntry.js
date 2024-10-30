@@ -3,9 +3,13 @@ import { fetchPostProductData } from "../../../../data/fetchedData/fetchProductD
 import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
 import useUserData from "../../../../data/userData/useUserData";
+import useGetEmployeeData from "../../../../data/employeeData/useGetEmployeeData";
 
 const useProductEntry = () => {
     const { users } = useUserData()
+    const { employeeData } = useGetEmployeeData();
+    const allEmployess = employeeData?.result;
+    console.log(employeeData)
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -33,7 +37,7 @@ const useProductEntry = () => {
         collectorName: ''
     }
     const [productData, setProductData] = useState(initialProductData);
-
+    console.log(productData)
     const [category, setCategory] = useState('');
 
 
@@ -98,7 +102,7 @@ const useProductEntry = () => {
         }
     }
 
-    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost }
+    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost, allEmployess }
 };
 
 

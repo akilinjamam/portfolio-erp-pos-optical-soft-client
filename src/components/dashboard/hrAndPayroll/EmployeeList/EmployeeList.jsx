@@ -10,7 +10,7 @@ import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlic
 import useEmployeeList from "./useEmployeeList";
 import EmployeeListTable from "./EmployeeListTable";
 const EmployeeList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts} = useEmployeeList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useEmployeeList();
     const employeeData = modifiedEmployeeDataWithIndexId
 
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const EmployeeList = () => {
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  textInput?.slice(0,5).map((input, index) => {
+                                  textInput?.slice(0,6).map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${employeeList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
@@ -121,13 +121,15 @@ const EmployeeList = () => {
                     }}
                     title="print" className="uil uil-print"></i>
                     <span>Total : {employeeData?.length} </span>
-                    <input type="text" name="" id=""/>
-                    <i  className="uil uil-times"></i>
+                    <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
+                    <i onClick={() => setQuery('')}  className="uil uil-times"></i>
                     <label htmlFor="">From: </label>
-                    <input  type="date" name="" id=""/>
+                    <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.from}  type="number" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                     <label htmlFor="">To: </label>
-                    <input  type="date" name="" id=""/>
-                    <i  className="uil uil-times"></i>
+                    <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.to}  type="number" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
+                    <i onClick={() => {
+                      setRange({from: '', to: ''})
+                    }}  className="uil uil-times"></i>
                 </div>
                 }
                 

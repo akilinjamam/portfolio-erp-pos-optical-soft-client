@@ -7,7 +7,7 @@ import { optionField, textInput } from './productInput';
 import useProductEntry from './useProductEntry';
 
 const ProductEntry = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost} = useProductEntry();
+  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost, allEmployess} = useProductEntry();
 
     return (
         <div className={`${productEntry.main} full_width`}>
@@ -20,8 +20,35 @@ const ProductEntry = () => {
                   <form onSubmit={handleSubmit} action="">
                         <div className='flex_top'>
                           <div style={{width:'49%'}}>
+                            <div className={`${productEntry.inputFields} flex_between`}>
+                                    <label htmlFor="">Supplier Name:</label>
+                                    <select value={productData?.supplierName} name="" id="" onChange={(e) => {setProductData({...productData, supplierName: e.target.value})}}  required>
+                                        <option value="">Select Supplier Name</option>
+                                        {
+                                          allEmployess?.map((employee, index) => {
+                                            return (
+                                              <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option>
+                                            )
+                                          })
+                                        }
+                                    </select>         
+                            </div>
+                            <div className={`${productEntry.inputFields} flex_between`}>
+                                    <label htmlFor="">Collector Name:</label>
+                                    <select value={productData?.collectorName} name="" id="" onChange={(e) => {setProductData({...productData, collectorName: e.target.value})}} required>
+                                    <option value="">Select Collector Name</option>
+                                        {
+                                          allEmployess?.map((employee, index) => {
+                                            return (
+                                              <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option>
+                                            )
+                                          })
+                                        }
+                                    </select>         
+                            </div>
+
                             {
-                              textInput?.slice(0,6).map((input, index) => {
+                              textInput?.slice(2,6).map((input, index) => {
                                 return (
                                   <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
@@ -33,6 +60,7 @@ const ProductEntry = () => {
                                 )
                               })
                             }
+                            
                             <div className={`${productEntry.inputFields} flex_between`}>
                             <label htmlFor="">Categories:</label>
                             <select value={category} style={{width: '70%'}} name="" id="" required 
