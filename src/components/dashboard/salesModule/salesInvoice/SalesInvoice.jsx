@@ -55,7 +55,7 @@ const SalesInvoice = () => {
 
 
     const {products, ...getCustomerInfo} = findSalesByInvoiceNumber || {};
-    console.log(barcodeId)
+   
     
     return (
         <div className={`${salesInvoice.main}`} >

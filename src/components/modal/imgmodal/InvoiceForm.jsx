@@ -40,7 +40,7 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p><strong>Delivery Status:</strong> {getCustomerInfo?.delivered}</p>
         </div>
         <div>
-          <p><strong>Invoice serial:</strong> {invoiceNumber}</p>
+          <p><strong>Invoice serial:</strong> {getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode?.slice(8) : invoiceNumber}</p>
           <p><strong>Mobile:</strong> {getCustomerInfo?.phoneNumber}</p>
           <p ><strong>Address:</strong> {getCustomerInfo?.address}</p>
           <p ><strong>Payment Method:</strong> {getCustomerInfo?.paymentMethod}</p>
