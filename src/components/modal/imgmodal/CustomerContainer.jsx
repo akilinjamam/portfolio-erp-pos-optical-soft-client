@@ -3,16 +3,41 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import imgmodal from './ImgModal.module.scss';
 import customerContainer from './CustomerContainer.module.scss';
+import { calculateTotalPrice } from "../../calculation/calculateSum";
 
-const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open,  }) => {
+const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
 
     const {
         register,
         handleSubmit,
-      } = useForm()
+      } = useForm();
+
+      const arrayOfTotalPriceValue = salesList?.map(item => (item?.actualSalesPrice * item?.quantity))
+      const totalPriceValue = calculateTotalPrice(arrayOfTotalPriceValue)
+      
     
       const onSubmit = (data) => {
-        console.log(data)
+       
+        if(salesList.length < 1){
+            toast.error('please add products to Sales list first')
+            return
+        }
+
+        if(Number(data?.discount) > totalPriceValue){
+            toast.error(`discount price can not be more than total sales price ${totalPriceValue}`)
+            return
+        }
+
+        if(Number(data?.advance) > totalPriceValue){
+            toast.error(` advance can not be more than total sales price ${totalPriceValue}`)
+            return
+        }
+        
+        if((Number(data?.advance) + Number(data?.discount)) > totalPriceValue){
+            toast.error(`sum of advance and discount can not be more than total sales price ${totalPriceValue}`)
+            return
+        }
+        
         const modifiedValue = {
             customerName: data?.customerName === '' ? undefined : data?.customerName,
             phoneNumber: data?.phoneNumber === '' ? undefined : data?.phoneNumber,

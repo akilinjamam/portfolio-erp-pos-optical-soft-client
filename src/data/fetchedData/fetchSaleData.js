@@ -29,5 +29,16 @@ export const fetchPostSaleData = async (data) => {
 }
 
 
+export const fetchUpdateSalesData = async (id, data) => {
+    try {
+        const result = await axios.patch(`${url}/sales/${id}`, data)
+        return result;
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+
 
 

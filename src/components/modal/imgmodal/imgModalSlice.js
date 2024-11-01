@@ -9,9 +9,11 @@ export const imgModalSlice = createSlice({
         img: '',
         barcode: [],
         customerInfo: {},
+        customerInfoForSalesInvoice: {},
         stockData: [],
         salesData: [],
         salesList: [],
+        salesListForSalesInvoice: [],
         totalSalesValue: 0,
         totalSalesItem: 0,
         employeeData: []
@@ -35,6 +37,9 @@ export const imgModalSlice = createSlice({
         customerInfo: (state, action) => {
             state.customerInfo = action.payload
         },
+        customerInfoForSalesInvoice: (state, action) => {
+            state.customerInfoForSalesInvoice = action.payload
+        },
         addStockData: (state, action) => {
             state.stockData = action.payload
         },
@@ -49,13 +54,16 @@ export const imgModalSlice = createSlice({
         addSalesList: (state, action) => {
             state.salesList = action.payload
         },
+        addSalesListForSalesInvoice: (state, action) => {
+            state.salesListForSalesInvoice = action.payload
+        },
         addEmployeeList: (state, action) => {
             state.employeeData = action.payload
         },
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

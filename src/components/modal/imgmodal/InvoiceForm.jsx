@@ -10,7 +10,9 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
     const {saleData} = useSalesRecord();
 
     const invoiceNumber = invoiceCalculation(saleData)
-   
+    const totalPriceArray = salesList?.map(item => (Number(item?.actualSalesPrice) * Number(item?.quantity)))
+    const totalPriceValue = calculateTotalPrice(totalPriceArray)
+    console.log(totalPriceValue)
 
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '20px', fontFamily: '"DM Sans", sans-serif', fontSize:'12px',}}>
@@ -42,6 +44,7 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p><strong>Mobile:</strong> {getCustomerInfo?.phoneNumber}</p>
           <p ><strong>Address:</strong> {getCustomerInfo?.address}</p>
           <p ><strong>Payment Method:</strong> {getCustomerInfo?.paymentMethod}</p>
+          <p ><strong>Payment Staus:</strong> {(totalPriceValue === (Number(getCustomerInfo?.advance) + Number(getCustomerInfo?.discount))) ? 'Paid' : 'Not-Paid'}</p>
         </div>
       </div>
 
@@ -159,7 +162,7 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
         </table>
 
         <div style={{width:'280px', display:'flex', alignItems:'center', justifyContent:'center'}}>
-        <Barcode width={1} height={60} value={`${moment().format("YYYYMMDD")}${invoiceNumber}`}/>
+        <Barcode width={1} height={60} value={getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode : `${moment().format("YYYYMMDD")}${invoiceNumber}`}/>
             {/* <p>{`${moment().format("YYYYMMDD")}${invoiceNumber}`}</p> */}
         </div>
       </div>

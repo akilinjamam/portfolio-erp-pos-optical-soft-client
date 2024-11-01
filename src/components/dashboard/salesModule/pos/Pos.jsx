@@ -322,7 +322,7 @@ const Pos = () => {
                 referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                 advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
                 
-                discount:customerInfo?.discount === undefined ? 'blank' : customerInfo?.discount,
+                discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
                 leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
                 leftCyl:customerInfo?.leftCyl === undefined ? 'blank' : customerInfo?.leftCyl,
                 leftSph:customerInfo?.leftSph === undefined ? 'blank' : customerInfo?.leftSph,
@@ -363,9 +363,9 @@ const Pos = () => {
                             address:customerInfo?.address === undefined ? 'blank' : customerInfo?.address,
                             products: listOfSalesItem,
                             referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
-                            advance:customerInfo?.advance === undefined ? 'blank' : customerInfo?.advance,
+                            advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
                            
-                            discount:customerInfo?.discount === undefined ? 'blank' : customerInfo?.discount,
+                            discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
                             leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
                             leftCyl:customerInfo?.leftCyl === undefined ? 'blank' : customerInfo?.leftCyl,
                             leftSph:customerInfo?.leftSph === undefined ? 'blank' : customerInfo?.leftSph,
@@ -403,7 +403,7 @@ const Pos = () => {
         return () => {
             document.removeEventListener('keydown', handleSalePress);
         };
-    },[customerInfo,listOfSalesItem, lock, mutate])
+    },[customerInfo,listOfSalesItem, lock, mutate, invoice])
 
 
     useEffect(() => {
