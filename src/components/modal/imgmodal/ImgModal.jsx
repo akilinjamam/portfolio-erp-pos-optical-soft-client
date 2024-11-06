@@ -13,6 +13,7 @@ import InvoiceModal from './InvoiceModal';
 import EmployeeModal from './EmployeeModal';
 import SalesInvoiceModal from './SalesInvoiceModal';
 import SalesAdjustModal from './SalesAdjustModal';
+import SupplierModal from './SupplierModal';
 
 const ImgModal = () => {
 
@@ -23,6 +24,7 @@ const ImgModal = () => {
         const type = useSelector((state) => state.imgModal.type );
         const barcode = useSelector((state) => state.imgModal.barcode );
         const employeeData = useSelector((state) => state.imgModal.employeeData)
+        const supplierData = useSelector((state) => state.imgModal.supplierData)
 
         const salesList = useSelector(state => state.imgModal.salesList)
         const salesListForSalesInvoice = useSelector(state => state.imgModal.salesListForSalesInvoice)
@@ -43,6 +45,7 @@ const ImgModal = () => {
             <SalesInvoiceModal salesList={salesListForSalesInvoice}  getCustomerInfo={getCustomerInfoForSalesInvoice}  closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <SalesAdjustModal salesList={salesListForSalesInvoice}  getCustomerInfo={getCustomerInfoForSalesInvoice}  closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <EmployeeModal dispatch={dispatch} closeModal={closeModal}  employeeData={employeeData} open={open} type={type}/>
+            <SupplierModal dispatch={dispatch} closeModal={closeModal}  supplierData={supplierData} open={open} type={type}/>
             
         </div>
     );

@@ -14,6 +14,8 @@ import salesRoute from './sub-routes/sales.route';
 import HrAndPayroll from './components/dashboard/hrAndPayroll/HrAndPayrol';
 import hrAndPayrollRoute from './sub-routes/hrAndPayroll.route';
 import Layout from './components/Layout/Layout';
+import ReportModule from './components/dashboard/report_module/ReportModule';
+import reportModuleRoute from './sub-routes/reportModule.route';
 
 function App() {
 
@@ -64,6 +66,11 @@ function App() {
           path: 'hr_and_payroll_module',
           element: <HrAndPayroll/>,
           children: hrAndPayrollRoute
+        },
+        {
+          path: 'report_module',
+          element: <ReportModule/>,
+          children: reportModuleRoute
         },
       ]
     }

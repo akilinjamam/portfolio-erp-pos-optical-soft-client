@@ -16,10 +16,12 @@ const useControllUserAccess = (id) => {
         product_entry: false,
         product_list: false,
         customer_list: false,
+        add_supplier: false,
+        supplier_list: false,
         controll_user_access: false,
         employee_list: false,
         payroll: false,
-        user_list: false
+        user_list: false,
     })
 
     const mutation = useMutation({

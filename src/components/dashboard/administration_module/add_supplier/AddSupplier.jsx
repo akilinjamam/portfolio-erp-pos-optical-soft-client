@@ -1,44 +1,44 @@
 import '../../../../global_style/global_style.css'
 import { updloadCloudinaryImage } from '../../../uploadCloudinaryImg';
 import Pagination from '../../pagination/Pagination';
-import addEmployee from './AddEmployee.module.scss';
-import AddEmployeTable from './AddEmployeTable';
-import { textInput } from './employeeInput';
-import useAddEmployee from './useAddEmployee';
+import addSupplier from './AddSupplier.module.scss';
+import { textInput } from './supplierInput';
+import useAddSupplier from './useAddSupplier';
+import AddSupplierTable from './AddSupplierTable';
 
-const AddEmployee = () => {
-  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, findEmployee, setImgHolder, setUploading, uploading, handlePost} = useAddEmployee()
+const AddSupplier = () => {
+  const {supplierData, setSupplierData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialSupplierData, findSupplier, setImgHolder, setUploading, uploading, handlePost} = useAddSupplier()
 
     return (
-        <div className={`${addEmployee.main} full_width`}>
+        <div className={`${addSupplier.main} full_width`}>
           <div  className={`flex_around`}>
-            <div className={`${addEmployee.inputAreaOne} flex_center`}>
-              <div className={`${addEmployee.container} `}>
-                    <div className={`${addEmployee.titleName}`}>{edit ? 'Update Employee' : 'Add Employee'}</div>
-                    <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${addEmployee.border_remover} `}></div>
+            <div className={`${addSupplier.inputAreaOne} flex_center`}>
+              <div className={`${addSupplier.container} `}>
+                    <div className={`${addSupplier.titleName}`}>{edit ? 'Update Supplier' : 'Add Supplier'}</div>
+                    <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${addSupplier.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
                   <div style={{width:'49%'}}>
                             {
-                              textInput?.slice(0,7).map((input, index) => {
+                              textInput?.slice(0,3).map((input, index) => {
                                 return (
-                                  <div key={index+1} className={`${addEmployee.inputFields} flex_between`}>
+                                  <div key={index+1} className={`${addSupplier.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={employeeData[input.name]}   type={input.type} 
-                                        onChange={(e) => {setEmployeeData({...employeeData, [input.value]: e.target.value})}}
+                                    <input value={supplierData[input.name]}   type={input.type} 
+                                        onChange={(e) => {setSupplierData({...supplierData, [input.value]: e.target.value})}}
                                         required
                                     />
                                 </div>
                                 )
                               })
                             }
-                            <div className={`${addEmployee.inputFields} flex_between`}>
+                            <div className={`${addSupplier.inputFields} flex_between`}>
                             
                             </div>
                           </div>
                   
-                        <div className={`${addEmployee.inputAreaOne_footer} flex_right`}>
-                              <div className={`${addEmployee.inputAreaOne_footer_container} flex_around`}>
+                        <div className={`${addSupplier.inputAreaOne_footer} flex_right`}>
+                              <div className={`${addSupplier.inputAreaOne_footer_container} flex_around`}>
                                   { !edit
                                   &&
                                     <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
@@ -59,13 +59,13 @@ const AddEmployee = () => {
                                       e.preventDefault()
                                       setEdit('')
                                       setImgHolder('')
-                                      setEmployeeData(initialEmployeeData)
+                                      setSupplierData(initialSupplierData)
                                     } } className={`commonButton btnColor_red`}>CANCEL</button>
                                     :
                                     <button onClick={(e) => {
                                       e.preventDefault();
                                       setShowData([]);
-                                      setEmployeeData(initialEmployeeData)
+                                      setSupplierData(initialSupplierData)
                                       setImgHolder('')
                                       setUploading(false)
                                     }} className={`commonButton btnColor_orangeRed`}>
@@ -77,16 +77,17 @@ const AddEmployee = () => {
                   </form>
               </div>
             </div>
-            <div className={`${addEmployee.inputAreaTwo} flex_center`}>
-              <div className={`${addEmployee.container} `}>
-                    <div className={`${addEmployee.titleName} flex_center`}>{edit ? 'Update Image' : 'Upload Image'}</div>
-                    <div style={{width: '120px'}} className={`${addEmployee.border_remover}`}></div>
-                        <div className={`${addEmployee.inputAreaTwoContainer}`}>
-                          {edit ? (findEmployee?.img !== 'not added' ? <img height={125} width={125} src={findEmployee?.img} alt="" /> : <i className="uil uil-image-slash"></i>) : <i className="uil uil-image-upload"></i> }
+            <div className={`${addSupplier.inputAreaTwo} flex_center`}>
+              <div className={`${addSupplier.container} `}>
+                    <div className={`${addSupplier.titleName} flex_center`}>{edit ? 'Update Image' : 'Upload Image'}</div>
+                    <div style={{width: '120px'}} className={`${addSupplier.border_remover}`}></div>
+                    <br />
+                        <div className={`${addSupplier.inputAreaTwoContainer}`}>
+                          {edit ? (findSupplier?.img !== 'not added' ? <img height={125} width={125} src={findSupplier?.img} alt="" /> : <i className="uil uil-image-slash"></i>) : <i className="uil uil-image-upload"></i> }
                               {
-                                    textInput?.slice(7,8).map((input, index) => {
+                                    textInput?.slice(3,4).map((input, index) => {
                                       return (
-                                        <div key={index+1} className={`${addEmployee.inputFields}`}>
+                                        <div key={index+1} className={`${addSupplier.inputFields}`}>
                                         
                                           <input className='custom-file-input'  type={input.type} 
                                               onChange={(e) => {
@@ -101,7 +102,7 @@ const AddEmployee = () => {
                                     })
                               }
 
-                              <div className={`${addEmployee.uploading}`}>
+                              <div className={`${addSupplier.uploading}`}>
                                   {uploading ? 'uploading...' : ''}
                               </div>
                               
@@ -110,10 +111,10 @@ const AddEmployee = () => {
               </div>
             </div>
           </div> 
-            <AddEmployeTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit}/>
+            <AddSupplierTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit}/>
             <Pagination showData={showData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex}/>
         </div>
     );
 };
 
-export default AddEmployee;
+export default AddSupplier;

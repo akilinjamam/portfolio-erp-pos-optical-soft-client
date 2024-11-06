@@ -4,11 +4,14 @@ import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
 import useUserData from "../../../../data/userData/useUserData";
 import useGetEmployeeData from "../../../../data/employeeData/useGetEmployeeData";
+import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
 
 const useProductEntry = () => {
     const { users } = useUserData()
     const { employeeData } = useGetEmployeeData();
+    const { supplierData } = useGetSupplierData();
     const allEmployess = employeeData?.result;
+    const allSuppliers = supplierData?.result;
     console.log(employeeData)
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
@@ -102,7 +105,7 @@ const useProductEntry = () => {
         }
     }
 
-    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost, allEmployess }
+    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost, allEmployess, allSuppliers }
 };
 
 

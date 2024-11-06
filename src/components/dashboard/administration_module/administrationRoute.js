@@ -14,13 +14,19 @@ export const administrationRoute = [
     {
         value: 'Customer List',
         link: '/dashboard/administration_module/customer_list',
-        icon: 'uil uil-file-graph',
+        icon: 'uil uil-clipboard-notes',
         color: 'rgb(219, 209, 243)'
     },
     {
-        value: 'sales Invoice',
-        link: '',
-        icon: 'uil uil-receipt',
+        value: 'Add Supplier',
+        link: '/dashboard/administration_module/add_supplier',
+        icon: 'uil uil-users-alt',
         color: 'rgb(243, 209, 237)'
+    },
+    {
+        value: 'Supplier List',
+        link: '/dashboard/administration_module/supplier_list',
+        icon: 'uil uil-file-exclamation-alt',
+        color: 'rgb(213, 409, 257)'
     }
 ]

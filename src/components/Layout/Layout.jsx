@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
     const findUser = users?.result?.find(f => f?.email === getUser?.email);
     
    
-    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee } = findUser || {};
+    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list } = findUser || {};
 
     useEffect(() => {
         const accessMap = {
@@ -31,7 +31,8 @@ const Layout = ({ children }) => {
             '/dashboard/administration_module/product_entry': product_entry,
             '/dashboard/administration_module/product_list': product_list,
             '/dashboard/administration_module/customer_list': customer_list,
-            '/dashboard/administration_module/sales_invoice': sales_invoice,
+            '/dashboard/administration_module/add_supplier': add_supplier,
+            '/dashboard/administration_module/supplier_list': supplier_list,
             '/dashboard/hr_and_payroll_module/controll_user_access': controll_user_access,
             '/dashboard/hr_and_payroll_module/employee_list': employee_list,
             '/dashboard/hr_and_payroll_module/payroll': payroll,
@@ -48,7 +49,7 @@ const Layout = ({ children }) => {
 
             }
         }
-    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee]);
+    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list]);
 
     return (
         <div>

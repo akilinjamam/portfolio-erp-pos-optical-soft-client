@@ -25,7 +25,7 @@ const UserListTable = ({paginatedDataContainer, handleUpdateRemove, handleUpdate
                                 <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                     
                                     {
-                                        userList?.accept_by_admin
+                                        !userList?.accept_by_admin
                                         ?
                                         <button style={{marginRight:'10px'}} className="commonButton btnColor_green"
                                         onClick={() => handleUpdateRequest(userList?._id, userList?.accept_by_admin)}

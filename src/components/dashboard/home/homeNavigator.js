@@ -51,15 +51,16 @@ export const homeNavigator = [
         }
     },
     {
-        route: '',
+        route: '/dashboard/report_module',
         value: 'Reports Module',
         icon: 'uil uil-calender',
         routes: {
-            one: '',
-            two: '',
-            three: '',
-            four: '',
-            five: ''
+            one: '/dashboard/report_module',
+            two: '/dashboard/report_module/customer_list',
+            three: '/dashboard/report_module/sales_record',
+            four: '/dashboard/report_module/employee_list',
+            five: '/dashboard/report_module/supplier_list',
+            six: '/dashboard/report_module/stock',
         }
     },
     {
@@ -71,7 +72,8 @@ export const homeNavigator = [
             two: '/dashboard/administration_module/product_entry',
             three: '/dashboard/administration_module/product_list',
             four: '/dashboard/administration_module/customer_list',
-            five: ''
+            five: '/dashboard/administration_module/add_supplier',
+            six: '/dashboard/administration_module/supplier_list',
         }
     },
     {

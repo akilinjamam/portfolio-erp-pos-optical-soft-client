@@ -1,0 +1,29 @@
+@use '../../../global_style/reusable_variables//index' as v;
+
+.main{
+    padding: 5px 10px;
+    .container{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 900px;
+        height: auto;
+        // border: 1px solid gray;
+        .allCarts{
+            width: 200px;
+            height: 180px;
+            margin: 10px;
+            cursor: pointer;
+            div{
+                text-align: center;
+                i{
+                    font-size: 65px;
+                }
+                p{
+                    font-family: v.$fs;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

@@ -1,11 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import usePostEmployeeData from "../../../../data/employeeData/usePostEmployeeData";
 import { toast } from "react-toastify";
-// import { fetchPostemployeeData } from "../../../../data/fetchedData/fetchemployeeData";
-// import { toast } from "react-toastify";
+import usePostSupplierData from "../../../../data/supplierData/usePostSupplierData";
 
-const useAddEmployee = () => {
+const useAddSupplier = () => {
     
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
@@ -14,53 +12,49 @@ const useAddEmployee = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
 
-    const {mutate:postEmployeeData, isSuccess, isError} = usePostEmployeeData()
+    const {mutate:postSupplierData, isSuccess, isError} = usePostSupplierData()
     
-    const initialEmployeeData = {
-        employeeName: '',
-        joiningDate: '',
+    const initialSupplierData = {
+        supplierName: '',
         address: '',
         mobile: '',
-        nid: '',
-        employeeId: '',
-        basicSalary: '',
         img: 'not added'
     }
-    const [employeeData, setEmployeeData] = useState(initialEmployeeData);
+    const [supplierData, setSupplierData] = useState(initialSupplierData);
 
 
 
-    const findEmployee = showData.find((f, i) => (i + 1) === edit);
+    const findSupplier = showData.find((f, i) => (i + 1) === edit);
     useEffect(() => {
-        if (findEmployee) {
-            setEmployeeData(findEmployee)
+        if (findSupplier) {
+            setSupplierData(findSupplier)
         }
-    }, [setEmployeeData, findEmployee])
+    }, [setSupplierData, findSupplier])
 
 
     
 
     const editProduct = (e) => {
 
-        let modifiedData = { ...employeeData, img: imgHolder === '' ? 'not added' : imgHolder }
+        let modifiedData = { ...setSupplierData, img: imgHolder === '' ? 'not added' : imgHolder }
         console.log(modifiedData)
         e.preventDefault();
         setEdit(false)
         setShowData(showData.map((product, index) => {
             return (index + 1) === edit ? modifiedData : product
         }))
-        setEmployeeData(initialEmployeeData)
+        setSupplierData(initialSupplierData)
         setImgHolder('')
     }
 
     const handleSubmit = (e) => {
         const allData = {
-            ...employeeData,
+            ...supplierData,
             img: imgHolder === '' ? 'not added' : imgHolder
         }
         e.preventDefault();
         setShowData((prevData) => [...prevData, allData]);
-        setEmployeeData(initialEmployeeData)
+        setSupplierData(initialSupplierData)
       
         setImgHolder('');
     }
@@ -68,7 +62,7 @@ const useAddEmployee = () => {
     const handlePost = async () => {
 
         if (showData.length >= 1) {
-            postEmployeeData(showData)
+            postSupplierData(showData)
         }
     }
 
@@ -76,7 +70,7 @@ const useAddEmployee = () => {
         if(isSuccess){
             setShowData([])
             setImgHolder(undefined)
-            setEmployeeData(initialEmployeeData)
+            setSupplierData(initialSupplierData)
         }
     
         if(isError){
@@ -84,8 +78,8 @@ const useAddEmployee = () => {
         }
     },[isSuccess,isError])
 
-    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, setImgHolder, uploading, setUploading, handlePost }
+    return { supplierData, setSupplierData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialSupplierData, findSupplier, setImgHolder, uploading, setUploading, handlePost }
 };
 
 
-export default useAddEmployee;
+export default useAddSupplier;

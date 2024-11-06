@@ -7,7 +7,7 @@ import { optionField, textInput } from './productInput';
 import useProductEntry from './useProductEntry';
 
 const ProductEntry = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost, allEmployess} = useProductEntry();
+  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost, allEmployess, allSuppliers} = useProductEntry();
 
     return (
         <div className={`${productEntry.main} full_width`}>
@@ -25,9 +25,9 @@ const ProductEntry = () => {
                                     <select value={productData?.supplierName} name="" id="" onChange={(e) => {setProductData({...productData, supplierName: e.target.value})}}  required>
                                         <option value="">Select Supplier Name</option>
                                         {
-                                          allEmployess?.map((employee, index) => {
+                                          allSuppliers?.map((employee, index) => {
                                             return (
-                                              <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option>
+                                              <option key={index+1} value={employee?.employeeName}>{employee?.supplierName}</option>
                                             )
                                           })
                                         }

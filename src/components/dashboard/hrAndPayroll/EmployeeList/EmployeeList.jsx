@@ -15,18 +15,6 @@ const EmployeeList = () => {
 
     const dispatch = useDispatch();
 
-    // const handlBarcode = () => {
-    //   dispatch(openModal('barcode'));
-    //   dispatch(openBarcode(productData))
-    // }
-
-    // const contentToPrint = useRef(null);
-    // const handlePrint = useReactToPrint({
-    //     documentTitle: "Print This Document",
-    //     onBeforePrint: () => console.log("before printing..."),
-    //     onAfterPrint: () => console.log("after printing..."),
-    //     removeAfterPrint: true,
-    // });
     return (
         <div  className={`${employeeList.main} full_width`}>
              <div style={{display:'flex'}}  className={`flex_around`}>

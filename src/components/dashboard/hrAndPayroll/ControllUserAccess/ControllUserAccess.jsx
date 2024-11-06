@@ -10,6 +10,8 @@ const ControllUserAccess = () => {
  
     const findUser = data?.result?.find( item => item?._id === userInfo )
 
+    console.log(findUser)
+
     return (
         <div className={`${controllUser.main}`}>
            <div className={`${controllUser.title}`}>

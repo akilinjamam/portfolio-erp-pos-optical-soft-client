@@ -13,7 +13,7 @@ export const routeCarts = [
     },
     {
         value: 'Report Module',
-        link: '',
+        link: '/dashboard/report_module',
         icon: 'uil uil-file-graph',
         color: 'rgb(219, 209, 243)'
     },
