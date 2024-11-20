@@ -14,7 +14,7 @@ import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalcul
 const Pos = () => {
     
     const {saleData} = useSaleData()
-
+    
     const invoiceNumber = invoiceCalculation(saleData)
 
     const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
@@ -321,6 +321,9 @@ const Pos = () => {
                 products: listOfSalesItem,
                 referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                 advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
+                todayPaid:customerInfo?.todayPaid === undefined ? '0' : customerInfo?.todayPaid,
+                paymentHistory:customerInfo?.paymentHistory === undefined ? '0' : customerInfo?.paymentHistory,
+                paymentDate:customerInfo?.paymentDate,
                 
                 discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
                 leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
@@ -364,6 +367,9 @@ const Pos = () => {
                             products: listOfSalesItem,
                             referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                             advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
+                            todayPaid:customerInfo?.todayPaid === undefined ? '0' : customerInfo?.todayPaid,
+                            paymentHistory:customerInfo?.paymentHistory === undefined ? '0' : customerInfo?.paymentHistory,
+                            paymentDate:customerInfo?.paymentDate,
                            
                             discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
                             leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,

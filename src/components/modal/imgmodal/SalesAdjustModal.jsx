@@ -6,12 +6,16 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import useUpdateSaleData from '../../../data/saleData/useUpdateSaleData';
 import useSaleData from '../../../data/saleData/useSaleData';
+import moment from 'moment';
 
 const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, salesList}) => {
+
+        const todayDate =  moment().format('YYYY-MM-DD');
+    
     
         const [payable, setPayable] = useState(0);
         const [discount, setDiscount] = useState(0);
-        const [deliveryStatus, setDeliveryStatus] = useState('');
+        
 
         const {refetch} = useSaleData()
     
@@ -23,10 +27,10 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
       useEffect(() => {
         setPayable(Number(totalPriceValue) - Number(getCustomerInfo?.advance || 0) - (Number(getCustomerInfo?.discount || 0)));
         setDiscount(Number(getCustomerInfo?.discount || 0));
-        setDeliveryStatus(getCustomerInfo?.delivered)
+       
       }, [totalPriceValue, getCustomerInfo]);
 
-      console.log(deliveryStatus)
+     
 
       const {mutate:updateSaleData} = useUpdateSaleData(refetch)
 
@@ -53,7 +57,9 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
             const data = {
                 advance : totalAdvance,
                 discount: totalDiscount,
-                delivered: deliveryStatus
+                todayPaid: payable,
+                paymentHistory: `${getCustomerInfo?.paymentHistory}+${payable}`,
+                paymentDate: todayDate
             }
 
             const updatedData = {
@@ -66,7 +72,7 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
             console.log(updatedData)
       }
     
-
+console.log(payable)
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'salesAdjust' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
@@ -90,7 +96,9 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                                
                                 />
                                <br /><br />
-                               <label htmlFor="">Total Due :</label>
+                               <div className='only_flex'>
+                                    <label htmlFor="">Total Due :</label>
+                               </div>
                                <br />
                                <br />
                                <input 
@@ -112,21 +120,14 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                             <div className={`${customerContainer.partTwo}`}>
                                 <br />
                                 <br />
-                               <label htmlFor="">Delivery Status :</label>
-                               <br /><br />
-                               <select
-                                    id="salesOptions"
-                                    value={deliveryStatus}
-                                    onChange={(e) => setDeliveryStatus(e.target.value)}
-                                >
-                                <option value="Delivered">Delivered</option>
-                                <option value="Not-Delivered">Not Delivered</option>
-                                    {/* Add more options as needed */}
-      </select>
                             </div>
                         </div>
                         <br /><br />
-                        <input onClick={handleUpdate} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
+                        {
+                            payable !== 0
+                            &&
+                            <input onClick={handleUpdate} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
+                        }
                     </form>
                 </section>
             </div>

@@ -20,7 +20,7 @@ const EmployeeList = () => {
              <div style={{display:'flex'}}  className={`flex_around`}>
                 <div className={`${employeeList.inputAreaOne} flex_center`}>
                   <div className={`${employeeList.container} `}>
-                        <div className={`${employeeList.titleName}`}>Product Update</div>
+                        <div className={`${employeeList.titleName}`}>Employee Update</div>
                         <div style={{width: '135px' }}  className={`${employeeList.border_remover} `}></div>
 
                       <form action="">

@@ -6,9 +6,11 @@ import SalesInvoicTable from "./SalesInvoiceTable";
 import { useDispatch } from 'react-redux';
 import { addSalesListForSalesInvoice, customerInfoForSalesInvoice, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { toast } from 'react-toastify';
+import useUpdateSaleData from '../../../../data/saleData/useUpdateSaleData';
 
 
 const SalesInvoice = () => {
+    const [deliveryStatus, setDeliveryStatus] = useState('');
     const [query, setQuery] = useState('')
     const [barcodeId, setBarcodeId] = useState('');
     const {saleData, refetch} = useSaleData('', '', '');
@@ -53,9 +55,26 @@ const SalesInvoice = () => {
         setQuery(barcodeId)
     },[barcodeId]);
 
+    useEffect(() => {
+        setDeliveryStatus(findSalesByInvoiceNumber?.delivered);
+    },[findSalesByInvoiceNumber])
+
 
     const {products, ...getCustomerInfo} = findSalesByInvoiceNumber || {};
-   
+    
+
+    const {mutate:updateDeliveryStatus} = useUpdateSaleData()
+
+    const updateDelivery = (status) => {
+        const updateData = {
+            id: findSalesByInvoiceNumber?._id,
+            data: {
+                delivered: status
+            }
+        }
+        updateDeliveryStatus(updateData)
+    }
+   console.log(deliveryStatus)
     
     return (
         <div className={`${salesInvoice.main}`} >
@@ -89,11 +108,22 @@ const SalesInvoice = () => {
                 {
                     findSalesByInvoiceNumber
                     &&
-                    <button onClick={() => {
+                    <div>
+                        <button style={{marginRight:'10px'}} onClick={() => {
                         dispatch(addSalesListForSalesInvoice(products))
                         dispatch(customerInfoForSalesInvoice(getCustomerInfo))
                         dispatch(openModal('salesAdjust'))
-                    } } className={salesInvoice.adjustBtn}>Adjust</button>
+                    } } className={salesInvoice.adjustBtn}>Adjust Payment</button>
+
+                        <select style={{marginRight:'10px'}} value={deliveryStatus} name="" id="" onChange={(e) => setDeliveryStatus(e.target.value)}>
+                            
+                            <option onClick={() => updateDelivery("Delivered")}>Delivered</option>
+                            <option onClick={() => updateDelivery("Not-Delivered")} >Not-Delivered</option>
+                        </select>
+                        <button style={{marginRight:'10px'}} onClick={() => {
+                        updateDelivery(deliveryStatus)
+                    } } className={salesInvoice.adjustBtn}>Adjust Delivery Status</button>
+                    </div>
                 }
             </div>
         </div>

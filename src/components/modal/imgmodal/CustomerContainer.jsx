@@ -4,9 +4,10 @@ import { toast } from "react-toastify";
 import imgmodal from './ImgModal.module.scss';
 import customerContainer from './CustomerContainer.module.scss';
 import { calculateTotalPrice } from "../../calculation/calculateSum";
+import moment from "moment";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
-
+    const todayDate =  moment().format('YYYY-MM-DD');
     const {
         register,
         handleSubmit,
@@ -44,7 +45,10 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             address: data?.address === '' ? undefined : data?.address,
             referredBy: data?.referredBy === '' ? undefined : data?.referredBy,
             advance: data?.advance === '' ? undefined : data?.advance,
-           
+            todayPaid:data?.advance === '' ? undefined : data?.advance,
+            paymentHistory: data?.advance === '' ? undefined : `+${data?.advance}`,
+            paymentDate: todayDate,
+            
             discount: data?.discount === '' ? undefined : data?.discount,
             leftAxis: data?.leftAxis === '' ? undefined : data?.leftAxis,
             leftCyl: data?.leftCyl === '' ? undefined : data?.leftCyl,
