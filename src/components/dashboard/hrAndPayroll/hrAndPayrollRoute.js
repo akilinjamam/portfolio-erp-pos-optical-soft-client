@@ -24,6 +24,12 @@ export const hrAndPayrollRoute = [
         color: 'rgb(219, 209, 243)'
     },
     {
+        value: 'Payroll List',
+        link: '/dashboard/hr_and_payroll_module/payroll_list',
+        icon: 'uil uil-file-graph',
+        color: 'rgb(219, 209, 243)'
+    },
+    {
         value: 'User List',
         link: '/dashboard/hr_and_payroll_module/user_list',
         icon: 'uil uil-receipt',

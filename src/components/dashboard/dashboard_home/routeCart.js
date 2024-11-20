@@ -29,4 +29,10 @@ export const routeCarts = [
         icon: 'uil uil-graph-bar',
         color: 'rgb(243, 211, 209)'
     },
+    {
+        value: 'Accounts Module',
+        link: '/dashboard/accounts_module',
+        icon: 'uil uil-calculator',
+        color: 'rgb(200, 291, 219)'
+    },
 ]

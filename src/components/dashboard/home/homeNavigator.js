@@ -26,13 +26,13 @@ export const homeNavigator = [
         }
     },
     {
-        route: '',
+        route: '/dashboard/accounts_module',
         value: 'Account Module',
         icon: 'uil uil-file-info-alt',
         routes: {
-            one: '',
-            two: '',
-            three: '',
+            one: '/dashboard/accounts_module',
+            two: '/dashboard/accounts_module/add_vendor',
+            three: '/dashboard/accounts_module/vendor_list',
             four: '',
             five: ''
         }
@@ -46,8 +46,9 @@ export const homeNavigator = [
             two: '/dashboard/hr_and_payroll_module/controll_user_access',
             three: '/dashboard/hr_and_payroll_module/employee_list',
             four: '/dashboard/hr_and_payroll_module/payroll',
-            five: '/dashboard/hr_and_payroll_module/user_list',
-            six: '/dashboard/hr_and_payroll_module/add_employee',
+            five: '/dashboard/hr_and_payroll_module/payroll_list',
+            six: '/dashboard/hr_and_payroll_module/user_list',
+            seven: '/dashboard/hr_and_payroll_module/add_employee',
         }
     },
     {

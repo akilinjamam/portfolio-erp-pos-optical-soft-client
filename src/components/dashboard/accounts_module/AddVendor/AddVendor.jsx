@@ -1,29 +1,29 @@
 import '../../../../global_style/global_style.css'
-import addEmployee from './Payroll.module.scss';
-import { payrollInput } from './payrollInput';
-import useAddPayroll from './useAddPayroll';
+import addVendor from './AddVendor.module.scss';
+import { vendorInput } from './addVendorInput';
+import useAddVendor from './useVendor';
 
-const Payroll = () => {
-  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee} = useAddPayroll()
+const AddVendor = () => {
+  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, setPaymentMethod,} = useAddVendor()
   
     return (
-        <div className={`${addEmployee.main} full_width`}>
+        <div className={`${addVendor.main} full_width`}>
           <div  className={`flex_around`}>
-            <div className={`${addEmployee.inputAreaOne} flex_center`}>
-              <div className={`${addEmployee.container} `}>
-                    <div className={`${addEmployee.titleName}`}>Add Payroll</div>
-                    <div style={{width: '100px'}}  className={`${addEmployee.border_remover} `}></div>
+            <div className={`${addVendor.inputAreaOne} flex_center`}>
+              <div className={`${addVendor.container} `}>
+                    <div className={`${addVendor.titleName}`}>Add Vendor</div>
+                    <div style={{width: '100px'}}  className={`${addVendor.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
                   <div style={{width:'49%'}}>
-                            <div  className={`${addEmployee.inputFields} flex_between`}>
-                                    <label htmlFor="">Employee Name:</label>
-                                    <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
+                            <div  className={`${addVendor.inputFields} flex_between`}>
+                                    <label htmlFor="">Supplier Name:</label>
+                                    <select name="" id="" onChange={(e) => setSupplierId(e.target.value)}>
                                       <option value="">Select Employee</option>
                                         {
-                                          allEmployees?.map((employee, index) => {
+                                          allSuppliers?.map((supplier, index) => {
                                             return (
-                                              <option key={index+1} value={employee?._id}>{employee?.employeeName}</option>
+                                              <option key={index+1} value={supplier?._id}>{supplier?.supplierName}</option>
                                             )
                                           })
                                         }
@@ -32,9 +32,9 @@ const Payroll = () => {
                         
                         
                             {
-                              payrollInput?.map((input, index) => {
+                              vendorInput?.map((input, index) => {
                                 return (
-                                  <div key={index+1} className={`${addEmployee.inputFields} flex_between`}>
+                                  <div key={index+1} className={`${addVendor.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
                                     <input value={payrollData[input.name]}   type={input.type} 
                                         onChange={(e) => {setPayrollData({...payrollData, [input.value]: e.target.value})}}
@@ -46,7 +46,7 @@ const Payroll = () => {
                             }
 
 
-                            <div  className={`${addEmployee.inputFields} flex_between`}>
+                            <div  className={`${addVendor.inputFields} flex_between`}>
                                     <label htmlFor="">Payment Method:</label>
                                     <select name="" id="" onChange={(e) => setPaymentMethod(e.target.value)}>
                                         <option value="cash">cash</option>
@@ -56,34 +56,35 @@ const Payroll = () => {
                                         <option value="rocket">rocket</option>
                                     </select>
                             </div>
-                            <div className={`${addEmployee.inputFields} flex_between`}>
+                            <div className={`${addVendor.inputFields} flex_between`}>
                             
                             </div>
                           </div>
                   
-                        <div className={`${addEmployee.inputAreaOne_footer} flex_right`}>
-                              <div className={`${addEmployee.inputAreaOne_footer_container} flex_right`}>
+                        <div className={`${addVendor.inputAreaOne_footer} flex_right`}>
+                              <div className={`${addVendor.inputAreaOne_footer_container} flex_right`}>
                                 <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
                               </div>
                         </div>
                   </form>
               </div>
             </div>
-            <div className={`${addEmployee.inputAreaTwo} flex_center`}>
-              <div className={`${addEmployee.container} `}>
-                    <div className={`${addEmployee.titleName} flex_center`}>
+            <div className={`${addVendor.inputAreaTwo} flex_center`}>
+              <div className={`${addVendor.container} `}>
+                    <div className={`${addVendor.titleName} flex_center`}>
                       Calculation Board
                     </div>
-                    <div style={{width: '150px'}} className={`${addEmployee.border_remover}`}>
+                    <div style={{width: '150px'}} className={`${addVendor.border_remover}`}>
 
                     </div>
-                    <div className={`${addEmployee.inputAreaTwoContainer}`}>
-                        <p>Basic Salary: {findEmployee?.basicSalary}</p>
+                    <div className={`${addVendor.inputAreaTwoContainer}`}>
+                        <p>Paid: {allPayroll?.paid}</p>
                         <p>Total Paid: {allPayroll?.totalPaid}</p>
                         <p>Due: {allPayroll?.due}</p>
-                        <p>Advance: {allPayroll?.advance}</p>
-                        <p>Net Salary (after advance): {allPayroll?.netSalary}</p>
-                        <p>Last Payment Date: {allPayroll?.date}</p>
+                        <p>Bill Amount: {allPayroll?.billAmount}</p>
+                        <p>Bill No: {allPayroll?.billNo}</p>
+                        <p>Last Billing Date: {allPayroll?.billingDate}</p>
+                        <p>Last Payment Date: {allPayroll?.paymentDate}</p>
                     </div>
               </div>
             </div>
@@ -92,4 +93,4 @@ const Payroll = () => {
     );
 };
 
-export default Payroll;
+export default AddVendor;
