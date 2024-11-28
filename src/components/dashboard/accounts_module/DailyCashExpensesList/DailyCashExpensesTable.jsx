@@ -1,0 +1,102 @@
+/* eslint-disable react/prop-types */
+import '../../../../global_style/global_style.css'
+import CommonLoading from '../../../commonLoagin/CommonLoading';
+ 
+const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+
+
+  const data = paginatedDataContainer
+  
+  const handleDelete = (id, e) => {
+    
+    setSelectDeleted(true)
+      if(e.target.checked){
+        setIdsForDelete((prevId) => [...prevId, id] )
+      }else{
+        const deleteId =idsForDelete?.filter(f => f !== id)
+        setIdsForDelete(deleteId)
+      }
+    }
+
+  const handleAllDelete = () => {
+    const allIds = showData?.map(all => all?._id)
+    if(idsForDelete?.length === showData?.length){
+     setIdsForDelete([])
+    }else{
+      setIdsForDelete(allIds)
+    }
+  }
+
+if(isLoading){
+    return <CommonLoading/>
+}
+
+    return (
+        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+          
+          <thead>
+          
+              <tr>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Sales Amount</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Due Sales Amount</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Starting Cash Reserved</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Sales Amount</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Expenses</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Ending Cash Reserved</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Deficit</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+        <tbody>
+          
+           {
+            data?.map((data, index) => {
+              return(
+                <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
+                    <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
+                      {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
+                      <span>{data?.indexId}</span>
+                    </td>
+                    
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.salesAmount}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.dueSalesAmount}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.startingCashReserved}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalSalesAmount}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+                        expenses
+                    </td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.endingCashReserved}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.deficit}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
+                     <td  className={`flex_around`}>
+                    
+                        <i onClick={() => {
+                          setSelectDeleted(!selectDeleted)
+                          setEdit('')
+                          if(selectDeleted){
+                            setIdsForDelete([])
+                          }
+                        }}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
+
+
+                      <i onClick={() => {
+                        setEdit(data?._id)
+                        setSelectDeleted(false)
+                        setIdsForDelete([])
+                      }} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i>
+                  </td>
+                </tr>
+              )
+            } )
+           }
+           
+        </tbody>
+      </table>
+    );
+};
+
+export default VendorListTable;

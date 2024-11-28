@@ -322,7 +322,7 @@ const Pos = () => {
                 referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                 advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
                 todayPaid:customerInfo?.todayPaid === undefined ? '0' : customerInfo?.todayPaid,
-                paymentHistory:customerInfo?.paymentHistory === undefined ? '0' : customerInfo?.paymentHistory,
+                paymentHistory:customerInfo?.paymentHistory === undefined ? '+0' : customerInfo?.paymentHistory,
                 paymentDate:customerInfo?.paymentDate,
                 
                 discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
@@ -368,7 +368,7 @@ const Pos = () => {
                             referredBy:customerInfo?.referredBy === undefined ? 'blank' : customerInfo?.referredBy,
                             advance:customerInfo?.advance === undefined ? '0' : customerInfo?.advance,
                             todayPaid:customerInfo?.todayPaid === undefined ? '0' : customerInfo?.todayPaid,
-                            paymentHistory:customerInfo?.paymentHistory === undefined ? '0' : customerInfo?.paymentHistory,
+                            paymentHistory:customerInfo?.paymentHistory === undefined ? '+0' : customerInfo?.paymentHistory,
                             paymentDate:customerInfo?.paymentDate,
                            
                             discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,

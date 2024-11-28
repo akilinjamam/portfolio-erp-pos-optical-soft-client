@@ -19,6 +19,26 @@ export const fetchGetLastSaleAndAccountsData = async (date) => {
     }
 }
 
+export const fetchGetAccountsData = async (year, month) => {
+    try {
+        const token = localStorage.getItem('user')
+
+        const valueYear = year ? year : '';
+        const valueMonth = month ? month : '';
+
+        const result = await axios.get(`${url}/accounts/get-accounts-with-year-month?year=${valueYear}&month=${valueMonth}`, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return result?.data;
+    } catch (error) {
+        return error
+    }
+}
+
 
 export const fetchPostAccountsData = async (data) => {
     try {

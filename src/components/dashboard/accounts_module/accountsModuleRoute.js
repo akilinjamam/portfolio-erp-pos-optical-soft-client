@@ -19,7 +19,7 @@ export const accountsModuleRoute = [
     },
     {
         value: 'Daily Cash Expenses List',
-        link: '/dashboard/accounts_module/vendor_list',
+        link: '/dashboard/accounts_module/expenses_list',
         icon: 'uil uil-clipboard-notes',
         color: 'rgb(243, 209, 237)'
     },
