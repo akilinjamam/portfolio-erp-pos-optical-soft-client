@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
+import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
 const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
@@ -27,6 +28,24 @@ const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, show
     }
   }
 
+  const everyExpenses = data?.flatMap(expense => expense?.expenses?.map(everyExp => Number(everyExp?.expenseAmount)));
+  const calculateAllExpenses = calculateTotalPrice(everyExpenses)
+
+
+  const saleAmount = data?.map(sale => Number(sale?.salesAmount));
+  const calculatetSales = calculateTotalPrice(saleAmount)
+
+
+  const totalSaleAmount = data?.map(sale => Number(sale?.totalSalesAmount));
+  const calculatetotalSales = calculateTotalPrice(totalSaleAmount)
+
+  const totalProfitAmount = data?.map(sale => Number(sale?.profitAllocation));
+  const calculatetotalProfit = calculateTotalPrice(totalProfitAmount)
+
+
+  console.log(calculatetotalSales)
+
+
 if(isLoading){
     return <CommonLoading/>
 }
@@ -44,6 +63,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Sales Amount</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Expenses</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Expenses</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Ending Cash Reserved</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Deficit</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th>
@@ -66,8 +86,15 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.startingCashReserved}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalSalesAmount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
-                        expenses
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
+                        {
+                            data?.expenses?.map((expense, index) => <p key={index+1}>{index+1}. {expense?.expenseName} = {expense?.expenseAmount} </p> )
+                        }
+                    </td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center', paddingLeft:'5px'}}>
+                        {
+                            calculateTotalPrice(data?.expenses?.map((expense) => Number(expense?.expenseAmount)))
+                        }
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.endingCashReserved}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.deficit}</td>
@@ -93,6 +120,19 @@ if(isLoading){
               )
             } )
            }
+
+           <td></td>
+           <td>Total = {calculatetSales}</td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td>Total Expenses = {calculateAllExpenses}</td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td>Total Profit = {calculatetotalProfit}</td>
+           <td></td>
            
         </tbody>
       </table>

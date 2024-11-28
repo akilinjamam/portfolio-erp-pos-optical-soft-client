@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import useGetAllVendorData from "../../../../data/vendorData/useGetVendorData";
-import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
-import useUpdateVendorData from "../../../../data/vendorData/useUpdateVendorData";
-import useDeleteVendorData from "../../../../data/vendorData/useDeleteVendorData";
+import useGetAccountsData from "../../../../data/accountsData/useGetAccountsData";
+import useUpdateAccountsData from "../../../../data/accountsData/useUpdateAccountsData";
+import useDeleteAccountsData from "../../../../data/accountsData/useDeleteAccountsData";
 
 
 const useDailyCashExpensesList = () => {
@@ -29,15 +28,15 @@ const useDailyCashExpensesList = () => {
 
     console.log(queryValues?.month, queryValues?.year, employeeId )
 
-    const { supplierData, refetch, isLoading } = useGetSupplierData(query, range.from, range.to)
+   
 
-    const { payroll, refetch: payrollRefetch } = useGetAllVendorData(queryValues.supplierName, queryValues.year, queryValues.month)
-
-    const allPayrollData = payroll?.data?.result
-
+    const { accountsData, refetch: refetch } = useGetAccountsData(queryValues.year, queryValues.month)
+    const allAccountsData = accountsData?.result
+    
+    console.log(accountsData?.result)
 
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
-    const [modifiedEmployeeDataWithIndexId, setModifiedEmployeeDataWithIndexId] = useState([])
+    const [modifiedAccountsDataWithIndexId, setModifiedAccountsDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
 
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -48,37 +47,27 @@ const useDailyCashExpensesList = () => {
     const [selectDeleted, setSelectDeleted] = useState(false)
     const [idsForDelete, setIdsForDelete] = useState([]);
 
-    const initialEmployeeData = {
-        paid: '',
-        billingDate: '',
-        paymentDate: '',
-        billNo: '',
-        billAmount: '',
-        transectionId: '',
+    const initialAccountsData = {
+        date: ''
     }
 
 
-    const [updateEmployeeData, setUdpateEmployeeData] = useState(initialEmployeeData);
+    const [updateAccountsData, setUdpateAccountsData] = useState(initialAccountsData);
 
 
-    const findPayrollList = allPayrollData?.find(f => f?._id === edit)
+    const findPayrollList = allAccountsData?.find(f => f?._id === edit)
 
     useEffect(() => {
-        setUdpateEmployeeData(findPayrollList || '')
+        setUdpateAccountsData(findPayrollList || '')
     }, [findPayrollList])
 
-    const { mutate: editPayrollData } = useUpdateVendorData(payrollRefetch, setUdpateEmployeeData, initialEmployeeData, setEdit)
+    const { mutate: editAccountsData } = useUpdateAccountsData(refetch, setUdpateAccountsData, initialAccountsData, setEdit)
 
     const editProduct = async (e) => {
         e.preventDefault()
 
         const updatedData = {
-            paid: updateEmployeeData?.paid,
-            billingDate: updateEmployeeData?.billingDate,
-            paymentDate: updateEmployeeData?.paymentDate,
-            billNo: updateEmployeeData?.billNo,
-            billAmount: updateEmployeeData?.billAmount,
-            transectionId: updateEmployeeData?.transectionId,
+            date: updateAccountsData?.date,
 
         }
 
@@ -87,32 +76,32 @@ const useDailyCashExpensesList = () => {
             id: edit,
         }
 
-        editPayrollData(finalUpdatedData)
+        editAccountsData(finalUpdatedData)
     }
 
 
     useEffect(() => {
-        const employeesAddedWithIndexId = allPayrollData?.slice()?.reverse()?.map((d, i) => ({
+        const accountsAddedWithIndexId = allAccountsData?.slice()?.reverse()?.map((d, i) => ({
             ...d, indexId: i + 1
         }))
-        setModifiedEmployeeDataWithIndexId(employeesAddedWithIndexId)
-    }, [allPayrollData])
+        setModifiedAccountsDataWithIndexId(accountsAddedWithIndexId)
+    }, [allAccountsData])
 
     useEffect(() => {
         refetch()
     }, [refetch, query, range])
 
     useEffect(() => {
-        payrollRefetch()
-    }, [payrollRefetch, employeeId, queryValues?.employeeName, queryValues?.month, queryValues?.year])
+        refetch()
+    }, [refetch, employeeId, queryValues?.employeeName, queryValues?.month, queryValues?.year])
 
-    const { mutate: deleteEmployees } = useDeleteVendorData(payrollRefetch, setIdsForDelete, setSelectDeleted)
+    const { mutate: deleteAccounts } = useDeleteAccountsData(refetch, setIdsForDelete, setSelectDeleted)
 
     const deleteProducts = async (e) => {
         e.preventDefault()
-        deleteEmployees(idsForDelete)
+        deleteAccounts(idsForDelete)
     }
 
-    return { supplierData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId }
+    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId }
 };
 export default useDailyCashExpensesList;

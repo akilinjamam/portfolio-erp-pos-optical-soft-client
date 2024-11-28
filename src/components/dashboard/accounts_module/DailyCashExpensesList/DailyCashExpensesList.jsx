@@ -2,16 +2,15 @@ import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import cashList from './DailyCashExpensesList.module.scss';
 import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
-import { vendorInput } from "../AddVendor/addVendorInput";
 import DailyCashExpensesTable from "./DailyCashExpensesTable";
 import useDailyCashExpensesList from "./useDailyCashExpensesList";
+import { accountListInput } from "./accountListInputs";
 
 
 const DailyCashExpensesList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData} = useDailyCashExpensesList();
-    const payrollData = modifiedEmployeeDataWithIndexId
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, } = useDailyCashExpensesList();
+    const accountsData = modifiedAccountsDataWithIndexId
 
-    const allEmployeeData =supplierData?.result;
 
     const dispatch = useDispatch();
 
@@ -20,19 +19,19 @@ const DailyCashExpensesList = () => {
              <div style={{display:'flex'}}  className={`flex_around`}>
                 <div className={`${cashList.inputAreaOne} flex_center`}>
                   <div className={`${cashList.container} `}>
-                        <div className={`${cashList.titleName}`}>Employee Update</div>
-                        <div style={{width: '135px' }}  className={`${cashList.border_remover} `}></div>
+                        <div className={`${cashList.titleName}`}>Expenses Update</div>
+                        <div style={{width: '150px' }}  className={`${cashList.border_remover} `}></div>
 
                       <form action="">
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  vendorInput?.map((input, index) => {
+                                  accountListInput?.map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${cashList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
-                                        <input value={updateEmployeeData[input?.value]}    type={input.type} 
-                                            onChange={(e) => {setUdpateEmployeeData({...updateEmployeeData, [input.value]: e.target.value})}}
+                                        <input value={updateAccountsData[input?.value]}    type={input.type} 
+                                            onChange={(e) => {setUdpateAccountsData({...updateAccountsData, [input.value]: e.target.value})}}
                                     
                                         />
                                     </div>
@@ -50,7 +49,7 @@ const DailyCashExpensesList = () => {
                                         {edit ? <button onClick={editProduct}  className={`commonButton btnColor_green`}>SAVE</button> : ''}
 
                                         {edit ? <button onClick={() => {
-                                          setUdpateEmployeeData(initialEmployeeData)
+                                          setUdpateAccountsData(initialAccountsData)
                                           setEdit('')
                                         }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}  
 
@@ -78,17 +77,11 @@ const DailyCashExpensesList = () => {
                     <i
                     onClick={() => {
                       dispatch(openModal('employee'))
-                      dispatch(addEmployeeList(payrollData))
+                      dispatch(addEmployeeList(accountsData))
                     }}
                     title="print" className="uil uil-print"></i>
-                    <span>Total : {payrollData?.length} </span>
+                    <span>Total : {accountsData?.length} </span>
                 
-                    <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
-                        <option value="">Select SupplierName</option>
-                        {
-                            allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.supplierName}</option> )
-                        }
-                    </select>
                     <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
                 </div>
                 }
@@ -99,12 +92,12 @@ const DailyCashExpensesList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${cashList.tableArea}`}>
-              <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} />
+              <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} />
           </section>
            {
             !isLoading
             &&
-            <Pagination showData={payrollData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
+            <Pagination showData={accountsData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
            }      
         </div>
     );

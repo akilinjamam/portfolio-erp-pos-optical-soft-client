@@ -49,3 +49,25 @@ export const fetchPostAccountsData = async (data) => {
         return error
     }
 }
+
+
+export const fetchUpdateAccountsData = async (id, data) => {
+    try {
+        const result = await axios.patch(`${url}/accounts/${id}`, data)
+        return result;
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+export const fetchDeleteAccountsData = async (ids) => {
+    try {
+        const result = await axios.post(`${url}/accounts/bulk-delete`, ids)
+
+        return result;
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
