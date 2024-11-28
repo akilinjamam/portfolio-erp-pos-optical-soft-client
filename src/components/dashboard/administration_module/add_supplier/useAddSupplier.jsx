@@ -36,8 +36,8 @@ const useAddSupplier = () => {
 
     const editProduct = (e) => {
 
-        let modifiedData = { ...setSupplierData, img: imgHolder === '' ? 'not added' : imgHolder }
-        console.log(modifiedData)
+        let modifiedData = { ...supplierData}
+       
         e.preventDefault();
         setEdit(false)
         setShowData(showData.map((product, index) => {
