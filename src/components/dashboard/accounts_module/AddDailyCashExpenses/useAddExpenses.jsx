@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import useGetLastSalesAndAccountsData from "../../../../data/accountsData/useGetLastSalesAccountsData";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 import usePostCreateAccounts from "../../../../data/accountsData/usePostCreateAccountsData";
+import useGetDueCollectionSaleData from "../../../../data/saleData/useGetDueCollectionSaleData";
 
 const useAddExpenses = () => {
     
@@ -31,6 +32,11 @@ const useAddExpenses = () => {
     const [otherExpensesData, setOtherExpensesData] = useState(initialOtherExpensesData)
     
     const {lastSaleAndAccountsData, refetch} = useGetLastSalesAndAccountsData(otherExpensesData.date);
+
+    const {dueCollectionSaleData} = useGetDueCollectionSaleData(otherExpensesData.date)
+
+    console.log(dueCollectionSaleData?.result?.totalPaidDueCollection);
+
    
 
     useEffect(() => {
@@ -95,6 +101,8 @@ const useAddExpenses = () => {
 
     const {mutate:postAccountsData, isSuccess, isError} = usePostCreateAccounts(refetch)
 
+      const dueSales = dueCollectionSaleData?.result?.totalPaidDueCollection ? dueCollectionSaleData?.result?.totalPaidDueCollection : '0'
+        console.log(dueSales);
     const handlePost = async () => {
 
         if(!otherExpensesData?.date){
@@ -141,13 +149,12 @@ const useAddExpenses = () => {
             return
         }
 
-        // const calculationOfProfitAllocation = calculateSalesWithStartingCashReserved - (calculatetotalExpenses ? calculatetotalExpenses : 0) - Number(otherExpensesData?.endingCashReserved)
-
+      
         const accountsData = {
             ...otherExpensesData, 
             startingCashReserved: otherExpensesData?.startingCashReserved === '' ? '0' : otherExpensesData?.startingCashReserved,
             deficit: '0',
-            dueSalesAmount: '0',
+            dueSalesAmount: dueSales,
             expenses: showData
         };
 
@@ -166,7 +173,7 @@ const useAddExpenses = () => {
         }
     },[isSuccess,isError])
 
-    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData }
+    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales }
 };
 
 

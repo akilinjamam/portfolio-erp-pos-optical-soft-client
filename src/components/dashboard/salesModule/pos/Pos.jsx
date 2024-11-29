@@ -39,6 +39,7 @@ const Pos = () => {
 
 
     const customerInfo = useSelector(state => state.imgModal.customerInfo)
+    
     const lock = useSelector(state => state.imgModal.lock)
     const dispatch = useDispatch();
     const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()

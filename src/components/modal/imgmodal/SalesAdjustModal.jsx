@@ -48,8 +48,6 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                 return
             }
 
-            console.log(totalPriceValue)
-
             const totalAdvance = (Number(getCustomerInfo?.advance) + Number(payable)).toString();
             const totalDiscount = discount.toString();
             const id = getCustomerInfo?._id
@@ -97,9 +95,9 @@ console.log(payable)
                                 />
                                <br /><br />
                                <div className='only_flex'>
-                                    <label htmlFor="">Total Due :</label>
+                                    <label htmlFor="">Pay Total Due :</label>
                                </div>
-                               <br />
+                               
                                <br />
                                <input 
                                 value={payable} 

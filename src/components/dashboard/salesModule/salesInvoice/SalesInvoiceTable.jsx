@@ -42,7 +42,7 @@ const SalesInvoicTable = ({data}) => {
                     </td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.advance}</td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                        {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance)}
+                        {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance) - Number(data?.discount)}
                     </td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
                         {data?.discount}

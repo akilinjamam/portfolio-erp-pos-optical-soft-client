@@ -7,12 +7,13 @@ import AddExpensesTable from './AddExpensesTable';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 const AddExpenses = () => {
-  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, lastSaleAndAccountsData} = useAddExpenses();
+  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, lastSaleAndAccountsData, dueSales} = useAddExpenses();
 
   const totalExpenses = showData?.map(expense => Number(expense?.expenseAmount));
   const calculationOfTotalExpense = calculateTotalPrice(totalExpenses);
 
   const conditionalTotalSales = Number(otherExpensesData?.startingCashReserved) > 0 ? (Number(otherExpensesData?.startingCashReserved) + Number(lastSaleAndAccountsData?.result?.totalSales)) : lastSaleAndAccountsData?.result?.total
+
 
     return (
         <div className={`${addExpenses.main} full_width`}>
@@ -105,16 +106,19 @@ const AddExpenses = () => {
                     <div style={{width: '150px'}} className={`${addExpenses.border_remover}`}></div>
                     <br />
                     <div className={`${addExpenses.inputAreaTwoContainer}`}>
-                        <p>Total Sales: {lastSaleAndAccountsData?.result?.totalSales  &&  lastSaleAndAccountsData?.result?.totalSales }</p>
-                        <p>(+) Starting Cash Reserved: {lastSaleAndAccountsData?.result?.total  &&  lastSaleAndAccountsData?.result?.beginingCashReserved }</p>
-                        <p style={{marginBottom: '10px'}}>Total: {conditionalTotalSales}</p>
-                        <hr />
-                        <br />
-                        <p>Total Sales: {conditionalTotalSales }</p>
-                        <p>(-)Total Expenses: {calculationOfTotalExpense}</p>
-                        <p style={{marginBottom: '10px'}}>(-)Ending Cash Reserved: {otherExpensesData?.endingCashReserved ? otherExpensesData?.endingCashReserved : 0}</p>
-                        <hr />
-                        <p>Profit Allocation: {Number(conditionalTotalSales ? conditionalTotalSales : 0) - (calculationOfTotalExpense) - Number(otherExpensesData?.endingCashReserved ? otherExpensesData?.endingCashReserved : 0)}</p>
+                        <div style={{display: `${otherExpensesData?.date ? 'block' : 'none'}`}}>
+                          <p>Total Sales: {lastSaleAndAccountsData?.result?.totalSales  &&  lastSaleAndAccountsData?.result?.totalSales }</p>
+                          <p>(+) Starting Cash Reserved: {lastSaleAndAccountsData?.result?.total  &&  (lastSaleAndAccountsData?.result?.beginingCashReserved === '0' ? (otherExpensesData?.startingCashReserved ? otherExpensesData?.startingCashReserved : 0 ) : lastSaleAndAccountsData?.result?.beginingCashReserved  )}</p>
+                          <p>(+) Daily Due Collection Amount: {dueSales}</p>
+                          <p style={{marginBottom: '10px'}}>Total: {Number(conditionalTotalSales) + Number(dueSales)}</p>
+                          <hr />
+                          <br />
+                          <p>Total Sales: {(Number(conditionalTotalSales) + Number(dueSales)) }</p>
+                          <p>(-)Total Expenses: {calculationOfTotalExpense}</p>
+                          <p style={{marginBottom: '10px'}}>(-)Ending Cash Reserved: {otherExpensesData?.endingCashReserved ? otherExpensesData?.endingCashReserved : 0}</p>
+                          <hr />
+                          <p>Profit Allocation: {Number(conditionalTotalSales ? (Number(conditionalTotalSales) + Number(dueSales)) : 0) - (calculationOfTotalExpense) - Number(otherExpensesData?.endingCashReserved ? otherExpensesData?.endingCashReserved : 0)}</p>
+                        </div>
                     </div>
 
               </div>
