@@ -33,14 +33,12 @@ const useAddExpenses = () => {
     
     const {lastSaleAndAccountsData, refetch} = useGetLastSalesAndAccountsData(otherExpensesData.date);
 
-    const {dueCollectionSaleData} = useGetDueCollectionSaleData(otherExpensesData.date)
-
-    console.log(dueCollectionSaleData?.result?.totalPaidDueCollection);
+    const {dueCollectionSaleData, refetch:refetchDue} = useGetDueCollectionSaleData(otherExpensesData.date)
 
    
-
     useEffect(() => {
         refetch()
+        refetchDue()
         otherExpensesData.date
     },[otherExpensesData, refetch])
 
