@@ -75,6 +75,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                 </tr>
                 </tbody>
             </table>

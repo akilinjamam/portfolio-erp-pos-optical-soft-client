@@ -3,12 +3,11 @@ import { fetchGetSaleData } from "../fetchedData/fetchSaleData";
 
 
 const useSaleData = (query, from , to) => {
-    const getAllData = useQuery({ queryKey: ['fetchGetSaleData'], queryFn: () => fetchGetSaleData(query, from, to) })
-    const saleData = getAllData?.data
-    const isLoading = getAllData?.isLoading
-    const error = getAllData?.error
+    const {data:getAllData, refetch, isLoading, error} = useQuery({ queryKey: ['fetchGetSaleData'], queryFn: () => fetchGetSaleData(query, from, to) })
+    const saleData = getAllData
+    
 
-    const refetch = getAllData?.refetch()
+    console.log(saleData);
 
     return { saleData, isLoading, error, refetch }
 };

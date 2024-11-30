@@ -4,16 +4,15 @@ import { useDispatch } from "react-redux";
 import { addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useState } from "react";
 import Pagination from "../../pagination/Pagination";
-import useSalesRecord from "./useSalesRecord";
 import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
-import handleDebounce from "../../../handleDebounce/handleDebounce";
+import useSaleData from "../../../../data/saleData/useSaleData";
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const SalesRecord = () => {
 
     const dispatch = useDispatch();
-    const [query, setQuery] = useState('');
+   
     const [handleQuery, setHandleQuery] = useState('');
     console.log(handleQuery)
     const [range, setRange] = useState({
@@ -21,7 +20,7 @@ const SalesRecord = () => {
         to: ''
     })
 
-    const {saleData, isLoading} = useSalesRecord(handleQuery, range.from, range.to);
+    const {saleData, isLoading, refetch} = useSaleData(handleQuery, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
@@ -37,6 +36,10 @@ const SalesRecord = () => {
         setModifiedProductDataWithIndexId(modified)
     }, [saleData?.result])
 
+    useEffect(() => {
+        refetch()
+    },[refetch,handleQuery])
+
     return (
         <div className={salesRecord.main}>
             <div className={`${salesRecord.title} flex_left`}>
@@ -45,11 +48,11 @@ const SalesRecord = () => {
                     dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {saleData?.total}</span>
-                <input value={query} type="text" name="" id="" onChange={(e) => {
-                    setQuery(e.target.value)
-                    handleDebounce(setHandleQuery, e.target.value)   
+                <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
+                   
+                    setHandleQuery(e.target.value)   
                 }}/>
-                <i onClick={() => setQuery('')} className="uil uil-times"></i>
+                <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
                 <label htmlFor="">From: </label>
                 <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                 <label htmlFor="">To: </label>

@@ -3,12 +3,11 @@ import { useDispatch} from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { customCode } from '../../../customCode/customcode';
-const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit}) => {
+const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit, category}) => {
 
-
+  console.log(paginatedDataContainer);
 
   const dispatch = useDispatch();
-
 
   const handleDelete = (value) => {
     const deletedId = ((value+1)+((paginatedIndex-1)*10))
@@ -41,11 +40,30 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                   <th>Quantity</th>
                   <th>Category</th>
                   <th>Date</th>
-                  <th>Size</th>
-                  <th>Material</th>
-                  <th>Frame Type</th>
-                  <th>Shape</th>
-                  <th>Power</th>
+                  {
+                    category === 'Optical Frame' && <th>Size</th>
+                  }
+                  {
+                    category === 'Optical Frame' && <th>Material</th>
+                  }
+                  {
+                    category === 'Optical Frame' && <th>Frame</th>
+                  }
+                  {
+                    category === 'Optical Frame' && <th>Shape</th>
+                  }
+                  {
+                    category === 'Glass' && <th>Power</th>
+                  }
+                  {
+                    category === 'Glass' && <th>sph</th>
+                  }
+                  {
+                    category === 'Glass' && <th>Cyl</th>
+                  }
+                  {
+                    category === 'Glass' && <th>Axis</th>
+                  }
                   <th>Barcode</th>
                   <th>Image</th>
                   <th>Action</th>
@@ -65,11 +83,31 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
                     <td>{data.quantity}</td>
                     <td>{data.category}</td>
                     <td>{todaysDate}</td>
-                    <td>{data.size}</td>
-                    <td>{data.material}</td>
-                    <td>{data.frameType}</td>
-                    <td>{data.shape}</td>
-                    <td>{data.power}</td>
+                    {
+                      category === 'Optical Frame' && <td>{data.size}</td>
+                    }
+                    {
+                      category === 'Optical Frame' && <td>{data.material}</td>
+                    }
+                    {
+                      category === 'Optical Frame' && <td>{data.frame}</td>
+                    }
+                    {
+                      category === 'Optical Frame' && <td>{data.shape}</td>
+                    }
+                    
+                    {
+                      category === 'Glass' && <td>{data.power}</td>
+                    }
+                    {
+                      category === 'Glass' && <td>{data.sph}</td>
+                    }
+                    {
+                      category === 'Glass' && <td>{data.cyl}</td>
+                    }
+                    {
+                      category === 'Glass' && <td>{data.axis}</td>
+                    }
                     <td>{data.barcode}</td>
                     <td>{data?.img !== 'not added' ? <img onClick={ () => handleModal(data?.img)} style={{margin:'auto', display:'block', borderRadius:'5px', cursor:'pointer'}} height={20} width={20} src={data?.img} alt="" /> : 'image not added'}</td>
                     <td  className={`flex_around`}><i onClick={() => handleDelete(index)} style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> <i onClick={() => handleEdit(index)} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i></td>

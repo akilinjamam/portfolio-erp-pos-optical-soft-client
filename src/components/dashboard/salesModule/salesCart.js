@@ -18,6 +18,12 @@ export const salesCartRoute = [
         color: 'rgb(219, 209, 243)'
     },
     {
+        value: 'Glass Stock',
+        link: '/dashboard/sales_module/glass_stock',
+        icon: 'uil uil-file-graph',
+        color: 'rgb(219, 229, 243)'
+    },
+    {
         value: 'sales Invoice',
         link: '/dashboard/sales_module/sales_invoice',
         icon: 'uil uil-receipt',

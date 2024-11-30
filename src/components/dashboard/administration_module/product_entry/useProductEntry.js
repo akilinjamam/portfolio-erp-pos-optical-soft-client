@@ -12,16 +12,18 @@ const useProductEntry = () => {
     const { supplierData } = useGetSupplierData();
     const allEmployess = employeeData?.result;
     const allSuppliers = supplierData?.result;
-    console.log(employeeData)
+
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [paginatedIndex, setPaginatedIndex] = useState();
     const [edit, setEdit] = useState();
-    const [imgHolder, setImgHolder] = useState();
+    const [imgHolder, setImgHolder] = useState('');
     const [uploading, setUploading] = useState(false);
 
     const recorderEmail = localStorage.getItem('userEmail')
     const recorderName = users?.result?.find(f => f?.email === recorderEmail)?.username
+
+    console.log(showData);
 
     const initialProductData = {
         productName: '',
@@ -34,14 +36,18 @@ const useProductEntry = () => {
         frameType: 'blank',
         size: 'blank',
         shape: 'blank',
-        img: 'not added',
-        power: '0',
+        img: '',
+        power: '',
+        sph: '',
+        cyl: '',
+        axis: '',
         supplierName: '',
         collectorName: ''
     }
     const [productData, setProductData] = useState(initialProductData);
-    console.log(productData)
+
     const [category, setCategory] = useState('');
+
 
 
     const findProduct = showData.find((f, i) => (i + 1) === edit);
@@ -52,12 +58,12 @@ const useProductEntry = () => {
     }, [setProductData, findProduct])
 
 
-    const newCode = customCode()
+    const newCode = customCode(productData?.purchasePrice)
 
     const editProduct = (e) => {
 
         let modifiedData = { ...productData, barcode: newCode.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
-        console.log(modifiedData)
+
         e.preventDefault();
         setEdit(false)
         setShowData(showData.map((product, index) => {
@@ -74,13 +80,16 @@ const useProductEntry = () => {
             category,
             img: imgHolder === '' ? 'not added' : imgHolder,
             recorderEmail,
-            recorderName
+            recorderName,
+            power: productData?.power === '' ? 'power not added' : productData?.power,
+            sph: productData?.sph === '' ? 'sph not added' : productData?.sph,
+            cyl: productData?.cyl === '' ? 'cyl not added' : productData?.cyl,
+            axis: productData?.axis === '' ? 'axis not added' : productData?.axis,
         }
 
         e.preventDefault();
         setShowData((prevData) => [...prevData, allData]);
         setProductData(initialProductData)
-        setCategory('')
         setImgHolder('');
 
     }

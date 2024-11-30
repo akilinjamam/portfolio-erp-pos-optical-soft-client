@@ -1,15 +1,17 @@
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import { useDispatch } from "react-redux";
-import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import Pagination from "../../pagination/Pagination";
-import { textInput } from "../AddEmployee/employeeInput";
-import employeeList from './EmployeeList.module.scss';
+
+import employeeList from './ProfitExpenseList.module.scss';
 import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 
-import useEmployeeList from "./useEmployeeList";
-import EmployeeListTable from "./EmployeeListTable";
-const EmployeeList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useEmployeeList();
+import { profitExpenseList } from "./profitExpenseListInput";
+
+import ProfitExpenseListTable from "./ProfitExpenseListTable";
+import useProfitexpenseList from "./useProfitExpenseList";
+const ProfitExpenseList = () => {
+    
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useProfitexpenseList()
     const employeeData = modifiedEmployeeDataWithIndexId
 
     const dispatch = useDispatch();
@@ -19,14 +21,14 @@ const EmployeeList = () => {
              <div style={{display:'flex'}}  className={`flex_around`}>
                 <div className={`${employeeList.inputAreaOne} flex_center`}>
                   <div className={`${employeeList.container} `}>
-                        <div className={`${employeeList.titleName}`}>Employee Update</div>
-                        <div style={{width: '135px' }}  className={`${employeeList.border_remover} `}></div>
+                        <div className={`${employeeList.titleName}`}>Expense Profit Update</div>
+                        <div style={{width: '185px' }}  className={`${employeeList.border_remover} `}></div>
 
                       <form action="">
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  textInput?.slice(0,6).map((input, index) => {
+                                  profitExpenseList?.map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${employeeList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
@@ -61,38 +63,12 @@ const EmployeeList = () => {
                 </div>
                 <div className={`${employeeList.inputAreaTwo} flex_center`}>
                   <div className={`${employeeList.container} `}>
-                        <div className={`${employeeList.titleName} flex_center`}>Update Image</div>
-                        <div style={{width: '120px'}} className={`${employeeList.border_remover}`}></div>
+                        <div className={`${employeeList.titleName} flex_center`}></div>
+                        <div style={{width: '0px'}} className={`${employeeList.border_remover}`}></div>
                         <br />
                             <div className={`${employeeList.inputAreaTwoContainer}`}>
-                            {updateEmployeeData?.img ? <img height={125} width={125} src={imgHolder ? imgHolder : updateEmployeeData?.img} alt="" /> :  <i className="uil uil-image-upload"></i> }
-                                  {
-                                        textInput?.slice(7,8).map((input, index) => {
-                                          return (
-                                            <div key={index+1} className={`${employeeList.inputFields}`}>
-                                            
-                                              {
-                                                edit 
-                                                ?
-                                                <input className='custom-file-input'  type={input?.type} 
-                                                  onChange={(e) => {
-                                                    const img = e.target.files[0];
-                                                  updloadCloudinaryImage(img,setImgHolder,setUploading)
-                                                    
-                                                  }
-                                              }
-                                              />
-                                              :
-                                              ''
-                                              }
-                                          </div>
-                                          )
-                                        })
-                                  }
-
-                                  <div className={`${employeeList.uploading}`}>
-                                      {uploading ? 'uploading...' : ''}
-                                  </div>
+                           
+                                
                                   
                             </div>
                   </div>
@@ -126,7 +102,7 @@ const EmployeeList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
-              <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} />
+              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} />
           </section>
            {
             !isLoading
@@ -137,4 +113,4 @@ const EmployeeList = () => {
     );
 };
 
-export default EmployeeList;
+export default ProfitExpenseList;

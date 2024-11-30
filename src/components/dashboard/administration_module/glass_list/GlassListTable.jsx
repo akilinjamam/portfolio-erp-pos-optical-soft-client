@@ -5,7 +5,7 @@ import { openImg, openModal, openSingleBarcode } from '../../../modal/imgmodal/i
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
  
-const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const GlassListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
 
 
   const dispatch = useDispatch();
@@ -98,11 +98,11 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Quantity</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Category</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Size</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Material</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Frame Type</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Shape</th>
+                  
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Power</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Sph</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Cyl</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Axis</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Barcode</th>
                   {fullScr ? '' : <th>Image</th>}
                   {fullScr ? '' : <th>Action</th>}
@@ -130,11 +130,11 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.quantity}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.category}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.size}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.material}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.frameType}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.shape}</td>
+                    
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.power}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.sph}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.cyl}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.axis}</td>
                      <td onClick={() => handleBarcode(data?.barcode, data?.productName)} style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.barcode}</td>
                     { fullScr ?
                       ''
@@ -171,4 +171,4 @@ if(isLoading){
     );
 };
 
-export default ProductListTable;
+export default GlassListTable;

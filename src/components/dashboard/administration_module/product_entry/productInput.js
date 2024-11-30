@@ -122,4 +122,25 @@ export const textInput = [
         name: 'power',
         id: ''
     },
+    {
+        value: 'sph',
+        placeholder: 'Sph',
+        type: 'text',
+        name: 'sph',
+        id: ''
+    },
+    {
+        value: 'cyl',
+        placeholder: 'Cyl',
+        type: 'text',
+        name: 'cyl',
+        id: ''
+    },
+    {
+        value: 'axis',
+        placeholder: 'Axis',
+        type: 'text',
+        name: 'axis',
+        id: ''
+    },
 ]

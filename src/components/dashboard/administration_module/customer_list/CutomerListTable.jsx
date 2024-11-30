@@ -22,18 +22,20 @@ const CustomerListTable = ({contentToPrint, paginatedDataContainer, isLoading}) 
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>Customer Phone</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Customer Address</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Invoice Number</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         paginatedDataContainer?.map((list, index) => {
-                            const {indexId, customerName, phoneNumber, address} = list || {}
+                            const {indexId, customerName, phoneNumber, address, invoiceBarcode} = list || {}
                             return (
                                 <tr key={index+1}>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{indexId}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{customerName}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left',paddingLeft:'5px'}}>{phoneNumber}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{address}</td>
+                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{invoiceBarcode}</td>
                                 </tr>
                             )
                         })

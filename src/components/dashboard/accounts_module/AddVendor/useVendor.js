@@ -55,7 +55,7 @@ const useAddVendor = () => {
             return
         }
         if (!payrollData?.billAmount) {
-            toast.error('please select bill')
+            toast.error('please select bill amount')
             return
         }
 

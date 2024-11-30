@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
+
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const PayrollListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
-
+const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
 
   const data = paginatedDataContainer
   
@@ -38,21 +38,13 @@ if(isLoading){
           
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Employee Name</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Basic Salary</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Profit</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Extra Profit</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Net Salary</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Paid</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Paid</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Previous Due</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Due</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Previous Advance</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Advance</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Overtime</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Incentive</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Salary</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Method</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Transection Id</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Expense</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Expense</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th>
+                 
                   <th>Action</th>
               </tr>
           </thead>
@@ -68,23 +60,14 @@ if(isLoading){
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
                     <div style={{maxWidth:"100px"}}>
-                    {data?.employeeName?.employeeName} 
+                    {data?.totalProfit} 
                     </div>  
                     </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.employeeName?.basicSalary}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.extraProfit}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.netSalary}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paid}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalPaid}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.prevDue}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.due}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.prevAdvance}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.advance}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.overtime}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.incentive}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{Number(data?.netSalary) + Number(data?.incentive) + Number(data?.overtime)}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.transectionId}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Expenses</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalExpense}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
                     
                      <td  className={`flex_around`}>
                     
@@ -113,4 +96,4 @@ if(isLoading){
     );
 };
 
-export default PayrollListTable;
+export default ProfitExpenseListTable;

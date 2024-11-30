@@ -6,7 +6,7 @@ import Pagination from "../../pagination/Pagination";
 import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 import CustomerListTable from "./CutomerListTable";
-import useCustomerList from './useCustomerList';
+import useSaleData from '../../../../data/saleData/useSaleData';
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const CustomerList = () => {
@@ -16,7 +16,7 @@ const CustomerList = () => {
         from: '',
         to: ''
     })
-    const {saleData, isLoading} = useCustomerList(query, range.from, range.to);
+    const {saleData, isLoading, refetch} = useSaleData(query, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedSaleDataWithIndexId,setModifiedSaleDataWithIndexId] = useState([])
     const [paginatedIndex,setPaginatedIndex] = useState()
@@ -29,6 +29,10 @@ const CustomerList = () => {
         const modified = saleData?.result?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedSaleDataWithIndexId(modified)
     }, [saleData?.result])
+
+    useEffect(() => {
+        refetch()
+    },[refetch, query ])
 
     return (
         <div  className={customerLists.main}>

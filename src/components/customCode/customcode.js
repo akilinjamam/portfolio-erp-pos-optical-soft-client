@@ -1,9 +1,28 @@
-export const customCode = () => {
+export const customCode = (purchasePrice) => {
+
+
+
+
+
+
+
     const date = new Date();
     const year = date.getFullYear()
     const month = date.getMonth();
     const monthDate = date.getDate();
     const ddmmyy = `${monthDate}-${month}-${year}`
+
+    const zero = '0000'
+    const remaininZero = zero?.slice(purchasePrice?.length);
+    const time = date.getTime();
+    const modifiedTime = time?.toString()?.slice(0, 9)
+
+
+    const newBarcode = `${remaininZero}${purchasePrice ? purchasePrice : ''}${modifiedTime}`
+
+
+
+
     // const alphabetMap = {
     //     '1': 'K',
     //     '2': 'E',
@@ -30,7 +49,7 @@ export const customCode = () => {
     // }
 
     // const generatedCode = `${convertedString}${updateProductData?.material?.slice(0, 1)}${updateProductData?.frameType?.slice(0, 1)}${updateProductData?.size?.slice(0, 1)}${updateProductData?.shape?.slice(0, 1)}${date.getTime()}`
-    const generatedCode = `${date.getTime()}`
+    const generatedCode = newBarcode
 
 
 

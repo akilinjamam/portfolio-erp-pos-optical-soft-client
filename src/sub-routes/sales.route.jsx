@@ -1,3 +1,4 @@
+import GlassStock from "../components/dashboard/salesModule/glassStock/GlassStock"
 import Pos from "../components/dashboard/salesModule/pos/Pos"
 import SalesInvoice from "../components/dashboard/salesModule/salesInvoice/SalesInvoice"
 import SalesRecord from "../components/dashboard/salesModule/salesRecord/SalesRecord"
@@ -19,6 +20,10 @@ const salesRoute = [
     {
       path: 'stock',
       element: <Stock/>
+    },
+    {
+      path: 'glass_stock',
+      element: <GlassStock/>
     },
   ]
 

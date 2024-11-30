@@ -23,6 +23,27 @@ export const fetchGetProductData = async (query, from, to, priceFrom, priceTo) =
         return error
     }
 }
+export const fetchGetGlassProductData = async (query, from, to, priceFrom, priceTo) => {
+    try {
+        const token = localStorage.getItem('user')
+        const value = query ? query : '';
+        const fromDate = from ? from : '';
+        const toDate = to ? to : '';
+        const fromPrice = priceFrom ? priceFrom : '';
+        const toPrice = priceTo ? priceTo : '';
+
+        const result = await axios.get(`${url}/products/glass?searchTerm=${value}&from=${fromDate}&to=${toDate}&priceFrom=${fromPrice}&priceTo=${toPrice}`, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return result?.data;
+    } catch (error) {
+        return error
+    }
+}
 export const fetchPostProductData = async (data) => {
     try {
 

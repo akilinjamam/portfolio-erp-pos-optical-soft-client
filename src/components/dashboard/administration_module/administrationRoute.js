@@ -12,6 +12,12 @@ export const administrationRoute = [
         color: 'rgb(243, 231, 209)'
     },
     {
+        value: 'Glass List',
+        link: '/dashboard/administration_module/glass_list',
+        icon: 'uil uil-file-info-alt',
+        color: 'rgb(243, 211, 509)'
+    },
+    {
         value: 'Customer List',
         link: '/dashboard/administration_module/customer_list',
         icon: 'uil uil-clipboard-notes',

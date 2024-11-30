@@ -19,7 +19,7 @@ const AddVendor = () => {
                             <div  className={`${addVendor.inputFields} flex_between`}>
                                     <label htmlFor="">Supplier Name:</label>
                                     <select name="" id="" onChange={(e) => setSupplierId(e.target.value)}>
-                                      <option value="">Select Employee</option>
+                                      <option value="">Select Supplier</option>
                                         {
                                           allSuppliers?.map((supplier, index) => {
                                             return (

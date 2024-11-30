@@ -100,7 +100,7 @@ const ProductEntry = () => {
                             }
                             { category === 'Glass'
                               &&
-                              textInput?.slice(8,9).map((input, index) => {
+                              textInput?.slice(8,12).map((input, index) => {
                                 return (
                                   <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
@@ -189,7 +189,7 @@ const ProductEntry = () => {
               </div>
             </div>
           </div> 
-            <ProductTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit}/>
+            <ProductTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit} category={category}/>
             <Pagination showData={showData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex}/>
         </div>
     );

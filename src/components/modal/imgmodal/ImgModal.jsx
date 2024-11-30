@@ -14,6 +14,8 @@ import EmployeeModal from './EmployeeModal';
 import SalesInvoiceModal from './SalesInvoiceModal';
 import SalesAdjustModal from './SalesAdjustModal';
 import SupplierModal from './SupplierModal';
+import SingleBarcodeContainer from './SingleBarcodeContainer';
+import GlassStockModal from './GlassStockModal';
 
 const ImgModal = () => {
 
@@ -23,6 +25,7 @@ const ImgModal = () => {
         const img = useSelector((state) => state.imgModal.img );
         const type = useSelector((state) => state.imgModal.type );
         const barcode = useSelector((state) => state.imgModal.barcode );
+       
         const employeeData = useSelector((state) => state.imgModal.employeeData)
         const supplierData = useSelector((state) => state.imgModal.supplierData)
 
@@ -31,14 +34,17 @@ const ImgModal = () => {
   
         const getCustomerInfo = useSelector(state => state.imgModal.customerInfo);
         const getCustomerInfoForSalesInvoice = useSelector(state => state.imgModal.customerInfoForSalesInvoice);
+        const singleBarcode = useSelector(state => state.imgModal.singleBarcodes)
         const dispatch = useDispatch();
         
     return (
         <div>
             <ImgContainer open={open} type={type} dispatch={dispatch} closeModal={closeModal} img={img}/>
             <BarcodeContainer open={open} type={type} barcode={barcode} closeModal={closeModal}  dispatch={dispatch} />
+            <SingleBarcodeContainer open={open} type={type} barcode={singleBarcode} closeModal={closeModal}  dispatch={dispatch} />
             <CustomerContainer closeModal={closeModal} dispatch={dispatch} open={open} customerInfo={customerInfo} type={type} salesList={salesList}/>
             <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
+            <GlassStockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <CustomerListModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <InvoiceModal salesList={salesList}  getCustomerInfo={getCustomerInfo}  closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
