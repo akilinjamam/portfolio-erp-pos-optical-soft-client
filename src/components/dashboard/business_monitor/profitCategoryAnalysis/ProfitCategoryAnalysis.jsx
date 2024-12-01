@@ -18,7 +18,7 @@ const ProfitCategoryAnalysis = () => {
     const {profitExpenseData, isLoading } = useGetProfitExpenseAccountsData();
 
     const analysisData = profitExpenseData?.result
-    console.log(analysisData);
+   
     ChartJS.register(
         CategoryScale,
         LinearScale,
