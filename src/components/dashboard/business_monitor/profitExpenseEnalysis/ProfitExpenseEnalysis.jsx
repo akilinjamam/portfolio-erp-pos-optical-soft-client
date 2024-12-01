@@ -11,10 +11,11 @@ import {Chart as ChartJS,
     Tooltip,
     Legend} from 'chart.js'
 import useGetProfitExpenseAccountsData from '../../../../data/accountsData/useGetProfitExpenseAccountsData';
+import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 const ProfitExpenseEnalysis = () => {
     
-    const {profitExpenseData } = useGetProfitExpenseAccountsData();
+    const {profitExpenseData, isLoading } = useGetProfitExpenseAccountsData();
 
     const analysisData = profitExpenseData?.result
     console.log(analysisData);
@@ -60,6 +61,10 @@ const ProfitExpenseEnalysis = () => {
         },
     };
 
+
+    if(isLoading){
+        return <CommonLoading/>
+    }
    
     return (
         <div  className={`${profitExpenseEnalaysis.main} full_width`}>
