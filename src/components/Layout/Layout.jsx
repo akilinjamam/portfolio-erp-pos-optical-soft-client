@@ -20,24 +20,37 @@ const Layout = ({ children }) => {
     const findUser = users?.result?.find(f => f?.email === getUser?.email);
     
    
-    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list } = findUser || {};
+    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list, glass_stock, glass_list, payroll_list,add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list} = findUser || {};
 
     useEffect(() => {
         const accessMap = {
             '/dashboard/sales_module/pos': pos,
             '/dashboard/sales_module/sales_record': sales_record,
             '/dashboard/sales_module/stock': stock,
+            '/dashboard/sales_module/glass_stock': glass_stock,
             '/dashboard/sales_module/sales_invoice': sales_invoice,
+
             '/dashboard/administration_module/product_entry': product_entry,
             '/dashboard/administration_module/product_list': product_list,
+            '/dashboard/administration_module/glass_list': glass_list,
             '/dashboard/administration_module/customer_list': customer_list,
             '/dashboard/administration_module/add_supplier': add_supplier,
             '/dashboard/administration_module/supplier_list': supplier_list,
+
             '/dashboard/hr_and_payroll_module/controll_user_access': controll_user_access,
             '/dashboard/hr_and_payroll_module/employee_list': employee_list,
             '/dashboard/hr_and_payroll_module/payroll': payroll,
+            '/dashboard/hr_and_payroll_module/payroll_list': payroll_list,
             '/dashboard/hr_and_payroll_module/user_list': user_list,
             '/dashboard/hr_and_payroll_module/add_employee': add_employee,
+
+            '/dashboard/accounts_module/add_vendor': add_vendor,
+            '/dashboard/accounts_module/vendor_list': vendor_list,
+            '/dashboard/accounts_module/add_expenses': add_expenses,
+            '/dashboard/accounts_module/expenses_list': expenses_list,
+            '/dashboard/accounts_module/due_collection_list': due_collection_list,
+            '/dashboard/accounts_module/add_fixed_expenses': add_fixed_expenses,
+            '/dashboard/accounts_module/expenses_profit_list': expenses_profit_list,
         };
        
 
@@ -49,7 +62,7 @@ const Layout = ({ children }) => {
 
             }
         }
-    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list]);
+    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list, glass_stock, glass_list, payroll_list, add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list]);
 
     return (
         <div>

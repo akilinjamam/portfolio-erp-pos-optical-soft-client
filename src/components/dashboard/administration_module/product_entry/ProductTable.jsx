@@ -5,8 +5,7 @@ import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { customCode } from '../../../customCode/customcode';
 const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit, category}) => {
 
-  console.log(paginatedDataContainer);
-
+ 
   const dispatch = useDispatch();
 
   const handleDelete = (value) => {

@@ -19,8 +19,9 @@ const CustomerList = () => {
     const {saleData, isLoading, refetch} = useSaleData(query, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedSaleDataWithIndexId,setModifiedSaleDataWithIndexId] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [paginatedIndex,setPaginatedIndex] = useState()
-    console.log(paginatedIndex)
+   
 
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
@@ -32,7 +33,7 @@ const CustomerList = () => {
 
     useEffect(() => {
         refetch()
-    },[refetch, query ])
+    },[refetch, query, range ])
 
     return (
         <div  className={customerLists.main}>

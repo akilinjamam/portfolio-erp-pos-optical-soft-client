@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchGetFinalAccountsData } from "../fetchedData/fetchAccountsData";
 
-const useGetFinalAccountsData = () => {
+const useGetFinalAccountsData = (year, month) => {
 
-    const { data: getAllData, refetch, isLoading, error } = useQuery({ queryKey: ['fetchGetFinalAccountsData'], queryFn: () => fetchGetFinalAccountsData() })
+    const { data: getAllData, refetch, isLoading, error } = useQuery({ queryKey: ['fetchGetFinalAccountsData'], queryFn: () => fetchGetFinalAccountsData(year, month) })
     const finalAccountsData = getAllData;
 
-    console.log(getAllData);
+
 
     return { finalAccountsData, isLoading, error, refetch }
 };

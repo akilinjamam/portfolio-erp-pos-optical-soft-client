@@ -27,18 +27,18 @@ export const accountsModuleRoute = [
         value: 'Daily Due Collection List',
         link: '/dashboard/accounts_module/due_collection_list',
         icon: 'uil uil-clipboard-notes',
-        color: 'rgb(243, 209, 237)'
+        color: 'rgb(143, 230, 637)'
     },
     {
         value: 'Add Fixed Expenses',
         link: '/dashboard/accounts_module/add_fixed_expenses',
-        icon: 'uil uil-clipboard-notes',
+        icon: 'uil uil-file-plus',
         color: 'rgb(243, 409, 237)'
     },
     {
         value: 'Expenses Profit List',
         link: '/dashboard/accounts_module/expenses_profit_list',
-        icon: 'uil uil-clipboard-notes',
+        icon: 'uil uil-file-alt',
         color: 'rgb(143, 409, 237)'
     },
 ]

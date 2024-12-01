@@ -18,10 +18,15 @@ export const fetchGetLastSaleAndAccountsData = async (date) => {
         return error
     }
 }
-export const fetchGetFinalAccountsData = async () => {
+export const fetchGetFinalAccountsData = async (year, month) => {
     try {
         const token = localStorage.getItem('user')
-        const result = await axios.get(`${url}/finalAccounts`, {
+
+        const valueYear = year ? year : '';
+        const valueMonth = month ? month : '';
+
+
+        const result = await axios.get(`${url}/finalAccounts?year=${valueYear}&month=${valueMonth}`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",

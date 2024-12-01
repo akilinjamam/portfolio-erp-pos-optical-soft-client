@@ -22,7 +22,8 @@ export const homeNavigator = [
             two: '/dashboard/sales_module/pos',
             three: '/dashboard/sales_module/sales_record',
             four: '/dashboard/sales_module/stock',
-            five: '/dashboard/sales_module/sales_invoice'
+            five: '/dashboard/sales_module/sales_invoice',
+            six: '/dashboard/sales_module/glass_stock',
         }
     },
     {
@@ -33,8 +34,11 @@ export const homeNavigator = [
             one: '/dashboard/accounts_module',
             two: '/dashboard/accounts_module/add_vendor',
             three: '/dashboard/accounts_module/vendor_list',
-            four: '',
-            five: ''
+            four: '/dashboard/accounts_module/add_expenses',
+            five: '/dashboard/accounts_module/expenses_list',
+            six: '/dashboard/accounts_module/due_collection_list',
+            seven: '/dashboard/accounts_module/add_fixed_expenses',
+            eight: '/dashboard/accounts_module/expenses_profit_list',
         }
     },
     {
@@ -75,16 +79,17 @@ export const homeNavigator = [
             four: '/dashboard/administration_module/customer_list',
             five: '/dashboard/administration_module/add_supplier',
             six: '/dashboard/administration_module/supplier_list',
+            seven: '/dashboard/administration_module/glass_list',
         }
     },
     {
-        route: '',
+        route: '/dashboard/business_monitor',
         value: 'Business Monitor',
         icon: 'uil uil-signal-alt-3',
         routes: {
-            one: '',
-            two: '',
-            three: '',
+            one: '/dashboard/business_monitor',
+            two: '/dashboard/business_monitor/profit_expense_enalysis',
+            three: '/dashboard/business_monitor/profit_category_analysis',
             four: '',
             five: ''
         }

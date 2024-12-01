@@ -135,7 +135,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.sph}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.cyl}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.axis}</td>
-                     <td onClick={() => handleBarcode(data?.barcode, data?.productName)} style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.barcode}</td>
+                     <td onClick={() => handleBarcode(data?.barcode, data?.productName)} style={{border:'1px solid #dddddd',textAlign:'center', cursor:'pointer'}}>{data?.barcode}</td>
                     { fullScr ?
                       ''
                       :

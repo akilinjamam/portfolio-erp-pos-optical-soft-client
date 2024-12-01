@@ -6,13 +6,12 @@ import useDeleteFinalAccountsData from "../../../../data/accountsData/useDeleteF
 
 const useProfitExpenseList = () => {
 
-    const [query, setQuery] = useState('');
-    const [range, setRange] = useState({
-        from: '',
-        to: '',
-    })
+    const [date, setDate] = useState('');
     
-    const {finalAccountsData, refetch, isLoading} = useGetFinalAccountsData()
+    const year = date?.split('-')?.[0]
+    const month = date?.split('-')?.[1]
+    
+    const {finalAccountsData, refetch, isLoading} = useGetFinalAccountsData(year, month)
     
     
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
@@ -75,7 +74,7 @@ const useProfitExpenseList = () => {
 
     useEffect(() => {
         refetch()
-    }, [refetch])
+    }, [refetch, date])
 
     const {mutate:deleteFinalAccounts} = useDeleteFinalAccountsData(refetch, setIdsForDelete, setSelectDeleted)
 
@@ -84,6 +83,6 @@ const useProfitExpenseList = () => {
         deleteFinalAccounts(idsForDelete)
     }
 
-    return { finalAccountsData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange}
+    return { finalAccountsData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, modifiedEmployeeDataWithIndexId,  selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, date, setDate}
 };
 export default useProfitExpenseList;

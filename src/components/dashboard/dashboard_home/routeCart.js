@@ -25,7 +25,7 @@ export const routeCarts = [
     },
     {
         value: 'Business Monitor',
-        link: '',
+        link: '/dashboard/business_monitor',
         icon: 'uil uil-graph-bar',
         color: 'rgb(243, 211, 209)'
     },

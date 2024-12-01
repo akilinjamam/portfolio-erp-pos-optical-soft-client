@@ -11,7 +11,7 @@ import ProfitExpenseListTable from "./ProfitExpenseListTable";
 import useProfitexpenseList from "./useProfitExpenseList";
 const ProfitExpenseList = () => {
     
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useProfitexpenseList()
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,date, setDate} = useProfitexpenseList()
     const employeeData = modifiedEmployeeDataWithIndexId
 
     const dispatch = useDispatch();
@@ -83,16 +83,11 @@ const ProfitExpenseList = () => {
                       dispatch(addEmployeeList(employeeData))
                     }}
                     title="print" className="uil uil-print"></i>
-                    <span>Total : {employeeData?.length} </span>
-                    <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                    <i onClick={() => setQuery('')}  className="uil uil-times"></i>
-                    <label htmlFor="">From: </label>
-                    <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.from}  type="number" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                    <label htmlFor="">To: </label>
-                    <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.to}  type="number" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    <i onClick={() => {
-                      setRange({from: '', to: ''})
-                    }}  className="uil uil-times"></i>
+
+                    <p style={{fontSize:'13px'}}>Total: {employeeData?.length}</p>
+                
+                    <input style={{padding:'0 2px'}} placeholder="Date" value={date}  type="month" name="" id="" onChange={(e) => setDate(e.target.value)}/>
+                   
                 </div>
                 }
                 

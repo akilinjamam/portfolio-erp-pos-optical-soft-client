@@ -38,7 +38,7 @@ const SalesRecord = () => {
 
     useEffect(() => {
         refetch()
-    },[refetch,handleQuery])
+    },[refetch,handleQuery, range])
 
     return (
         <div className={salesRecord.main}>
