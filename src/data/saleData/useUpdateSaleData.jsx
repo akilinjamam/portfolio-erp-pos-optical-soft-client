@@ -10,7 +10,7 @@ const useUpdateSaleData = (refetch) => {
         mutationFn: (data) => fetchUpdateSalesData(data.id, data.data),
         onSuccess: (data) => {
             if (data) {
-                refetch
+                refetch()
                 toast.success("Sales Updated Successfully")
             }
         },

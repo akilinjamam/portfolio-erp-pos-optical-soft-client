@@ -7,8 +7,6 @@ const useSaleData = (query, from , to) => {
     const saleData = getAllData
     
 
-    console.log(saleData);
-
     return { saleData, isLoading, error, refetch }
 };
 
