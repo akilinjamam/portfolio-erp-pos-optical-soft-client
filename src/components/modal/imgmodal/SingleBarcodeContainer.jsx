@@ -34,10 +34,7 @@ const SingleBarcodeContainer = ({open, type, barcode, dispatch, closeModal}) => 
                     <br />
                     <div  style={{ display: 'flex', flexWrap: 'wrap'}} ref={contentToPrint} className={`${imgmodal.SinglebarcodeContainer}`}>
                         <div style={{ textAlign:'center',}}>
-                            <br />
-                            <button style={{fontWeight:'bold', background:'none', border:'none'}}>{barcode?.productName}</button>
-                            <br />
-                            <Barcode width={1} height={30} value={barcode?.barcode}/>
+                            <Barcode format='CODE128'  fontSize="16px"  width={1.1} height={29} value={barcode?.barcode}/>
                         </div>
                     </div>
                 </section>

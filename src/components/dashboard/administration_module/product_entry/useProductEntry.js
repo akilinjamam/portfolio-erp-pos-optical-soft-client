@@ -89,7 +89,7 @@ const useProductEntry = () => {
 
         e.preventDefault();
         setShowData((prevData) => [...prevData, allData]);
-        setProductData(initialProductData)
+        // setProductData(initialProductData)
         setImgHolder('');
 
     }

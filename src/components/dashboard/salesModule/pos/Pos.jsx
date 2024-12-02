@@ -44,6 +44,11 @@ const Pos = () => {
     const dispatch = useDispatch();
     const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()
 
+    if(priceArray?.length > 0) {
+        if(quantityArray?.length === 0) {
+            setQuantityArray([1])
+        }
+    }
    
     const [barcodeId, setBarcodeId] = useState();
     const [isScanned, setIsScanned] = useState(false)
@@ -174,10 +179,7 @@ const Pos = () => {
         }
 
     },[setQuantityArray,setPriceArray, lock,])
-    console.log(finProduct?.recorderEmail)
-    console.log(finProduct?.recorderName)
-
-
+    
     const salesItem = {
         id: finProduct?._id,
         productName: finProduct?.productName,
@@ -271,6 +273,8 @@ const Pos = () => {
             barcode: finProduct?.barcode,
             inStock: Number(quantityArray.join('')) === Number(finProduct?.quantity) ? false : true
         }
+
+        console.log(quantityArray);
 
         const handleKeyDowns = (e) => {
 
