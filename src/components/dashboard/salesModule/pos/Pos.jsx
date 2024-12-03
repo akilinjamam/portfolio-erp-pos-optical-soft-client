@@ -423,7 +423,11 @@ const Pos = () => {
 
 
     return (
-       <div className={`${pos.main}`}>
+       <div onClick={() => {
+        setQuantity(false)
+        setPrice(false)
+        setIsScanned(false)
+       }} className={`${pos.main}`}>
          <div  className={`flex_around`}>
             <div className={`${pos.inputAreaOne} flex_center`}>
                 <div className={`${pos.container} flex_between`}>
@@ -475,21 +479,24 @@ const Pos = () => {
                     <div className={`${pos.calculationAndSubmit}`}>
                        <div className={`${pos.productCalculation} flex_between`}>
                             <div className={`${pos.priceQuantityCalculation}`}>
-                                <div onClick={() => {
+                                <div onClick={(e) => {
+                                    e.stopPropagation()
                                     setQuantity(true)
                                     setPrice(false)
                                     setIsScanned(false)
                                 }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
                                     Quantity
                                 </div>
-                                <div onClick={() => {
+                                <div onClick={(e) => {
+                                    e.stopPropagation()
                                     setPrice(true)
                                     setQuantity(false)
                                     setIsScanned(false)
                                 }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
                                     Price
                                 </div>
-                                <div onClick={() => {
+                                <div onClick={(e) => {
+                                    e.stopPropagation()
                                     setIsScanned(true)
                                     setPrice(false)
                                     setQuantity(false)

@@ -24,6 +24,9 @@ export const homeNavigator = [
             four: '/dashboard/sales_module/stock',
             five: '/dashboard/sales_module/sales_invoice',
             six: '/dashboard/sales_module/glass_stock',
+            seven: '/dashboard/sales_module/today_sales',
+            eight: '/dashboard/sales_module/today_due_collection',
+            nine: '/dashboard/sales_module/manual_sale',
         }
     },
     {

@@ -1,61 +1,66 @@
-import dueCollection from './DailyDueCollection.module.scss';
+import todaySales from './TodayDueCollection.module.scss';
 import { useDispatch } from "react-redux";
 import { addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useState } from "react";
 import Pagination from "../../pagination/Pagination";
 import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
-import DailyDueCollectionTable from "./DailyDueCollectionTable";
-import useGetDueCollectionSaleData from '../../../../data/saleData/useGetDueCollectionSaleData';
-// import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
-const DailyDueCollection = () => {
+
+import TodayDueCollectionTable from './TodayDueCollectionTable';
+import useGetDueCollectionSaleData from '../../../../data/saleData/useGetDueCollectionSaleData';
+
+const TodayDueCollection = () => {
 
     const dispatch = useDispatch();
    
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState('');
     
-    const {dueCollectionSaleData, isLoading, refetch} = useGetDueCollectionSaleData(date);
 
-    useEffect(() => {
-    
-        refetch()
-    },[refetch,date])
-   
+    const {dueCollectionSaleData, isLoading, refetch} = useGetDueCollectionSaleData(date);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
     const [paginatedIndex,setPaginatedIndex] = useState()
     
-    console.log(paginatedDataContainer?.length);
-    const total = dueCollectionSaleData?.result?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
-    const totalSalesValue = calculateTotalPrice(total)
-    const totalSalesItem = dueCollectionSaleData?.result?.length;
 
+    const total = dueCollectionSaleData?.result?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const totalPaid = calculateTotalPrice(dueCollectionSaleData?.result?.result?.map(sale => Number(sale?.advance)))
+    const totalDiscount = calculateTotalPrice(dueCollectionSaleData?.result?.result?.map(sale => Number(sale?.discount)))
+
+    const totalTodayPaid = calculateTotalPrice(dueCollectionSaleData?.result?.result?.map(sale => Number(sale?.todayPaid)))
+  
+    const totalSalesValue = calculateTotalPrice(total)
+    const totalSalesItem = dueCollectionSaleData?.result?.result?.length;
+    
+    
     useEffect(() => {
         const modified = dueCollectionSaleData?.result?.result?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
-    }, [dueCollectionSaleData])
+    }, [dueCollectionSaleData?.result])
+
+    useEffect(() => {
+        refetch()
+    },[refetch, date])
 
     return (
-        <div className={dueCollection.main}>
-            <div className={`${dueCollection.title} flex_left`}>
+        <div className={todaySales.main}>
+            <div className={`${todaySales.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('sales'))
                     dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
                 }} title="print" className="uil uil-print"></i>
-                <span>Total : {dueCollectionSaleData?.total}</span>
+                <span>Total : {dueCollectionSaleData?.result?.result?.length}</span>
                 
-                <label htmlFor="">Date: </label>
-                <input value={date} type="date" name="" id="" onChange={(e) => setDate(e.target.value)}/>
+                
+                <input value={date}  type="date" name="" id=""  onChange={(e) => setDate(e.target.value)}/>
                 <i onClick={() => {
                     setDate('')
                     setModifiedProductDataWithIndexId([])
-                    }} className="uil uil-times"></i>
-                
+                }} className="uil uil-times"></i>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <DailyDueCollectionTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={dueCollectionSaleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} />
+                <TodayDueCollectionTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} />
             </div>
             {
                 ((modifiedProductDataWithIndexId) )
@@ -66,4 +71,4 @@ const DailyDueCollection = () => {
     );
 };
 
-export default DailyDueCollection;
+export default TodayDueCollection;

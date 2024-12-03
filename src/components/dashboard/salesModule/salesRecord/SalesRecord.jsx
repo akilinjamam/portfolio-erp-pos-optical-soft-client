@@ -28,9 +28,13 @@ const SalesRecord = () => {
     
 
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const totalPaid = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.advance)))
+    const totalDiscount = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.discount)))
+  
     const totalSalesValue = calculateTotalPrice(total)
     const totalSalesItem = saleData?.result?.length;
-
+    
+    
     useEffect(() => {
         const modified = saleData?.result?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
@@ -60,7 +64,7 @@ const SalesRecord = () => {
                 <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <SalesRecordTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={saleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} />
+                <SalesRecordTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={saleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} />
             </div>
             {
                 !isLoading

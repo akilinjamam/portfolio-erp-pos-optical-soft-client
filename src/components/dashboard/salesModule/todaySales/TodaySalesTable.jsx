@@ -4,7 +4,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}) => {
+const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid}) => {
     
 
     if(isLoading){
@@ -28,7 +28,9 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sales Price</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment History</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Paid</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Today Paid</th>
                        
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Discount</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
@@ -53,7 +55,11 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                 {calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
                             </td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                                {sale?.paymentHistory}
+                            </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.advance}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.todayPaid}</td>
                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.discount}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(sale?.advance) - Number(sale?.discount)}</td>
@@ -73,10 +79,12 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sale Value({totalSalesItem})  :</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalPaid}</td>
-                    
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalTodayPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDiscount}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue -totalDiscount- totalPaid}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue - totalDiscount - totalTodayPaid}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                 </tr>
@@ -86,4 +94,4 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
     );
 };
 
-export default SalesRecordTable;
+export default TodaySalesTable;

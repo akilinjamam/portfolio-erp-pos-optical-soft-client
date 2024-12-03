@@ -6,10 +6,28 @@ export const salesCartRoute = [
         color: 'rgb(229, 243, 209)'
     },
     {
+        value: 'Manual Sale',
+        link: '/dashboard/sales_module/manual_sale',
+        icon: 'uil uil-coins',
+        color: 'rgb(129, 243, 309)'
+    },
+    {
         value: 'Sales Record',
         link: '/dashboard/sales_module/sales_record',
         icon: 'uil uil-file-info-alt',
         color: 'rgb(243, 231, 209)'
+    },
+    {
+        value: 'Today Sales',
+        link: '/dashboard/sales_module/today_sales',
+        icon: 'uil uil-clipboard-alt',
+        color: 'rgb(243, 231, 239)'
+    },
+    {
+        value: 'Today Due Collection',
+        link: '/dashboard/sales_module/today_due_collection',
+        icon: 'uil uil-money-withdrawal',
+        color: 'rgb(243, 231, 139)'
     },
     {
         value: 'Stock',
