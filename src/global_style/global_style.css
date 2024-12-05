@@ -26,6 +26,9 @@
 .btnColor_orange{
     background-color: orange;
 }
+.btnColor_green{
+    background-color: green;
+}
 .only_flex{
     display: flex;
 }

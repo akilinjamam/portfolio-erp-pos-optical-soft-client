@@ -5,8 +5,87 @@ import imgmodal from './ImgModal.module.scss';
 import customerContainer from './CustomerContainer.module.scss';
 import { calculateTotalPrice } from "../../calculation/calculateSum";
 import moment from "moment";
+import { useState } from "react";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
+
+    const glassTypeOption = [
+        {
+            name:'White',
+        },
+        {
+            name:'ARC',
+        },
+        {
+            name:'HMC',
+        },
+        {
+            name:'Blue Cut',
+        },
+        {
+            name:'Photo Chromic',
+        },
+        {
+            name:'Hmc Blue Cut',
+        },
+        {
+            name:'Photo Blue Cut',
+        },
+        {
+            name:'Elements',
+        },
+        {
+            name:'White Moon',
+        },
+        {
+            name:'MC Moon',
+        },
+        {
+            name:'Blue Cut Moon',
+        },
+        {
+            name:'Photo Moon',
+        },
+        {
+            name:'Photo Blue Cut Moon',
+        },
+        {
+            name:'White DEE',
+        },
+        {
+            name:'MC DEE',
+        },
+        {
+            name:'Blue Cut DEE',
+        },
+        {
+            name:'Photo DEE',
+        },
+        {
+            name:'White Progressive',
+        },
+        {
+            name:'MC Progressive',
+        },
+        {
+            name:'Blue Cut Progressive',
+        },
+        {
+            name:'Photo Progressive',
+        },
+        {
+            name:'Photo Blue Cut Progressive',
+        },
+        {
+            name:'HMC Blue Cut Progressive',
+        },
+        {
+            name:'AO Progressive',
+        },
+    ]
+
+
+    const [glassType, setGlassType] = useState('')
     const todayDate =  moment().format('YYYY-MM-DD');
     const {
         register,
@@ -57,6 +136,8 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             rightAxis: data?.rightAxis === '' ? undefined : data?.rightAxis,
             rightCyl: data?.rightCyl === '' ? undefined : data?.rightCyl,
             rightSph: data?.rightSph === '' ? undefined : data?.rightSph,
+            lense: data?.lense === '' ? undefined : data?.lense,
+            glassType:glassType,
             rightNear: data?.rightNear === '' ? undefined : data?.rightNear,
             deliveryDate: data?.deliveryDate === '' ? undefined : data?.deliveryDate,
             delivered:data?.delivered === '' ? undefined : data?.delivered,
@@ -119,6 +200,21 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <label htmlFor="">Sales By: <span style={{color:'red'}}>*</span> </label>
                                 <br />
                                 <input type="text" name="" id="" {...register('recorderName')} required/>
+                                <br />
+                                <br />
+                                <label htmlFor="">Lense: <span style={{color:'red'}}></span> </label>
+                                <br />
+                                <input type="text" name="" id="" {...register('lense')}/>
+                                <br />
+                                <br />
+                                <label htmlFor="">Glass Type: <span style={{color:'red'}}></span> </label>
+                                <br />
+                                <select name="" id="" onChange={(e) => setGlassType(e.target.value)}>
+                                    <option value="">select glass type</option>
+                                    {
+                                        glassTypeOption?.map((item, index) => <option key={index+1} value={item?.name}>{item?.name}</option> )
+                                    }
+                                </select>
                                 <br />
                                 <br />
                                 

@@ -7,7 +7,7 @@ export const salesCartRoute = [
     },
     {
         value: 'Manual Sale',
-        link: '/dashboard/sales_module/manual_sale',
+        link: '/dashboard/sales_module/manual_sales',
         icon: 'uil uil-coins',
         color: 'rgb(129, 243, 309)'
     },

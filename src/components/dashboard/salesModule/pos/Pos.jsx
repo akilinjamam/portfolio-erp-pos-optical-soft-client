@@ -44,17 +44,24 @@ const Pos = () => {
     const dispatch = useDispatch();
     const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()
 
-    if(priceArray?.length > 0) {
-        if(quantityArray?.length === 0) {
-            setQuantityArray([1])
-        }
-    }
+    
    
     const [barcodeId, setBarcodeId] = useState();
     const [isScanned, setIsScanned] = useState(false)
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
     const finProduct = allProducts?.find(f => f?.barcode === barcodeId)
+
+    // 1718116697332, 1718124380396, 1718116693575, 0380173306547
+    // const finProduct = allProducts?.find(f => f?.barcode === '1718116693575')
+
+    if(priceArray?.length > 0) {
+        if(quantityArray?.length === 0) {
+           if(!quantity){
+                setQuantityArray([1])
+           }
+        }
+    }
   
    
   useEffect(() => {
@@ -329,6 +336,9 @@ const Pos = () => {
                 todayPaid:customerInfo?.todayPaid === undefined ? '0' : customerInfo?.todayPaid,
                 paymentHistory:customerInfo?.paymentHistory === undefined ? '+0' : customerInfo?.paymentHistory,
                 paymentDate:customerInfo?.paymentDate,
+                lense: customerInfo?.lense === undefined ? 'blank' : customerInfo?.lense,
+                glassType: customerInfo?.glassType === undefined ? 'blank' : customerInfo?.glassType,
+                
                 
                 discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
                 leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
@@ -375,6 +385,9 @@ const Pos = () => {
                             todayPaid:customerInfo?.todayPaid === undefined ? '0' : customerInfo?.todayPaid,
                             paymentHistory:customerInfo?.paymentHistory === undefined ? '+0' : customerInfo?.paymentHistory,
                             paymentDate:customerInfo?.paymentDate,
+                            lense: customerInfo?.lense === undefined ? 'blank' : customerInfo?.lense,
+                            glassType: customerInfo?.glassType === undefined ? 'blank' : customerInfo?.glassType,
+                           
                            
                             discount:customerInfo?.discount === undefined ? '0' : customerInfo?.discount,
                             leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
@@ -423,7 +436,7 @@ const Pos = () => {
 
 
     return (
-       <div onClick={() => {
+       <div onDoubleClick={() => {
         setQuantity(false)
         setPrice(false)
         setIsScanned(false)
