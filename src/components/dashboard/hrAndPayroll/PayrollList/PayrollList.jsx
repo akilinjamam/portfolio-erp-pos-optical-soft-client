@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import payrollList from './PayrollList.module.scss';
-import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import { addPayrollList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 // import { useRef } from "react";
 // import { useReactToPrint } from "react-to-print";
 import usePayrollList from "./usePayrollList";
@@ -21,7 +21,7 @@ const PayrollList = () => {
              <div style={{display:'flex'}}  className={`flex_around`}>
                 <div className={`${payrollList.inputAreaOne} flex_center`}>
                   <div className={`${payrollList.container} `}>
-                        <div className={`${payrollList.titleName}`}>Employee Update</div>
+                        <div className={`${payrollList.titleName}`}>Payroll Update</div>
                         <div style={{width: '135px' }}  className={`${payrollList.border_remover} `}></div>
 
                       <form action="">
@@ -78,8 +78,8 @@ const PayrollList = () => {
                 <div className={`${payrollList.inputPart} flex_left`}>
                     <i
                     onClick={() => {
-                      dispatch(openModal('employee'))
-                      dispatch(addEmployeeList(payrollData))
+                      dispatch(openModal('payroll'))
+                      dispatch(addPayrollList(payrollData))
                     }}
                     title="print" className="uil uil-print"></i>
                     <span>Total : {payrollData?.length} </span>

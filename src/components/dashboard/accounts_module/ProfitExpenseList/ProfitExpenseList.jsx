@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 
 import employeeList from './ProfitExpenseList.module.scss';
-import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import {  addProfitExpenseData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 
 import { profitExpenseList } from "./profitExpenseListInput";
 
@@ -79,8 +79,8 @@ const ProfitExpenseList = () => {
                 <div className={`${employeeList.inputPart} flex_left`}>
                     <i
                     onClick={() => {
-                      dispatch(openModal('employee'))
-                      dispatch(addEmployeeList(employeeData))
+                      dispatch(openModal('profit-expense'))
+                      dispatch(addProfitExpenseData(employeeData))
                     }}
                     title="print" className="uil uil-print"></i>
 

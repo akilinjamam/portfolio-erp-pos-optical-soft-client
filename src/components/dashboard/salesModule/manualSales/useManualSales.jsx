@@ -172,6 +172,7 @@ const useManualSales = () => {
                 toast.error('please fill up all marked input fields from Customer Info')
                 return
             }
+            
             console.log(customerInfoData);
             mutate(customerInfoData)
 

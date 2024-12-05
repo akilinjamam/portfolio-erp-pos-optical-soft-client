@@ -6,7 +6,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid}) => {
     
-   
+   console.log(totalSalesValue - totalPaid - totalDiscount);
 
     if(isLoading){
         return (
@@ -63,7 +63,9 @@ const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoad
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.todayPaid}</td>
                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.discount}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(sale?.advance) - Number(sale?.discount)}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(sale?.advance) - Number(sale?.discount)}
+
+                            </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
@@ -84,7 +86,7 @@ const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoad
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalTodayPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDiscount}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue - totalDiscount - totalTodayPaid}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue - totalPaid - totalDiscount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>

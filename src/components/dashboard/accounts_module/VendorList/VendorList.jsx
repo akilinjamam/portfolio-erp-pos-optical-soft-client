@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import vendorList from './VendorList.module.scss';
-import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import {  addVendorList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import useVendorList from "./useVendorList";
 import { vendorInput } from "../AddVendor/addVendorInput";
 import VendorListTable from "./VendorlistTable";
@@ -9,7 +9,7 @@ import VendorListTable from "./VendorlistTable";
 
 const VendorList = () => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData} = useVendorList();
-    const payrollData = modifiedEmployeeDataWithIndexId
+    const vendorData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData =supplierData?.result;
 
@@ -77,11 +77,11 @@ const VendorList = () => {
                 <div className={`${vendorList.inputPart} flex_left`}>
                     <i
                     onClick={() => {
-                      dispatch(openModal('employee'))
-                      dispatch(addEmployeeList(payrollData))
+                      dispatch(openModal('vendor'))
+                      dispatch(addVendorList(vendorData))
                     }}
                     title="print" className="uil uil-print"></i>
-                    <span>Total : {payrollData?.length} </span>
+                    <span>Total : {vendorData?.length} </span>
                 
                     <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
                         <option value="">Select SupplierName</option>
@@ -99,12 +99,12 @@ const VendorList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${vendorList.tableArea}`}>
-              <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} />
+              <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={vendorData} />
           </section>
            {
             !isLoading
             &&
-            <Pagination showData={payrollData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
+            <Pagination showData={vendorData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
            }      
         </div>
     );

@@ -19,6 +19,12 @@ export const imgModalSlice = createSlice({
         totalSalesItem: 0,
         employeeData: [],
         supplierData: [],
+        payrollData: [],
+        vendorData: [],
+        expenseListData: [],
+        profitExpenseData: [],
+        options: {},
+        profitCalegoryAnalysisData: {}
     },
     reducers: {
         openModal: (state, action) => {
@@ -71,10 +77,25 @@ export const imgModalSlice = createSlice({
         addSupplierList: (state, action) => {
             state.supplierData = action.payload
         },
+        addPayrollList: (state, action) => {
+            state.payrollData = action.payload
+        },
+        addVendorList: (state, action) => {
+            state.vendorData = action.payload
+        },
+        addExpenseListData: (state, action) => {
+            state.expenseListData = action.payload
+        },
+        addProfitExpenseData: (state, action) => {
+            state.profitExpenseData = action.payload
+        },
+        addAnalysis: (state, action) => {
+            state.profitCalegoryAnalysisData = action.payload.data
+        },
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

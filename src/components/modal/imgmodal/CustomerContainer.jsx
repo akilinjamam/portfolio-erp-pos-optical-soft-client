@@ -144,7 +144,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             rightCyl: data?.rightCyl === '' ? undefined : data?.rightCyl,
             rightSph: data?.rightSph === '' ? undefined : data?.rightSph,
             lense: data?.lense === '' ? undefined : data?.lense,
-            glassType:glassType,
+            glassType:glassType === '' ? undefined : glassType,
             rightNear: data?.rightNear === '' ? undefined : data?.rightNear,
             deliveryDate: data?.deliveryDate === '' ? undefined : data?.deliveryDate,
             delivered:data?.delivered === '' ? undefined : data?.delivered,

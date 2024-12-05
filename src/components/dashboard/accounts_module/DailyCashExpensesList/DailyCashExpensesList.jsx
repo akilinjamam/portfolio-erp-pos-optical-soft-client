@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import cashList from './DailyCashExpensesList.module.scss';
-import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import {  addExpenseListData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import DailyCashExpensesTable from "./DailyCashExpensesTable";
 import useDailyCashExpensesList from "./useDailyCashExpensesList";
 import { accountListInput } from "./accountListInputs";
@@ -11,6 +11,7 @@ const DailyCashExpensesList = () => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, } = useDailyCashExpensesList();
     const accountsData = modifiedAccountsDataWithIndexId
 
+   
 
     const dispatch = useDispatch();
 
@@ -76,8 +77,8 @@ const DailyCashExpensesList = () => {
                 <div className={`${cashList.inputPart} flex_left`}>
                     <i
                     onClick={() => {
-                      dispatch(openModal('employee'))
-                      dispatch(addEmployeeList(accountsData))
+                      dispatch(openModal('expense'))
+                      dispatch(addExpenseListData(accountsData))
                     }}
                     title="print" className="uil uil-print"></i>
                     <span>Total : {accountsData?.length} </span>

@@ -3,9 +3,10 @@ import { useRef } from 'react';
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
-import TodayDueCollectionTable from '../../dashboard/salesModule/TodayDueCollection/TodayDueCollectionTable';
 
-const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
+import DailyDueCollectionTable from '../../dashboard/accounts_module/DueCollection/DailyDueCollectionTable';
+
+const DailyDueCollectionModal = ({open, type, dispatch, closeModal }) => {
 
    const saleData = useSelector(state => state.imgModal.salesData)
    const totalSalesValue = useSelector(state => state.imgModal.totalSalesValue)
@@ -13,7 +14,7 @@ const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
    const totalPaid = useSelector(state => state.imgModal.totalPaid)
    const totalDiscount = useSelector(state => state.imgModal.totalDiscount)
 
-   
+   console.log(totalDiscount);
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
         documentTitle: "Print This Document",
@@ -25,7 +26,7 @@ const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
     
 
     return (
-        <div className={`${imgmodal.main} flex_center  ${(open && type === 'today-due-collection' ) ? imgmodal.open : imgmodal.close}`} >
+        <div className={`${imgmodal.main} flex_center  ${(open && type === 'daily-due-collection' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container} ${imgmodal.sizeTodaySales}`}>
                     <div className={`${imgmodal.cancelBtn} flex_between`}>
                         <div>
@@ -41,11 +42,11 @@ const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                    <TodayDueCollectionTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount}/>
+                    <DailyDueCollectionTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount}/>
                     </div>        
                 </section>
         </div>
     );
 };
 
-export default TodayDueCollectionModal;
+export default DailyDueCollectionModal;

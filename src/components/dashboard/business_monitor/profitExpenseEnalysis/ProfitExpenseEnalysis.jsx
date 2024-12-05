@@ -1,66 +1,18 @@
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import profitExpenseEnalaysis from './ProfitExpenseEnalysis.module.scss';
-import {Bar} from 'react-chartjs-2';
-import {Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend} from 'chart.js'
+
+
 import useGetProfitExpenseAccountsData from '../../../../data/accountsData/useGetProfitExpenseAccountsData';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import ProfitExpenseAnalysisChart from './ProfitExpenseAnalysisChart';
+import { useDispatch } from 'react-redux';
+import { addAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 
 const ProfitExpenseEnalysis = () => {
     
     const {profitExpenseData, isLoading } = useGetProfitExpenseAccountsData();
 
-    const analysisData = profitExpenseData?.result
-    console.log(analysisData);
-    ChartJS.register(
-        CategoryScale,
-        LinearScale,
-        PointElement,
-        BarElement,
-        LineElement,
-        Title,
-        Tooltip,
-        Legend
-      );
-
-
-      const data = {
-        labels: ['Total Profit', 'Total Expenses'],
-        datasets: [
-          {
-            label: 'Profit Expense',
-            data: [analysisData?.totalProfit, analysisData?.totalExpenses],
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.7)', 
-                'rgba(255, 159, 64, 0.7)'
-            ],
-            fill: true,
-          },
-        ],
-      };
-
-      const options = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Profit vs Expense Analysis',
-            },
-        },
-    };
-
+    const dispatch = useDispatch();
 
     if(isLoading){
         return <CommonLoading/>
@@ -110,9 +62,11 @@ const ProfitExpenseEnalysis = () => {
           <section className={`${profitExpenseEnalaysis.navigationIcon} flex_between`}>
                 { 
                 <div className={`${profitExpenseEnalaysis.inputPart} flex_left`}>
-                    <i title="print" className="uil uil-print"></i>
-                    
-                   
+                    <i onClick={() => {
+                      dispatch(openModal('profit-expense-analysis'))
+                      dispatch(addAnalysis({data:profitExpenseData?.result}))
+                    }} title="print" className="uil uil-print"></i>
+                  
                 </div>
                 }
                 
@@ -122,7 +76,7 @@ const ProfitExpenseEnalysis = () => {
                 
           </section>
           <section style={{height: '62vh'}}  className={`${profitExpenseEnalaysis.tableArea}`}>
-              <Bar style={{width:'100%'}} data={data} options={options} />
+              <ProfitExpenseAnalysisChart style={{width:'100%'}} analysisData={profitExpenseData?.result} />
           </section>
              
         </div>
