@@ -6,8 +6,13 @@ import customerContainer from './CustomerContainer.module.scss';
 import { calculateTotalPrice } from "../../calculation/calculateSum";
 import moment from "moment";
 import { useState } from "react";
+import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
+
+    const {employeeData, isLoading} = useGetEmployeeData('', '', '');
+
+    console.log();
 
     const glassTypeOption = [
         {
@@ -85,7 +90,9 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
     ]
 
 
-    const [glassType, setGlassType] = useState('')
+    const [glassType, setGlassType] = useState('');
+    const [salesBy,setSalesBy] = useState('');
+    console.log(salesBy);
     const todayDate =  moment().format('YYYY-MM-DD');
     const {
         register,
@@ -141,7 +148,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             rightNear: data?.rightNear === '' ? undefined : data?.rightNear,
             deliveryDate: data?.deliveryDate === '' ? undefined : data?.deliveryDate,
             delivered:data?.delivered === '' ? undefined : data?.delivered,
-            recorderName: data?.recorderName === '' ? undefined : data?.recorderName,
+            recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
             comment:data?.comment === '' ? undefined : data?.comment,
 
@@ -199,7 +206,17 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                                 <label htmlFor="">Sales By: <span style={{color:'red'}}>*</span> </label>
                                 <br />
-                                <input type="text" name="" id="" {...register('recorderName')} required/>
+                                
+                                <select name="" id="" onChange={(e) => setSalesBy(e.target.value)} required>
+                                    <option value="">select employeeName</option>
+                                    { !isLoading
+                                        &&
+                                        employeeData?.result?.map((employee,index) => <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option> )
+                                    }
+                                    { isLoading &&
+                                        <option value="">Loading...</option>
+                                    }
+                                </select>
                                 <br />
                                 <br />
                                 <label htmlFor="">Lense: <span style={{color:'red'}}></span> </label>

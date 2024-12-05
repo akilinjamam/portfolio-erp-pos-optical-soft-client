@@ -23,7 +23,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Phone Number</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Address</th>
+                       
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
@@ -35,6 +35,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Status</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold By</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Invoice Number</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +45,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.indexId ? sale?.indexId : index+1}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.customerName}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.address}</td>
+                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.createdAt?.slice(0,10)}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.referredBy}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
@@ -60,12 +61,13 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.invoiceBarcode}</td>
                         </tr>
                     ))
                 }
                 
                 <tr style={{fontWeight:'bold'}}>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
@@ -79,6 +81,9 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue -totalDiscount- totalPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
+                    
                 </tr>
                 </tbody>
             </table>

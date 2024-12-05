@@ -21,7 +21,7 @@ const useManualSales = () => {
 
     const customerInfo = useSelector(state => state.imgModal.customerInfo);
 
-    
+    console.log(invoiceNumber);
     
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
@@ -45,13 +45,14 @@ const useManualSales = () => {
        
     }
     const [employeeData, setEmployeeData] = useState(initialEmployeeData);
-
+    const [customerInfoData, setCustomerInfoData] = useState({});
 
     useEffect(() => {
         dispatch(addSalesList(showData))
     },[showData, dispatch])
 
 
+   useEffect(() => {
     const customerData = {
         customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
         phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
@@ -81,6 +82,10 @@ const useManualSales = () => {
         lense: customerInfo?.lense === undefined ? 'blank' : customerInfo?.lense,
         glassType: customerInfo?.glassType === undefined ? 'blank' : customerInfo?.glassType,
     }
+
+    setCustomerInfoData(customerData)
+    
+   },[customerInfo])
 
     
     const findEmployee = showData.find((f, i) => (i + 1) === edit);
@@ -160,15 +165,15 @@ const useManualSales = () => {
     })
 
     const handlePost = async () => {
-
+        
         if (showData.length >= 1) {
 
-            if(customerData?.deliveryDate === 'blank' || customerData?.delivered === 'blank' || customerData?.recorderName === 'blank'  || customerData?.paymentMethod === 'blank'){
+            if(customerInfoData?.deliveryDate === 'blank' || customerInfoData?.delivered === 'blank' || customerInfoData?.recorderName === 'blank'  || customerInfoData?.paymentMethod === 'blank'){
                 toast.error('please fill up all marked input fields from Customer Info')
                 return
             }
-
-            mutate(customerData)
+            console.log(customerInfoData);
+            mutate(customerInfoData)
 
         }else{
             toast.error('please add to sales list first')

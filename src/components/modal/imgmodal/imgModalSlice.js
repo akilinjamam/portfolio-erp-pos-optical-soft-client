@@ -53,6 +53,8 @@ export const imgModalSlice = createSlice({
             state.salesData = action.payload.modifiedData;
             state.totalSalesValue = action.payload.totalSalesValue;
             state.totalSalesItem = action.payload.totalSalesItem;
+            state.totalPaid = action.payload.totalPaid;
+            state.totalDiscount = action.payload.totalDiscount;
         },
         customerList: (state, action) => {
             state.salesData = action.payload;

@@ -63,7 +63,7 @@ const SalesInvoice = () => {
     const {products, ...getCustomerInfo} = findSalesByInvoiceNumber || {};
     
 
-    const {mutate:updateDeliveryStatus} = useUpdateSaleData()
+    const {mutate:updateDeliveryStatus} = useUpdateSaleData(refetch)
 
     const updateDelivery = (status) => {
         const updateData = {

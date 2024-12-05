@@ -110,10 +110,10 @@ const AddExpenses = () => {
                           <p>Total Sales: {lastSaleAndAccountsData?.result?.totalSales  &&  lastSaleAndAccountsData?.result?.totalSales }</p>
                           <p>(+) Starting Cash Reserved: {lastSaleAndAccountsData?.result?.total  &&  (lastSaleAndAccountsData?.result?.beginingCashReserved === '0' ? (otherExpensesData?.startingCashReserved ? otherExpensesData?.startingCashReserved : 0 ) : lastSaleAndAccountsData?.result?.beginingCashReserved  )}</p>
                           <p>(+) Daily Due Collection Amount: {dueSales}</p>
-                          <p style={{marginBottom: '10px'}}>Total: {Number(conditionalTotalSales) + Number(dueSales)}</p>
+                          <p style={{marginBottom: '10px'}}>Total: {Number(conditionalTotalSales ? conditionalTotalSales : 0) + Number(dueSales ? dueSales : 0)}</p>
                           <hr />
                           <br />
-                          <p>Total Sales: {(Number(conditionalTotalSales) + Number(dueSales)) }</p>
+                          <p>Total Sales: {(Number(conditionalTotalSales ? conditionalTotalSales : 0) + Number(dueSales ? dueSales: 0)) }</p>
                           <p>(-)Total Expenses: {calculationOfTotalExpense}</p>
                           <p style={{marginBottom: '10px'}}>(-)Ending Cash Reserved: {otherExpensesData?.endingCashReserved ? otherExpensesData?.endingCashReserved : 0}</p>
                           <hr />

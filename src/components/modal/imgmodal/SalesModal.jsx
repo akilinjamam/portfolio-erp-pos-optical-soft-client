@@ -10,6 +10,10 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
    const saleData = useSelector(state => state.imgModal.salesData)
    const totalSalesValue = useSelector(state => state.imgModal.totalSalesValue)
    const totalSalesItem = useSelector(state => state.imgModal.totalSalesItem)
+   const totalPaid = useSelector(state => state.imgModal.totalPaid)
+   const totalDiscount = useSelector(state => state.imgModal.totalDiscount)
+
+   console.log(totalPaid);
 
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
@@ -36,7 +40,7 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                    <SalesRecordTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem}/>
+                    <SalesRecordTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount}/>
                     </div>        
                 </section>
         </div>

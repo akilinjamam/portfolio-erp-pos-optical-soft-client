@@ -49,7 +49,7 @@ const SalesRecord = () => {
             <div className={`${salesRecord.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {saleData?.total}</span>
                 <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
