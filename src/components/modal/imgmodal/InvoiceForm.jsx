@@ -12,14 +12,13 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
     const invoiceNumber = invoiceCalculation(saleData)
     const totalPriceArray = salesList?.map(item => (Number(item?.actualSalesPrice) * Number(item?.quantity)))
     const totalPriceValue = calculateTotalPrice(totalPriceArray)
-    console.log(totalPriceValue)
-
+  
     return (
-        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '20px', fontFamily: '"DM Sans", sans-serif', fontSize:'12px',}}>
+        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"DM Sans", sans-serif', fontSize:'10px'}}>
       
       {/* Header Section */}
       <div style={{ textAlign: 'center', borderBottom: '2px solid #000', paddingBottom: '10px' }}>
-        <div style={{display:'flex', width:'70%', margin:'auto'}}>
+        <div style={{display:'flex', width:'50%', margin:'auto'}}>
             <span style={{width:'100px', textAlign:'right', fontWeight:'bold', fontSize:'13px', padding:'0 4px'}}>New</span>
             <h2 style={{ margin: 'auto', position:'relative',textAlign:'left',width:"90%" }}> AL-ARAFAT OPTICAL</h2>
         </div>
@@ -31,14 +30,14 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       </div>
 
       {/* Invoice Details */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
         <div>
           <p><strong>Sold By:</strong> {getCustomerInfo?.recorderName}</p>
           <p><strong>Order Date:</strong> {moment().format("YYYY-MM-DD")} </p>
           <p><strong>Name:</strong> {getCustomerInfo?.customerName}</p>
           <p><strong>Delivery Date:</strong> {getCustomerInfo?.deliveryDate}</p>
           <p><strong>Delivery Status:</strong> {getCustomerInfo?.delivered}</p>
-          <br />
+         
           <p><strong>Lense:</strong> {getCustomerInfo?.lense}</p>
           <p><strong>Glass Types:</strong> {getCustomerInfo?.glassType}</p>
         </div>
@@ -53,27 +52,27 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
 
     
       {/* Eye Prescription Section */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
         <div style={{ width: '48%' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
             <thead>
               <tr>
-                <th colSpan="3" style={{ padding: '2px', textAlign: 'center' }}>Left Eye</th>
+                <th colSpan="3" style={{ padding: '2px', textAlign: 'center', fontSize:'10px' }}>Left Eye</th>
               </tr>
               <tr>
-                <th style={{ padding: '2px' }}>Sph.</th>
-                <th style={{ padding: '2px' }}>Cyl.</th>
-                <th style={{ padding: '2px' }}>Axis</th>
+                <th style={{ padding: '2px', fontSize:'10px' }}>Sph.</th>
+                <th style={{ padding: '2px', fontSize:'10px' }}>Cyl.</th>
+                <th style={{ padding: '2px', fontSize:'10px' }}>Axis</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{  height:'20px' }}>{getCustomerInfo?.leftCyl}</td>
-                <td style={{ height:'20px' }}>{getCustomerInfo?.leftCyl}</td>
-                <td style={{ height:'20px' }}>{getCustomerInfo?.leftAxis}</td>
+                <td style={{  height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftAxis}</td>
               </tr>
               <tr>
-                <td colSpan="3" style={{ padding: '2px' }}><strong>Near Add:</strong> {getCustomerInfo?.leftNear}</td>
+                <td colSpan="3" style={{ padding: '2px', fontSize:'10px' }}><strong>Near Add:</strong> {getCustomerInfo?.leftNear}</td>
               </tr>
             </tbody>
           </table>
@@ -82,22 +81,22 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
             <thead>
               <tr>
-                <th colSpan="3" style={{ padding: '2px', textAlign: 'center' }}>Right Eye</th>
+                <th colSpan="3" style={{ padding: '2px', textAlign: 'center', fontSize:'10px' }}>Right Eye</th>
               </tr>
               <tr>
-                <th style={{ padding: '2px', }}>Sph.</th>
-                <th style={{ padding: '2px' }}>Cyl.</th>
-                <th style={{ padding: '2px' }}>Axis</th>
+                <th style={{ padding: '2px', fontSize:'10px' }}>Sph.</th>
+                <th style={{ padding: '2px', fontSize:'10px' }}>Cyl.</th>
+                <th style={{ padding: '2px', fontSize:'10px' }}>Axis</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-              <td style={{ padding: '10px' }}>{getCustomerInfo?.rightSph}</td>
-                <td style={{ padding: '10px' }}>{getCustomerInfo?.rightCyl}</td>
-                <td style={{ padding: '10px' }}>{getCustomerInfo?.rightAxis}</td>
+              <td style={{ padding: '10px', fontSize:'10px' }}>{getCustomerInfo?.rightSph}</td>
+                <td style={{ padding: '10px', fontSize:'10px' }}>{getCustomerInfo?.rightCyl}</td>
+                <td style={{ padding: '10px', fontSize:'10px' }}>{getCustomerInfo?.rightAxis}</td>
               </tr>
               <tr>
-                <td colSpan="3" style={{ padding: '2px' }}><strong>Near Add:</strong> {getCustomerInfo?.rightNear}</td>
+                <td colSpan="3" style={{ padding: '2px', fontSize:'10px' }}><strong>Near Add:</strong> {getCustomerInfo?.rightNear}</td>
               </tr>
             </tbody>
           </table>
@@ -105,36 +104,36 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       </div>
 
       {/* Instruction Section */}
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: '5px' }}>
         <h3>Instruction</h3>
         <div style={{ border: '1px solid #000', padding: '10px', height: '50px' }}>{getCustomerInfo?.comment}</div>
       </div>
 
       {/* Total Section */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
         <table style={{ width: '35%', borderCollapse: 'collapse' }} border="1">
           <tbody>
             <tr>
-              <td style={{ padding: '2px', fontWeight:'bold'}}>SUBTOTAL</td>
-              <td style={{ padding: '2px' }}>{calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))}</td>
+              <td style={{ padding: '2px', fontWeight:'bold', fontSize:'10px'}}>SUBTOTAL</td>
+              <td style={{ padding: '2px', fontSize:'10px' }}>{calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))}</td>
             </tr>
             <tr>
-              <td style={{ padding: '2px',  fontWeight:'bold' }}>DISCOUNT</td>
-              <td style={{ padding: '2px' }}>{getCustomerInfo?.discount !== undefined ? getCustomerInfo?.discount : 0}</td>
+              <td style={{ padding: '2px', fontSize:'10px',  fontWeight:'bold' }}>DISCOUNT</td>
+              <td style={{ padding: '2px', fontSize:'10px' }}>{getCustomerInfo?.discount !== undefined ? getCustomerInfo?.discount : 0}</td>
             </tr>
             <tr>
-              <td style={{ padding: '2px', fontWeight:'bold' }}>PAID</td>
-              <td style={{ padding: '2px' }}>{getCustomerInfo?.advance !== undefined ? getCustomerInfo?.advance : 0}</td>
+              <td style={{ padding: '2px', fontSize:'10px', fontWeight:'bold' }}>PAID</td>
+              <td style={{ padding: '2px', fontSize:'10px' }}>{getCustomerInfo?.advance !== undefined ? getCustomerInfo?.advance : 0}</td>
             </tr>
             <tr>
-              <td style={{ padding: '2px', fontWeight:'bold' }}>TOTAL PAYABLE</td>
+              <td style={{ padding: '2px', fontSize:'10px', fontWeight:'bold' }}>TOTAL PAYABLE</td>
               <td style={{ padding: '2px' }}>{(calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))) - (getCustomerInfo?.discount !== undefined ? Number(getCustomerInfo?.discount) : 0) - (getCustomerInfo?.advance !== undefined ? Number(getCustomerInfo?.advance) : 0)}  </td>
             </tr>
           </tbody>
         </table>
 
         <div style={{width:'280px', display:'flex', alignItems:'center', justifyContent:'center'}}>
-        <Barcode width={1} height={60} value={getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode : `${moment().format("YYYYMMDD")}${invoiceNumber}`}/>
+        <Barcode format="CODE128" fontSize={15} width={1.2} height={30} value={getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode : `${moment().format("YYYYMMDD")}${invoiceNumber}`}/>
             {/* <p>{`${moment().format("YYYYMMDD")}${invoiceNumber}`}</p> */}
         </div>
       </div>
@@ -143,7 +142,7 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '10px' }}>
         <p>বিঃদ্রঃ ডেলিভারি বিকাল ৫ টার পর। ১৫ দিনের মধ্যে ডেলিভারি না নিলে পরে হারানো গেলে অথবা পুরানো জিনিস মেরামতের সময় নষ্ট হলে কোম্পানি দায়ী থাকবে না।</p>
       </div>
-      <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '12px', width:'100%', height:'30px', backgroundColor:'black', display:'flex', alignItems:'center', justifyContent:"space-between",color:'white', padding: '0 5px' }}>
+      <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '10px', width:'100%', height:'30px', backgroundColor:'black', display:'flex', alignItems:'center', justifyContent:"space-between",color:'white', padding: '0 5px' }}>
             <p>{copy}</p>
             <p>Any Complain: 01521-484359</p>
       </div>
