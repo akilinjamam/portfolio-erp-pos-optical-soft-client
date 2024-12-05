@@ -5,7 +5,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
 const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid}) => {
-    
+    console.log(totalSalesValue - totalPaid - totalDiscount);
 
     if(isLoading){
         return (

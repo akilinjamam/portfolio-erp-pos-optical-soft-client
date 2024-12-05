@@ -6,6 +6,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid}) => {
     
+   
 
     if(isLoading){
         return (

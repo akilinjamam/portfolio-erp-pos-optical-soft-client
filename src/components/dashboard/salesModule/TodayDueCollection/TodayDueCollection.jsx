@@ -47,8 +47,8 @@ const TodayDueCollection = () => {
         <div className={todaySales.main}>
             <div className={`${todaySales.title} flex_left`}>
                 <i onClick={() => {
-                    dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
+                    dispatch(openModal('today-due-collection'))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {dueCollectionSaleData?.result?.result?.length}</span>
                 

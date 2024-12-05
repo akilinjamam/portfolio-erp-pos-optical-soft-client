@@ -29,6 +29,12 @@ const DailyDueCollection = () => {
     
     console.log(paginatedDataContainer?.length);
     const total = dueCollectionSaleData?.result?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+
+    const totalDiscount = calculateTotalPrice(dueCollectionSaleData?.result?.result?.map(sale => Number(sale?.discount)))
+
+    const totalTodayPaid = calculateTotalPrice(dueCollectionSaleData?.result?.result?.map(sale => Number(sale?.todayPaid)))
+
+
     const totalSalesValue = calculateTotalPrice(total)
     const totalSalesItem = dueCollectionSaleData?.result?.length;
 
@@ -42,7 +48,7 @@ const DailyDueCollection = () => {
             <div className={`${dueCollection.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalDiscount, totalTodayPaid}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {dueCollectionSaleData?.total}</span>
                 

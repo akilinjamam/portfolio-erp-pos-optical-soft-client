@@ -28,6 +28,8 @@ const TodaySales = () => {
     const totalDiscount = calculateTotalPrice(lastSaleAndAccountsData?.result?.allSalesDetail?.map(sale => Number(sale?.discount)))
 
     const totalTodayPaid = calculateTotalPrice(lastSaleAndAccountsData?.result?.allSalesDetail?.map(sale => Number(sale?.todayPaid)))
+
+    
   
     const totalSalesValue = calculateTotalPrice(total)
     const totalSalesItem = lastSaleAndAccountsData?.result?.allSalesDetail?.length;
@@ -38,6 +40,7 @@ const TodaySales = () => {
         setModifiedProductDataWithIndexId(modified)
     }, [lastSaleAndAccountsData?.result])
 
+
     useEffect(() => {
         refetch()
     },[refetch, date])
@@ -46,8 +49,8 @@ const TodaySales = () => {
         <div className={todaySales.main}>
             <div className={`${todaySales.title} flex_left`}>
                 <i onClick={() => {
-                    dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem}))
+                    dispatch(openModal('today-sales'))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {lastSaleAndAccountsData?.result?.allSalesDetail?.length}</span>
                 
