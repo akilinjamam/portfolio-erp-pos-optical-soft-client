@@ -53,8 +53,8 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Sales Module</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'250px'}}>Administration Module</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'550px'}}>Hr & Payroll</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Accounts Module</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Business Monitor</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'550px'}}>Accounts Module</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'300px'}}>Business Monitor</th>
                        
                     </tr>
                 </thead>
