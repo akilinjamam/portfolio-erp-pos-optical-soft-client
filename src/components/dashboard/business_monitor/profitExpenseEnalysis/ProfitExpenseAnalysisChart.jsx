@@ -51,7 +51,7 @@ const ProfitExpenseAnalysisChart = ({analysisData}) => {
           },
           title: {
             display: true,
-            text: "Profit vs Expenses Analysis",
+            text: "Profit (excluding fixed cost) vs Expenses Analysis",
           },
           datalabels: {
             color: "black", 

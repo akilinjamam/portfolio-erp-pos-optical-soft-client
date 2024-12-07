@@ -43,19 +43,19 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
 
     return (
         <div style={{marginTop:'10px'}} >
-           <table style={{borderCollapse:'collapse' ,fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
+           <table style={{borderCollapse:'collapse' ,fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
                 <thead>
                     <tr>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:"200px"}}>User Name</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:"150px"}}>User Name</th>
                     
                          
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>User Email</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Sales Module</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Administration Module</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Hr & Payroll</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'500px'}}>Accounts Module</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'200px'}}>User Email</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Sales Module</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'250px'}}>Administration Module</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'550px'}}>Hr & Payroll</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Accounts Module</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Business Monitor</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Action</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -202,12 +202,18 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                             <span style={{marginLeft:'5px'}}>Profit Category <i className={`uil uil-${access?.profit_category_analysis ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
-                   <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', }}> <button onClick={handleUpdate} style={{outline:'none', border:'none', padding:'5px 10px', color:'white', fontWeight:'bold', cursor:'pointer'}} className='btnColor_green'>UPDATE</button> </td>
+                  
                                  
                     </tr>
                 }
                 </tbody>
            </table>
+           <div style={{padding:"10px 5px"}} className='flex_right'>
+                <div > 
+                    <button onClick={handleUpdate} style={{outline:'none', border:'none', padding:'5px 10px', color:'white', fontWeight:'bold', cursor:'pointer'}} className='btnColor_green'>UPDATE
+                    </button> 
+                </div>
+           </div>
         </div>
     );
 };

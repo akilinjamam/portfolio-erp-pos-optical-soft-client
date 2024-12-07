@@ -56,7 +56,7 @@ const ProfitCategoryAnalysisChart = ({analysisData}) => {
           },
           title: {
             display: true,
-            text: "Profit Category Analysis",
+            text: "Monthly Profit (excluding fixed cost) Category Analysis",
           },
           datalabels: {
             color: "black", 
