@@ -87,6 +87,15 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
         {
             name:'AO Progressive',
         },
+        {
+            name:'Hard Coat',
+        },
+        {
+            name:'Polycarbonate',
+        },
+        {
+            name:'Colour',
+        },
     ]
 
 
