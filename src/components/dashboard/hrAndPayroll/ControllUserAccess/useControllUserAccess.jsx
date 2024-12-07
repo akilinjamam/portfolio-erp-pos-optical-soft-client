@@ -33,6 +33,11 @@ const useControllUserAccess = (id) => {
         due_collection_list: false,
         add_fixed_expenses: false,
         expenses_profit_list: false,
+        manual_sales: false,
+        today_sales: false,
+        today_due_collection: false,
+        profit_expense_enalysis:false,
+        profit_category_analysis:false
     })
 
     const mutation = useMutation({

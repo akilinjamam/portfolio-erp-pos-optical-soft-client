@@ -31,6 +31,11 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             due_collection_list: paginatedDataContainer?.due_collection_list,
             add_fixed_expenses: paginatedDataContainer?.add_fixed_expenses,
             expenses_profit_list: paginatedDataContainer?.expenses_profit_list,
+            manual_sales: paginatedDataContainer?.manual_sales,
+            today_sales: paginatedDataContainer?.today_sales,
+            today_due_collection: paginatedDataContainer?.today_due_collection,
+            profit_expense_enalysis:paginatedDataContainer?.profit_expense_enalysis,
+            profit_category_analysis:paginatedDataContainer?.profit_category_analysis
 
         })
     },[paginatedDataContainer, setAccess])
@@ -48,7 +53,8 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Sales Module</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Administration Module</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Hr & Payroll</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Accounts Module</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'500px'}}>Accounts Module</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Business Monitor</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Action</th>
                     </tr>
                 </thead>
@@ -82,6 +88,18 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.sales_invoice} type="checkbox" name="" id="" onClick={() => setAccess({...access, sales_invoice: access?.sales_invoice ? false : true })} />
                             <span style={{marginLeft:'5px'}}>Sales Invoice <i className={`uil uil-${access?.sales_invoice ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.manual_sales} type="checkbox" name="" id="" onClick={() => setAccess({...access, manual_sales: access?.manual_sales ? false : true })} />
+                            <span style={{marginLeft:'5px'}}>Manual Sales <i className={`uil uil-${access?.manual_sales ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.today_sales} type="checkbox" name="" id="" onClick={() => setAccess({...access, today_sales: access?.today_sales ? false : true })} />
+                            <span style={{marginLeft:'5px'}}>Today Sales <i className={`uil uil-${access?.today_sales ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.today_due_collection} type="checkbox" name="" id="" onClick={() => setAccess({...access, today_due_collection: access?.today_due_collection ? false : true })} />
+                            <span style={{marginLeft:'5px'}}>Today Due Collection <i className={`uil uil-${access?.today_due_collection ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
@@ -170,6 +188,18 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.expenses_profit_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, expenses_profit_list: access?.expenses_profit_list ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Expenses Profit List <i className={`uil uil-${access?.expenses_profit_list ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                    </td>
+
+
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
+                        <div className='only_flex'>
+                            <input checked={access?.profit_expense_enalysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, profit_expense_enalysis: access?.profit_expense_enalysis ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Profit Expenses <i className={`uil uil-${access?.profit_expense_enalysis ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.profit_category_analysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, profit_category_analysis: access?.profit_category_analysis ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Profit Category <i className={`uil uil-${access?.profit_category_analysis ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', }}> <button onClick={handleUpdate} style={{outline:'none', border:'none', padding:'5px 10px', color:'white', fontWeight:'bold', cursor:'pointer'}} className='btnColor_green'>UPDATE</button> </td>
