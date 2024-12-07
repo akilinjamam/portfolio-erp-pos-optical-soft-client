@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import decodeJwt from "../../jwtDecoder/jwtDecoder";
 import useUserData from "../../data/userData/useUserData";
 import { toast } from "react-toastify";
+import layoutControll from './Layout.module.scss';
+import '../../global_style/global_style.css';
 
 const Layout = ({ children }) => {
 
@@ -71,8 +73,15 @@ const Layout = ({ children }) => {
     }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list, glass_stock, glass_list, payroll_list, add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales,  today_due_collection]);
 
     return (
-        <div>
-            {children}
+        <div className={`${layoutControll.main}`}>
+            <div className={`${layoutControll.container}`}>
+                {children}
+            </div>
+            <div className={`${layoutControll.displayWidthLimitControll}`}>
+                <div className="flex_center">
+                    <p>Screen Size must have to be more than 1242px</p>
+                </div>
+            </div>
         </div>
     );
 };

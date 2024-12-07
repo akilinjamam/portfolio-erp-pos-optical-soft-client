@@ -46,15 +46,30 @@ const ProfitExpenseAnalysisChart = ({analysisData}) => {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: {
-                position: 'top',
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Profit vs Expenses Analysis",
+          },
+          datalabels: {
+            color: "black", 
+            anchor: "end", 
+            align: "top",
+            font: {
+              weight: "bold",
+              size: 12,
             },
-            title: {
-                display: true,
-                text: 'Profit vs Expense Analysis',
-            },
+            formatter: (value) => value || "0", // Display "0" for empty values
+          },
         },
-    };
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      };
 
     return (
         <div style={{height: '62vh'}}>

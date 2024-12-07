@@ -10,6 +10,7 @@ import {Chart as ChartJS,
     Legend} from 'chart.js'
 
 import { Bar } from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
 const ProfitCategoryAnalysisChart = ({analysisData}) => {
 
@@ -22,7 +23,8 @@ const ProfitCategoryAnalysisChart = ({analysisData}) => {
         LineElement,
         Title,
         Tooltip,
-        Legend
+        Legend,
+        ChartDataLabels
       );
 
 
@@ -49,15 +51,30 @@ const ProfitCategoryAnalysisChart = ({analysisData}) => {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: {
-                position: 'top',
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Profit Category Analysis",
+          },
+          datalabels: {
+            color: "black", 
+            anchor: "end", 
+            align: "top",
+            font: {
+              weight: "bold",
+              size: 12,
             },
-            title: {
-                display: true,
-                text: 'Profit Category Analysis',
-            },
+            formatter: (value) => value || "0",
+          },
         },
-    };
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      };
 
     return (
         <div style={{height: '62vh'}}>

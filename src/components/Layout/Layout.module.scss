@@ -1,0 +1,33 @@
+@use '../../global_style/reusable_variables/index' as v;
+@media screen and  (max-width: 1242px) {
+    .main .container {
+        display: none;
+    }
+
+    .main .displayWidthLimitControll {
+        display: block;
+        background-color: v.$primary;
+        width: 100%;
+        height: 100vh;
+
+        div{
+            width: 100%;
+            height: 100vh;
+            p{
+                color: white;
+                font-family: v.$fs;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 1243px)  {
+    .main .container {
+        display: block;
+    }
+
+    .main .displayWidthLimitControll {
+        display: none;
+    }
+}
