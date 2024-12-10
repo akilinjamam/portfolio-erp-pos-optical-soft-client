@@ -67,7 +67,7 @@ const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
             </thead>
             <tbody>
               <tr>
-                <td style={{  height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftCyl}</td>
+                <td style={{  height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftSph}</td>
                 <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftCyl}</td>
                 <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftAxis}</td>
               </tr>
