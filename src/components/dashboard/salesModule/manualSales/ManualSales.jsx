@@ -9,7 +9,7 @@ import { useDispatch} from 'react-redux';
 import { openModal } from '../../../modal/imgmodal/imgModalSlice';
 
 const ManualSales = () => {
-  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, uploading, handlePost, category, setCategory} = useManualSales()
+  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, uploading, handlePost, category, setCategory, isPending} = useManualSales()
 
 
   
@@ -67,7 +67,7 @@ const ManualSales = () => {
                                   <button onClick={(e) => {
                                     e.preventDefault()
                                     handlePost()
-                                  }} className={`commonButton btnColor_green`}>ADD TO SALE</button>
+                                  }} className={`commonButton btnColor_green`}>{!isPending ? 'Loading....' : 'ADD TO SALE'}</button>
                                   }
                                   {
                                     edit
