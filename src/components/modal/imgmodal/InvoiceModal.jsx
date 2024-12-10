@@ -37,7 +37,7 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                         className="uil uil-times"></i>
                     </div>
                     <br />
-                    <div ref={contentToPrint} style={{width:'566px', margin:'auto'}}>
+                    <div ref={contentToPrint} style={{width:'500px', margin:'auto'}}>
                         <br />
                         <div style={{marginBottom:'10px'}}>
                             <InvoiceForm getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy'/>
