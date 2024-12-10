@@ -67,7 +67,7 @@ const ManualSales = () => {
                                   <button onClick={(e) => {
                                     e.preventDefault()
                                     handlePost()
-                                  }} className={`commonButton btnColor_green`}>{!isPending ? 'Loading....' : 'ADD TO SALE'}</button>
+                                  }} className={`commonButton btnColor_green`}>{isPending ? 'Loading....' : 'ADD TO SALE'}</button>
                                   }
                                   {
                                     edit
