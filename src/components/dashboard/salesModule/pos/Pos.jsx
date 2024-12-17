@@ -20,6 +20,7 @@ const Pos = () => {
     const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
     const {mutate, isPending} = useMutation({
         mutationFn: async (data) => {
+            console.log(data);
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {  
@@ -199,8 +200,6 @@ const Pos = () => {
         frameType: finProduct?.frameType,
         size: finProduct?.size,
         shape: finProduct?.shape,
-        recorderName:finProduct?.recorderName !== undefined ? finProduct?.recorderName : 'not-found',
-        recorderEmail:finProduct?.recorderEmai !== undefined ? finProduct?.recorderEmail : 'notfound@gmail.com',
         barcode: finProduct?.barcode,
         inStock: Number(quantityArray.join('')) === Number(finProduct?.quantity) ? false : true
     }
