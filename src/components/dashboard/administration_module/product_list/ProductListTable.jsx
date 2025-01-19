@@ -15,8 +15,8 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
     dispatch(openImg(img))
   }
 
-  const totalSales = showData?.map(data => Number(data?.salesPrice));
-  const totalPurchase = showData?.map(data => Number(data?.purchasePrice));
+  const totalSales = showData?.map(data => Number(data?.salesPrice) * Number(data?.quantity));
+  const totalPurchase = showData?.map(data => ( Number(data?.purchasePrice)) * (Number(data?.quantity)) );
   const totalQuantity = showData?.map(data => Number(data?.quantity));
   const totalSalesPrice = calculateTotalPrice(totalSales);
   const totalPurchasePrice = calculateTotalPrice(totalPurchase);

@@ -13,18 +13,21 @@ import useSaleData from '../../../../data/saleData/useSaleData';
 import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalculation';
 const Pos = () => {
     
+
     const {saleData} = useSaleData()
     
     const invoiceNumber = invoiceCalculation(saleData)
-
+    
+    
     const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
+    console.log(invoice);
     const {mutate, isPending} = useMutation({
         mutationFn: async (data) => {
             console.log(data);
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {  
-
+            
             console.log(data)
             if(data?.data?.success){
                 toast.success('product added to sale list')
