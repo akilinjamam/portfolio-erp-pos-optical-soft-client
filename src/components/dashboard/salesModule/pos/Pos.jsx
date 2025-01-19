@@ -51,6 +51,7 @@ const Pos = () => {
     
    
     const [barcodeId, setBarcodeId] = useState();
+    const [searchByBarcode, setSearchByBarcode] = useState(false);
     const [isScanned, setIsScanned] = useState(false)
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
@@ -167,11 +168,13 @@ const Pos = () => {
                     setQuantity(true)
                     setPrice(false)
                     setIsScanned(false)
+                    setSearchByBarcode(false)
                 }
                 if(e.key === 'p'){
                     setPrice(true)
                     setQuantity(false)
                     setIsScanned(false)
+                    setSearchByBarcode(false)
                 }
                 if(e.key === 's'){
                     setIsScanned(true)
@@ -179,6 +182,7 @@ const Pos = () => {
                     setQuantity(false)
                     setPriceArray([])
                     setQuantityArray([])
+                    setSearchByBarcode(false)
                 }
             }
         }
@@ -499,6 +503,7 @@ const Pos = () => {
                                     setQuantity(true)
                                     setPrice(false)
                                     setIsScanned(false)
+                                    setSearchByBarcode(false)
                                 }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
                                     Quantity
                                 </div>
@@ -507,6 +512,7 @@ const Pos = () => {
                                     setPrice(true)
                                     setQuantity(false)
                                     setIsScanned(false)
+                                    setSearchByBarcode(false)
                                 }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
                                     Price
                                 </div>
@@ -517,17 +523,21 @@ const Pos = () => {
                                     setQuantity(false)
                                     setPriceArray([])
                                     setQuantityArray([])
+                                    setSearchByBarcode(false)
                                 }} style={{border: `${isScanned ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.scanBtn} flex_center`}>
                                     Scan
                                 </div>
                             </div>
                             <div style={{backgroundColor: `${quantity ? 'orange': 'green'}`}} className={`${pos.numberCalculation}`}>
-                                {
+                                { !searchByBarcode
+                                    ?
                                     calculationValue.map((item, index) => {
                                         return (
                                         <div onClick={() => handleNumber(item)} key={index+1}><p>{item}</p></div>
                                     )
                                     })
+                                    :
+                                    <input placeholder='search by typing barcode' style={{height:'20px', border:'none', outline:'none', padding:'0 5px', borderRadius:'5px'}} type="number" name="" id="" onChange={(e) => setBarcodeId(e.target.value)}/>
                                 }
                             </div>
                        </div>
@@ -539,9 +549,10 @@ const Pos = () => {
                                 dispatch(openModal('invoice'))
                             }} className={`${pos.submitInvoice}`}>Print Invoice</button>
                        </div>
-                       <div className={`${pos.submitSale} flex_center`}>
+                       <div className={`${pos.submitSale} flex_between`}>
     
                             <button onClick={handleSale} className={`${pos.submitSaleAddSale}`}>{isPending ? 'Loading...': 'Add to Sale'}</button>
+                            <button onClick={() => setSearchByBarcode(!searchByBarcode) } title='search by barcode' className={`${pos.submitSale_switch} flex_center`}><i className="uil uil-search"></i></button>
                        </div>
                     </div>
                     

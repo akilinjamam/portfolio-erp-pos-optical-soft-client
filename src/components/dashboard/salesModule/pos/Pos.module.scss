@@ -151,8 +151,15 @@
                         }
                         .submitSaleAddSale{
                             background-color:v.$primary;
-                            width: 100%;
+                            width: 76.5%;
                             padding: 10px 29px;
+                        }
+                        .submitSale_switch{
+                            background-color:v.$primary;
+                            width: 20%;
+                            padding: 10px 29px;
+                            cursor: pointer;
+                            
                         }
                         .submitInvoice{
                             background-color:v.$primary;
