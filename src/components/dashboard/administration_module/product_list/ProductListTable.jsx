@@ -7,7 +7,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
  
 const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
 
-
+  
   const dispatch = useDispatch();
 
   const handleModal = (img) => {
@@ -18,27 +18,29 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
   const totalSales = showData?.map(data => Number(data?.salesPrice) * Number(data?.quantity));
   const totalPurchase = showData?.map(data => ( Number(data?.purchasePrice)) * (Number(data?.quantity)) );
   const totalQuantity = showData?.map(data => Number(data?.quantity));
-  const totalSalesPrice = calculateTotalPrice(totalSales);
+  const totalSalesPrice =  calculateTotalPrice(totalSales);
   const totalPurchasePrice = calculateTotalPrice(totalPurchase);
   const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
 
+
+  
   const data = fullScr ? showData : paginatedDataContainer
   
   const handleDelete = (id, e) => {
     
     setSelectDeleted(true)
-      if(e.target.checked){
-        setIdsForDelete((prevId) => [...prevId, id] )
-      }else{
-        const deleteId =idsForDelete?.filter(f => f !== id)
-        setIdsForDelete(deleteId)
-      }
+    if(e.target.checked){
+      setIdsForDelete((prevId) => [...prevId, id] )
+    }else{
+      const deleteId =idsForDelete?.filter(f => f !== id)
+      setIdsForDelete(deleteId)
     }
-
+  }
+  
   const handleAllDelete = () => {
     const allIds = showData?.map(all => all?._id)
     if(idsForDelete?.length === showData?.length){
-     setIdsForDelete([])
+      setIdsForDelete([])
     }else{
       setIdsForDelete(allIds)
     }
@@ -67,13 +69,13 @@ if(isLoading){
           <tr> 
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Total</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}> Sales =</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalSalesPrice}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalSalesPrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Purchase =</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalPurchasePrice}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalPurchasePrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Quantity =</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalAmountOfQuantity}</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit = </td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalSalesPrice - totalPurchasePrice}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalSalesPrice - totalPurchasePrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
