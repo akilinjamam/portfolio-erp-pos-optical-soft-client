@@ -1,6 +1,16 @@
+import { useState } from 'react';
 import useHome from '../home/useHome';
 import dashboardTitle from './DashboardTitleBar.module.scss';
+import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 const DashboardTitleBar = () => {
+
+    const getToken = localStorage.getItem('user');
+
+    const splitToken = getToken?.split(' ')[1];
+    const getUser = decodeJwt(splitToken);
+
+
+    const [view, setView] = useState(false);
     // const [date, setDate] = useState({
     //     day:'',
     //     monthDate: '',
@@ -50,8 +60,14 @@ const DashboardTitleBar = () => {
                      }
                      </div>
                     {/* <p>{date.day}, {date.monthDate}  {date.monthName} {date.year}, {date.hour > 12 ? (date.hour - 12): date.hour === 0 ? 12 : date.hour}:{date.minute + 1}:{date.second < 10 ? ('0'+date.second) : date.second}  {date.hour >= 12 ? 'PM' : 'AM' }</p>  */}
-                    <div onClick={handleLogOut} className={`${dashboardTitle.mappedRoute}`}>
-                        <p>LOGOUT</p>
+                    <div onClick={() => setView(!view)} className={`${dashboardTitle.mappedRoute}`}>
+                        <p><i style={{fontSize:"30px"}} className="uil uil-user-circle"></i></p>
+                        <div style={{display: `${view ? 'block': 'none'}`}} className={`${dashboardTitle.userDetails}`}>
+                            <h4>{getUser?.username}</h4>
+                            <hr />
+                            <br />
+                            <p onClick={handleLogOut}><i className="uil uil-sign-out-alt"></i> Logout</p>
+                        </div>
                     </div>
                 </div>
             </div>  

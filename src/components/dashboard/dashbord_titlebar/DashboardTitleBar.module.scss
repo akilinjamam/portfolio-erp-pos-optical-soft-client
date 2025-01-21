@@ -14,8 +14,26 @@
                 color: v.$white;
                 font-weight: bold;
                 font-size: 16px;
+                position: relative;
                 span, p{
                     cursor: pointer;
+                }
+                .userDetails{
+                    width: 200px;
+                    height: auto;
+                    background-color: v.$pest;
+                    position: absolute;
+                    top: 45px;
+                    right: -10px;
+                    z-index: 10;
+                    border-radius: 10px;
+                    padding: 5px;
+                    color: white;
+                    font-size: 15px;
+
+                    p{
+                        cursor: pointer;
+                    } 
                 }
             }
        }
