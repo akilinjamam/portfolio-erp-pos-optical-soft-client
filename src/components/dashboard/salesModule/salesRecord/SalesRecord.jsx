@@ -21,14 +21,16 @@ const SalesRecord = () => {
         to: ''
     })
 
-    const {saleData, isLoading, refetch} = useOneMonthSaleData(handleQuery, range.from, range.to);
+    const {saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, isLoading, refetch} = useOneMonthSaleData(handleQuery, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
     const [paginatedIndex,setPaginatedIndex] = useState()
     
-
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+
+    
+
     const totalPaid = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.advance)))
     const totalDiscount = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.discount)))
   
@@ -50,7 +52,7 @@ const SalesRecord = () => {
             <div className={`${salesRecord.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {saleData?.total}</span>
                 <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
@@ -65,7 +67,7 @@ const SalesRecord = () => {
                 <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <SalesRecordTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={saleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} />
+                <SalesRecordTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={saleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} />
             </div>
             {
                 !isLoading

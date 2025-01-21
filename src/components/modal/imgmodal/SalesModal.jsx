@@ -12,6 +12,10 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
    const totalSalesItem = useSelector(state => state.imgModal.totalSalesItem)
    const totalPaid = useSelector(state => state.imgModal.totalPaid)
    const totalDiscount = useSelector(state => state.imgModal.totalDiscount)
+   const totalCashValue = useSelector(state => state.imgModal.totalCash)
+    const totalBankValue = useSelector(state => state.imgModal.totalBank)
+    const totalBkashValue = useSelector(state => state.imgModal.totalBkash)
+    const totalNogodValue = useSelector(state => state.imgModal.totalNogod)
 
    
     const contentToPrint = useRef(null);
@@ -39,7 +43,7 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                    <SalesRecordTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount}/>
+                    <SalesRecordTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue}/>
                     </div>        
                 </section>
         </div>

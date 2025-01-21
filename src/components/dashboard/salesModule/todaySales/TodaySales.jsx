@@ -16,7 +16,7 @@ const TodaySales = () => {
     const [date, setDate] = useState('');
     
 
-    const {lastSaleAndAccountsData, isLoading, refetch} = useGetLastSalesAndAccountsData(date);
+    const {lastSaleAndAccountsData, totalBankValue, totalBkashValue, totalNogodValue, totalCashValue,isLoading, refetch} = useGetLastSalesAndAccountsData(date);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
@@ -50,7 +50,7 @@ const TodaySales = () => {
             <div className={`${todaySales.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('today-sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {lastSaleAndAccountsData?.result?.allSalesDetail?.length}</span>
                 
@@ -62,7 +62,7 @@ const TodaySales = () => {
                     }} className="uil uil-times"></i>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <TodaySalesTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} />
+                <TodaySalesTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue}/>
             </div>
             {
                 ((modifiedProductDataWithIndexId) )

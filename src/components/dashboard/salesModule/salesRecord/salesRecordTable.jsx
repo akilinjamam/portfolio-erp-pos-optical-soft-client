@@ -4,7 +4,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}) => {
+const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue}) => {
     
 
     if(isLoading){
@@ -17,8 +17,26 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
 
     return (
         <div ref={contentToPrint}>
-            <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px'}}>
                 <thead>
+                    <tr>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sales =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</th>
+                       
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBankValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bkash =</th>
+                       
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBkashValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                    </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>

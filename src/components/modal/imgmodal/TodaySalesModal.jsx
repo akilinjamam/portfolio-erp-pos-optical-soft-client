@@ -7,11 +7,16 @@ import TodaySalesTable from '../../dashboard/salesModule/todaySales/TodaySalesTa
 
 const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
 
-   const saleData = useSelector(state => state.imgModal.salesData)
-   const totalSalesValue = useSelector(state => state.imgModal.totalSalesValue)
-   const totalSalesItem = useSelector(state => state.imgModal.totalSalesItem)
-   const totalPaid = useSelector(state => state.imgModal.totalPaid)
-   const totalDiscount = useSelector(state => state.imgModal.totalDiscount)
+    const saleData = useSelector(state => state.imgModal.salesData)
+    const totalSalesValue = useSelector(state => state.imgModal.totalSalesValue)
+    const totalSalesItem = useSelector(state => state.imgModal.totalSalesItem)
+    const totalPaid = useSelector(state => state.imgModal.totalPaid)
+    const totalDiscount = useSelector(state => state.imgModal.totalDiscount)
+    const totalCashValue = useSelector(state => state.imgModal.totalCash)
+    const totalBankValue = useSelector(state => state.imgModal.totalBank)
+    const totalBkashValue = useSelector(state => state.imgModal.totalBkash)
+    const totalNogodValue = useSelector(state => state.imgModal.totalNogod)
+    
 
    console.log(totalDiscount);
     const contentToPrint = useRef(null);
@@ -24,7 +29,7 @@ const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
 
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'today-sales' ) ? imgmodal.open : imgmodal.close}`} >
-                <section className={`${imgmodal.container} ${imgmodal.sizeTodaySales}`}>
+                <section   className={`${imgmodal.container} ${imgmodal.sizeTodaySales}`}>
                     <div className={`${imgmodal.cancelBtn} flex_between`}>
                         <div>
                         <button>Total Today Sale Data : {saleData?.length} </button>
@@ -38,8 +43,10 @@ const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                    <TodaySalesTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount}/>
+                    <div style={{marginTop:'10px', overflowX:'hidden', height:"450px", scrollbarWidth:'none', minHeight:'auto'}}  className={`${imgmodal.stockContainer}`}>
+                        <div>
+                            <TodaySalesTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue}/>
+                        </div>
                     </div>        
                 </section>
         </div>

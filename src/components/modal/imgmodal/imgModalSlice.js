@@ -17,6 +17,10 @@ export const imgModalSlice = createSlice({
         salesListForSalesInvoice: [],
         totalSalesValue: 0,
         totalSalesItem: 0,
+        totalCash: 0,
+        totalBank: 0,
+        totalBkash: 0,
+        totalNogod: 0,
         employeeData: [],
         supplierData: [],
         payrollData: [],
@@ -61,6 +65,10 @@ export const imgModalSlice = createSlice({
             state.totalSalesItem = action.payload.totalSalesItem;
             state.totalPaid = action.payload.totalPaid;
             state.totalDiscount = action.payload.totalDiscount;
+            state.totalCash = action.payload.totalCash;
+            state.totalBank = action.payload.totalBank;
+            state.totalBkash = action.payload.totalBkash;
+            state.totalNogod = action.payload.totalNogod;
         },
         customerList: (state, action) => {
             state.salesData = action.payload;
