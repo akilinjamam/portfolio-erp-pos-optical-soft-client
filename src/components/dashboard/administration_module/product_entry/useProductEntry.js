@@ -62,7 +62,7 @@ const useProductEntry = () => {
 
     const editProduct = (e) => {
 
-        let modifiedData = { ...productData, barcode: newCode.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
+        let modifiedData = { ...productData, barcode: newCode?.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
 
         e.preventDefault();
         setEdit(false)

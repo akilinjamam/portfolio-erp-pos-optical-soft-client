@@ -1,21 +1,15 @@
 export const customCode = (purchasePrice) => {
 
-
-
-
-
-
-
     const date = new Date();
     const year = date.getFullYear()
-    const month = date.getMonth();
+    const month = date.getMonth() + 1;
     const monthDate = date.getDate();
     const ddmmyy = `${monthDate}-${month}-${year}`
 
     const zero = '00000'
     const remaininZero = zero?.slice(purchasePrice?.length);
     const time = date.getTime();
-    const modifiedTime = time?.toString()?.slice(0, 8)
+    const modifiedTime = time?.toString()?.slice(5, 13)
 
 
     const newBarcode = `${modifiedTime}${remaininZero}${purchasePrice ? purchasePrice : ''}`
