@@ -12,7 +12,7 @@ const PosListTable = ({listOfSalesItem, handleDeleteSale}) => {
    
 
     return (
-        <div style={{overflowX:'hidden', overflowY:'scroll', height:'700px'}}>
+        <div style={{overflowX:'hidden', overflowY:'scroll', height:'40vh'}}>
             <table >
           <thead>
               <tr>

@@ -34,5 +34,11 @@ export const administrationRoute = [
         link: '/dashboard/administration_module/supplier_list',
         icon: 'uil uil-file-exclamation-alt',
         color: 'rgb(213, 409, 257)'
+    },
+    {
+        value: 'Manage Sales',
+        link: '/dashboard/administration_module/supplier_list',
+        icon: 'uil uil-bill',
+        color: 'rgb(213, 409, 237)'
     }
 ]
