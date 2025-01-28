@@ -17,6 +17,7 @@ const SalesInvoicTable = ({data}) => {
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price)=Total Price per Customer</th>
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total</th>
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Paid</th>
+                    <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment History</th>
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Discount</th>
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
@@ -41,6 +42,7 @@ const SalesInvoicTable = ({data}) => {
                         {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
                     </td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.advance}</td>
+                    <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.paymentHistory}</td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
                         {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance) - Number(data?.discount)}
                     </td>

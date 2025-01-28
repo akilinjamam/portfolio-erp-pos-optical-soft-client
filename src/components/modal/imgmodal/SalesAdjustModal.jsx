@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import useUpdateSaleData from '../../../data/saleData/useUpdateSaleData';
 import useSaleData from '../../../data/saleData/useSaleData';
 import moment from 'moment';
+import useCancelAdjustmentSaleData from '../../../data/saleData/useCancelAdjustmentSaleData';
 
 const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, salesList}) => {
 
@@ -33,11 +34,16 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
      
 
       const {mutate:updateSaleData} = useUpdateSaleData(refetch)
+      const {mutate: cancelSalesAdjustment} = useCancelAdjustmentSaleData(refetch)
 
       useEffect(() => {
         refetch
       },[refetch])
-     
+      
+     const handleCancelAdjustment = (e) => {
+        e.preventDefault()
+        cancelSalesAdjustment(getCustomerInfo?._id)
+        }
 
       const handleUpdate = (e) => {
             e.preventDefault();
@@ -70,7 +76,7 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
             console.log(updatedData)
       }
     
-console.log(payable)
+
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'salesAdjust' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
@@ -126,6 +132,10 @@ console.log(payable)
                             &&
                             <input onClick={handleUpdate} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
                         }
+
+                        <button onClick={handleCancelAdjustment} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', marginLeft:'10px', border:'none', cursor:'pointer'}} >
+                            Cancel Adjustment
+                        </button>
                     </form>
                 </section>
             </div>

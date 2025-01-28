@@ -75,6 +75,15 @@ export const fetchUpdateSalesData = async (id, data) => {
         return error
     }
 }
+export const fetchCancelAdjustment = async (id) => {
+    try {
+        const result = await axios.patch(`${url}/sales/cancel-sales-adjustment/${id}`)
+        return result;
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
 
 
 

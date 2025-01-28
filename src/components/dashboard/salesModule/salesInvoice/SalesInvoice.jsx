@@ -74,7 +74,6 @@ const SalesInvoice = () => {
         }
         updateDeliveryStatus(updateData)
     }
-   console.log(deliveryStatus)
     
     return (
         <div className={`${salesInvoice.main}`} >
