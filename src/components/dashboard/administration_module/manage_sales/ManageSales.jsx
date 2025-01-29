@@ -10,8 +10,10 @@ import ManageSaleTable from "./ManageSalesTable";
 import { manageSaleUpdateInput } from "./manageSalesUpdateInput";
 
 const ManageSales = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange} = useManageSales()
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange, updatePaymentMethod, setUpdatePaymentMethod} = useManageSales()
     const supplierData = modifiedSupplierDataWithIndexId
+
+    console.log(updatePaymentMethod)
 
     const dispatch = useDispatch();
     return (
@@ -34,10 +36,21 @@ const ManageSales = () => {
                                             onChange={(e) => {setUdpateSupplierData({...updateSupplierData, [input.value]: e.target.value})}}
                                             required
                                         />
-                                    </div>
+                                      </div>
                                     )
                                   })
                                 }
+                                <div className={`${manageSaleList.inputFields} flex_between`}>
+                                    <label htmlFor="">Payment Method:</label>
+                                    <select value={updatePaymentMethod} onChange={(e) => setUpdatePaymentMethod(e.target.value)}>
+                                      <option value="">Select Payment Method</option>
+                                      <option value="Cash">Cash</option>
+                                      <option value="Bank">Bank</option>
+                                      <option value="Bkash">Bkash</option>
+                                      <option value="Nogod">Nogod</option>
+                                    </select>
+                                </div>
+
                               </div>
                               <div style={{width:'49%'}}>
                                 
@@ -51,6 +64,7 @@ const ManageSales = () => {
                                         {edit ? <button onClick={() => {
                                           setUdpateSupplierData(initialSupplierData)
                                           setEdit('')
+                                          setUpdatePaymentMethod('')
                                         }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}  
 
                                         { idsForDelete?.length > 0 ?  <button onClick={deleteProducts} style={{backgroundColor:'red', color:'white', border:'none', padding:'3px', borderRadius:'5px', width:'auto', cursor:'pointer'}} className="">DELETE {`(${idsForDelete?.length})`} </button> : '' }          

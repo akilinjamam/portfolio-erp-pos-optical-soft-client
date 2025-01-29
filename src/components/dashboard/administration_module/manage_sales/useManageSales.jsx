@@ -11,6 +11,8 @@ const useManageSales = () => {
         from: '',
         to: '',
     })
+
+    const [updatePaymentMethod, setUpdatePaymentMethod] = useState('');
     
     const {saleData, refetch, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue } = useOneMonthSaleData(query,range.from, range.to);
    
@@ -45,18 +47,26 @@ const useManageSales = () => {
         setUdpateSupplierData(findSupplierList || '')
     }, [findSupplierList])
 
-    const {mutate: editEmployeeData} = useUpdateSaleInfoData(refetch, setUdpateSupplierData, initialSupplierData, setEdit)
+    useEffect(() => {
+        setUpdatePaymentMethod(findSupplierList?.paymentMethod)
+    },[findSupplierList])
+
+    
+
+    const {mutate: editEmployeeData} = useUpdateSaleInfoData(refetch, setUdpateSupplierData, initialSupplierData, setEdit, setUpdatePaymentMethod)
 
     const editProduct = async (e) => {
         e.preventDefault()
-        
+       
         const updatedData = {
             customerName: updateSupplierData?.customerName,
             phoneNumber: updateSupplierData?.phoneNumber,
             referredBy: updateSupplierData?.referredBy,
             advance: updateSupplierData?.advance,
             discount: updateSupplierData?.discount,
-            recorderName: updateSupplierData?.recorderName
+            recorderName: updateSupplierData?.recorderName,
+            paymentHistory: updateSupplierData?.paymentHistory,
+            paymentMethod: updatePaymentMethod,
         }
 
         const finalUpdatedData = {
@@ -65,7 +75,7 @@ const useManageSales = () => {
         }
 
         editEmployeeData(finalUpdatedData)
-        console.log(updatedData)
+        console.log(updateSupplierData)
     }
     
 
@@ -87,6 +97,6 @@ const useManageSales = () => {
         deleteEmployees(idsForDelete)
     }
 
-    return { saleData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange,  totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue}
+    return { saleData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange,  totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue, updatePaymentMethod, setUpdatePaymentMethod}
 };
 export default useManageSales;

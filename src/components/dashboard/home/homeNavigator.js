@@ -1,5 +1,3 @@
-
-
 export const homeNavigator = [
     {
         route: '/dashboard',

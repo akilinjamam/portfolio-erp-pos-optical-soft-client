@@ -76,6 +76,7 @@ export const fetchUpdateSalesData = async (id, data) => {
     }
 }
 export const fetchUpdateSalesInfoData = async (id, data) => {
+    console.log(id);
     try {
         const result = await axios.patch(`${url}/sales/update-sales-info/${id}`, data)
         return result;

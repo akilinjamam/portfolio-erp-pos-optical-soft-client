@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { fetchUpdateSalesInfoData } from "../fetchedData/fetchSaleData";
 
 
-const useUpdateSaleInfoData = (refetch, setUdpateSupplierData, initialSupplierData, setEdit) => {
+const useUpdateSaleInfoData = (refetch, setUdpateSupplierData, initialSupplierData, setEdit,setUpdatePaymentMethod) => {
     const postAllData = useMutation({
         queryKey: ['fetchUpdateSalesInfo'],
         mutationFn: (data) => fetchUpdateSalesInfoData(data.id, data.data),
@@ -14,6 +14,7 @@ const useUpdateSaleInfoData = (refetch, setUdpateSupplierData, initialSupplierDa
                 toast.success("Sales info Updated Successfully")
                 setUdpateSupplierData(initialSupplierData)
                 setEdit('')
+                setUpdatePaymentMethod('')
             }
         },
         onError: (error) => {
