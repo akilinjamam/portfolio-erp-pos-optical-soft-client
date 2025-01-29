@@ -15,6 +15,12 @@ const useOneMonthSaleData = (query, from , to) => {
     
         const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
 
+        const totalPaid = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.advance)))
+        const totalDiscount = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.discount)))
+  
+   
+    const totalSalesItem = saleData?.result?.length;
+
         const totalCashSales = filterCashSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
 
         const totalBankSales = filterBankSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
@@ -29,7 +35,7 @@ const useOneMonthSaleData = (query, from , to) => {
         const totalNogodValue = calculateTotalPrice(totalNogodSales)
         const totalSalesValue = calculateTotalPrice(total)  
 
-    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue, isLoading, error, refetch }
+    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalDiscount, totalSalesItem, isLoading, error, refetch }
 };
 
 export default useOneMonthSaleData;

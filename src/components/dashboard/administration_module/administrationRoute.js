@@ -37,7 +37,7 @@ export const administrationRoute = [
     },
     {
         value: 'Manage Sales',
-        link: '/dashboard/administration_module/supplier_list',
+        link: '/dashboard/administration_module/manage_sales',
         icon: 'uil uil-bill',
         color: 'rgb(213, 409, 237)'
     }
