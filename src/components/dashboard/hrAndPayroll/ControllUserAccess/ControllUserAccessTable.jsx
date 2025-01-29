@@ -17,6 +17,7 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             customer_list: paginatedDataContainer?.customer_list,
             add_supplier: paginatedDataContainer?.add_supplier,
             supplier_list: paginatedDataContainer?.supplier_list,
+            manage_sales: paginatedDataContainer?.manage_sales,
             sales_invoice: paginatedDataContainer?.sales_invoice,
             controll_user_access: paginatedDataContainer?.controll_user_access,
             add_employee: paginatedDataContainer?.add_employee,
@@ -126,6 +127,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.supplier_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, supplier_list: access?.supplier_list ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Supplier List<i className={`uil uil-${access?.supplier_list ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.manage_sales} type="checkbox" name="" id="" onClick={() => setAccess({...access, manage_sales: access?.manage_sales ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Manage Sale<i className={`uil uil-${access?.manage_sales ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
 

@@ -20,6 +20,7 @@ const useControllUserAccess = (id) => {
         customer_list: false,
         add_supplier: false,
         supplier_list: false,
+        manage_sales: false,
         controll_user_access: false,
         add_employee: false,
         employee_list: false,
