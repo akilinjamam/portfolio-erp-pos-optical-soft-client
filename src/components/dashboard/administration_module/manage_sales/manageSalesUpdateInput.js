@@ -41,4 +41,25 @@ export const manageSaleUpdateInput = [
         name: 'recorderName',
         id: ''
     },
+    {
+        value: 'productName',
+        placeholder: 'Product Name',
+        type: 'text',
+        name: 'productName',
+        id: ''
+    },
+    {
+        value: 'quantity',
+        placeholder: 'Quantity',
+        type: 'number',
+        name: 'quantity',
+        id: ''
+    },
+    {
+        value: 'actualSalesPrice',
+        placeholder: 'Price',
+        type: 'number',
+        name: 'actualSalesPrice',
+        id: ''
+    },
 ]

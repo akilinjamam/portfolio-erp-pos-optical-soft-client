@@ -3,7 +3,9 @@ import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const ManageSaleTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const ManageSaleTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete,setUpdateProductData, productId, setProductId, setSaleId, selectProduct, setSelectProduct}) => {
+
+  console.log(productId);
 
   const data = paginatedDataContainer
   
@@ -25,6 +27,20 @@ const ManageSaleTable = ({paginatedDataContainer, isLoading, setEdit, edit, show
     }else{
       setIdsForDelete(allIds)
     }
+  }
+  
+  const handleProduct = (id, productid) => {
+
+    const findSales = data?.find(f => f?._id === id)?.products?.find(f => f?.id === productid);
+    const productInfo = {
+      productName: findSales?.productName,
+      quantity: findSales?.quantity,
+      actualSalesPrice: findSales?.actualSalesPrice
+    }
+    setSaleId(id)
+    setProductId(productid)
+    setUpdateProductData(productInfo)
+    console.log(productid)
   }
 
 if(isLoading){
@@ -74,7 +90,12 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.referredBy}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
-                                {data?.products?.map((item, index) => <p key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
+                                {data?.products?.map((item, index) => <p onClick={() => {
+                                  setProductId(item?._id)
+                                  setSelectProduct(item?._id)
+                                  handleProduct(data?._id,item?.id)
+
+                                }} style={{backgroundColor: `${selectProduct === item?._id ? 'lightgreen': ''}`, cursor:'pointer'}} key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
                             </td>
                         <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                             {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}

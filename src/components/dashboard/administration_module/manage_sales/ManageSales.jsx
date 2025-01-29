@@ -1,8 +1,5 @@
-
 import { useDispatch } from "react-redux";
-import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import Pagination from "../../pagination/Pagination";
-import { textInput } from "../add_supplier/supplierInput";
 import manageSaleList from './ManageSales.module.scss';
 import {addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import useManageSales from "./useManageSales";
@@ -10,11 +7,10 @@ import ManageSaleTable from "./ManageSalesTable";
 import { manageSaleUpdateInput } from "./manageSalesUpdateInput";
 
 const ManageSales = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange, updatePaymentMethod, setUpdatePaymentMethod} = useManageSales()
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData,  modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct} = useManageSales()
     const supplierData = modifiedSupplierDataWithIndexId
 
-    console.log(updatePaymentMethod)
-
+  
     const dispatch = useDispatch();
     return (
         <div  className={`${manageSaleList.main} full_width`}>
@@ -28,7 +24,7 @@ const ManageSales = () => {
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  manageSaleUpdateInput?.slice(0,8).map((input, index) => {
+                                  manageSaleUpdateInput?.slice(0,6).map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${manageSaleList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
@@ -75,38 +71,39 @@ const ManageSales = () => {
                 </div>
                 <div className={`${manageSaleList.inputAreaTwo} flex_center`}>
                   <div className={`${manageSaleList.container} `}>
-                        <div className={`${manageSaleList.titleName} flex_center`}>Update Image</div>
-                        <div style={{width: '120px'}} className={`${manageSaleList.border_remover}`}></div>
+                        <div className={`${manageSaleList.titleName} flex_center`}>Product Update</div>
+                        <div style={{width: '135px'}} className={`${manageSaleList.border_remover}`}></div>
                         <br />
                             <div className={`${manageSaleList.inputAreaTwoContainer}`}>
-                            {updateSupplierData?.img ? <img height={125} width={125} src={imgHolder ? imgHolder : updateSupplierData?.img} alt="" /> :  <i className="uil uil-image-upload"></i> }
-                                  {
-                                        textInput?.slice(3,4).map((input, index) => {
-                                          return (
-                                            <div key={index+1} className={`${manageSaleList.inputFields}`}>
-                                            
-                                              {
-                                                edit 
-                                                ?
-                                                <input className='custom-file-input'  type={input?.type} 
-                                                  onChange={(e) => {
-                                                    const img = e.target.files[0];
-                                                  updloadCloudinaryImage(img,setImgHolder,setUploading)
-                                                    
-                                                  }
-                                              }
-                                              />
-                                              :
-                                              ''
-                                              }
-                                          </div>
-                                          )
-                                        })
-                                  }
+                           
+                                  
+                            {
+                                  manageSaleUpdateInput?.slice(6,9).map((input, index) => {
+                                    return (
+                                      <div key={index+1} className={`${manageSaleList.productInputArea} flex_between`}>
+                                        <label htmlFor="">{input.placeholder}:</label>
+                                        <input value={updateProductData[input?.value]}    type={input.type} 
+                                            onChange={(e) => {setUpdateProductData({...updateProductData, [input.value]: e.target.value})}}
+                                            required
+                                        />
+                                      </div>
+                                    )
+                                  })
+                            }
 
-                                  <div className={`${manageSaleList.uploading}`}>
-                                      {uploading ? 'uploading...' : ''}
+                            <div className={`${manageSaleList.inputAreaTwo_footer} flex_right`}>
+                                  <div className={`${manageSaleList.inputAreaOne_footer_container} flex_around`}>                                            
+                                        {selectProduct ? <button onClick={handleUpdateProduct}  className={`commonButton btnColor_green`}>SAVE</button> : ''}
+
+                                        {selectProduct ? <button onClick={() => {
+                                          setUpdateProductData(initialProductData)
+                                          setSelectProduct('')
+                                        }}  className={`commonButton btnColor_red`}>CANCEL</button> : ''}  
+
+                                             
                                   </div>
+                          </div>
+                                  
                                   
                             </div>
                   </div>
@@ -139,7 +136,7 @@ const ManageSales = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${manageSaleList.tableArea}`}>
-              <ManageSaleTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} />
+              <ManageSaleTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} setUpdateProductData={setUpdateProductData} productId={productId} setProductId={setProductId} setSaleId={setSaleId} selectProduct={selectProduct} setSelectProduct={setSelectProduct} />
           </section>
            {
             !isLoading

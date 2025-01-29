@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 import useDeleteSupplierData from "../../../../data/supplierData/useDeleteSupplierData";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
 import useUpdateSaleInfoData from "../../../../data/saleData/useUpdateSalesInfoData";
+import useUpdateProductInfoData from "../../../../data/saleData/useUpdateProductInfoData";
 
 
 const useManageSales = () => {
-
+    const [selectProduct, setSelectProduct] = useState('');
+    const [saleId, setSaleId] = useState('')
+    const [productId, setProductId] = useState('')
     const [query, setQuery] = useState('');
     const [range, setRange] = useState({
         from: '',
         to: '',
     })
+
+    console.log(saleId, productId)
 
     const [updatePaymentMethod, setUpdatePaymentMethod] = useState('');
     
@@ -97,6 +102,33 @@ const useManageSales = () => {
         deleteEmployees(idsForDelete)
     }
 
-    return { saleData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange,  totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue, updatePaymentMethod, setUpdatePaymentMethod}
+    const initialProductData = {
+        productName: '',
+        quantity: '',
+        actualSalesPrice: ''
+      }
+    
+      const [updateProductData, setUpdateProductData] = useState(initialProductData);
+
+    const {mutate: updateProductInfo} = useUpdateProductInfoData(refetch, setUpdateProductData, initialProductData, setSelectProduct);
+
+    const handleUpdateProduct = (e) => {
+        e.preventDefault();
+
+        const updatedData = {
+            id: saleId,
+            data: {
+                ...updateProductData,
+                productId
+            }
+        }
+       
+        updateProductInfo(updatedData)
+    }
+
+
+
+
+    return { saleData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange,  totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct}
 };
 export default useManageSales;

@@ -56,6 +56,18 @@
                     
                 }
             }
+            .inputAreaTwo_footer{
+                width: 100%;
+                height: 20px;
+                margin-top: 65px;
+                .inputAreaOne_footer_container{
+                    min-width: 250px;
+                    max-width: auto;
+                    // background-color: red;
+                    height: 20px;
+                    
+                }
+            }
         }
         .inputAreaOne{
             width: 79%;
@@ -66,35 +78,13 @@
             .inputAreaTwoContainer{
                 width: 100%;
                 height: 100%;
-                i{
-                    font-size: 80px;
-                    color: rgb(167, 167, 167);
-                   
-                    position: absolute;
-                    top: 20%;
-                    left: 30%;
-            
-                }
-                input{
-                    position: absolute;
-                    top: 20%;
-                    left: 15%;
-                    opacity: 0;
-                }
-                img{
-                    
-                    display: block;
-                    margin: auto;
-                    border-radius: 10px;
-                }
-                .uploading{
-                    position: absolute;
-                    bottom: 13px;
-                    left: 36%;
-                    font-style: italic;
-                    font-size: 11px;
-                    font-weight: bold;
-                    color: green;
+                
+                .productInputArea{
+                    font-size: 13px;
+                    margin-bottom: 2px;
+                    input{
+                        width: 100px;
+                    }
                 }
             }
         }
@@ -158,5 +148,4 @@
     th {
         background-color: #f4f4f4;
     }
-
 }
