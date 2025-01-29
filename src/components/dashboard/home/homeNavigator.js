@@ -83,6 +83,7 @@ export const homeNavigator = [
             five: '/dashboard/administration_module/add_supplier',
             six: '/dashboard/administration_module/supplier_list',
             seven: '/dashboard/administration_module/glass_list',
+            eight: '/dashboard/administration_module/manage_sales',
         }
     },
     {
