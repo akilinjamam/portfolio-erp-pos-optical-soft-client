@@ -31,6 +31,7 @@ const useProductEntry = () => {
         purchasePrice: '',
         category: '',
         quantity: '',
+        stockAmount: '',
         barcode: '',
         material: 'blank',
         frameType: 'blank',
@@ -62,7 +63,7 @@ const useProductEntry = () => {
 
     const editProduct = (e) => {
 
-        let modifiedData = { ...productData, barcode: newCode?.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
+        let modifiedData = { ...productData, stockAmount: productData?.quantity, barcode: newCode?.generatedCode, img: imgHolder === '' ? 'not added' : imgHolder }
 
         e.preventDefault();
         setEdit(false)
@@ -76,6 +77,7 @@ const useProductEntry = () => {
     const handleSubmit = (e) => {
         const allData = {
             ...productData,
+            stockAmount: productData?.quantity,
             barcode: newCode.generatedCode,
             category,
             img: imgHolder === '' ? 'not added' : imgHolder,

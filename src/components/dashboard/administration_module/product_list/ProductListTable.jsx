@@ -63,7 +63,7 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+        <table style={{borderCollapse:'collapse', fontSize:'12px', margin:'auto', paddingBottom:'10px'}}>
           
           <thead>
           <tr> 
@@ -129,7 +129,13 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.purchasePrice}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.supplierName}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.collectorName}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.quantity}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+                      <div style={{textAlign:'left'}}>
+                          <p>Total: {data?.stockAmount}</p>
+                          <p> Stockout: {Number(data?.stockAmount) - Number(data?.quantity)}</p>
+                          <p>Available: {Number(data?.quantity)}</p>
+                      </div>
+                    </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.category}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.size}</td>

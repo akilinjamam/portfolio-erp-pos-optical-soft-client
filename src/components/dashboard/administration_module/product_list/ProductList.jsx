@@ -39,7 +39,7 @@ const ProductList = () => {
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  textInput?.slice(0,6).map((input, index) => {
+                                  textInput?.slice(0,7).map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${productList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>

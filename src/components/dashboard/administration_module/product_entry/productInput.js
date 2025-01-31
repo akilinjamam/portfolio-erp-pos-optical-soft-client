@@ -101,6 +101,13 @@ export const textInput = [
         id: ''
     },
     {
+        value: 'stockAmount',
+        placeholder: 'Stock Amount',
+        type: 'number',
+        name: 'stockAmount',
+        id: ''
+    },
+    {
         value: 'category',
         placeholder: 'Category',
         type: 'text',
