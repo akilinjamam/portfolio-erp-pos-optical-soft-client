@@ -10,9 +10,9 @@ import moment from 'moment';
 import useCancelAdjustmentSaleData from '../../../data/saleData/useCancelAdjustmentSaleData';
 
 const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, salesList}) => {
-
+        console.log(getCustomerInfo);
         const todayDate =  moment().format('YYYY-MM-DD');
-    
+        const [duePaymentMethod, setDuePaymentMethod] = useState('');
     
         const [payable, setPayable] = useState(0);
         const [discount, setDiscount] = useState(0);
@@ -31,6 +31,9 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
        
       }, [totalPriceValue, getCustomerInfo]);
 
+      useEffect(() => {
+        setDuePaymentMethod(getCustomerInfo?.duePaymentMethod)
+      },[getCustomerInfo])
      
 
       const {mutate:updateSaleData} = useUpdateSaleData(refetch)
@@ -63,7 +66,8 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                 discount: totalDiscount,
                 todayPaid: payable,
                 paymentHistory: `${getCustomerInfo?.paymentHistory}+${payable}`,
-                paymentDate: todayDate
+                paymentDate: todayDate,
+                duePaymentMethod
             }
 
             const updatedData = {
@@ -119,6 +123,17 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                                 type="number" 
                                 onChange={(e) => setDiscount(e.target.value)} 
                                 />
+                                <br /><br />
+                                <label htmlFor="">Due Payment Method</label>
+                                <br />
+                                <br />
+                                <select style={{width: '175px'}} value={duePaymentMethod} name="" id="" onChange={(e) => setDuePaymentMethod(e.target.value)}>
+                                    <option value="blank">Blank</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Bank">Bank</option>
+                                    <option value="Bkash">Bkash</option>
+                                    <option value="Nogod">Nogod</option>
+                                </select>
                                 
                             </div>
                             <div className={`${customerContainer.partTwo}`}>
