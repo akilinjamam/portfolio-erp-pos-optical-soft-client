@@ -68,7 +68,7 @@ const ProductEntry = () => {
                             >
                               <option value="">select category</option>
                               {
-                                textInput[6].options?.map((option, index) => (
+                                textInput[7].options?.map((option, index) => (
                                   <option key={index+1} value={option}>{option}</option>
                                 ))
                               }
