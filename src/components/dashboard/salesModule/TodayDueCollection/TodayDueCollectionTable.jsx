@@ -67,7 +67,7 @@ const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoad
 
                             </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.duePaymentMethod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
                         </tr>
                     ))
