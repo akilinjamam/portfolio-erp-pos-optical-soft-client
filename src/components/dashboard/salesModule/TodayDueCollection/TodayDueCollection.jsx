@@ -18,6 +18,11 @@ const TodayDueCollection = () => {
     
 
     const {dueCollectionSaleData, isLoading, refetch} = useGetDueCollectionSaleData(date);
+    const totalDueCollection = dueCollectionSaleData?.result?.totalPaidDueCollection;
+    const totalCashDueCollection = dueCollectionSaleData?.result?.dueCashPaidValue
+    const totalBankDueCollection = dueCollectionSaleData?.result?.dueBankPaidValue
+    const totalBkashDueCollection = dueCollectionSaleData?.result?.dueBkashPaidValue
+    const totalNogodDueCollection = dueCollectionSaleData?.result?.dueNogodPaidValue
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
@@ -60,7 +65,7 @@ const TodayDueCollection = () => {
                 }} className="uil uil-times"></i>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <TodayDueCollectionTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} />
+                <TodayDueCollectionTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalDueCollection={totalDueCollection} totalCashDueCollection={totalCashDueCollection} totalBankDueCollection={totalBankDueCollection} totalBkashDueCollection={totalBkashDueCollection} totalNogodDueCollection={totalNogodDueCollection}  />
             </div>
             {
                 ((modifiedProductDataWithIndexId) )

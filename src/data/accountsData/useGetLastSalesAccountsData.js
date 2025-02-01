@@ -19,12 +19,17 @@ const useGetLastSalesAndAccountsData = (date) => {
     const total = getAllData?.result?.allSalesDetail?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
 
     const totalCashSales = filterCashSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const totalCashPaid = filterCashSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
+
 
     const totalBankSales = filterBankSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const totalBankPaid = filterBankSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
 
     const totalBkashSales = filterBkashSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const totalBkashPaid = filterBkashSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
 
     const totalNogodSales = filterNogodSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const totalNogodPaid = filterBkashSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
 
     const totalCashValue = calculateTotalPrice(totalCashSales)
     const totalBankValue = calculateTotalPrice(totalBankSales)
@@ -32,8 +37,12 @@ const useGetLastSalesAndAccountsData = (date) => {
     const totalNogodValue = calculateTotalPrice(totalNogodSales)
     const totalSalesValue = calculateTotalPrice(total)
 
+    const totalCashPaidValue = calculateTotalPrice(totalCashPaid)
+    const totalBankPaidValue = calculateTotalPrice(totalBankPaid)
+    const totalBkashPaidValue = calculateTotalPrice(totalBkashPaid)
+    const totalNogodPaidValue = calculateTotalPrice(totalNogodPaid)
 
-    return { lastSaleAndAccountsData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue, isLoading, error, refetch }
+    return { lastSaleAndAccountsData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue, totalSalesValue, isLoading, error, refetch }
 };
 
 export default useGetLastSalesAndAccountsData;

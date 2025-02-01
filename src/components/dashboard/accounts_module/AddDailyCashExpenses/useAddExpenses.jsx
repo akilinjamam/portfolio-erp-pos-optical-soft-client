@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useGetLastSalesAndAccountsData from "../../../../data/accountsData/useGetLastSalesAccountsData";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 import usePostCreateAccounts from "../../../../data/accountsData/usePostCreateAccountsData";
 import useGetDueCollectionSaleData from "../../../../data/saleData/useGetDueCollectionSaleData";
+import useGetLastSaleForAddExpenses from "../../../../data/accountsData/useGetLastSaleForAddExpenses";
 
 const useAddExpenses = () => {
     
@@ -31,7 +31,7 @@ const useAddExpenses = () => {
     const [expensesData, setExpensesData] = useState(initialExpensesData);
     const [otherExpensesData, setOtherExpensesData] = useState(initialOtherExpensesData)
     
-    const {lastSaleAndAccountsData, refetch} = useGetLastSalesAndAccountsData(otherExpensesData.date);
+    const {lastSaleAndAccountsData, refetch} = useGetLastSaleForAddExpenses(otherExpensesData.date);
 
     const {dueCollectionSaleData, refetch:refetchDue} = useGetDueCollectionSaleData(otherExpensesData.date)
 
@@ -99,8 +99,8 @@ const useAddExpenses = () => {
 
     const {mutate:postAccountsData, isSuccess, isError} = usePostCreateAccounts(refetch)
 
-      const dueSales = dueCollectionSaleData?.result?.totalPaidDueCollection ? dueCollectionSaleData?.result?.totalPaidDueCollection : '0'
-        console.log(dueSales);
+    const dueSales = dueCollectionSaleData?.result?.dueCashPaidValue ? dueCollectionSaleData?.result?.dueCashPaidValue : '0'
+    
     const handlePost = async () => {
 
         if(!otherExpensesData?.date){
@@ -155,6 +155,7 @@ const useAddExpenses = () => {
             dueSalesAmount: dueSales,
             expenses: showData
         };
+        console.log(accountsData);
 
         postAccountsData(accountsData)
     }

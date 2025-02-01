@@ -4,9 +4,9 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid}) => {
+const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalDueCollection, totalCashDueCollection, totalBankDueCollection, totalBkashDueCollection, totalNogodDueCollection}) => {
     
-   console.log(totalSalesValue - totalPaid - totalDiscount);
+  
 
     if(isLoading){
         return (
@@ -20,6 +20,25 @@ const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoad
         <div ref={contentToPrint}>
             <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
                 <thead>
+                    <tr>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Paid</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDueCollection}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Cash =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashDueCollection}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBankDueCollection}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bkash =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBkashDueCollection}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodDueCollection}</th>
+                       
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Discount</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Status</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold By</th>
+                    </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>

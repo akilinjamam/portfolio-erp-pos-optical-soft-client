@@ -18,6 +18,24 @@ export const fetchGetLastSaleAndAccountsData = async (date) => {
         return error
     }
 }
+export const fetchGetLastSaleForAddExpenses = async (date) => {
+    try {
+        const token = localStorage.getItem('user')
+
+        const valueDate = date ? date : '';
+
+        const result = await axios.get(`${url}/accounts/get-today-sales-for-add-expenses?date=${valueDate}`, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return result?.data;
+    } catch (error) {
+        return error
+    }
+}
 export const fetchGetFinalAccountsData = async (year, month) => {
     try {
         const token = localStorage.getItem('user')

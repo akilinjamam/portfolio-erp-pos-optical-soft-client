@@ -4,7 +4,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue}) => {
+const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue}) => {
    
 
     if(isLoading){
@@ -30,7 +30,25 @@ const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, tot
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bkash =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBkashValue}</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodValue}</th>                       
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                    </tr>
+                    <tr>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Paid =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Cash Paid =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashPaidValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank Paid =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBankPaidValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bkash Paid =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBkashPaidValue}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod Paid =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodPaidValue}</th>
                        
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
@@ -78,7 +96,7 @@ const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, tot
                                 {sale?.paymentHistory}
                             </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.advance}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.todayPaid}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentHistory?.split('+')?.slice(1,2)}</td>
                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.discount}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(sale?.advance) - Number(sale?.discount)}</td>
@@ -100,7 +118,7 @@ const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, tot
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalPaid}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalTodayPaid}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDiscount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue - totalDiscount - totalTodayPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
