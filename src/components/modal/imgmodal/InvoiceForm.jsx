@@ -4,10 +4,15 @@ import { calculateTotalPrice } from "../../calculation/calculateSum";
 import useSalesRecord from "../../dashboard/salesModule/salesRecord/useSalesRecord";
 import Barcode from "react-barcode";
 import { invoiceCalculation } from "../../../invoiceCalculation/invoiceCalculation";
+import { useEffect } from "react";
 
 const InvoiceForm = ({getCustomerInfo, salesList, copy='Copy will be added'}) => {
 
-    const {saleData} = useSalesRecord();
+    const {saleData, refetch} = useSalesRecord();
+
+    useEffect(() => {
+      refetch()
+    },[refetch])
 
     const invoiceNumber = invoiceCalculation(saleData)
     const totalPriceArray = salesList?.map(item => (Number(item?.actualSalesPrice) * Number(item?.quantity)))

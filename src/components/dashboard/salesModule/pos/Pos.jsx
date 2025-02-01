@@ -11,6 +11,7 @@ import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
 import useSaleData from '../../../../data/saleData/useSaleData';
 import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalculation';
+import useSalesRecord from '../salesRecord/useSalesRecord';
 const Pos = () => {
     
 
@@ -18,6 +19,7 @@ const Pos = () => {
     
     const invoiceNumber = invoiceCalculation(saleData)
     
+    const {refetch} = useSalesRecord('', '', '')
     
     const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
     console.log(invoice);
@@ -27,7 +29,7 @@ const Pos = () => {
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {  
-            
+            refetch()
             console.log(data)
             if(data?.data?.success){
                 toast.success('product added to sale list')
