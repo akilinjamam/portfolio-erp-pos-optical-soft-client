@@ -40,7 +40,6 @@ const ProfitCategoryAnalysisChart = ({analysisData}) => {
                 'rgba(255, 159, 64, 0.7)', 
                 'rgba(153, 102, 255, 0.7)',
                 'rgba(253, 102, 255, 0.7)',
-                'rgba(753, 102, 255, 0.7)',
             ],
             fill: true,
           },
