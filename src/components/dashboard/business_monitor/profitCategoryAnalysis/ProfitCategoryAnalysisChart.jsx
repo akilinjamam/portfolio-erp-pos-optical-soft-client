@@ -29,11 +29,11 @@ const ProfitCategoryAnalysisChart = ({analysisData}) => {
 
 
       const data = {
-        labels: ['Cash', 'Bank', 'Bkash', 'Nogod', 'Rocket'],
+        labels: ['Cash', 'Bank', 'Bkash', 'Nogod'],
         datasets: [
           {
             label: 'Sales',
-            data: [analysisData?.cashProfit, analysisData?.bankProfit, analysisData?.bkashProfit, analysisData?.nogodProfit, analysisData?.rocketProfit ],
+            data: [analysisData?.cashProfit, analysisData?.bankProfit, analysisData?.bkashProfit, analysisData?.nogodProfit ],
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: [
                 'rgba(255, 99, 132, 0.7)', 
