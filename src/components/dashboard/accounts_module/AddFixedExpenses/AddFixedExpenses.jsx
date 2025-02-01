@@ -105,7 +105,7 @@ const AddFixedExpenses = () => {
                         <div style={{display: `${otherExpensesData?.date ? 'block' : 'none'}`}}>
                             
                         </div>
-                         <p>Cash+Bank+Bkash+Nogod+Rocket : {profitExpenseData?.result?.cashProfit}+{profitExpenseData?.result?.bankProfit}+{profitExpenseData?.result?.bkashProfit}+{profitExpenseData?.result?.nogodProfit}+{profitExpenseData?.result?.rocketProfit}</p>
+                         <p>Cash+Bank+Bkash+Nogod : {profitExpenseData?.result?.cashProfit}+{profitExpenseData?.result?.bankProfit}+{profitExpenseData?.result?.bkashProfit}+{profitExpenseData?.result?.nogodProfit}</p>
                          <br />           
                         <p>Profit : {profitExpenseData?.result?.totalProfit}</p>
                         <p style={{marginBottom:'3px'}}>(+) Extra Profit : </p>
