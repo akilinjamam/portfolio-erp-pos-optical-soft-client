@@ -11,6 +11,8 @@ const ProfitCategoryAnalysis = () => {
 
   const { profitExpenseData, isLoading } = useGetProfitExpenseAccountsData();
 
+  console.log(profitExpenseData);
+
   const analysisData = profitExpenseData?.result
 
   const dispatch = useDispatch();
