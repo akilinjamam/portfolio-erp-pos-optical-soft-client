@@ -56,15 +56,13 @@ const ProfitCategoryAnalysis = () => {
         <div className={`${profitCatAnalysis.inputAreaTwo} flex_center`}>
           <div className={`${profitCatAnalysis.container} `}>
             <div className={`${profitCatAnalysis.titleName} flex_center`}>Details</div>
-            <div style={{ width: '65px' }} className={`${profitCatAnalysis.border_remover}`}></div>
+              <div style={{ width: '65px' }} className={`${profitCatAnalysis.border_remover}`}></div>
             
-            <div className={`${profitCatAnalysis.inputAreaTwoContainer}`}>
-              <p>Cash Profit: {profitExpenseData?.result?.cashProfit}</p>
-              <p>Cash Profit: {profitExpenseData?.result?.bankProfit}</p>
-              <p>Cash Profit: {profitExpenseData?.result?.bkashProfit}</p>
-              <p>Cash Profit: {profitExpenseData?.result?.nogodProfit}</p>
-
-
+              <div className={`${profitCatAnalysis.inputAreaTwoContainer}`}>
+                  <p>Cash Profit: {profitExpenseData?.result?.cashProfit}</p>
+                  <p>Cash Profit: {profitExpenseData?.result?.bankProfit}</p>
+                  <p>Cash Profit: {profitExpenseData?.result?.bkashProfit}</p>
+                  <p>Cash Profit: {profitExpenseData?.result?.nogodProfit}</p>
               <div className={`${profitCatAnalysis.uploading}`}>
 
               </div>

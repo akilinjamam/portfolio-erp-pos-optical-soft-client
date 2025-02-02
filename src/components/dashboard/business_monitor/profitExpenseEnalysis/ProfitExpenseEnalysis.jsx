@@ -59,7 +59,10 @@ const ProfitExpenseEnalysis = () => {
                             <div className={`${profitExpenseEnalaysis.inputAreaTwoContainer}`}>   <br />
                                   <div>
                                       <p>Total Profit: {profitExpenseData?.result?.totalProfit}</p>
-                                      <p>Total Expenses: {profitExpenseData?.result?.totalExpenses}</p>
+                                      <p>Fixed Expenses: {profitExpenseData?.result?.fixedExpenses}</p>
+                                      <p>Payroll Expenses: {profitExpenseData?.result?.salaryExpenses}</p>
+                                      <p>Vendor Expenses: {profitExpenseData?.result?.vendorExpenses}</p>
+                                      <p>Total Expenses: {profitExpenseData?.result?.totalExpenses + profitExpenseData?.result?.fixedExpenses}</p>
                                   </div>
                                   
 
