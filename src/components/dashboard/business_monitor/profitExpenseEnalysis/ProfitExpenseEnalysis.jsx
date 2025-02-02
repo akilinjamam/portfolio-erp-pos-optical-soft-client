@@ -7,10 +7,18 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 import ProfitExpenseAnalysisChart from './ProfitExpenseAnalysisChart';
 import { useDispatch } from 'react-redux';
 import { addAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { useEffect, useState } from 'react';
 
 const ProfitExpenseEnalysis = () => {
-    
-    const {profitExpenseData, isLoading } = useGetProfitExpenseAccountsData();
+
+  const [month,setMonth] = useState('');
+  
+  const {profitExpenseData, isLoading, refetch } = useGetProfitExpenseAccountsData(month);
+  
+  console.log(profitExpenseData);
+    useEffect(() => {
+      refetch()
+    }, [month, refetch])
 
     const dispatch = useDispatch();
 
@@ -29,8 +37,9 @@ const ProfitExpenseEnalysis = () => {
                       <form action="">
                             <div className='flex_top'>
                               
-                              <div style={{width:'49%'}}>
-                                
+                              <div style={{width:'100%', fontSize:"13px",padding: '5px 0'}}>
+                                <label style={{marginRight:"10px"}} htmlFor="">Find by month:</label>
+                                <input style={{width:'200px'}} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
                               </div>
                             </div>
                       
@@ -46,9 +55,12 @@ const ProfitExpenseEnalysis = () => {
                   <div className={`${profitExpenseEnalaysis.container} `}>
                         <div className={`${profitExpenseEnalaysis.titleName} flex_center`}>Details</div>
                         <div style={{width: '65px'}} className={`${profitExpenseEnalaysis.border_remover}`}></div>
-                        <br />
-                            <div className={`${profitExpenseEnalaysis.inputAreaTwoContainer}`}>
-                           
+                        
+                            <div className={`${profitExpenseEnalaysis.inputAreaTwoContainer}`}>   <br />
+                                  <div>
+                                      <p>Total Profit: {profitExpenseData?.result?.totalProfit}</p>
+                                      <p>Total Expenses: {profitExpenseData?.result?.totalExpenses}</p>
+                                  </div>
                                   
 
                                   <div className={`${profitExpenseEnalaysis.uploading}`}>

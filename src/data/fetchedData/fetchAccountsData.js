@@ -56,10 +56,13 @@ export const fetchGetFinalAccountsData = async (year, month) => {
         return error
     }
 }
-export const fetchGetFinalProfitExpenseAccountsData = async () => {
+export const fetchGetFinalProfitExpenseAccountsData = async (month) => {
     try {
+
+        const valueMonth = month ? month : '';
+
         const token = localStorage.getItem('user')
-        const result = await axios.get(`${url}/accounts/get-accounts-monthly-profit-expenses`, {
+        const result = await axios.get(`${url}/accounts/get-accounts-monthly-profit-expenses?yearMonth=${valueMonth}`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",

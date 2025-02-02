@@ -6,14 +6,20 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 import ProfitCategoryAnalysisChart from './ProfitCategoryAnalysisChart';
 import { useDispatch } from 'react-redux';
 import { addAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { useEffect, useState } from 'react';
 
 const ProfitCategoryAnalysis = () => {
 
-  const { profitExpenseData, isLoading } = useGetProfitExpenseAccountsData();
+  const [month, setMonth] = useState();
+  const { profitExpenseData, isLoading, refetch } = useGetProfitExpenseAccountsData(month);
 
   console.log(profitExpenseData);
 
   const analysisData = profitExpenseData?.result
+
+  useEffect(() => {
+    refetch()
+  },[refetch, month])
 
   const dispatch = useDispatch();
 
@@ -33,8 +39,9 @@ const ProfitCategoryAnalysis = () => {
             <form action="">
               <div className='flex_top'>
 
-                <div style={{ width: '49%' }}>
-
+                <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
+                    <label style={{marginRight:'5px'}} htmlFor="">Find By Month: </label>
+                    <input style={{width:'200px'}} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)} />
                 </div>
               </div>
 
@@ -50,9 +57,12 @@ const ProfitCategoryAnalysis = () => {
           <div className={`${profitCatAnalysis.container} `}>
             <div className={`${profitCatAnalysis.titleName} flex_center`}>Details</div>
             <div style={{ width: '65px' }} className={`${profitCatAnalysis.border_remover}`}></div>
-            <br />
+            
             <div className={`${profitCatAnalysis.inputAreaTwoContainer}`}>
-
+              <p>Cash Profit: {profitExpenseData?.result?.cashProfit}</p>
+              <p>Cash Profit: {profitExpenseData?.result?.bankProfit}</p>
+              <p>Cash Profit: {profitExpenseData?.result?.bkashProfit}</p>
+              <p>Cash Profit: {profitExpenseData?.result?.nogodProfit}</p>
 
 
               <div className={`${profitCatAnalysis.uploading}`}>
