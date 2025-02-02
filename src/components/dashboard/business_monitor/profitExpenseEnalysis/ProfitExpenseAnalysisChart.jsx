@@ -14,7 +14,7 @@ import { Bar } from "react-chartjs-2";
 const ProfitExpenseAnalysisChart = ({analysisData}) => {
 
   const totalExp = analysisData?.totalExpenses + analysisData?.fixedExpenses;
-  const netProfit = analysisData?.cashProfit - (analysisData?.totalExpenses + analysisData?.fixedExpenses)
+  const netProfit = analysisData?.totalProfit - (analysisData?.totalExpenses + analysisData?.fixedExpenses)
 
     ChartJS.register(
         CategoryScale,
