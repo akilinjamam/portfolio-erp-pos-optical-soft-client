@@ -29,7 +29,7 @@ const useGetLastSalesAndAccountsData = (date) => {
     const totalBkashPaid = filterBkashSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
 
     const totalNogodSales = filterNogodSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
-    const totalNogodPaid = filterBkashSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
+    const totalNogodPaid = filterNogodSales?.flatMap(sale => Number(sale?.paymentHistory?.split('+')?.slice(1, 2)))
 
     const totalCashValue = calculateTotalPrice(totalCashSales)
     const totalBankValue = calculateTotalPrice(totalBankSales)
