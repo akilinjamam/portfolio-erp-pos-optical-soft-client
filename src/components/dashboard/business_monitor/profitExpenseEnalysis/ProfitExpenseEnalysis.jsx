@@ -56,13 +56,14 @@ const ProfitExpenseEnalysis = () => {
                         <div className={`${profitExpenseEnalaysis.titleName} flex_center`}>Details</div>
                         <div style={{width: '65px'}} className={`${profitExpenseEnalaysis.border_remover}`}></div>
                         
-                            <div className={`${profitExpenseEnalaysis.inputAreaTwoContainer}`}>   <br />
+                            <div className={`${profitExpenseEnalaysis.inputAreaTwoContainer}`}>   
                                   <div>
-                                      <p>Total Profit: {profitExpenseData?.result?.totalProfit}</p>
-                                      <p>Fixed Expenses: {profitExpenseData?.result?.fixedExpenses}</p>
-                                      <p>Payroll Expenses: {profitExpenseData?.result?.salaryExpenses}</p>
-                                      <p>Vendor Expenses: {profitExpenseData?.result?.vendorExpenses}</p>
-                                      <p>Total Expenses: {profitExpenseData?.result?.totalExpenses + profitExpenseData?.result?.fixedExpenses}</p>
+                                     
+                                      
+                                      <p>Gross Profit: {profitExpenseData?.result?.totalProfit}</p>
+                                      (-) Total Expenses: {profitExpenseData?.result?.totalExpenses + profitExpenseData?.result?.fixedExpenses}
+                                      <hr />
+                                      <p>(=) Net Profit: {profitExpenseData?.result?.totalProfit - (profitExpenseData?.result?.totalExpenses + profitExpenseData?.result?.fixedExpenses)}</p>
                                   </div>
                                   
 

@@ -13,7 +13,8 @@ import { Bar } from "react-chartjs-2";
 
 const ProfitExpenseAnalysisChart = ({analysisData}) => {
 
-  const totalExp = analysisData?.totalExpenses + analysisData?.fixedExpenses
+  const totalExp = analysisData?.totalExpenses + analysisData?.fixedExpenses;
+  const netProfit = analysisData?.cashProfit - (analysisData?.totalExpenses + analysisData?.fixedExpenses)
 
     ChartJS.register(
         CategoryScale,
@@ -28,15 +29,16 @@ const ProfitExpenseAnalysisChart = ({analysisData}) => {
 
 
       const data = {
-        labels: ['Total Profit', 'Total Expenses'],
+        labels: ['Total Profit', 'Total Expenses', 'Net Profit'],
         datasets: [
           {
             label: 'Profit Expense',
-            data: [analysisData?.totalProfit, totalExp],
+            data: [analysisData?.totalProfit, totalExp, netProfit],
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: [
                 'rgba(255, 99, 132, 0.7)', 
-                'rgba(255, 159, 64, 0.7)'
+                'rgba(255, 159, 64, 0.7)',
+                'rgba(117, 173, 247, 0.7)'
             ],
             fill: true,
           },
