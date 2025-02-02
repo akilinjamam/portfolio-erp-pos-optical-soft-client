@@ -60,7 +60,7 @@ const DailyCashExpensesList = () => {
                       </form>
                   </div>
                 </div>
-                <div className={`${cashList.inputAreaTwo} flex_center`}>
+                {/* <div className={`${cashList.inputAreaTwo} flex_center`}>
                   <div className={`${cashList.container} `}>
                         <div className={`${cashList.titleName} flex_center`}></div>
                         <div style={{width: '0'}} className={`${cashList.border_remover}`}></div>
@@ -70,7 +70,7 @@ const DailyCashExpensesList = () => {
                               
                             </div>
                   </div>
-                </div>
+                </div> */}
               </div>
           <section className={`${cashList.navigationIcon} flex_between`}>
                 { 

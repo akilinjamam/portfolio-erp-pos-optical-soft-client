@@ -27,6 +27,8 @@ const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edi
     }
   }
 
+  console.log(data);
+
 if(isLoading){
     return <CommonLoading/>
 }
@@ -42,6 +44,8 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Extra Profit</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Expense</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>vendor Expenses</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payroll Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th>
                  
@@ -65,7 +69,17 @@ if(isLoading){
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.extraProfit}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Expenses</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+                      {
+                        data?.expenses?.map((expense, index) => 
+                        <div key={index+1}>
+                            <p style={{textAlign:'left'}} >{index+1}. {expense?.expenseName} = {expense?.expenseAmount}</p>
+                        </div>
+                         )
+                      }
+                    </td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.vendorExpenses}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.payrollExpenses}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalExpense}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
                     
