@@ -1,7 +1,10 @@
 import CustomerList from "../components/dashboard/administration_module/customer_list/CustomerList"
 import EmployeeListReport from "../components/dashboard/report_module/employee_list/EmployeeListReport"
+import SupplierListReport from "../components/dashboard/report_module/supplier_list/SupplierListReport"
 import SalesRecord from "../components/dashboard/salesModule/salesRecord/SalesRecord"
 import Stock from "../components/dashboard/salesModule/stock/Stock"
+import TodayDueCollection from "../components/dashboard/salesModule/TodayDueCollection/TodayDueCollection"
+import TodaySales from "../components/dashboard/salesModule/todaySales/TodaySales"
 
 const reportModuleRoute = [
     {
@@ -18,11 +21,19 @@ const reportModuleRoute = [
       },
       {
         path:'supplier_list',
-        element: <SalesRecord/>
+        element: <SupplierListReport/>
       },
       {
         path:'stock',
         element: <Stock/>
+      },
+      {
+        path:'today_due_collection',
+        element: <TodayDueCollection/>
+      },
+      {
+        path:'today_sales',
+        element: <TodaySales/>
       },
 ]
 

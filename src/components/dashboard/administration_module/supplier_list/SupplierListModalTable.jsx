@@ -7,7 +7,6 @@ const SupplierListModalTable = ({paginatedDataContainer}) => {
   
     return (
         <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'98%'}}>
-          
           <thead>
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>

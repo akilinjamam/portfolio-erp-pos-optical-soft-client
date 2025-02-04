@@ -67,6 +67,8 @@ export const homeNavigator = [
             four: '/dashboard/report_module/employee_list',
             five: '/dashboard/report_module/supplier_list',
             six: '/dashboard/report_module/stock',
+            seven: '/dashboard/report_module/today_due_collection',
+            eight: '/dashboard/report_module/today_sales',
         }
     },
     {

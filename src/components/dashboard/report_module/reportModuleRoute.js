@@ -6,7 +6,7 @@ export const reportModuleRoute = [
         color: 'rgb(229, 243, 209)'
     },
     {
-        value: 'Sales_Record',
+        value: 'Sales Record',
         link: '/dashboard/report_module/sales_record',
         icon: 'uil uil-file-info-alt',
         color: 'rgb(243, 211, 209)'
@@ -28,5 +28,17 @@ export const reportModuleRoute = [
         link: '/dashboard/report_module/stock',
         icon: 'uil uil-receipt',
         color: 'rgb(243, 209, 237)'
-    }
+    },
+    {
+        value: 'Today Due Collection',
+        link: '/dashboard/report_module/today_due_collection',
+        icon: 'uil uil-money-withdrawal',
+        color: 'rgb(243, 239, 237)'
+    },
+    {
+        value: 'Today Sales',
+        link: '/dashboard/report_module/today_sales',
+        icon: 'uil uil-clipboard-notes',
+        color: 'rgb(213, 219, 227)'
+    },
 ]

@@ -97,27 +97,27 @@ const SupplierList = () => {
                   </div>
                 </div>
               </div>
-          <section className={`${supplierList.navigationIcon} flex_between`}>
-                { 
-                <div className={`${supplierList.inputPart} flex_left`}>
-                    <i
-                    onClick={() => {
-                      dispatch(openModal('supplier'))
-                      dispatch(addSupplierList(supplierData))
-                    }}
-                    title="print" className="uil uil-print"></i>
-                    <span>Total : {supplierData?.length} </span>
-                    <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                    <i onClick={() => setQuery('')}  className="uil uil-times"></i>
-                   
-                </div>
-                }
-                
-          </section>
-          <section className={`${supplierList.navigationIcon} only_flex`}>
-          
-                
-          </section>
+              <section className={`${supplierList.navigationIcon} flex_between`}>
+                    { 
+                    <div className={`${supplierList.inputPart} flex_left`}>
+                        <i
+                        onClick={() => {
+                          dispatch(openModal('supplier'))
+                          dispatch(addSupplierList(supplierData))
+                        }}
+                        title="print" className="uil uil-print"></i>
+                        <span>Total : {supplierData?.length} </span>
+                        <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
+                        <i onClick={() => setQuery('')}  className="uil uil-times"></i>
+                      
+                    </div>
+                    }
+                    
+              </section>
+              <section className={`${supplierList.navigationIcon} only_flex`}>
+              
+                    
+              </section>
           <section style={{height: '42vh'}}  className={`${supplierList.tableArea}`}>
               <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} />
           </section>
