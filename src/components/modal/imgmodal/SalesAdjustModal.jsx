@@ -128,7 +128,6 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                                 <br />
                                 <br />
                                 <select style={{width: '175px'}} value={duePaymentMethod} name="" id="" onChange={(e) => setDuePaymentMethod(e.target.value)}>
-                                    <option value="blank">Blank</option>
                                     <option value="Cash">Cash</option>
                                     <option value="Bank">Bank</option>
                                     <option value="Bkash">Bkash</option>

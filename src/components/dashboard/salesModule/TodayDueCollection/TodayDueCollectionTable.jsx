@@ -33,11 +33,11 @@ const TodayDueCollectionTable = ({contentToPrint, paginatedDataContainer, isLoad
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodDueCollection}</th>
                        
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Discount</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Status</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold By</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>

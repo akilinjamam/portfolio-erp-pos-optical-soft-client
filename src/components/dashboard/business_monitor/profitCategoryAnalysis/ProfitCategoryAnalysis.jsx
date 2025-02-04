@@ -60,9 +60,9 @@ const ProfitCategoryAnalysis = () => {
             
               <div className={`${profitCatAnalysis.inputAreaTwoContainer}`}>
                   <p>Cash Profit: {profitExpenseData?.result?.cashProfit}</p>
-                  <p>Bank Profit: {profitExpenseData?.result?.bankProfit}</p>
-                  <p>Bkash Profit: {profitExpenseData?.result?.bkashProfit}</p>
-                  <p>Nogod Profit: {profitExpenseData?.result?.nogodProfit}</p>
+                  <p>Bank Profit: {profitExpenseData?.result?.bankProfit + analysisData?.bankDueCollection}</p>
+                  <p>Bkash Profit: {profitExpenseData?.result?.bkashProfit + analysisData?.bkashDueCollection}</p>
+                  <p>Nogod Profit: {profitExpenseData?.result?.nogodProfit + analysisData?.nogodDueCollection}</p>
               <div className={`${profitCatAnalysis.uploading}`}>
 
               </div>
