@@ -58,8 +58,6 @@ const ProfitExpenseEnalysis = () => {
                         
                             <div className={`${profitExpenseEnalaysis.inputAreaTwoContainer}`}>   
                                   <div>
-                                     
-                                      
                                       <p>Gross Profit: {profitExpenseData?.result?.totalProfit}</p>
                                       (-) Total Expenses: {profitExpenseData?.result?.totalExpenses + profitExpenseData?.result?.fixedExpenses}
                                       <hr />
