@@ -16,12 +16,14 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
   }
 
   const totalSales = showData?.map(data => Number(data?.salesPrice) * Number(data?.quantity));
+  const totalStocks = showData?.map(data => Number(data?.stockAmount));
   const totalPurchase = showData?.map(data => ( Number(data?.purchasePrice)) * (Number(data?.quantity)) );
   const totalQuantity = showData?.map(data => Number(data?.quantity));
   const totalSalesPrice =  calculateTotalPrice(totalSales);
   const totalPurchasePrice = calculateTotalPrice(totalPurchase);
   const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
-
+  const totalStockAmount = calculateTotalPrice(totalStocks);
+  console.log(totalStockAmount)
 
   
   const data = fullScr ? showData : paginatedDataContainer
@@ -72,14 +74,14 @@ if(isLoading){
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalSalesPrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Purchase =</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalPurchasePrice) }</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Quantity =</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Available Quantity =</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalAmountOfQuantity}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Sold Quantity =</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalStockAmount - totalAmountOfQuantity}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Stock Amount = </td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalStockAmount}</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit = </td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalSalesPrice - totalPurchasePrice) }</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               {
