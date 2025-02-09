@@ -34,6 +34,9 @@ const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, show
 
   const saleAmount = data?.map(sale => Number(sale?.salesAmount));
   const calculatetSales = calculateTotalPrice(saleAmount)
+  const totalBankAmount = calculateTotalPrice(data?.map(bank => bank?.todayBankValue))
+  const totalBkashAmount = calculateTotalPrice(data?.map(bank => bank?.todayBkashValue))
+  const totalNogodAmount = calculateTotalPrice(data?.map(bank => bank?.todayNogodValue))
 
 
   const totalSaleAmount = data?.map(sale => Number(sale?.totalSalesAmount));
@@ -67,10 +70,31 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Ending Cash Reserved</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Deficit</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Bank</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Bkash</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Nogod</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>total</th>
                   <th>Action</th>
               </tr>
           </thead>
         <tbody>
+
+        <td></td>
+           <td>Total = {calculatetSales}</td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td>Total Expenses = {calculateAllExpenses}</td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td>Total Profit = {calculatetotalProfit}</td>
+           <td>{totalBankAmount}</td>
+           <td>{totalBkashAmount}</td>
+           <td>{totalNogodAmount}</td>
+           <td>{totalBankAmount + totalBkashAmount + totalNogodAmount + calculatetotalProfit}</td>
+           <td></td>
           
            {
             data?.map((data, index) => {
@@ -99,6 +123,10 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.endingCashReserved}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.deficit}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.todayBankValue}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.todayBkashValue}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.todayNogodValue}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.todayNogodValue + data?.todayBkashValue + data?.todayBankValue + Number(data?.profitAllocation)}</td>
                      <td  className={`flex_around`}>
                     
                         <i onClick={() => {
@@ -121,18 +149,7 @@ if(isLoading){
             } )
            }
 
-           <td></td>
-           <td>Total = {calculatetSales}</td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td>Total Expenses = {calculateAllExpenses}</td>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td>Total Profit = {calculatetotalProfit}</td>
-           <td></td>
+          
            
         </tbody>
       </table>

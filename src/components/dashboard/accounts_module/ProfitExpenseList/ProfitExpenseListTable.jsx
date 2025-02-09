@@ -47,8 +47,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payroll Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Vendor Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Expense</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th>
-                 
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th> 
                   <th>Action</th>
               </tr>
           </thead>

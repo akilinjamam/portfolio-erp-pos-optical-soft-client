@@ -5,6 +5,7 @@ import { calculateTotalPrice } from "../../../calculation/calculateSum";
 import usePostCreateAccounts from "../../../../data/accountsData/usePostCreateAccountsData";
 import useGetDueCollectionSaleData from "../../../../data/saleData/useGetDueCollectionSaleData";
 import useGetLastSaleForAddExpenses from "../../../../data/accountsData/useGetLastSaleForAddExpenses";
+import useGetLastSalesAndAccountsData from "../../../../data/accountsData/useGetLastSalesAccountsData";
 
 const useAddExpenses = () => {
     
@@ -32,17 +33,25 @@ const useAddExpenses = () => {
     const [otherExpensesData, setOtherExpensesData] = useState(initialOtherExpensesData)
     
     const {lastSaleAndAccountsData, refetch} = useGetLastSaleForAddExpenses(otherExpensesData.date);
-
+    const {totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue, refetch:refetchSale} = useGetLastSalesAndAccountsData(otherExpensesData.date)
     const {dueCollectionSaleData, refetch:refetchDue} = useGetDueCollectionSaleData(otherExpensesData.date)
-
-   
+    
+    
     useEffect(() => {
         refetch()
         refetchDue()
+        refetchSale()
         otherExpensesData.date
     },[otherExpensesData, refetch])
+    
+    
+    console.log(totalBankPaidValue + Number(dueCollectionSaleData?.result?.dueBankPaidValue), totalBkashPaidValue + Number(dueCollectionSaleData?.result?.dueBkashPaidValue), totalNogodPaidValue + Number(dueCollectionSaleData?.result?.dueNogodPaidValue))
+    console.log(Number(dueCollectionSaleData?.result?.dueBankPaidValue))
+    console.log(Number(dueCollectionSaleData?.result?.dueBkashPaidValue))
 
-
+    const todayBankValue = totalBankPaidValue + Number(dueCollectionSaleData?.result?.dueBankPaidValue)
+    const todayBkashValue = totalBkashPaidValue + Number(dueCollectionSaleData?.result?.dueBkashPaidValue)
+    const todayNogodValue = totalNogodPaidValue + Number(dueCollectionSaleData?.result?.dueNogodPaidValue)
 
     const findSupplier = showData.find((f, i) => (i + 1) === edit);
     useEffect(() => {
@@ -99,7 +108,8 @@ const useAddExpenses = () => {
 
     const {mutate:postAccountsData, isSuccess, isError} = usePostCreateAccounts(refetch)
 
-    const dueSales = dueCollectionSaleData?.result?.dueCashPaidValue ? dueCollectionSaleData?.result?.dueCashPaidValue : '0'
+    const dueSales = dueCollectionSaleData?.result?.dueCashPaidValue ? dueCollectionSaleData?.result?.dueCashPaidValue : '0';
+    
     
     const handlePost = async () => {
 
@@ -153,7 +163,10 @@ const useAddExpenses = () => {
             startingCashReserved: otherExpensesData?.startingCashReserved === '' ? '0' : otherExpensesData?.startingCashReserved,
             deficit: '0',
             dueSalesAmount: dueSales,
-            expenses: showData
+            expenses: showData,
+            todayBankValue,
+            todayBkashValue,
+            todayNogodValue
         };
         console.log(accountsData);
 
@@ -172,7 +185,7 @@ const useAddExpenses = () => {
         }
     },[isSuccess,isError])
 
-    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales }
+    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales, }
 };
 
 
