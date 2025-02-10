@@ -99,7 +99,7 @@ const DailyCashExpensesList = () => {
            {
             !isLoading
             &&
-            <Pagination showData={accountsData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
+            <Pagination showData={accountsData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={31}/>
            }      
         </div>
     );
