@@ -75,14 +75,16 @@ export const fetchGetFinalProfitExpenseAccountsData = async (month) => {
     }
 }
 
-export const fetchGetAccountsData = async (year, month) => {
+export const fetchGetAccountsData = async (year, month, date) => {
     try {
+        console.log(date)
         const token = localStorage.getItem('user')
 
         const valueYear = year ? year : '';
         const valueMonth = month ? month : '';
+        const valueDate = date ? date : '';
 
-        const result = await axios.get(`${url}/accounts/get-accounts-with-year-month?year=${valueYear}&month=${valueMonth}`, {
+        const result = await axios.get(`${url}/accounts/get-accounts-with-year-month?year=${valueYear}&month=${valueMonth}&fullDate=${valueDate}`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",

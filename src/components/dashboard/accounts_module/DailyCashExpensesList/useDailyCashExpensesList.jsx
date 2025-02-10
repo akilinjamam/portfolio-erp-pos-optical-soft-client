@@ -14,6 +14,7 @@ const useDailyCashExpensesList = () => {
     })
 
     const [month, setMonth] = useState('')
+    const [date, setDate] = useState('')
 
 
     const splitedMonthValue = month.split('-');
@@ -30,7 +31,7 @@ const useDailyCashExpensesList = () => {
 
    
 
-    const { accountsData, refetch: refetch } = useGetAccountsData(queryValues.year, queryValues.month)
+    const { accountsData, refetch: refetch } = useGetAccountsData(queryValues.year, queryValues.month, date)
     const allAccountsData = accountsData?.result
     
     console.log(accountsData?.result)
@@ -93,7 +94,7 @@ const useDailyCashExpensesList = () => {
 
     useEffect(() => {
         refetch()
-    }, [refetch, employeeId, queryValues?.employeeName, queryValues?.month, queryValues?.year])
+    }, [refetch, employeeId, queryValues?.employeeName, queryValues?.month, queryValues?.year, date])
 
     const { mutate: deleteAccounts } = useDeleteAccountsData(refetch, setIdsForDelete, setSelectDeleted)
 
@@ -102,6 +103,6 @@ const useDailyCashExpensesList = () => {
         deleteAccounts(idsForDelete)
     }
 
-    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId }
+    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId }
 };
 export default useDailyCashExpensesList;

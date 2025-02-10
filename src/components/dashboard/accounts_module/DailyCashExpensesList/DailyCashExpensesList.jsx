@@ -8,7 +8,7 @@ import { accountListInput } from "./accountListInputs";
 
 
 const DailyCashExpensesList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, } = useDailyCashExpensesList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setDate, } = useDailyCashExpensesList();
     const accountsData = modifiedAccountsDataWithIndexId
 
    
@@ -84,6 +84,7 @@ const DailyCashExpensesList = () => {
                     <span>Total : {accountsData?.length} </span>
                 
                     <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
+                    <input type="date" name="" id="" onChange={(e) => setDate(e.target.value)}/>
                 </div>
                 }
                 
