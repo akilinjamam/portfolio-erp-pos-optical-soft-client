@@ -95,7 +95,8 @@ if(isLoading){
                                   setSelectProduct(item?._id)
                                   handleProduct(data?._id,item?.id)
 
-                                }} style={{backgroundColor: `${selectProduct === item?._id ? 'lightgreen': ''}`, cursor:'pointer'}} key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
+                                }} style={{backgroundColor: `${selectProduct === item?._id ? 'lightgreen': ''}`, cursor:'pointer'}} key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )
+                                }
                             </td>
                         <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                             {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
@@ -106,7 +107,7 @@ if(isLoading){
                         <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.delivered}</td>
                         <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
                         <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.recorderName}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.recorderName}</td>
+                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.invoiceBarcode}</td>
                      <td  className={`flex_around`}>
                     
                         {/* <i onClick={() => {

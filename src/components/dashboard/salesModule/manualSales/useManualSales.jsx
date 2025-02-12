@@ -85,7 +85,7 @@ const useManualSales = () => {
 
     setCustomerInfoData(customerData)
     
-   },[customerInfo])
+   },[customerInfo, showData])
 
     
     const findEmployee = showData.find((f, i) => (i + 1) === edit);
@@ -172,8 +172,7 @@ const useManualSales = () => {
                 toast.error('please fill up all marked input fields from Customer Info')
                 return
             }
-            
-            console.log(customerInfoData);
+           
             mutate(customerInfoData)
 
         }else{
