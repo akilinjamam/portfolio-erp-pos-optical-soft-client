@@ -67,7 +67,7 @@ const useManualSales = () => {
         leftAxis:customerInfo?.leftAxis === undefined ? 'blank' : customerInfo?.leftAxis,
         leftCyl:customerInfo?.leftCyl === undefined ? 'blank' : customerInfo?.leftCyl,
         leftSph:customerInfo?.leftSph === undefined ? 'blank' : customerInfo?.leftSph,
-        leftNear:customerInfo?.lefNear === undefined ? 'blank' : customerInfo?.leftNear,
+        leftNear:customerInfo?.leftNear === undefined ? 'blank' : customerInfo?.leftNear,
         rightAxis:customerInfo?.rightAxis === undefined ? 'blank' : customerInfo?.rightAxis,
         rightCyl:customerInfo?.rightCyl === undefined ? 'blank' : customerInfo?.rightCyl,
         rightSph:customerInfo?.rightSph === undefined ? 'blank' : customerInfo?.rightSph,
@@ -87,7 +87,7 @@ const useManualSales = () => {
     
    },[customerInfo, showData])
 
-    
+   
     const findEmployee = showData.find((f, i) => (i + 1) === edit);
     useEffect(() => {
         if (findEmployee) {

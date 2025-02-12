@@ -12,8 +12,13 @@ const useOneMonthSaleData = (query, from , to) => {
         const filterBankSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Bank')
         const filterBkashSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Bkash')
         const filterNogodSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Nogod')
+
+        const filterCashSalesDue = saleData?.result?.filter(sale => sale?.duePaymentMethod === 'Cash')
+        const filterBankSalesDue = saleData?.result?.filter(sale => sale?.duePaymentMethod === 'Bank')
+        const filterBkashSalesDue = saleData?.result?.filter(sale => sale?.duePaymentMethod === 'Bkash')
+        const filterNogodSalesDue = saleData?.result?.filter(sale => sale?.duePaymentMethod === 'Nogod')
     
-        const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+        const total = saleData?.result?.map(sale => Number(sale?.advance))
 
         const totalPaid = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.advance)))
         const totalDiscount = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.discount)))
@@ -21,19 +26,41 @@ const useOneMonthSaleData = (query, from , to) => {
    
     const totalSalesItem = saleData?.result?.length;
 
-        const totalCashSales = filterCashSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+        const totalCashSales = filterCashSales?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(1,2)))
 
-        const totalBankSales = filterBankSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+        const totalBankSales = filterBankSales?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(1,2)))
 
-        const totalBkashSales = filterBkashSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+        const totalBkashSales = filterBkashSales?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(1,2)))
 
-        const totalNogodSales = filterNogodSales?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+        const totalNogodSales = filterNogodSales?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(1,2)))
+
+
+        const totalCashSalesDue = filterCashSalesDue?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(2,3)))
+
+        const totalBankSalesDue = filterBankSalesDue?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(2,3)))
+
+        const totalBkashSalesDue = filterBkashSalesDue?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(2,3)))
+
+        const totalNogodSalesDue = filterNogodSalesDue?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(2,3)))
         
-        const totalCashValue = calculateTotalPrice(totalCashSales)
-        const totalBankValue = calculateTotalPrice(totalBankSales)
-        const totalBkashValue = calculateTotalPrice(totalBkashSales)
-        const totalNogodValue = calculateTotalPrice(totalNogodSales)
-        const totalSalesValue = calculateTotalPrice(total)  
+        const totalCashValueSale = calculateTotalPrice(totalCashSales)
+        const totalBankValueSale = calculateTotalPrice(totalBankSales)
+        const totalBkashValueSale = calculateTotalPrice(totalBkashSales)
+        const totalNogodValueSale = calculateTotalPrice(totalNogodSales)
+        const totalSalesValue = calculateTotalPrice(total) 
+
+        const totalCashValueDue = calculateTotalPrice(totalCashSalesDue)
+        const totalBankValueDue = calculateTotalPrice(totalBankSalesDue)
+        const totalBkashValueDue = calculateTotalPrice(totalBkashSalesDue)
+        const totalNogodValueDue = calculateTotalPrice(totalNogodSalesDue)
+       
+        
+        const totalCashValue = totalCashValueSale + totalCashValueDue
+        const totalBankValue = totalBankValueSale + totalBankValueDue
+        const totalBkashValue = totalBkashValueSale + totalBkashValueDue
+        const totalNogodValue = totalNogodValueSale + totalNogodValueDue
+
+        console.log(totalCashValueDue)
 
     return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalDiscount, totalSalesItem, isLoading, error, refetch }
 };

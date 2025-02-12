@@ -72,12 +72,12 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                 {calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
                             </td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.advance}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentHistory} = {sale?.advance}</td>
                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.discount}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(sale?.advance) - Number(sale?.discount)}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}{sale?.duePaymentMethod === 'blank' ? '' : `, ${sale?.duePaymentMethod}`}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.invoiceBarcode}</td>
                         </tr>

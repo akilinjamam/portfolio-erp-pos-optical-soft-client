@@ -162,6 +162,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             comment:data?.comment === '' ? undefined : data?.comment,
 
         }
+        console.log(modifiedValue)
         dispatch(customerInfo(modifiedValue))
         toast.success('customer info added successfully')
         dispatch(closeModal())
