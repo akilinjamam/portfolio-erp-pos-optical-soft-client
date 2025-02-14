@@ -227,6 +227,9 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                         &&
                                         employeeData?.result?.map((employee,index) => <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option> )
                                     }
+                                    {
+                                        <option value="">Developer</option>
+                                    }
                                     { isLoading &&
                                         <option value="">Loading...</option>
                                     }
