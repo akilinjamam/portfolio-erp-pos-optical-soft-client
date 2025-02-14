@@ -124,6 +124,10 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             return
         }
 
+        if(Number(!data?.advance)){
+            toast.error(`please give advance amount`)
+            return
+        }
         if(Number(data?.advance) > totalPriceValue){
             toast.error(` advance can not be more than total sales price ${totalPriceValue}`)
             return
@@ -253,7 +257,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <input type="number" name="" id="" {...register('discount')}/>
                                 <br />
                                 <br />
-                                <label htmlFor="">advance: </label>
+                                <label htmlFor="">advance:<span style={{color:'red'}}>*</span></label>
                                 <br />
                                 <input type="number" name="" id="" {...register('advance')}/>
                                 <br />

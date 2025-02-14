@@ -38,7 +38,7 @@ export const reportModuleRoute = [
     {
         value: 'Today Sales',
         link: '/dashboard/report_module/today_sales',
-        icon: '',
+        icon: 'uil uil-clipboard-alt',
         color: 'rgb(213, 219, 227)'
     },
 ]

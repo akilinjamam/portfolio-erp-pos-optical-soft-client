@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
-
 import imgmodal from './ImgModal.module.scss';
-import InvoiceForm from "./InvoiceForm";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import { invoiceCalculation } from '../../../invoiceCalculation/invoiceCalculation';
 import useSaleData from '../../../data/saleData/useSaleData';
+import InvoiceSlip from './InvoiceSlip';
 
 const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerInfo  }) => {
     
@@ -37,15 +36,15 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                         className="uil uil-times"></i>
                     </div>
                     <br />
-                    <div ref={contentToPrint} style={{width:'500px', margin:'auto'}}>
+                    <div ref={contentToPrint} style={{width:'250px', margin:'auto'}}>
                         <br />
                         <div style={{marginBottom:'10px'}}>
-                            <InvoiceForm getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy'/>
+                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy'/>
                         </div>
                         <br />
                        
                         <div>
-                            <InvoiceForm getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy'/>
+                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy'/>
                         </div>
                     </div>
                     

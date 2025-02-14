@@ -23,12 +23,12 @@ export const accountsModuleRoute = [
         icon: 'uil uil-clipboard-notes',
         color: 'rgb(243, 209, 237)'
     },
-    {
-        value: 'Daily Due Collection List',
-        link: '/dashboard/accounts_module/due_collection_list',
-        icon: 'uil uil-clipboard-notes',
-        color: 'rgb(143, 230, 637)'
-    },
+    // {
+    //     value: 'Daily Due Collection List',
+    //     link: '/dashboard/accounts_module/due_collection_list',
+    //     icon: 'uil uil-clipboard-notes',
+    //     color: 'rgb(143, 230, 637)'
+    // },
     {
         value: 'Add Fixed Expenses',
         link: '/dashboard/accounts_module/add_fixed_expenses',
