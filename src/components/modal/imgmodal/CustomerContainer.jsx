@@ -163,7 +163,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             delivered:data?.delivered === '' ? undefined : data?.delivered,
             recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
-            comment:data?.comment === '' ? undefined : data?.comment,
+            comment:data?.comment === '' ? undefined : `${data?.comment}=${data?.pd}`,
 
         }
         console.log(modifiedValue)
@@ -265,6 +265,10 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <label htmlFor="">Comment:</label>
                                 <br />
                                 <textarea  name="" id="" {...register('comment')}/>
+                                <br />
+                                <label htmlFor="">PD:</label>
+                                <br />
+                                <input type="text"  name="" id="" {...register('pd')}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">Payment Method: <span style={{color:'red'}}>*</span></label>

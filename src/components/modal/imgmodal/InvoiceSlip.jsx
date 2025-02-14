@@ -59,35 +59,35 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
 
     
       {/* Eye Prescription Section */}
-      <div style={{ marginTop: '5px' }}>
+      <div style={{ width:'100%',marginTop: '5px' }}>
       
-        <div style={{ width: '100%', marginLeft:'-5px' }}>
-          <table style={{ borderCollapse: 'collapse' }} border="1">
+        <div style={{ width: '100%' }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%' }} border="1">
             <thead>
               
               <tr>
-                <th style={{ padding: '2px', fontSize:'10px', width:'20px' }}></th>
-                <th style={{ padding: '2px', fontSize:'10px' }}>Sph.</th>
-                <th style={{ padding: '2px', fontSize:'10px' }}>Cyl.</th>
-                <th style={{ padding: '2px', fontSize:'10px' }}>Axis</th>
-                <th style={{ padding: '2px', fontSize:'10px' }}>Near</th>
+                <th style={{ padding: '3px', fontSize:'10px', width:'20px' }}></th>
+                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Sph.</th>
+                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Cyl.</th>
+                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Axis</th>
+                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Near</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>L</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftSph}</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.leftNear}</td>
+                <td style={{ height:'20px', fontSize:'10px' , textAlign:'center' }}>{getCustomerInfo?.leftSph}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftAxis}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftNear}</td>
                 
               </tr>
               <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>R</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.rightSph}</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.rightCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.rightAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px' }}>{getCustomerInfo?.rightNear}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightSph}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightAxis}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightNear}</td>
               </tr>
               
             </tbody>
@@ -97,12 +97,12 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
 
       {/* Instruction Section */}
       <div style={{ margin: '10px 0', fontSize:'9px' }}>
-        <h3>PD:</h3>
-        <h3>Remarks:</h3>
+        <h3>PD: {getCustomerInfo?.comment?.split('=')?.[1]}</h3>
+        <h3>Remarks: {getCustomerInfo?.comment?.split('=')?.[0]}</h3>
       </div>
 
       {/* Total Section */}
-      <div style={{ width: '100%',marginTop: '5px',  marginLeft:'-5px' }}>
+      <div style={{ width: '100%',marginTop: '5px' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
           <tbody>
             <tr>
