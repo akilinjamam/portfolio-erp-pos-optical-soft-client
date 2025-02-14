@@ -38,7 +38,7 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                     <br />
                     <div ref={contentToPrint} style={{width:'250px', margin:'auto'}}>
                         <br />
-                        <div style={{marginBottom:'10px'}}>
+                        <div style={{marginBottom:'300px'}}>
                             <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy'/>
                         </div>
                         <br />
