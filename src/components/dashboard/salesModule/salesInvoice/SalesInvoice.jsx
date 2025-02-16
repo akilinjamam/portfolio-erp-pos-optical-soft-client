@@ -111,6 +111,11 @@ const SalesInvoice = () => {
                         <button style={{marginRight:'10px'}} onClick={() => {
                         dispatch(addSalesListForSalesInvoice(products))
                         dispatch(customerInfoForSalesInvoice(getCustomerInfo))
+                        dispatch(openModal('updateCustomer'))
+                    } } className={salesInvoice.adjustBtn}>Update Customer Info</button>
+                        <button style={{marginRight:'10px'}} onClick={() => {
+                        dispatch(addSalesListForSalesInvoice(products))
+                        dispatch(customerInfoForSalesInvoice(getCustomerInfo))
                         dispatch(openModal('salesAdjust'))
                     } } className={salesInvoice.adjustBtn}>Adjust Payment</button>
 

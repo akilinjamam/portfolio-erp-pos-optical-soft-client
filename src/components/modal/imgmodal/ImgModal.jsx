@@ -25,6 +25,7 @@ import DailyDueCollectionModal from './DailyDueCollectionModal';
 import ProfitExpenseListModal from './ProfitExpenseListModal';
 import AnalysisModal from './AnalysisModal';
 import ProfitExpenseAnalysisModal from './ProfitExpenseAnalysisModal';
+import UpdateCustomerInfo from './UpdateCustomerInfo';
 
 const ImgModal = () => {
 
@@ -58,6 +59,7 @@ const ImgModal = () => {
             <BarcodeContainer open={open} type={type} barcode={barcode} closeModal={closeModal}  dispatch={dispatch} />
             <SingleBarcodeContainer open={open} type={type} barcode={singleBarcode} closeModal={closeModal}  dispatch={dispatch} />
             <CustomerContainer closeModal={closeModal} dispatch={dispatch} open={open} customerInfo={customerInfo} type={type} salesList={salesList}/>
+            <UpdateCustomerInfo closeModal={closeModal} dispatch={dispatch} open={open} type={type} getCustomerInfo={getCustomerInfoForSalesInvoice} salesList={salesListForSalesInvoice}/>
             <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <GlassStockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
