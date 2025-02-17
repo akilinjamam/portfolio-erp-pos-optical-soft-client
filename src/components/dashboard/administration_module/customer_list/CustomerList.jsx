@@ -6,7 +6,8 @@ import Pagination from "../../pagination/Pagination";
 import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 import CustomerListTable from "./CutomerListTable";
-import useSaleData from '../../../../data/saleData/useSaleData';
+// import useSaleData from '../../../../data/saleData/useSaleData';
+import useOneMonthSaleData from '../../../../data/saleData/useOneMonthSalesData';
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const CustomerList = () => {
@@ -16,7 +17,7 @@ const CustomerList = () => {
         from: '',
         to: ''
     })
-    const {saleData, isLoading, refetch} = useSaleData(query, range.from, range.to);
+    const {saleData, isLoading, refetch} = useOneMonthSaleData(query, range.from, range.to);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedSaleDataWithIndexId,setModifiedSaleDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
