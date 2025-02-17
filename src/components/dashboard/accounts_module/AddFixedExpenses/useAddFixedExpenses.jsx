@@ -5,7 +5,8 @@ import useGetProfitExpenseAccountsData from "../../../../data/accountsData/useGe
 import usePostFinalAccountsData from "../../../../data/accountsData/usePostFinalAccountsData";
 
 const useAddFixedExpenses = () => {
-    
+    const [inInput, setInInput] = useState(false);
+    console.log(inInput)
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -61,15 +62,17 @@ const useAddFixedExpenses = () => {
     useEffect(() => {
 
         const handleExpenseList = (e) => {
-            if(e.key === 'l' || e.key === 'L'){
-                const allData = {
-                    ...expensesData
-                }
-                if(expensesData?.expenseAmount && expensesData?.expenseName ){
-                    setShowData((prevData) => [...prevData, allData]);
-                    setExpensesData(initialExpensesData)
-                }else{
-                    toast.error('please fillup Expense Name and Expense Amount input ')
+            if(!inInput){
+                if(e.key === 'l' || e.key === 'L'){
+                    const allData = {
+                        ...expensesData
+                    }
+                    if(expensesData?.expenseAmount && expensesData?.expenseName ){
+                        setShowData((prevData) => [...prevData, allData]);
+                        setExpensesData(initialExpensesData)
+                    }else{
+                        toast.error('please fillup Expense Name and Expense Amount input ')
+                    }
                 }
             }
         }
@@ -126,7 +129,7 @@ const useAddFixedExpenses = () => {
         }
     },[isSuccess,isError])
 
-    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, profitExpenseData }
+    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, profitExpenseData, setInInput }
 };
 
 
