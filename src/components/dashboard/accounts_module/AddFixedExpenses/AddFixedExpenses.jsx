@@ -116,18 +116,25 @@ const AddFixedExpenses = () => {
                         <div style={{display: `${otherExpensesData?.date ? 'block' : 'none'}`}}>
                             
                         </div>
-                         <p>Cash+Bank+Bkash+Nogod : {profitExpenseData?.result?.cashProfit}+{profitExpenseData?.result?.bankProfit + profitExpenseData?.result?.bankDueCollection }+{profitExpenseData?.result?.bkashProfit + profitExpenseData?.result?.bkashDueCollection}+{profitExpenseData?.result?.nogodProfit + profitExpenseData?.result?.nogodDueCollection}</p>
+                         <p>Cash+Bank+Bkash+Nogod :</p>
+                         {
+                          profitExpenseData?.result 
+                          ?
+                          <p>{profitExpenseData?.result?.cashProfit}+{profitExpenseData?.result?.bankProfit + profitExpenseData?.result?.bankDueCollection }+{profitExpenseData?.result?.bkashProfit + profitExpenseData?.result?.bkashDueCollection}+{profitExpenseData?.result?.nogodProfit + profitExpenseData?.result?.nogodDueCollection}</p>
+                          :
+                          <p>Loading...</p>
+                         }
                          <br />           
-                        <p>Profit : {profitExpenseData?.result?.totalProfit}</p>
-                        <p style={{marginBottom:'3px'}}>(+) Extra Profit : </p>
+                        <p>Profit : {profitExpenseData?.result ? profitExpenseData?.result?.totalProfit : 'Loading...'}</p>
+                        <p style={{marginBottom:'3px'}}>(+) Extra Profit : {otherExpensesData?.extraProfitAmount}</p>
                         <hr />
-                        <p>Total Profit : {profitExpenseData?.result?.totalProfit + Number(otherExpensesData?.extraProfitAmount)}</p>
+                        <p>Total Profit : {profitExpenseData?.result ? (profitExpenseData?.result?.totalProfit + Number(otherExpensesData?.extraProfitAmount)) : 'Loading...'}</p>
                         <br />
                         <p>(-) Fixed Expenses : {totalFixedExpense}</p>
                         <p>(-) Vendor Payment : {profitExpenseData?.result?.vendorExpenses}</p>
                         <p style={{marginBottom:'3px'}}>(-) Salary Payment : {profitExpenseData?.result?.salaryExpenses}</p>
                         <hr />
-                        <p>Net Profit : {profitExpenseData?.result?.totalProfit - profitExpenseData?.result?.vendorExpenses - profitExpenseData?.result?.salaryExpenses - totalFixedExpense}</p>
+                        <p>Net Profit : {profitExpenseData?.result ? (profitExpenseData?.result?.totalProfit - profitExpenseData?.result?.vendorExpenses - profitExpenseData?.result?.salaryExpenses - totalFixedExpense) : 'Loading...'}</p>
                     </div>
 
               </div>
