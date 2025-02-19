@@ -64,7 +64,7 @@ const DashboardTitleBar = () => {
                      </div>
                    
                     <div onClick={() => setView(!view)} className={`${dashboardTitle.mappedRoute}`}>
-                        <div style={{width:'365px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+                        <div style={{width:'370px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                         <p>{formattedDate.day}, {formattedDate.monthDate} {formattedDate.monthName} {formattedDate.year},{" "}
                         {date.getHours() % 12 || 12}:{String(date.getMinutes()).padStart(2, "0")}:
                         {String(date.getSeconds()).padStart(2, "0")} {date.getHours() >= 12 ? 'PM' : 'AM'}</p>
