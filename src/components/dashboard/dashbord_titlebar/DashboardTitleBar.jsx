@@ -71,7 +71,7 @@ const DashboardTitleBar = () => {
                         <p><i style={{fontSize:"30px"}} className="uil uil-user-circle"></i></p>
                         </div>
                         <div style={{display: `${view ? 'block': 'none'}`}} className={`${dashboardTitle.userDetails}`}>
-                            <h4>{getUser?.username}</h4>
+                            <h4>{getUser?.username?.length >= 16 ? getUser?.username?.slice(0,16) + '...' : getUser?.username}</h4>
                             <hr />
                             <br />
                             <p onClick={handleLogOut}><i className="uil uil-sign-out-alt"></i> Logout</p>
