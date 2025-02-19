@@ -63,8 +63,8 @@ const DashboardTitleBar = () => {
                     </div>
 
                     <div onClick={() => setView(!view)} className={`${dashboardTitle.mappedRoute}`}>
-                        <div style={{ width: '295px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <p>{formattedDate.day}, {formattedDate.monthDate} {formattedDate.monthName} {formattedDate.year},{" "}
+                        <div style={{ width: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <p style={{margin:'0 10px'}}>{formattedDate.day}, {formattedDate.monthDate} {formattedDate.monthName} {formattedDate.year},{" "}
                                 {date.getHours() % 12 || 12}:{String(date.getMinutes()).padStart(2, "0")}:
                                 {String(date.getSeconds()).padStart(2, "0")} {date.getHours() >= 12 ? 'PM' : 'AM'}</p>
                             <p><i style={{ fontSize: "30px" }} className="uil uil-user-circle"></i></p>
