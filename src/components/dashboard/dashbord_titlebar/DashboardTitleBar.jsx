@@ -23,10 +23,10 @@ const DashboardTitleBar = () => {
         navigate(`/${findNavigation}`)
     }
     const formattedDate = useMemo(() => {
-        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const monthNames = [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
         ];
 
         return {
@@ -63,7 +63,7 @@ const DashboardTitleBar = () => {
                     </div>
 
                     <div onClick={() => setView(!view)} className={`${dashboardTitle.mappedRoute}`}>
-                        <div style={{ width: '370px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ width: '295px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <p>{formattedDate.day}, {formattedDate.monthDate} {formattedDate.monthName} {formattedDate.year},{" "}
                                 {date.getHours() % 12 || 12}:{String(date.getMinutes()).padStart(2, "0")}:
                                 {String(date.getSeconds()).padStart(2, "0")} {date.getHours() >= 12 ? 'PM' : 'AM'}</p>
