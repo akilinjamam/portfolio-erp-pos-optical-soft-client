@@ -3,6 +3,7 @@ import useGetAllVendorData from "../../../../data/vendorData/useGetVendorData";
 import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
 import useUpdateVendorData from "../../../../data/vendorData/useUpdateVendorData";
 import useDeleteVendorData from "../../../../data/vendorData/useDeleteVendorData";
+import { calculateTotalPrice } from "../../../calculation/calculateSum";
 
 
 const useVendorList = () => {
@@ -113,6 +114,8 @@ const useVendorList = () => {
         deleteEmployees(idsForDelete)
     }
 
-    return { supplierData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId }
+    const totalPaid = calculateTotalPrice(modifiedEmployeeDataWithIndexId?.map(data => Number(data?.paid)));
+
+    return { supplierData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId, totalPaid }
 };
 export default useVendorList;

@@ -2,7 +2,7 @@
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, totalPaid}) => {
 
 
   const data = paginatedDataContainer
@@ -36,6 +36,23 @@ if(isLoading){
           
           <thead>
           
+              <tr>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Paid =</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalPaid}</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th></th>
+              </tr>
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Supplier Name</th>

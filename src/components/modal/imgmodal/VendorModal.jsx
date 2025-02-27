@@ -5,8 +5,11 @@ import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 
 import VendorListTable from '../../dashboard/accounts_module/VendorList/VendorlistTable';
+import useVendorList from '../../dashboard/accounts_module/VendorList/useVendorList';
 
 const VendorModal = ({type, open, dispatch, closeModal, vendorData}) => {
+
+    const {totalPaid} = useVendorList();
 
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
@@ -35,7 +38,7 @@ const VendorModal = ({type, open, dispatch, closeModal, vendorData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                        <VendorListTable  paginatedDataContainer={vendorData}/>
+                        <VendorListTable  paginatedDataContainer={vendorData} totalPaid={totalPaid}/>
                     </div>        
                 </section>
         </div>
