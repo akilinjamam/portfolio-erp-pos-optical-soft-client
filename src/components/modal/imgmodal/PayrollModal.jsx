@@ -4,8 +4,11 @@ import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import PayrollListTable from '../../dashboard/hrAndPayroll/PayrollList/PayrollListTable';
+import usePayrollList from '../../dashboard/hrAndPayroll/PayrollList/usePayrollList';
 
 const PayrollModal = ({type, open, dispatch, closeModal, payrollData}) => {
+
+    const {totalPaid, totalIncentive, totalOvertime, paidAmount} = usePayrollList();
 
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
@@ -34,7 +37,7 @@ const PayrollModal = ({type, open, dispatch, closeModal, payrollData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                        <PayrollListTable  paginatedDataContainer={payrollData}/>
+                        <PayrollListTable  paginatedDataContainer={payrollData} totalPaid={totalPaid} totalIncentive={totalIncentive} totalOvertime={totalOvertime} paidAmount={paidAmount} />
                     </div>        
                 </section>
         </div>

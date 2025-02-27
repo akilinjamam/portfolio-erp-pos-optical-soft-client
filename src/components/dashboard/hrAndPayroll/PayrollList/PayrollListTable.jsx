@@ -2,8 +2,9 @@
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const PayrollListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const PayrollListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, paidAmount, totalPaid, totalIncentive, totalOvertime}) => {
 
+ 
 
   const data = paginatedDataContainer
   
@@ -35,8 +36,26 @@ if(isLoading){
         <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
           
           <thead>
-          
-              <tr>
+          <tr>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Paid =</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalPaid}</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Paid =</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>{paidAmount}</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Overtime =</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalOvertime}</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Incentive =</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalIncentive}</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
+                  <th></th>
+              </tr>
+                <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Employee Name</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Basic Salary</th>
@@ -55,6 +74,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Transection Id</th>
                   <th>Action</th>
               </tr>
+               
           </thead>
         <tbody>
           

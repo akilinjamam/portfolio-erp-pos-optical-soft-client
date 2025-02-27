@@ -3,6 +3,7 @@ import useGetEmployeeData from "../../../../data/employeeData/useGetEmployeeData
 import useGetAllPayrollData from "../../../../data/payrollData/useGetPayrollData";
 import useUpdatePayrollData from "../../../../data/payrollData/useUpdatePayrollData";
 import useDeletePayrollData from "../../../../data/payrollData/useDeletePayrollData";
+import { calculateTotalPrice } from "../../../calculation/calculateSum";
 
 
 const usePayrollList = () => {
@@ -112,6 +113,12 @@ const usePayrollList = () => {
         deleteEmployees(idsForDelete)
     }
 
-    return { employeeData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId }
+
+    const paidAmount = calculateTotalPrice(modifiedEmployeeDataWithIndexId?.map(data => Number(data?.paid)));
+    const totalIncentive = calculateTotalPrice(modifiedEmployeeDataWithIndexId?.map(data => Number(data?.incentive)));
+    const totalOvertime = calculateTotalPrice(modifiedEmployeeDataWithIndexId?.map(data => Number(data?.overtime)));
+    const totalPaid = paidAmount + totalIncentive + totalOvertime;
+
+    return { employeeData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId, paidAmount, totalIncentive, totalOvertime, totalPaid }
 };
 export default usePayrollList;
