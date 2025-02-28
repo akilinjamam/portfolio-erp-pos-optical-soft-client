@@ -29,6 +29,7 @@ const ReportModule = () => {
                     </div>   
                 </div>
                 <ModulePagination data={reportModuleRoute} newDataContainer={setPaginatedData} />
+                
             </div>
             <Outlet/>
         </div>
