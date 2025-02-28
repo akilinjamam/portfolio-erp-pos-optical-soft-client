@@ -12,7 +12,7 @@ const hrAndPayrollRoute = [
       },
       {
         path:'employee_list',
-        element: <EmployeeList/>
+        element: <EmployeeList hideField={false} hideSection={false}/>
       },
       {
         path:'payroll',

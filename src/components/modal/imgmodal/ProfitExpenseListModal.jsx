@@ -34,7 +34,7 @@ const ProfitExpenseListModal = ({type, open, dispatch, closeModal, expenseData})
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                        <ProfitExpenseListTable  paginatedDataContainer={expenseData}/>
+                        <ProfitExpenseListTable  paginatedDataContainer={expenseData} hideField={true}/>
                     </div>        
                 </section>
         </div>

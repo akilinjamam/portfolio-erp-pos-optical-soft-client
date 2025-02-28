@@ -60,6 +60,15 @@ const Layout = ({ children }) => {
 
             '/dashboard/business_monitor/profit_expense_enalysis': profit_expense_enalysis,
             '/dashboard/business_monitor/profit_category_analysis': profit_category_analysis,
+
+            '/dashboard/report_module/customer_list': customer_list,
+            '/dashboard/report_module/sales_record': sales_record,
+            '/dashboard/report_module/employee_list': employee_list,
+            '/dashboard/report_module/supplier_list': supplier_list,
+            '/dashboard/report_module/stock': stock,
+            '/dashboard/report_module/today_due_collection': today_due_collection,
+            '/dashboard/report_module/today_sales': today_sales,
+            '/dashboard/report_module/payroll_list': payroll_list,
         };
        
 

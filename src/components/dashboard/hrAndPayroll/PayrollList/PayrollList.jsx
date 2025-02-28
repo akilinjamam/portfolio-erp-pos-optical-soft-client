@@ -1,14 +1,12 @@
-// import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
+/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import payrollList from './PayrollList.module.scss';
 import { addPayrollList, openModal } from "../../../modal/imgmodal/imgModalSlice";
-// import { useRef } from "react";
-// import { useReactToPrint } from "react-to-print";
 import usePayrollList from "./usePayrollList";
 import PayrollListTable from "./PayrollListTable";
 import { payrollInput } from "../Payroll/payrollInput";
-const PayrollList = () => {
+const PayrollList = ({hideSection, hideField}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
@@ -17,7 +15,7 @@ const PayrollList = () => {
 
     return (
         <div  className={`${payrollList.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${payrollList.inputAreaOne} flex_center`}>
                   <div className={`${payrollList.container} `}>
                         <div className={`${payrollList.titleName}`}>Payroll Update</div>
@@ -60,7 +58,7 @@ const PayrollList = () => {
                       </form>
                   </div>
                 </div>
-                <div className={`${payrollList.inputAreaTwo} flex_center`}>
+                {/* <div className={`${payrollList.inputAreaTwo} flex_center`}>
                   <div className={`${payrollList.container} `}>
                         <div className={`${payrollList.titleName} flex_center`}></div>
                         <div style={{width: '0'}} className={`${payrollList.border_remover}`}></div>
@@ -70,7 +68,7 @@ const PayrollList = () => {
                               
                             </div>
                   </div>
-                </div>
+                </div> */}
               </div>
           <section className={`${payrollList.navigationIcon} flex_between`}>
                 { 
@@ -99,7 +97,7 @@ const PayrollList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${payrollList.tableArea}`}>
-              <PayrollListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} paidAmount={paidAmount} totalIncentive={totalIncentive} totalOvertime={totalOvertime} totalPaid={totalPaid} />
+              <PayrollListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} paidAmount={paidAmount} totalIncentive={totalIncentive} totalOvertime={totalOvertime} totalPaid={totalPaid} hideField={hideField} fontsize='13.5px'/>
           </section>
            {
             !isLoading

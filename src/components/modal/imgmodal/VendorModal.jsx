@@ -38,7 +38,7 @@ const VendorModal = ({type, open, dispatch, closeModal, vendorData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                        <VendorListTable  paginatedDataContainer={vendorData} totalPaid={totalPaid}/>
+                        <VendorListTable  paginatedDataContainer={vendorData} totalPaid={totalPaid} hideField={true}/>
                     </div>        
                 </section>
         </div>

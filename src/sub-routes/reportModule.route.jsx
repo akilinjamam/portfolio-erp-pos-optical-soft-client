@@ -1,4 +1,5 @@
 import CustomerList from "../components/dashboard/administration_module/customer_list/CustomerList"
+import PayrollList from "../components/dashboard/hrAndPayroll/PayrollList/PayrollList"
 import EmployeeListReport from "../components/dashboard/report_module/employee_list/EmployeeListReport"
 import SupplierListReport from "../components/dashboard/report_module/supplier_list/SupplierListReport"
 import SalesRecord from "../components/dashboard/salesModule/salesRecord/SalesRecord"
@@ -34,6 +35,10 @@ const reportModuleRoute = [
       {
         path:'today_sales',
         element: <TodaySales/>
+      },
+      {
+        path:'payroll_list',
+        element: <PayrollList hideField={true} hideSection={true}/>
       },
 ]
 

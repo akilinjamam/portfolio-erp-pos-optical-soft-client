@@ -2,7 +2,7 @@
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, totalPaid}) => {
+const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, totalPaid, hideField}) => {
 
 
   const data = paginatedDataContainer
@@ -51,7 +51,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
-                  <th></th>
+                  <th style={{display: `${hideField ? 'none' : ''}`}}></th>
               </tr>
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
@@ -68,7 +68,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Due</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Method</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Transection Id</th>
-                  <th>Action</th>
+                  <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
               </tr>
           </thead>
         <tbody>
@@ -96,7 +96,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.transectionId}</td>
                     
-                     <td  className={`flex_around`}>
+                     <td style={{display: `${hideField ? 'none' : 'block'}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {
                           setSelectDeleted(!selectDeleted)

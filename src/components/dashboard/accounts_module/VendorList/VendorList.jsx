@@ -21,7 +21,7 @@ const VendorList = () => {
                 <div className={`${vendorList.inputAreaOne} flex_center`}>
                   <div className={`${vendorList.container} `}>
                         <div className={`${vendorList.titleName}`}>Employee Update</div>
-                        <div style={{width: '135px' }}  className={`${vendorList.border_remover} `}></div>
+                        <div style={{width: '145px' }}  className={`${vendorList.border_remover} `}></div>
 
                       <form action="">
                             <div className='flex_top'>
@@ -60,7 +60,7 @@ const VendorList = () => {
                       </form>
                   </div>
                 </div>
-                <div className={`${vendorList.inputAreaTwo} flex_center`}>
+                {/* <div className={`${vendorList.inputAreaTwo} flex_center`}>
                   <div className={`${vendorList.container} `}>
                         <div className={`${vendorList.titleName} flex_center`}></div>
                         <div style={{width: '0'}} className={`${vendorList.border_remover}`}></div>
@@ -70,7 +70,7 @@ const VendorList = () => {
                               
                             </div>
                   </div>
-                </div>
+                </div> */}
               </div>
           <section className={`${vendorList.navigationIcon} flex_between`}>
                 { 
@@ -99,7 +99,7 @@ const VendorList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${vendorList.tableArea}`}>
-              <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={vendorData} totalPaid={totalPaid}/>
+              <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={vendorData} totalPaid={totalPaid} hideField={false}/>
           </section>
            {
             !isLoading

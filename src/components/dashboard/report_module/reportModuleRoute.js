@@ -41,5 +41,11 @@ export const reportModuleRoute = [
         icon: 'uil uil-clipboard-alt',
         color: 'rgb(213, 219, 227)'
     },
+    {
+        value: 'Payroll List',
+        link: '/dashboard/report_module/payroll_list',
+        icon: 'uil uil-clipboard-alt',
+        color: 'rgb(213, 319, 227)'
+    },
 ]
 

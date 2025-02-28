@@ -29,7 +29,7 @@ const administrationRoute = [
       },
       {
         path:'supplier_list',
-        element: <SupplierList/>
+        element: <SupplierList hideField={false} hideSection={false}/>
       },
       {
         path:'manage_sales',

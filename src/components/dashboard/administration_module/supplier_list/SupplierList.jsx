@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
@@ -8,14 +9,14 @@ import {addSupplierList, openModal } from "../../../modal/imgmodal/imgModalSlice
 import useSupplierList from "./useSupplierList";
 import SupplierListTable from "./SupplierListTable";
 
-const SupplierList = () => {
+const SupplierList = ({hideField, hideSection}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery} = useSupplierList();
     const supplierData = modifiedSupplierDataWithIndexId
 
     const dispatch = useDispatch();
     return (
         <div  className={`${supplierList.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${supplierList.inputAreaOne} flex_center`}>
                   <div className={`${supplierList.container} `}>
                         <div className={`${supplierList.titleName}`}>Supplier Update</div>
@@ -119,7 +120,7 @@ const SupplierList = () => {
                     
               </section>
           <section style={{height: '42vh'}}  className={`${supplierList.tableArea}`}>
-              <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} />
+              <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} hideField={hideField} />
           </section>
            {
             !isLoading

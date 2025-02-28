@@ -4,7 +4,7 @@ import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const SupplierListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const SupplierListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField}) => {
 
 
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Address</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Mobile</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Image</th>
-                  <th>Action</th>
+                  <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
               </tr>
           </thead>
         <tbody>
@@ -73,7 +73,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.address}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.mobile}</td>
                      <td>{data?.img !== 'not added' ? <img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /> : <p style={{textAlign:'center',fontStyle:'italic'}}>blank</p> }</td>
-                     <td  className={`flex_around`}>
+                     <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {
                           setSelectDeleted(!selectDeleted)

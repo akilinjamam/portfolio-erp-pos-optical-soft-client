@@ -3,7 +3,7 @@ import '../../../../global_style/global_style.css'
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField}) => {
 
   const data = paginatedDataContainer
   
@@ -48,7 +48,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Vendor Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th> 
-                  <th>Action</th>
+                  <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
               </tr>
           </thead>
         <tbody>
@@ -82,7 +82,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalExpense}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
                     
-                     <td  className={`flex_around`}>
+                     <td style={{display: `${hideField ? 'none' : 'block'}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {
                           setSelectDeleted(!selectDeleted)

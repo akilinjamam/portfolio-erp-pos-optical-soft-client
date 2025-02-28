@@ -61,7 +61,7 @@ const ProfitExpenseList = () => {
                       </form>
                   </div>
                 </div>
-                <div className={`${employeeList.inputAreaTwo} flex_center`}>
+                {/* <div className={`${employeeList.inputAreaTwo} flex_center`}>
                   <div className={`${employeeList.container} `}>
                         <div className={`${employeeList.titleName} flex_center`}></div>
                         <div style={{width: '0px'}} className={`${employeeList.border_remover}`}></div>
@@ -72,7 +72,7 @@ const ProfitExpenseList = () => {
                                   
                             </div>
                   </div>
-                </div>
+                </div> */}
               </div>
           <section className={`${employeeList.navigationIcon} flex_between`}>
                 { 
@@ -97,7 +97,7 @@ const ProfitExpenseList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
-              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} />
+              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={false} />
           </section>
            {
             !isLoading

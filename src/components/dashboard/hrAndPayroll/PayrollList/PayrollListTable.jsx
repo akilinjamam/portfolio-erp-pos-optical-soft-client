@@ -2,7 +2,7 @@
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const PayrollListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, paidAmount, totalPaid, totalIncentive, totalOvertime}) => {
+const PayrollListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, paidAmount, totalPaid, totalIncentive, totalOvertime, hideField, fontsize}) => {
 
  
 
@@ -33,7 +33,7 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+        <table style={{borderCollapse:'collapse', fontSize:fontsize, margin:'auto', paddingBottom:'10px', width:'99%'}}>
           
           <thead>
           <tr>
@@ -53,7 +53,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
-                  <th></th>
+                  <th style={{display: `${hideField ? 'none' : ''}`}}></th>
               </tr>
                 <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
@@ -72,7 +72,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Salary</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Method</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Transection Id</th>
-                  <th>Action</th>
+                  <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
               </tr>
                
           </thead>
@@ -106,7 +106,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.transectionId}</td>
                     
-                     <td  className={`flex_around`}>
+                     <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {
                           setSelectDeleted(!selectDeleted)

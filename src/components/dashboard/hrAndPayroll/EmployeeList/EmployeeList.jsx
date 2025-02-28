@@ -1,4 +1,4 @@
-// import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
+/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import Pagination from "../../pagination/Pagination";
@@ -8,7 +8,7 @@ import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlic
 
 import useEmployeeList from "./useEmployeeList";
 import EmployeeListTable from "./EmployeeListTable";
-const EmployeeList = () => {
+const EmployeeList = ({hideField, hideSection}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useEmployeeList();
     const employeeData = modifiedEmployeeDataWithIndexId
 
@@ -16,7 +16,7 @@ const EmployeeList = () => {
 
     return (
         <div  className={`${employeeList.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none': 'flex'}`}}  className={`flex_around`}>
                 <div className={`${employeeList.inputAreaOne} flex_center`}>
                   <div className={`${employeeList.container} `}>
                         <div className={`${employeeList.titleName}`}>Employee Update</div>
@@ -126,7 +126,7 @@ const EmployeeList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
-              <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} />
+              <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} />
           </section>
            {
             !isLoading

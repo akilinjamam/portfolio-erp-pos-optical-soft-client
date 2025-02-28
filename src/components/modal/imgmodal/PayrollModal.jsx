@@ -22,7 +22,7 @@ const PayrollModal = ({type, open, dispatch, closeModal, payrollData}) => {
     
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'payroll' ) ? imgmodal.open : imgmodal.close}`} >
-                <section className={`${imgmodal.container} ${imgmodal.sizeStock}`}>
+                <section className={`${imgmodal.container} ${imgmodal.sizePayroll}`}>
                     <div className={`${imgmodal.cancelBtn} flex_between`}>
                         <div>
                         <button>Total payroll Data : {payrollData?.length} </button>
@@ -37,7 +37,7 @@ const PayrollModal = ({type, open, dispatch, closeModal, payrollData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                        <PayrollListTable  paginatedDataContainer={payrollData} totalPaid={totalPaid} totalIncentive={totalIncentive} totalOvertime={totalOvertime} paidAmount={paidAmount} />
+                        <PayrollListTable  paginatedDataContainer={payrollData} totalPaid={totalPaid} totalIncentive={totalIncentive} totalOvertime={totalOvertime} paidAmount={paidAmount} hideField={true} fontsize=''/>
                     </div>        
                 </section>
         </div>
