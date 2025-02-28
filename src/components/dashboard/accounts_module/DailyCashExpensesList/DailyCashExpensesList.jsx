@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import cashList from './DailyCashExpensesList.module.scss';
@@ -7,7 +8,7 @@ import useDailyCashExpensesList from "./useDailyCashExpensesList";
 import { accountListInput } from "./accountListInputs";
 
 
-const DailyCashExpensesList = () => {
+const DailyCashExpensesList = ({hideField, hideSection}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setDate, } = useDailyCashExpensesList();
     const accountsData = modifiedAccountsDataWithIndexId
 
@@ -17,7 +18,7 @@ const DailyCashExpensesList = () => {
 
     return (
         <div  className={`${cashList.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display: `${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${cashList.inputAreaOne} flex_center`}>
                   <div className={`${cashList.container} `}>
                         <div className={`${cashList.titleName}`}>Expenses Update</div>
@@ -94,7 +95,7 @@ const DailyCashExpensesList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${cashList.tableArea}`}>
-              <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} />
+              <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} hideField={hideField} />
           </section>
            {
             !isLoading

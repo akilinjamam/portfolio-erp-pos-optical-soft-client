@@ -69,6 +69,9 @@ const Layout = ({ children }) => {
             '/dashboard/report_module/today_due_collection': today_due_collection,
             '/dashboard/report_module/today_sales': today_sales,
             '/dashboard/report_module/payroll_list': payroll_list,
+            '/dashboard/report_module/vendor_list': vendor_list,
+            '/dashboard/report_module/expenses_list': expenses_list,
+            '/dashboard/report_module/expenses_profit_list': expenses_profit_list,
         };
        
 

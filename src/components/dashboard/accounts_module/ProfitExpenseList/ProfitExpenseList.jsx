@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
@@ -9,7 +10,7 @@ import { profitExpenseList } from "./profitExpenseListInput";
 
 import ProfitExpenseListTable from "./ProfitExpenseListTable";
 import useProfitexpenseList from "./useProfitExpenseList";
-const ProfitExpenseList = () => {
+const ProfitExpenseList = ({hideSection, hideField}) => {
     
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,date, setDate} = useProfitexpenseList()
     const employeeData = modifiedEmployeeDataWithIndexId
@@ -18,7 +19,7 @@ const ProfitExpenseList = () => {
 
     return (
         <div  className={`${employeeList.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${employeeList.inputAreaOne} flex_center`}>
                   <div className={`${employeeList.container} `}>
                         <div className={`${employeeList.titleName}`}>Expense Profit Update</div>
@@ -97,7 +98,7 @@ const ProfitExpenseList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
-              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={false} />
+              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} />
           </section>
            {
             !isLoading

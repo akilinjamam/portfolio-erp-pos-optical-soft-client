@@ -3,7 +3,7 @@ import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
-const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted, selectDeleted, idsForDelete, setIdsForDelete }) => {
+const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted, selectDeleted, idsForDelete, setIdsForDelete, hideFiled }) => {
 
 
   const data = paginatedDataContainer
@@ -74,7 +74,7 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Bkash</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Nogod</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>total</th>
-          <th>Action</th>
+          <th style={{display: `${hideFiled ? 'none' : ''}`}}>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -127,7 +127,7 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayBkashValue}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayNogodValue}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayNogodValue + data?.todayBkashValue + data?.todayBankValue + Number(data?.profitAllocation)}</td>
-                <td className={`flex_around`}>
+                <td style={{display: `${hideFiled ? 'none' : ''}`}} className={`flex_around`}>
 
                   <i onClick={() => {
                     setSelectDeleted(!selectDeleted)

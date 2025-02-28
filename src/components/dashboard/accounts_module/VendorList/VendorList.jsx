@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import vendorList from './VendorList.module.scss';
@@ -7,7 +8,7 @@ import { vendorInput } from "../AddVendor/addVendorInput";
 import VendorListTable from "./VendorlistTable";
 
 
-const VendorList = () => {
+const VendorList = ({hideSection, hideField}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData, totalPaid} = useVendorList();
     const vendorData = modifiedEmployeeDataWithIndexId
 
@@ -17,7 +18,7 @@ const VendorList = () => {
 
     return (
         <div  className={`${vendorList.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${vendorList.inputAreaOne} flex_center`}>
                   <div className={`${vendorList.container} `}>
                         <div className={`${vendorList.titleName}`}>Employee Update</div>
@@ -99,7 +100,7 @@ const VendorList = () => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${vendorList.tableArea}`}>
-              <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={vendorData} totalPaid={totalPaid} hideField={false}/>
+              <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={vendorData} totalPaid={totalPaid} hideField={hideField}/>
           </section>
            {
             !isLoading

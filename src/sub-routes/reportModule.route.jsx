@@ -1,3 +1,6 @@
+import DailyCashExpensesList from "../components/dashboard/accounts_module/DailyCashExpensesList/DailyCashExpensesList"
+import ProfitExpenseList from "../components/dashboard/accounts_module/ProfitExpenseList/ProfitExpenseList"
+import VendorList from "../components/dashboard/accounts_module/VendorList/VendorList"
 import CustomerList from "../components/dashboard/administration_module/customer_list/CustomerList"
 import PayrollList from "../components/dashboard/hrAndPayroll/PayrollList/PayrollList"
 import EmployeeListReport from "../components/dashboard/report_module/employee_list/EmployeeListReport"
@@ -39,6 +42,22 @@ const reportModuleRoute = [
       {
         path:'payroll_list',
         element: <PayrollList hideField={true} hideSection={true}/>
+      },
+      {
+        path:'expenses_list',
+        element: <DailyCashExpensesList hideField={true} hideSection={true}/>
+      },
+      {
+        path:'expenses_list',
+        element: <DailyCashExpensesList hideField={true} hideSection={true}/>
+      },
+      {
+        path:'vendor_list',
+        element: <VendorList hideField={true} hideSection={true}/>
+      },
+      {
+        path:'expenses_profit_list',
+        element: <ProfitExpenseList hideField={true} hideSection={true}/>
       },
 ]
 
