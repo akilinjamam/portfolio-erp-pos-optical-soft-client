@@ -7,96 +7,14 @@ import { calculateTotalPrice } from "../../calculation/calculateSum";
 import moment from "moment";
 import { useState } from "react";
 import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
+import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
 
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
 
-    console.log();
-
-    const glassTypeOption = [
-        {
-            name:'White',
-        },
-        {
-            name:'ARC',
-        },
-        {
-            name:'HMC',
-        },
-        {
-            name:'Blue Cut',
-        },
-        {
-            name:'Photo Chromic',
-        },
-        {
-            name:'Hmc Blue Cut',
-        },
-        {
-            name:'Photo Blue Cut',
-        },
-        {
-            name:'Elements',
-        },
-        {
-            name:'White Moon',
-        },
-        {
-            name:'MC Moon',
-        },
-        {
-            name:'Blue Cut Moon',
-        },
-        {
-            name:'Photo Moon',
-        },
-        {
-            name:'Photo Blue Cut Moon',
-        },
-        {
-            name:'White DEE',
-        },
-        {
-            name:'MC DEE',
-        },
-        {
-            name:'Blue Cut DEE',
-        },
-        {
-            name:'Photo DEE',
-        },
-        {
-            name:'White Progressive',
-        },
-        {
-            name:'MC Progressive',
-        },
-        {
-            name:'Blue Cut Progressive',
-        },
-        {
-            name:'Photo Progressive',
-        },
-        {
-            name:'Photo Blue Cut Progressive',
-        },
-        {
-            name:'HMC Blue Cut Progressive',
-        },
-        {
-            name:'AO Progressive',
-        },
-        {
-            name:'Hard Coat',
-        },
-        {
-            name:'Polycarbonate',
-        },
-        {
-            name:'Colour',
-        },
-    ]
+    const [addGlass, setAddGlass] = useState('');
+    const [deleteGlass, setDeleteGlass] = useState('');
 
 
     const [glassType, setGlassType] = useState('');
@@ -172,12 +90,56 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
         dispatch(closeModal())
       }
 
+      const {glassData, refetch} = useGetGlassData();
+      const allGlass = glassData?.result;
+      const {mutate: addGlassType} = usePostGlassTypeData(refetch);
+
+      const {mutate: deleteGlassType} = useDeleteGlassData(refetch)
+
+      const handleAddGlass = () => {
+            if(addGlass === ''){
+                toast.error('please add glass type')
+                return
+            }
+            addGlassType({glassType: addGlass})
+            setAddGlass('')
+      }
+
+      const handleDelete = () => {
+            if(deleteGlass === ''){
+                toast.error('please select glass type')
+                return
+            }
+            deleteGlassType(deleteGlass);
+            setDeleteGlass('')
+      }
+
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'customer' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
                     <div className={`${imgmodal.cancelBtn}  flex_right`}>
                         <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
                     </div>
+                    <br />
+                    <label className={imgmodal.useFont} htmlFor="">Add Glass Type: <span style={{color:'red'}}></span> </label>
+                    <br />
+                    <input value={addGlass} type="text" name="" id="" onChange={(e) => setAddGlass(e.target.value)}/>
+                    <button style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px' }} onClick={handleAddGlass}>Add</button>
+                    <br />
+                    <br />
+                    <label className={imgmodal.useFont} htmlFor="">Delete Glass Type: <span style={{color:'red'}}></span> </label>
+                    <br />
+                    <select name="" id="" onChange={(e) => setDeleteGlass(e.target.value)}>
+                    <option value="">select glass type</option>
+                        {   !isLoading
+                            ?
+                            allGlass?.map((item, index) => <option key={index+1} value={item?._id}>{item?.glassType}</option> )
+                            :
+                            <option value="">Loading...</option>
+                        }
+                    </select>
+                    <button style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px', }} onClick={handleDelete}>Delete</button>
+                    <br />
                     <br />
                     <form className={imgmodal.useFont} onSubmit={handleSubmit(onSubmit)}>
                         <h4>Add Customer Information:</h4>
@@ -241,12 +203,17 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <input type="text" name="" id="" {...register('lense')}/>
                                 <br />
                                 <br />
+                               
+                               
                                 <label htmlFor="">Glass Type: <span style={{color:'red'}}></span> </label>
                                 <br />
                                 <select name="" id="" onChange={(e) => setGlassType(e.target.value)}>
                                     <option value="">select glass type</option>
-                                    {
-                                        glassTypeOption?.map((item, index) => <option key={index+1} value={item?.name}>{item?.name}</option> )
+                                    {   !isLoading
+                                        ?
+                                        allGlass?.map((item, index) => <option key={index+1} value={item?.glassType}>{item?.glassType}</option> )
+                                        :
+                                        <option value="">Loading...</option>
                                     }
                                 </select>
                                 <br />
