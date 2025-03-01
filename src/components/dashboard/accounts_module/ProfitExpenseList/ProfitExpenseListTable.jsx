@@ -66,7 +66,7 @@ if(isLoading){
                     {Number(data?.totalProfit) + data?.vendorExpenses + data?.payrollExpenses} 
                     </div>  
                     </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.extraProfit}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.extraProfitAmount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
                       {
@@ -82,7 +82,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalExpense}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
                     
-                     <td style={{display: `${hideField ? 'none' : 'block'}`}}  className={`flex_around`}>
+                     <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {
                           setSelectDeleted(!selectDeleted)

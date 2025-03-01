@@ -25,13 +25,13 @@ const useAddFixedExpenses = () => {
     }
     const [expensesData, setExpensesData] = useState(initialExpensesData);
     const [otherExpensesData, setOtherExpensesData] = useState(initialOtherExpensesData)
-    
-    
+    const monthDate = otherExpensesData?.date?.slice(0,7);
 
-    const {profitExpenseData, refetch } = useGetProfitExpenseAccountsData();
+    const {profitExpenseData, refetch } = useGetProfitExpenseAccountsData(monthDate);
 
-
-
+    useEffect(() => {
+        refetch()
+    },[otherExpensesData])
 
    
     useEffect(() => {
@@ -111,8 +111,6 @@ const useAddFixedExpenses = () => {
             extraProfitAmount: otherExpensesData?.extraProfitAmount === '' ? '0' : otherExpensesData?.extraProfitAmount,
            expenses:showData
         };
-
-        console.log(accountsData);
 
         postFinalAccountsData(accountsData)
     }
