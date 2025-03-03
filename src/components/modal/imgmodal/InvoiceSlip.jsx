@@ -17,7 +17,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
     const invoiceNumber = invoiceCalculation(saleData)
     // const totalPriceArray = salesList?.map(item => (Number(item?.actualSalesPrice) * Number(item?.quantity)))
     // const totalPriceValue = calculateTotalPrice(totalPriceArray)
-  
+    console.log(invoiceNumber)
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"DM Sans", sans-serif', fontSize:'9px'}}>
       
@@ -37,7 +37,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px' }}>
         <div>
           {/* <p><strong>Sold By:</strong> {getCustomerInfo?.recorderName}</p> */}
-          <p><strong>Invoice No:</strong></p>
+          <p style={{ fontSize:'10px'}}><strong>Invoice No:</strong></p>
           <p><strong>Order Date:</strong></p>
           <p><strong>Delivery Date:</strong></p>
           <p><strong>Name:</strong></p>
@@ -46,7 +46,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p><strong>Payment Method:</strong></p>
         </div>
         <div style={{textAlign:"right"}}>
-          <p>{getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode?.slice(8) : invoiceNumber}</p>
+          <p style={{fontWeight:'bold', fontSize:'10px'}}>{getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode?.slice(8) : invoiceNumber}</p>
           <p><strong></strong> {moment().format("YYYY-MM-DD")}</p>
           <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate : 'blank'}</p>
           <p >{getCustomerInfo?.customerName ? getCustomerInfo?.customerName : 'blank'}</p>
@@ -74,6 +74,13 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
               </tr>
             </thead>
             <tbody>
+            <tr>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>R</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightSph}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightAxis}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightNear}</td>
+              </tr>
               <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>L</td>
                 <td style={{ height:'20px', fontSize:'10px' , textAlign:'center' }}>{getCustomerInfo?.leftSph}</td>
@@ -82,13 +89,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftNear}</td>
                 
               </tr>
-              <tr>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>R</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightSph}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightNear}</td>
-              </tr>
+              
               
             </tbody>
           </table>
