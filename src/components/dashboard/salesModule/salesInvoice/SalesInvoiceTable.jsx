@@ -53,7 +53,7 @@ const SalesInvoicTable = ({data}) => {
                         {data?.delivered}
                     </td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                        {data?.paymentMethod}
+                        {data?.paymentMethod}, {data?.duePaymentMethod}
                     </td>
                     <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
                         {data?.recorderName}

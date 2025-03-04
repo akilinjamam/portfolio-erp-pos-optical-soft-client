@@ -46,7 +46,8 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
      const handleCancelAdjustment = (e) => {
         e.preventDefault()
         cancelSalesAdjustment(getCustomerInfo?._id)
-        }
+        dispatch(closeModal())
+    }
 
       const handleUpdate = (e) => {
             e.preventDefault();
@@ -54,6 +55,11 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
 
             if(payableAndDiscountAmount > Number(totalPriceValue)){
                 toast.error(`Dua and Discount price both can not across Sales Price ${totalPriceValue}`)
+                return
+            }
+
+            if(duePaymentMethod === 'blank'){
+                toast.error('Please select Due Payment Method')
                 return
             }
 
@@ -76,8 +82,7 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
             }
 
             updateSaleData(updatedData)
-
-            console.log(updatedData)
+            dispatch(closeModal())
       }
     
 
