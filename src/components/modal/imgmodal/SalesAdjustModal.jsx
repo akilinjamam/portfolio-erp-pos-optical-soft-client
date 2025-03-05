@@ -53,6 +53,12 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
             e.preventDefault();
             const payableAndDiscountAmount = (Number(payable) + Number(discount) + Number(getCustomerInfo?.advance));
 
+
+            if(payable ===''){
+                toast.error('Please enter payable amount')
+                return
+            }
+
             if(payableAndDiscountAmount > Number(totalPriceValue)){
                 toast.error(`Dua and Discount price both can not across Sales Price ${totalPriceValue}`)
                 return
