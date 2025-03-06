@@ -1,5 +1,6 @@
 import ProfitCategoryAnalysis from "../components/dashboard/business_monitor/profitCategoryAnalysis/ProfitCategoryAnalysis"
 import ProfitExpenseEnalysis from "../components/dashboard/business_monitor/profitExpenseEnalysis/ProfitExpenseEnalysis"
+import StockAnalysis from "../components/dashboard/business_monitor/stockAnalysis/StockAnalysis"
 
 const businessMonitorRoute = [
     {
@@ -9,6 +10,10 @@ const businessMonitorRoute = [
     {
         path:'profit_category_analysis',
         element: <ProfitCategoryAnalysis/>
+    },  
+    {
+        path:'stock_analysis',
+        element: <StockAnalysis/>
     },  
 ]
 

@@ -11,5 +11,11 @@ export const businessMonitorRoute = [
         icon: 'uil uil-money-stack',
         color: 'rgb(243, 211, 209)'
     },
+    {
+        value: 'Stock Category Analysis',
+        link: '/dashboard/business_monitor/stock_analysis',
+        icon: 'uil uil-analysis',
+        color: 'rgb(243, 211, 409)'
+    },
 
 ]

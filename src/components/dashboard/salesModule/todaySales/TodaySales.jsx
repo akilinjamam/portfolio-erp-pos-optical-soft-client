@@ -37,7 +37,11 @@ const TodaySales = () => {
     
     useEffect(() => {
         const modified = lastSaleAndAccountsData?.result?.allSalesDetail?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
-        setModifiedProductDataWithIndexId(modified)
+        if(lastSaleAndAccountsData?.result?.allSalesDetail?.length > 0) {
+            setModifiedProductDataWithIndexId(modified)
+        }else{
+            setModifiedProductDataWithIndexId([])
+        }
     }, [lastSaleAndAccountsData?.result])
 
 
