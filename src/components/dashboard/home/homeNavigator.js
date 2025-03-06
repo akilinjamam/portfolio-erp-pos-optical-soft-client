@@ -98,7 +98,7 @@ export const homeNavigator = [
             one: '/dashboard/business_monitor',
             two: '/dashboard/business_monitor/profit_expense_enalysis',
             three: '/dashboard/business_monitor/profit_category_analysis',
-            four: '',
+            four: '/dashboard/business_monitor/stock_analysis',
             five: ''
         }
     }
