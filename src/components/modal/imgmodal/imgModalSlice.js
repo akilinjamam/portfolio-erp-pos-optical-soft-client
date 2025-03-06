@@ -21,6 +21,10 @@ export const imgModalSlice = createSlice({
         totalBank: 0,
         totalBkash: 0,
         totalNogod: 0,
+        totalCashPaid: 0,
+        totalBankPaid: 0,
+        totalBkashPaid: 0,
+        totalNogodPaid: 0,
         employeeData: [],
         supplierData: [],
         payrollData: [],
@@ -71,6 +75,10 @@ export const imgModalSlice = createSlice({
             state.totalBank = action.payload.totalBank;
             state.totalBkash = action.payload.totalBkash;
             state.totalNogod = action.payload.totalNogod;
+            state.totalCashPaid = action.payload.totalCashPaidValue;
+            state.totalBankPaid = action.payload.totalBankPaidValue;
+            state.totalBkashPaid = action.payload.totalBkashPaidValue;
+            state.totalNogodPaid = action.payload.totalNogodPaidValue;
         },
         customerList: (state, action) => {
             state.salesData = action.payload;

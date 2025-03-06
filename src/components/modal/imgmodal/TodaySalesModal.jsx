@@ -16,6 +16,11 @@ const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
     const totalBankValue = useSelector(state => state.imgModal.totalBank)
     const totalBkashValue = useSelector(state => state.imgModal.totalBkash)
     const totalNogodValue = useSelector(state => state.imgModal.totalNogod)
+    const totalCashPaidValue = useSelector(state => state.imgModal.totalCashPaid)
+    const totalBankPaidValue = useSelector(state => state.imgModal.totalBankPaid)
+    const totalBkashPaidValue = useSelector(state => state.imgModal.totalBkashPaid)
+    const totalNogodPaidValue = useSelector(state => state.imgModal.totalNogodPaid)
+    
     
 
    console.log(totalDiscount);
@@ -45,7 +50,7 @@ const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
                     </div>
                     <div style={{marginTop:'10px', overflowX:'hidden', height:"450px", scrollbarWidth:'none', minHeight:'auto'}}  className={`${imgmodal.stockContainer}`}>
                         <div>
-                            <TodaySalesTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue}/>
+                            <TodaySalesTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashPaidValue={totalCashPaidValue} totalBankPaidValue={totalBankPaidValue} totalBkashPaidValue={totalBkashPaidValue} totalNogodPaidValue={totalNogodPaidValue}/>
                         </div>
                     </div>        
                 </section>
