@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
@@ -23,14 +24,14 @@ const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, tot
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sales =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Cash =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBankValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bkash =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBkashValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodValue}</th>                       
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>                       
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
