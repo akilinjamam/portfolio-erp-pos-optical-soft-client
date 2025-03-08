@@ -3,10 +3,10 @@ import { useRef } from 'react';
 import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
-import StockAnalysisChart from '../../dashboard/business_monitor/stockAnalysis/StockAnalysisChart';
+import SalesAnalysisChart from '../../dashboard/business_monitor/sales_analysis/SalesAnalysisChart';
 
-const StockAnalysisModal = ({type, open, dispatch, closeModal, analysisData, categoryWiseStockDetail}) => {
-
+const SalesAnalysisModal = ({type, open, dispatch, closeModal, analysisData, salesDetail}) => {
+    console.log(salesDetail)
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
         documentTitle: "Print This Document",
@@ -17,7 +17,7 @@ const StockAnalysisModal = ({type, open, dispatch, closeModal, analysisData, cat
 
     
     return (
-        <div className={`${imgmodal.main} flex_center  ${(open && type === 'stock-analysis' ) ? imgmodal.open : imgmodal.close}`} >
+        <div className={`${imgmodal.main} flex_center  ${(open && type === 'sales-analysis' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container} ${imgmodal.sizeStock}`}>
                     <div className={`${imgmodal.cancelBtn} flex_between`}>
                         <div>
@@ -33,11 +33,11 @@ const StockAnalysisModal = ({type, open, dispatch, closeModal, analysisData, cat
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                    <StockAnalysisChart analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseStockDetail?.categoryWiseAvailableQuantity} categoryWiseStockOunt={categoryWiseStockDetail?.categoryWiseStockOunt} categoryWiseTotalQuantity={categoryWiseStockDetail?.categoryWiseTotalQuantity} categoryName={categoryWiseStockDetail?.categoryName} />
+                    <SalesAnalysisChart allSalesPriceData={analysisData} highestSale={salesDetail?.highestSale} lowestSale={salesDetail?.lowestSale} totalSales={salesDetail?.totalSales} netSales={salesDetail?.netSales} totalDiscount={salesDetail?.totalDiscount} totalPaid={salesDetail?.totalPaid} totalDue={salesDetail?.totalDue} />
                     </div>        
                 </section>
         </div>
     );
 };
 
-export default StockAnalysisModal;
+export default SalesAnalysisModal;

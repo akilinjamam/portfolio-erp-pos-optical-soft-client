@@ -12,8 +12,12 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 const StockAnalysis = () => {
 
+    const [date, setDate] = useState({
+      from: '',
+      to: ''
+    }) 
     
-    const {products, refetch, isLoading} = useProductData('', '', '', '', '')
+    const {products, refetch, isLoading} = useProductData('', date?.from, date?.to, '', '')
     const analysisData = products?.result
     
     const categoryCount = analysisData?.reduce((acc, item) => {
@@ -27,7 +31,7 @@ const StockAnalysis = () => {
 
   useEffect(() => {
     refetch
-  },[refetch, month])
+  },[refetch, month, date])
 
   const dispatch = useDispatch();
 
@@ -48,23 +52,29 @@ const StockAnalysis = () => {
       <div style={{ display: 'flex' }} className={`flex_around`}>
         <div className={`${stockAnalysis.inputAreaOne} flex_center`}>
           <div className={`${stockAnalysis.container} `}>
-            <div className={`${stockAnalysis.titleName}`}>Profit Category Analysis</div>
-            <div style={{ width: '193px' }} className={`${stockAnalysis.border_remover} `}></div>
+            <div className={`${stockAnalysis.titleName}`}>Stock Analysis</div>
+            <div style={{ width: '123px' }} className={`${stockAnalysis.border_remover} `}></div>
 
             <form action="">
               <div className='flex_top'>
 
                 <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
                     <label style={{marginRight:'5px'}} htmlFor="">Find By Category: </label>
-                    <select name="" id="" onChange={(e) => setMonth(e.target.value)}>
+                    <select style={{marginBottom:'3px'}} name="" id="" onChange={(e) => setMonth(e.target.value)}>
                        {
-                            Object.keys(categoryCount).map((item, index) => {
+                            Object?.keys(categoryCount)?.map((item, index) => {
                                 return (
                                     <option key={index+1} value={item}>{item}</option>
                                 )
                             })
                        }
                     </select>
+                    <br />
+                    <label style={{marginRight:'81px'}} htmlFor="">From:</label>
+                    <input  style={{marginBottom:'3px'}} type="date" name="" id="" onChange={(e) => setDate({...date, from: e.target.value})} />
+                    <br />
+                    <label style={{marginRight:'98px'}} htmlFor="">To:</label>
+                    <input  style={{marginBottom:'3px'}} type="date" name="" id="" onChange={(e) => setDate({...date, to: e.target.value})} />
                 </div>
               </div>
 
@@ -82,7 +92,7 @@ const StockAnalysis = () => {
               <div style={{ width: '65px' }} className={`${stockAnalysis.border_remover}`}></div>
             
               <div className={`${stockAnalysis.inputAreaTwoContainer}`}>
-                  <h4>Category wish Stock</h4>
+                  <h4>Category wise Stock</h4>
                   <br />
                   <p>Total: {categoryWiseTotalQuantity}</p>
                   <p>Available: {categoryWiseAvailableQuantity}</p>

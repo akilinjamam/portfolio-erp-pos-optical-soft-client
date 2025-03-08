@@ -27,6 +27,7 @@ import AnalysisModal from './AnalysisModal';
 import ProfitExpenseAnalysisModal from './ProfitExpenseAnalysisModal';
 import UpdateCustomerInfo from './UpdateCustomerInfo';
 import StockAnalysisModal from './StockAnalysisModal';
+import SalesAnalysisModal from './SalesAnalysisModal';
 
 const ImgModal = () => {
 
@@ -53,6 +54,10 @@ const ImgModal = () => {
         const analysisData = useSelector(state => state.imgModal.profitCalegoryAnalysisData)   
         const stockAnalysisData = useSelector(state => state.imgModal.stockAnalysisData)   
         const categoryWiseStockDetail = useSelector(state => state.imgModal.categoryWishStockDetail)   
+
+        const salesAnalysisData = useSelector(state => state.imgModal.salesAnalysisData)
+        const salesDetailData = useSelector(state => state.imgModal.salesDetail)
+
         const dispatch = useDispatch();
         
     return (
@@ -81,6 +86,7 @@ const ImgModal = () => {
             <AnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={analysisData} />
             <ProfitExpenseAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={analysisData} />
             <StockAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={stockAnalysisData} categoryWiseStockDetail={categoryWiseStockDetail}/>
+            <SalesAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={salesAnalysisData} salesDetail={salesDetailData}/>
 
         </div>
     );

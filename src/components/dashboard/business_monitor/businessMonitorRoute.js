@@ -17,5 +17,11 @@ export const businessMonitorRoute = [
         icon: 'uil uil-analysis',
         color: 'rgb(243, 211, 409)'
     },
+    {
+        value: 'Sales Analysis',
+        link: '/dashboard/business_monitor/sales_analysis',
+        icon: 'uil uil-usd-circle',
+        color: 'rgb(183, 211, 409)'
+    },
 
 ]
