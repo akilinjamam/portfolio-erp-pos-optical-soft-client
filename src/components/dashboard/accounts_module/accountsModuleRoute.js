@@ -1,5 +1,11 @@
 export const accountsModuleRoute = [
     {
+        value: 'Add Vendor Bill',
+        link: '/dashboard/accounts_module/add_vendor_bill',
+        icon: 'uil uil-money-bill-stack',
+        color: 'rgb(429, 243, 209)'
+    },
+    {
         value: 'Add Vendor',
         link: '/dashboard/accounts_module/add_vendor',
         icon: 'uil uil-user-md',

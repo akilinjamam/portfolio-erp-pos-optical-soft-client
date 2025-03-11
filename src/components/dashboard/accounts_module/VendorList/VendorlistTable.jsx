@@ -96,7 +96,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.transectionId}</td>
                     
-                     <td style={{display: `${hideField ? 'none' : 'block'}`}}  className={`flex_around`}>
+                     <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {
                           setSelectDeleted(!selectDeleted)

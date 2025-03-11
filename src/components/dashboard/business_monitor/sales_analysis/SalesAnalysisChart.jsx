@@ -151,7 +151,7 @@ const SalesAnalysisChart = ({ allSalesPriceData, highestSale, lowestSale, netSal
 
     return (
         <div style={{height: '62vh'}}>
-            <div className='only_flex' style={{height: '31vh'}}>
+            <div className='only_flex' style={{height: '25vh'}}>
                 <div style={{width:'50%'}}>
                     <Bar style={{width:'100%'}} data={dataCategoryWishCount} options={optionsCategoryWiseQunatity} />
                 </div>
@@ -160,7 +160,7 @@ const SalesAnalysisChart = ({ allSalesPriceData, highestSale, lowestSale, netSal
                 </div>
                
             </div>
-            <div style={{height: '31vh', width: '100%'}}>
+            <div style={{height: '37vh', width: '100%'}}>
                 <Line style={{width:'90%'}} data={data} options={options} />
             </div>       
         </div>

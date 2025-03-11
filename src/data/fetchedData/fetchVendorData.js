@@ -24,6 +24,14 @@ export const fetchPostVendorData = async (data) => {
         return error.response?.data?.errorMessage
     }
 }
+export const fetchPostVendorBillData = async (data) => {
+    try {
+        const result = await axios.post(`${url}/vendors/create-vendor-bill`, data)
+        return result;
+    } catch (error) {
+        return error.response?.data?.errorMessage
+    }
+}
 
 export const fetchgetVendorData = async (supplierId, year, month) => {
     try {

@@ -3,42 +3,40 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
 import useGetSingleVendorData from "../../../../data/vendorData/useGetSingleVendorData";
-import usePostVendorData from "../../../../data/vendorData/usePostVendor";
+import usePostVendorBillData from "../../../../data/vendorData/usePostVendorBill";
 
-
-
-const useAddVendor = () => {
+const useAddVendorBill = () => {
 
     const initialPayrollData = {
-        paymentDate: '',
-        paid: '',
-        transectionId: '',
+        billingDate: '',
+        billAmount: '',
+        billNo: '',
     }
     const [payrollData, setPayrollData] = useState(initialPayrollData);
     const [supplierId, setSupplierId] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('');
 
     const { supplierData, refetch: refetchEmployee } = useGetSupplierData('')
     const { payroll, refetch } = useGetSingleVendorData(supplierId);
     const allPayroll = payroll?.result;
-    const lastBillingDate = payroll?.lastBillingDate;
-    const lastPaymentDate = payroll?.lastPaymentDate;
-    const lastPaid = payroll?.lastPaid;
+    const lastBillingDate= payroll?.lastBillingDate
+    const lastPaymentDate= payroll?.lastPaymentDate
+    const lastPaid= payroll?.lastPaid
 
 
     const allSuppliers = supplierData?.result;
 
     const findEmployee = allSuppliers?.find(f => f?._id === supplierId);
 
-    const { mutate: postPayrollData } = usePostVendorData(refetch)
+    const { mutate: postPayrollData } = usePostVendorBillData(refetch)
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
         console.log(payrollData)
 
-        if (!payrollData?.paymentDate) {
-            toast.error('please give payment date')
+       
+        if (!payrollData?.billingDate) {
+            toast.error('please give biling date')
             return
         }
 
@@ -46,17 +44,20 @@ const useAddVendor = () => {
             toast.error('please select supplier name')
             return
         }
-        if (!payrollData?.paid) {
-            toast.error('please add payment amount')
+        if (!payrollData?.billNo) {
+            toast.error('please select bill no')
+            return
+        }
+        if (!payrollData?.billAmount) {
+            toast.error('please select bill amount')
             return
         }
 
         const allData = {
             supplierName: supplierId,
-            paid: payrollData?.paid ? payrollData?.paid : '0',
-            paymentDate: payrollData?.paymentDate ? payrollData?.paymentDate : '0',
-            transectionId: payrollData?.transectionId ? payrollData?.transectionId : 'blank',
-            paymentMethod: paymentMethod ? paymentMethod : 'cash'
+            billingDate: payrollData?.billingDate ? payrollData?.billingDate : 'yy-mm-dd',
+            billAmount: payrollData?.billAmount ? payrollData?.billAmount : '0',
+            billNo: payrollData?.billNo ? payrollData?.billNo : '0',
         }
 
         console.log(allData)
@@ -71,8 +72,8 @@ const useAddVendor = () => {
         refetchEmployee()
     })
 
-    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, setPaymentMethod, findEmployee, lastBillingDate, lastPaymentDate, lastPaid }
+    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, findEmployee, lastBillingDate, lastPaymentDate, lastPaid }
 };
 
 
-export default useAddVendor;
+export default useAddVendorBill;

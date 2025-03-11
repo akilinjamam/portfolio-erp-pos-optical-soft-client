@@ -41,8 +41,6 @@ const StockAnalysis = () => {
   const categoryWiseTotalQuantity = calculateTotalPrice(findByCategory?.map(item => Number(item?.stockAmount)))
   const categoryWiseStockOunt = calculateTotalPrice(findByCategory?.map(item => Number(item?.stockAmount))) - calculateTotalPrice(findByCategory?.map(item => Number(item?.quantity)))
 
-
-
   if (isLoading) {
     return <CommonLoading />
   }

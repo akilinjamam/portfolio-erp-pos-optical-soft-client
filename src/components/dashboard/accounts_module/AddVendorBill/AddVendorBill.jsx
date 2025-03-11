@@ -1,22 +1,22 @@
 import '../../../../global_style/global_style.css'
-import addVendor from './AddVendor.module.scss';
-import { vendorInput } from './addVendorInput';
-import useAddVendor from './useVendor';
+import addVendorBill from './AddVendorBill.module.scss';
+import { vendorBillInput } from './addVendorBillInput';
+import useAddVendorBill from './useAddVendorBill';
 
-const AddVendor = () => {
-  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, setPaymentMethod,lastBillingDate, lastPaymentDate, lastPaid} = useAddVendor()
+const AddVendorBill = () => {
+  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid} = useAddVendorBill()
   
     return (
-        <div className={`${addVendor.main} full_width`}>
+        <div className={`${addVendorBill.main} full_width`}>
           <div  className={`flex_around`}>
-            <div className={`${addVendor.inputAreaOne} flex_center`}>
-              <div className={`${addVendor.container} `}>
-                    <div className={`${addVendor.titleName}`}>Add Vendor</div>
-                    <div style={{width: '100px'}}  className={`${addVendor.border_remover} `}></div>
+            <div className={`${addVendorBill.inputAreaOne} flex_center`}>
+              <div className={`${addVendorBill.container} `}>
+                    <div className={`${addVendorBill.titleName}`}>Add Vendor</div>
+                    <div style={{width: '100px'}}  className={`${addVendorBill.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
                   <div style={{width:'49%'}}>
-                            <div  className={`${addVendor.inputFields} flex_between`}>
+                            <div  className={`${addVendorBill.inputFields} flex_between`}>
                                     <label htmlFor="">Supplier Name:</label>
                                     <select name="" id="" onChange={(e) => setSupplierId(e.target.value)}>
                                       <option value="">Select Supplier</option>
@@ -32,9 +32,9 @@ const AddVendor = () => {
                         
                         
                             {
-                              vendorInput?.map((input, index) => {
+                              vendorBillInput?.map((input, index) => {
                                 return (
-                                  <div key={index+1} className={`${addVendor.inputFields} flex_between`}>
+                                  <div key={index+1} className={`${addVendorBill.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
                                     <input value={payrollData[input.name]}   type={input.type} 
                                         onChange={(e) => {setPayrollData({...payrollData, [input.value]: e.target.value})}}
@@ -45,39 +45,28 @@ const AddVendor = () => {
                               })
                             }
 
-
-                            <div  className={`${addVendor.inputFields} flex_between`}>
-                                    <label htmlFor="">Payment Method:</label>
-                                    <select name="" id="" onChange={(e) => setPaymentMethod(e.target.value)}>
-                                        <option value="cash">cash</option>
-                                        <option value="bank">bank</option>
-                                        <option value="bkash">bkash</option>
-                                        <option value="nogod">nogod</option>
-                                        <option value="rocket">rocket</option>
-                                    </select>
-                            </div>
-                            <div className={`${addVendor.inputFields} flex_between`}>
+                            <div className={`${addVendorBill.inputFields} flex_between`}>
                             
                             </div>
                           </div>
                   
-                        <div className={`${addVendor.inputAreaOne_footer} flex_right`}>
-                              <div className={`${addVendor.inputAreaOne_footer_container} flex_right`}>
+                        <div className={`${addVendorBill.inputAreaOne_footer} flex_right`}>
+                              <div className={`${addVendorBill.inputAreaOne_footer_container} flex_right`}>
                                 <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
                               </div>
                         </div>
                   </form>
               </div>
             </div>
-            <div className={`${addVendor.inputAreaTwo} flex_center`}>
-              <div className={`${addVendor.container} `}>
-                    <div className={`${addVendor.titleName} flex_center`}>
+            <div className={`${addVendorBill.inputAreaTwo} flex_center`}>
+              <div className={`${addVendorBill.container} `}>
+                    <div className={`${addVendorBill.titleName} flex_center`}>
                       Calculation Board
                     </div>
-                    <div style={{width: '150px'}} className={`${addVendor.border_remover}`}>
+                    <div style={{width: '150px'}} className={`${addVendorBill.border_remover}`}>
 
                     </div>
-                    <div className={`${addVendor.inputAreaTwoContainer}`}>
+                    <div className={`${addVendorBill.inputAreaTwoContainer}`}>
                         <p>Paid: {lastPaid}</p>
                         <p>Total Paid: {allPayroll?.totalPaid}</p>
                         <p>Due: {allPayroll?.due}</p>
@@ -85,7 +74,6 @@ const AddVendor = () => {
                         <p>Bill No: {allPayroll?.billNo}</p>
                         <p>Last Billing Date: {lastBillingDate}</p>
                         <p>Last Payment Date: {lastPaymentDate}</p>
-                        
                     </div>
               </div>
             </div>
@@ -94,4 +82,4 @@ const AddVendor = () => {
     );
 };
 
-export default AddVendor;
+export default AddVendorBill;
