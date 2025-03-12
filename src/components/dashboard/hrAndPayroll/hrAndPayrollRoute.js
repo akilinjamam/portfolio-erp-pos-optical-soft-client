@@ -34,5 +34,11 @@ export const hrAndPayrollRoute = [
         link: '/dashboard/hr_and_payroll_module/user_list',
         icon: 'uil uil-receipt',
         color: 'rgb(243, 209, 237)'
-    }
+    },
+    {
+        value: 'Best Sale Performer',
+        link: '/dashboard/hr_and_payroll_module/best_sale_performer',
+        icon: 'uil uil-panel-add',
+        color: 'rgb(179, 259, 189)'
+    },
 ]

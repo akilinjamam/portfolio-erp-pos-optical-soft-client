@@ -82,6 +82,10 @@ export const imgModalSlice = createSlice({
             state.totalBkashPaid = action.payload.totalBkashPaidValue;
             state.totalNogodPaid = action.payload.totalNogodPaidValue;
         },
+        addBestPerformerData: (state, action) => {
+            state.salesData = action.payload.modifiedData;
+            state.totalSalesValue = action.payload.totalSalesValue;
+        },
         customerList: (state, action) => {
             state.salesData = action.payload;
         },
@@ -123,7 +127,7 @@ export const imgModalSlice = createSlice({
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

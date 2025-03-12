@@ -56,7 +56,7 @@ const SalesAnalysis = () => {
       };
     
     const salesGroupeByDate = formatSalesData(saleData?.result);
-
+    console.log(formatSalesData(saleData?.result))
     
     const highestSale = salesGroupeByDate?.reduce((max, sale) => 
     (sale.sales > max.sales ? sale : max),  { date: "", sales: 0 } 

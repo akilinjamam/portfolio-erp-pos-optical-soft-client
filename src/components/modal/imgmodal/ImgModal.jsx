@@ -28,6 +28,7 @@ import ProfitExpenseAnalysisModal from './ProfitExpenseAnalysisModal';
 import UpdateCustomerInfo from './UpdateCustomerInfo';
 import StockAnalysisModal from './StockAnalysisModal';
 import SalesAnalysisModal from './SalesAnalysisModal';
+import BestSalePerformerModal from './BestSalePerformerModal';
 
 const ImgModal = () => {
 
@@ -70,6 +71,7 @@ const ImgModal = () => {
             <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <GlassStockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
+            <BestSalePerformerModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <TodaySalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <TodayDueCollectionModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <DailyDueCollectionModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>

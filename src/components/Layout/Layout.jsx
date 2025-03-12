@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
     const findUser = users?.result?.find(f => f?.email === getUser?.email);
     
    
-    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list, glass_stock, glass_list, payroll_list,add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales, today_due_collection, manage_sales} = findUser || {};
+    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list, glass_stock, glass_list, payroll_list,add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales, today_due_collection, manage_sales, best_sale_performer, stock_analysis, sales_analysis} = findUser || {};
 
     useEffect(() => {
         const accessMap = {
@@ -49,6 +49,7 @@ const Layout = ({ children }) => {
             '/dashboard/hr_and_payroll_module/payroll_list': payroll_list,
             '/dashboard/hr_and_payroll_module/user_list': user_list,
             '/dashboard/hr_and_payroll_module/add_employee': add_employee,
+            '/dashboard/hr_and_payroll_module/best_sale_performer': best_sale_performer,
 
             '/dashboard/accounts_module/add_vendor': add_vendor,
             '/dashboard/accounts_module/vendor_list': vendor_list,
@@ -60,6 +61,8 @@ const Layout = ({ children }) => {
 
             '/dashboard/business_monitor/profit_expense_enalysis': profit_expense_enalysis,
             '/dashboard/business_monitor/profit_category_analysis': profit_category_analysis,
+            '/dashboard/business_monitor/sales_analysis': sales_analysis,
+            '/dashboard/business_monitor/stock_analysis': stock_analysis,
 
             '/dashboard/report_module/customer_list': customer_list,
             '/dashboard/report_module/sales_record': sales_record,
@@ -83,7 +86,7 @@ const Layout = ({ children }) => {
 
             }
         }
-    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list, glass_stock, glass_list, payroll_list, add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales,  today_due_collection, manage_sales]);
+    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list, glass_stock, glass_list, payroll_list, add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales,  today_due_collection, manage_sales, best_sale_performer, stock_analysis, sales_analysis]);
 
     return (
         <div className={`${layoutControll.main}`}>
