@@ -38,7 +38,11 @@ const useControllUserAccess = (id) => {
         today_sales: false,
         today_due_collection: false,
         profit_expense_enalysis:false,
-        profit_category_analysis:false
+        profit_category_analysis:false,
+        stock_analysis: false,
+        sales_analysis: false,
+        best_sale_performence: false
+
     })
 
     const mutation = useMutation({

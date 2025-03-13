@@ -36,7 +36,11 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             today_sales: paginatedDataContainer?.today_sales,
             today_due_collection: paginatedDataContainer?.today_due_collection,
             profit_expense_enalysis:paginatedDataContainer?.profit_expense_enalysis,
-            profit_category_analysis:paginatedDataContainer?.profit_category_analysis
+            profit_category_analysis:paginatedDataContainer?.profit_category_analysis,
+            stock_analysis: paginatedDataContainer?.stock_analysis,
+            sales_analysis: paginatedDataContainer?.sales_analysis,
+            best_sale_performer: paginatedDataContainer?.best_sale_performer,
+
 
         })
     },[paginatedDataContainer, setAccess])
@@ -161,6 +165,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                             <input checked={access?.user_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, user_list: access?.user_list ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>User List <i className={`uil uil-${access?.user_list ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.best_sale_performer} type="checkbox" name="" id="" onClick={() => setAccess({...access, best_sale_performer: access?.best_sale_performer ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Best Sale Performer <i className={`uil uil-${access?.best_sale_performer ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
                     </td>
 
 
@@ -205,6 +213,14 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.profit_category_analysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, profit_category_analysis: access?.profit_category_analysis ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Profit Category <i className={`uil uil-${access?.profit_category_analysis ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.stock_analysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, stock_analysis: access?.stock_analysis ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Stock Analysis <i className={`uil uil-${access?.stock_analysis ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.sales_analysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, sales_analysis: access?.sales_analysis ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Sales Analysis <i className={`uil uil-${access?.stock_analysis ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
                   
