@@ -5,9 +5,11 @@ import imgmodal from './ImgModal.module.scss';
 import customerContainer from './CustomerContainer.module.scss';
 import { calculateTotalPrice } from "../../calculation/calculateSum";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
+import { resetFormState } from "./imgModalSlice";
+import { useSelector } from "react-redux";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
 
@@ -24,14 +26,24 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
     const {
         register,
         handleSubmit,
+        reset,
       } = useForm();
 
       const arrayOfTotalPriceValue = salesList?.map(item => (item?.actualSalesPrice * item?.quantity))
       const totalPriceValue = calculateTotalPrice(arrayOfTotalPriceValue)
       
-    
+      const resetForm = useSelector((state) => state.imgModal.resetForm);
+
+      useEffect(() => {
+        if(resetForm){
+            reset()
+        }
+      }, [reset, dispatch, resetForm])
+
+      
       const onSubmit = (data) => {
-       
+          dispatch(resetFormState())
+          
         if(salesList.length < 1){
             toast.error('please add products to Sales list first')
             return
@@ -118,7 +130,10 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'customer' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
                     <div className={`${imgmodal.cancelBtn}  flex_right`}>
-                        <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
+                        <i onClick={() => { 
+                        dispatch(closeModal())
+                        dispatch(resetFormState())
+                        } } className="uil uil-times"></i>
                     </div>
                     <br />
                     <label className={imgmodal.useFont} htmlFor="">Add Glass Type: <span style={{color:'red'}}></span> </label>
@@ -304,7 +319,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                             </div>
                         </div>
-                        <input style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
+                        <input onClick={() => dispatch(resetFormState())} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
                     </form>
                 </section>
             </div>

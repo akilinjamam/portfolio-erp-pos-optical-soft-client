@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSalesList, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addSalesList, clearCustomerInfo, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
@@ -20,6 +20,8 @@ const Pos = () => {
     const invoiceNumber = invoiceCalculation(saleData)
     
     const {refetch} = useSalesRecord('', '', '')
+    let customerInfo = useSelector(state => state.imgModal.customerInfo)
+  
     
     const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
     console.log(invoice);
@@ -34,6 +36,7 @@ const Pos = () => {
             if(data?.data?.success){
                 toast.success('product added to sale list')
                 setListOfSalesItem([])
+                dispatch(clearCustomerInfo())
             }
         },
         onError: (data) => {
@@ -44,7 +47,6 @@ const Pos = () => {
 
 
 
-    const customerInfo = useSelector(state => state.imgModal.customerInfo)
     
     const lock = useSelector(state => state.imgModal.lock)
     const dispatch = useDispatch();

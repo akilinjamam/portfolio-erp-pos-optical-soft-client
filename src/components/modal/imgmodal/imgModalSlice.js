@@ -36,7 +36,8 @@ export const imgModalSlice = createSlice({
         stockAnalysisData: [],
         salesAnalysisData: [],
         salesDetail: {},
-        categoryWishStockDetail: {}
+        categoryWishStockDetail: {},
+        resetForm: false
     },
     reducers: {
         openModal: (state, action) => {
@@ -60,6 +61,13 @@ export const imgModalSlice = createSlice({
         },
         customerInfo: (state, action) => {
             state.customerInfo = action.payload
+        },
+        clearCustomerInfo: (state) => {
+            state.customerInfo = {};
+            state.resetForm = true
+        },
+        resetFormState: (state) => {
+            state.resetForm = false
         },
         customerInfoForSalesInvoice: (state, action) => {
             state.customerInfoForSalesInvoice = action.payload
@@ -127,7 +135,7 @@ export const imgModalSlice = createSlice({
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer
