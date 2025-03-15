@@ -7,7 +7,7 @@ import usePayrollList from "./usePayrollList";
 import PayrollListTable from "./PayrollListTable";
 import { payrollInput } from "../Payroll/payrollInput";
 const PayrollList = ({hideSection, hideField}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime} = usePayrollList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData = employeeData?.result;
@@ -16,6 +16,7 @@ const PayrollList = ({hideSection, hideField}) => {
     return (
         <div  className={`${payrollList.main} full_width`}>
              <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
+
                 <div className={`${payrollList.inputAreaOne} flex_center`}>
                   <div className={`${payrollList.container} `}>
                         <div className={`${payrollList.titleName}`}>Payroll Update</div>
@@ -87,7 +88,7 @@ const PayrollList = ({hideSection, hideField}) => {
                             allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.employeeName}</option> )
                         }
                     </select>
-                    <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
+                    <input value={month} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
                 </div>
                 }
                 

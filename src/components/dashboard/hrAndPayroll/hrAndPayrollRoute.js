@@ -18,10 +18,16 @@ export const hrAndPayrollRoute = [
         color: 'rgb(243, 231, 209)'
     },
     {
-        value: 'Payroll',
+        value: 'Add Payroll (Salary)',
         link: '/dashboard/hr_and_payroll_module/payroll',
         icon: 'uil uil-file-graph',
         color: 'rgb(219, 209, 243)'
+    },
+    {
+        value: 'Add Payroll (Bonus)',
+        link: '/dashboard/hr_and_payroll_module/payroll_bonus',
+        icon: 'uil uil-file-graph',
+        color: 'rgb(129, 209, 243)'
     },
     {
         value: 'Payroll List',

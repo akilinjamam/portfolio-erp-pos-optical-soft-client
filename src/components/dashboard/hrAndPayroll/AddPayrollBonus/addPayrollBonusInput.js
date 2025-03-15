@@ -8,26 +8,27 @@
 
 */
 
-export const payrollInput = [
-    {
-        value: 'paid',
-        placeholder: 'Payment',
-        type: 'number',
-        name: 'paid',
-        id: ''
-    },
+export const addPayrollBonusInput = [
+
     {
         value: 'date',
-        placeholder: 'Payment Date',
+        placeholder: 'Bonus Payment Date',
         type: 'date',
         name: 'date',
         id: ''
     },
     {
-        value: 'advance',
-        placeholder: 'Advance',
+        value: 'incentive',
+        placeholder: 'Incentive',
         type: 'number',
-        name: 'advance',
+        name: 'incentive',
+        id: ''
+    },
+    {
+        value: 'overtime',
+        placeholder: 'Overtime',
+        type: 'number',
+        name: 'overtime',
         id: ''
     },
     {

@@ -102,7 +102,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.advance}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.overtime}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.incentive}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{Number(data?.netSalary) + Number(data?.incentive) + Number(data?.overtime)}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalSalary}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.transectionId}</td>
                     

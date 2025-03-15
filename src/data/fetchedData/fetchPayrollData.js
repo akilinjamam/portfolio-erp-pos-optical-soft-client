@@ -24,6 +24,14 @@ export const fetchPostPayrollData = async (data) => {
         return error.response?.data?.errorMessage
     }
 }
+export const fetchPostPayrollBonusData = async (data) => {
+    try {
+        const result = await axios.post(`${url}/payroll/create-payroll-bonus`, data)
+        return result;
+    } catch (error) {
+        return error.response?.data?.errorMessage
+    }
+}
 
 export const fetchgetPayrollData = async (employeeId, year, month) => {
     try {

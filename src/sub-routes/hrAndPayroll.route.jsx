@@ -1,4 +1,5 @@
 import AddEmployee from "../components/dashboard/hrAndPayroll/AddEmployee/AddEmployee"
+import AddPayrollBonus from "../components/dashboard/hrAndPayroll/AddPayrollBonus/AddPayrollBonus"
 import BestSalePerformer from "../components/dashboard/hrAndPayroll/BestSalePerformer/BestSalePerformer"
 import ControllUserAccess from "../components/dashboard/hrAndPayroll/ControllUserAccess/ControllUserAccess"
 import EmployeeList from "../components/dashboard/hrAndPayroll/EmployeeList/EmployeeList"
@@ -18,6 +19,10 @@ const hrAndPayrollRoute = [
       {
         path:'payroll',
         element: <Payroll/>
+      },
+      {
+        path:'payroll_bonus',
+        element: <AddPayrollBonus/>
       },
       {
         path:'payroll_list',

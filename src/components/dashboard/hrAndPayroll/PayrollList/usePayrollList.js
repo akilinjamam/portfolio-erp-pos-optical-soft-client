@@ -15,7 +15,12 @@ const usePayrollList = () => {
         to: '',
     })
 
-    const [month, setMonth] = useState('')
+    const currentDate = new Date();
+    const currentMonth = (currentDate?.getMonth() + 1)?.toString()?.padStart(2, '0');
+    const currentYear = currentDate?.getFullYear();
+    const currentYearMonth = `${currentYear}-${currentMonth}`
+
+    const [month, setMonth] = useState(currentYearMonth)
 
 
     const splitedMonthValue = month.split('-');
@@ -119,6 +124,6 @@ const usePayrollList = () => {
     const totalOvertime = calculateTotalPrice(modifiedEmployeeDataWithIndexId?.map(data => Number(data?.overtime)));
     const totalPaid = paidAmount + totalIncentive + totalOvertime;
 
-    return { employeeData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId, paidAmount, totalIncentive, totalOvertime, totalPaid }
+    return { employeeData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId, paidAmount, totalIncentive, totalOvertime, totalPaid, currentYearMonth, month }
 };
 export default usePayrollList;

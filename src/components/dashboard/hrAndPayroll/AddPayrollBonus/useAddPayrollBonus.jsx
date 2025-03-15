@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 import useGetEmployeeData from "../../../../data/employeeData/useGetEmployeeData";
 import useGetSinglePayrollData from "../../../../data/payrollData/useGetSinglePayrollData";
 import { toast } from "react-toastify";
-import usePostPayrollData from "../../../../data/payrollData/usePostPayrollData";
+import usePostPayrollBonusData from "../../../../data/payrollData/usePayrollBonusData";
 
 
 
-const useAddPayroll = () => {
+const useAddPayrollBonus = () => {
         
     const initialPayrollData = {
-        paid: '',
         date: '',
-        advance: '',
+        incentive: '',
+        overtime: '',
         transectionId: '',
     }
     const [payrollData, setPayrollData] = useState(initialPayrollData);
@@ -29,7 +29,7 @@ const useAddPayroll = () => {
     const findEmployee = allEmployees?.find(f => f?._id === employeeId);
     console.log(findEmployee)
 
-    const {mutate:postPayrollData} = usePostPayrollData(refetch)
+    const {mutate:postPayrollData} = usePostPayrollBonusData(refetch)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -43,12 +43,11 @@ const useAddPayroll = () => {
             toast.error('please select employee name')
             return
         }
-
         const allData = {
             employeeName: employeeId,
-            paid: payrollData?.paid ? payrollData?.paid : '0',
             date: payrollData?.date ? payrollData?.date : 'yy-mm-dd',
-            advance:  payrollData?.advance ? payrollData?.advance :'0',
+            incentive:  payrollData?.incentive ? payrollData?.incentive: '0',
+            overtime:  payrollData?.overtime ? payrollData?.overtime:'0',
             transectionId:  payrollData?.transectionId ? payrollData?.transectionId:'blank',
             paymentMethod: paymentMethod ? paymentMethod : 'cash'  
         }
@@ -69,4 +68,4 @@ const useAddPayroll = () => {
 };
 
 
-export default useAddPayroll;
+export default useAddPayrollBonus;

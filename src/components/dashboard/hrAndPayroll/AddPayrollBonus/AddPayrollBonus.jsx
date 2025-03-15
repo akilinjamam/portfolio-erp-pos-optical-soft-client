@@ -1,22 +1,22 @@
 import '../../../../global_style/global_style.css'
-import addEmployee from './Payroll.module.scss';
-import { payrollInput } from './payrollInput';
-import useAddPayroll from './useAddPayroll';
+import addPayrollBonus from './AddPayrollBonus.module.scss';
+import { addPayrollBonusInput } from './addPayrollBonusInput';
+import useAddPayrollBonus from './useAddPayrollBonus';
 
-const Payroll = () => {
-  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee} = useAddPayroll()
+const AddPayrollBonus = () => {
+  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee} = useAddPayrollBonus()
   
     return (
-        <div className={`${addEmployee.main} full_width`}>
+        <div className={`${addPayrollBonus.main} full_width`}>
           <div  className={`flex_around`}>
-            <div className={`${addEmployee.inputAreaOne} flex_center`}>
-              <div className={`${addEmployee.container} `}>
-                    <div className={`${addEmployee.titleName}`}>Add Payroll</div>
-                    <div style={{width: '100px'}}  className={`${addEmployee.border_remover} `}></div>
+            <div className={`${addPayrollBonus.inputAreaOne} flex_center`}>
+              <div className={`${addPayrollBonus.container} `}>
+                    <div className={`${addPayrollBonus.titleName}`}>Add Payroll</div>
+                    <div style={{width: '100px'}}  className={`${addPayrollBonus.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
                   <div style={{width:'49%'}}>
-                            <div  className={`${addEmployee.inputFields} flex_between`}>
+                            <div  className={`${addPayrollBonus.inputFields} flex_between`}>
                                     <label htmlFor="">Employee Name:</label>
                                     <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
                                       <option value="">Select Employee</option>
@@ -28,13 +28,11 @@ const Payroll = () => {
                                           })
                                         }
                                     </select>
-                            </div>
-                        
-                        
+                            </div>            
                             {
-                              payrollInput?.map((input, index) => {
+                              addPayrollBonusInput?.map((input, index) => {
                                 return (
-                                  <div key={index+1} className={`${addEmployee.inputFields} flex_between`}>
+                                  <div key={index+1} className={`${addPayrollBonus.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
                                     <input value={payrollData[input.name]}   type={input.type} 
                                         onChange={(e) => {setPayrollData({...payrollData, [input.value]: e.target.value})}}
@@ -46,7 +44,7 @@ const Payroll = () => {
                             }
 
 
-                            <div  className={`${addEmployee.inputFields} flex_between`}>
+                            <div  className={`${addPayrollBonus.inputFields} flex_between`}>
                                     <label htmlFor="">Payment Method:</label>
                                     <select name="" id="" onChange={(e) => setPaymentMethod(e.target.value)}>
                                         <option value="cash">cash</option>
@@ -56,28 +54,28 @@ const Payroll = () => {
                                         <option value="rocket">rocket</option>
                                     </select>
                             </div>
-                            <div className={`${addEmployee.inputFields} flex_between`}>
+                            <div className={`${addPayrollBonus.inputFields} flex_between`}>
                             
                             </div>
                           </div>
                   
-                        <div className={`${addEmployee.inputAreaOne_footer} flex_right`}>
-                              <div className={`${addEmployee.inputAreaOne_footer_container} flex_right`}>
+                        <div className={`${addPayrollBonus.inputAreaOne_footer} flex_right`}>
+                              <div className={`${addPayrollBonus.inputAreaOne_footer_container} flex_right`}>
                                 <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
                               </div>
                         </div>
                   </form>
               </div>
             </div>
-            <div className={`${addEmployee.inputAreaTwo} flex_center`}>
-              <div className={`${addEmployee.container} `}>
-                    <div className={`${addEmployee.titleName} flex_center`}>
+            <div className={`${addPayrollBonus.inputAreaTwo} flex_center`}>
+              <div className={`${addPayrollBonus.container} `}>
+                    <div className={`${addPayrollBonus.titleName} flex_center`}>
                       Calculation Board
                     </div>
-                    <div style={{width: '150px'}} className={`${addEmployee.border_remover}`}>
+                    <div style={{width: '150px'}} className={`${addPayrollBonus.border_remover}`}>
 
                     </div>
-                    <div className={`${addEmployee.inputAreaTwoContainer}`}>
+                    <div className={`${addPayrollBonus.inputAreaTwoContainer}`}>
                         <p>Basic Salary: {findEmployee?.basicSalary}</p>
                         <p>Total Paid: {allPayroll?.totalPaid}</p>
                         <p>Due: {allPayroll?.due}</p>
@@ -94,4 +92,4 @@ const Payroll = () => {
     );
 };
 
-export default Payroll;
+export default AddPayrollBonus;

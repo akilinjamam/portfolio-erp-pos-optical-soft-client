@@ -55,6 +55,7 @@ export const homeNavigator = [
             six: '/dashboard/hr_and_payroll_module/user_list',
             seven: '/dashboard/hr_and_payroll_module/add_employee',
             eight: '/dashboard/hr_and_payroll_module/best_sale_performer',
+            nine: '/dashboard/hr_and_payroll_module/payroll_bonus',
         }
     },
     {
