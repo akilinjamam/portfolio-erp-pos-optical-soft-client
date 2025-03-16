@@ -1,11 +1,5 @@
 export const profitExpenseList = [
-    {
-        value: 'totalProfit',
-        placeholder: 'Total Profit',
-        type: 'number',
-        name: 'totalProfit',
-        id: ''
-    },
+
     {
         value: 'extraProfitAmount',
         placeholder: 'Extra Profit',
@@ -19,20 +13,6 @@ export const profitExpenseList = [
         type: 'date',
         name: 'date',
         id: ''
-    },
-    {
-        value: 'totalExpense',
-        placeholder: 'Total Expense',
-        type: 'number',
-        name: 'totalExpense',
-        id: ''
-    },
-    {
-        value: 'profitAllocation',
-        placeholder: 'Profit Allocation',
-        type: 'number',
-        name: 'profitAllocation',
-        id: ''
-    },
+    }
 
 ]
