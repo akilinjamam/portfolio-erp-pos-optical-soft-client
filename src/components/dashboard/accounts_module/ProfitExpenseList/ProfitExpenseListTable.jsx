@@ -9,7 +9,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField, monthYear}) => {
 
 
-  const {profitExpenseData, refetch} = useGetProfitExpenseAccountsData(monthYear)
+  const {profitExpenseData, refetch, isLoading: isLoadingProfitExpenseData} = useGetProfitExpenseAccountsData(monthYear)
   console.log(profitExpenseData?.result)
 
   useEffect(() => {
@@ -73,7 +73,7 @@ if(isLoading){
           </tr>
           <tr>
           <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>Gross Profit</td>
-          <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>{Number(allProfitExpenseData?.totalProfit) + totalExtraProfit}</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>{ !isLoadingProfitExpenseData && (Number(allProfitExpenseData?.totalProfit) + totalExtraProfit)}</td>
           </tr>
           <tr>
           <td style={{border:'1px solid #dddddd',textAlign:'left' }}>(-) Vendor Expense</td>
@@ -94,8 +94,9 @@ if(isLoading){
           <tr>
           <td style={{border:'1px solid #dddddd',textAlign:'left',fontWeight:'bold' }}>Net Profit</td>
           <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>
-            {
-              (Number(allProfitExpenseData?.totalProfit) + totalExtraProfit) - Number(allProfitExpenseData?.vendorExpenses) - Number(allProfitExpenseData?.salaryExpenses) - allFixedExpData
+            { !isLoadingProfitExpenseData
+              &&
+              ((Number(allProfitExpenseData?.totalProfit) + totalExtraProfit) - Number(allProfitExpenseData?.vendorExpenses) - Number(allProfitExpenseData?.salaryExpenses) - allFixedExpData)
             }
           </td>
           </tr>
