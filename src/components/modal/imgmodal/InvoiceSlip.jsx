@@ -10,6 +10,8 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
 
     const {saleData, refetch} = useSalesRecord();
 
+    console.log(saleData?.upcomingInvoiceNumber)
+
     useEffect(() => {
       refetch()
     },[refetch])
@@ -47,7 +49,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p><strong>Payment Method:</strong></p>
         </div>
         <div style={{textAlign:"right"}}>
-          <p style={{fontWeight:'bold', fontSize:'10px'}}>{getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode?.slice(8) : invoiceNumber}</p>
+          <p style={{fontWeight:'bold', fontSize:'10px'}}>{saleData?.upcomingInvoiceNumber?.toString()?.slice(8)}</p>
           <p><strong></strong> {moment().format("YYYY-MM-DD")}</p>
           <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate : 'blank'}</p>
           <p >{getCustomerInfo?.customerName ? getCustomerInfo?.customerName : 'blank'}</p>
@@ -65,8 +67,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       
         <div style={{ width: '100%' }}>
           <table style={{ borderCollapse: 'collapse', width: '100%' }} border="1">
-            <thead>
-              
+            <thead>         
               <tr>
                 <th style={{ padding: '3px', fontSize:'10px', width:'20px' }}></th>
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Sph.</th>
@@ -128,7 +129,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
         </table>
 
         <div style={{ width:"100%", display:'flex', alignItems:'center', justifyContent:'center', marginLeft:'5px'}}>
-            <Barcode  format="CODE128" fontSize={15} width={1.8} height={30} value={getCustomerInfo?.invoiceBarcode ? getCustomerInfo?.invoiceBarcode : `${moment().format("YYYYMMDD")}${invoiceNumber}`}/>   
+            <Barcode  format="CODE128" fontSize={15} width={1.8} height={30} value={saleData?.upcomingInvoiceNumber}/>   
         </div>
       </div>
 

@@ -17,7 +17,8 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
 
     const [addGlass, setAddGlass] = useState('');
     const [deleteGlass, setDeleteGlass] = useState('');
-
+    // const [itemName, setItemName] = useState('');
+    // const [productAndGlass, setProductAndGlass] = useState('');
 
     const [glassType, setGlassType] = useState('');
     const [salesBy,setSalesBy] = useState('');
@@ -145,16 +146,42 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                     <label className={imgmodal.useFont} htmlFor="">Delete Glass Type: <span style={{color:'red'}}></span> </label>
                     <br />
                     <select name="" id="" onChange={(e) => setDeleteGlass(e.target.value)}>
-                    <option value="">select glass type</option>
-                        {   !isLoading
-                            ?
-                            allGlass?.map((item, index) => <option key={index+1} value={item?._id}>{item?.glassType}</option> )
-                            :
-                            <option value="">Loading...</option>
-                        }
+                        <option value="">select glass type</option>
+                            {   !isLoading
+                                ?
+                                allGlass?.map((item, index) => <option key={index+1} value={item?._id}>{item?.glassType}</option> )
+                                :
+                        <option value="">Loading...</option>
+                            }
                     </select>
+                    
                     <button style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px', }} onClick={handleDelete}>Delete</button>
                     <br />
+                    <br />
+                    {/* 
+                    5628440600190
+                    5621706100450
+                    5614786300290
+                    */}
+                    <p style={{marginBottom:'5px'}} className={imgmodal.useFont} htmlFor="">Add Glass Type for Individual Product: </p>
+                    
+                    <label className={imgmodal.useFont} htmlFor="">Select Product: </label>
+                    <select style={{marginRight: '10px'}} name="" id="">
+                       {
+                        salesList?.map( (item, index) =>  <option key={index+1} value={` ${item?.productName}=`}>{item?.productName}</option>)
+                       }
+                    </select>
+                    <label className={imgmodal.useFont} htmlFor="">Select Glass Type: </label>
+                    <select name="" id="" onChange={(e) => setDeleteGlass(e.target.value)}>
+                        <option value="">select glass type</option>
+                            {   !isLoading
+                                ?
+                                allGlass?.map((item, index) => <option key={index+1} value={`${item?.glassType},`}>{item?.glassType}</option> )
+                                :
+                        <option value="">Loading...</option>
+                            }
+                    </select>
+                    <hr />
                     <br />
                     <form className={imgmodal.useFont} onSubmit={handleSubmit(onSubmit)}>
                         <h4>Add Customer Information:</h4>
