@@ -1,9 +1,22 @@
 /* eslint-disable react/prop-types */
+import { useEffect } from 'react';
+import useGetProfitExpenseAccountsData from '../../../../data/accountsData/useGetProfitExpenseAccountsData';
 import '../../../../global_style/global_style.css'
+import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
  
-const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField}) => {
+const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField, monthYear}) => {
+
+
+  const {profitExpenseData, refetch} = useGetProfitExpenseAccountsData(monthYear)
+  console.log(profitExpenseData?.result)
+
+  useEffect(() => {
+    refetch()
+  },[monthYear, refetch])
+
+  const allProfitExpenseData = profitExpenseData?.result;
 
   const data = paginatedDataContainer
   
@@ -29,25 +42,77 @@ const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edi
     }
   }
 
+  const totalExtraProfit = calculateTotalPrice(data?.map(extra => Number(extra?.extraProfitAmount)));
+
+  const allFixedExpData = calculateTotalPrice(data?.flatMap( item => item?.expenses?.map(expense => Number(expense?.expenseAmount))));
+  
+
 if(isLoading){
     return <CommonLoading/>
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+        <div>
+          <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
           
           <thead>
+              <tr>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Details</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Amount</th>
+              </tr>
+          </thead>
+        <tbody>
           
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Profit</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{allProfitExpenseData?.totalProfit}</td>
+          </tr>
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>(+) Extra Profit</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalExtraProfit}</td>
+          </tr>
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>Gross Profit</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>{Number(allProfitExpenseData?.totalProfit) + totalExtraProfit}</td>
+          </tr>
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left' }}>(-) Vendor Expense</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{allProfitExpenseData?.vendorExpenses}</td>
+          </tr>
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left' }}>(-) Salary Expense</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{allProfitExpenseData?.salaryExpenses}</td>
+          </tr>
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left', }}>(-) fixed Expenses</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+            {
+              allFixedExpData
+            }
+          </td>
+          </tr>
+          <tr>
+          <td style={{border:'1px solid #dddddd',textAlign:'left',fontWeight:'bold' }}>Net Profit</td>
+          <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>
+            {
+              (Number(allProfitExpenseData?.totalProfit) + totalExtraProfit) - Number(allProfitExpenseData?.vendorExpenses) - Number(allProfitExpenseData?.salaryExpenses) - allFixedExpData
+            }
+          </td>
+          </tr>
+           
+        </tbody>
+          </table>
+           <br />
+          <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+          
+          <thead>
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Profit</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Extra Profit</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Expense</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payroll Expense</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Vendor Expense</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Expense</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit Allocation</th> 
+                  
                   <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
               </tr>
           </thead>
@@ -61,11 +126,6 @@ if(isLoading){
                       {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
                       <span>{data?.indexId}</span>
                     </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
-                    <div style={{maxWidth:"100px"}}>
-                    {Number(data?.totalProfit) + data?.vendorExpenses + data?.payrollExpenses} 
-                    </div>  
-                    </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.extraProfitAmount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.date}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
@@ -77,10 +137,11 @@ if(isLoading){
                         ))
                       }
                     </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.payrollExpenses}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.vendorExpenses}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalExpense}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.profitAllocation}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+                      {
+                        calculateTotalPrice(data?.expenses?.map(total => Number(total?.expenseAmount) ))
+                      }
+                    </td>
                     
                      <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     
@@ -105,7 +166,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+          </table>
+        </div>
     );
 };
 

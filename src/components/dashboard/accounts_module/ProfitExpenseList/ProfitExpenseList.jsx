@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 
 import employeeList from './ProfitExpenseList.module.scss';
-import {  addProfitExpenseData, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import {  addMonthYear, addProfitExpenseData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 
 import { profitExpenseList } from "./profitExpenseListInput";
 
@@ -82,6 +82,7 @@ const ProfitExpenseList = ({hideSection, hideField}) => {
                     onClick={() => {
                       dispatch(openModal('profit-expense'))
                       dispatch(addProfitExpenseData(employeeData))
+                      dispatch(addMonthYear(date))
                     }}
                     title="print" className="uil uil-print"></i>
 
@@ -98,7 +99,7 @@ const ProfitExpenseList = ({hideSection, hideField}) => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
-              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} />
+              <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} monthYear={date} />
           </section>
            {
             !isLoading
