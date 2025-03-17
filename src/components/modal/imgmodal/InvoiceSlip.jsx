@@ -44,7 +44,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p><strong>Delivery Date:</strong></p>
           <p><strong>Name:</strong></p>
           <p><strong>Mobile:</strong></p>
-          <p><strong>Glass:</strong></p>
+          {/* <p><strong>Glass:</strong></p> */}
           <p><strong>Lense:</strong></p>
           <p><strong>Payment Method:</strong></p>
         </div>
@@ -54,7 +54,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate : 'blank'}</p>
           <p >{getCustomerInfo?.customerName ? getCustomerInfo?.customerName : 'blank'}</p>
           <p >{getCustomerInfo?.phoneNumber ? getCustomerInfo?.phoneNumber : 'blank'}</p>
-          <p >{getCustomerInfo?.glassType ? getCustomerInfo?.glassType : 'blank'}</p>
+          {/* <p >{getCustomerInfo?.glassType ? getCustomerInfo?.glassType : 'blank'}</p> */}
           <p >{getCustomerInfo?.paymentMethod ? getCustomerInfo?.lense : 'blank'}</p>
           <p >{getCustomerInfo?.paymentMethod ? getCustomerInfo?.paymentMethod : 'blank'}</p>
           {/* <p ><strong>Payment Staus:</strong> {(totalPriceValue === (Number(getCustomerInfo?.advance) + Number(getCustomerInfo?.discount))) ? 'Paid' : 'Not-Paid'}</p> */}
@@ -103,6 +103,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
       <div style={{ margin: '10px 0', fontSize:'9px' }}>
         <h3>PD: {getCustomerInfo?.comment?.split('=')?.[1]}</h3>
         <h3>Remarks: {getCustomerInfo?.comment?.split('=')?.[0]}</h3>
+        <h3>Glass Type: <span>{getCustomerInfo?.glassType}</span></h3>
       </div>
 
       {/* Total Section */}

@@ -17,10 +17,16 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
 
     const [addGlass, setAddGlass] = useState('');
     const [deleteGlass, setDeleteGlass] = useState('');
-    // const [itemName, setItemName] = useState('');
-    // const [productAndGlass, setProductAndGlass] = useState('');
+    const [itemName, setItemName] = useState('');
+    const [addProductAndGlass, setAddProductAndGlass] = useState([]);
 
     const [glassType, setGlassType] = useState('');
+    const [glassTypeForProduct, setGlassTypeForProduct] = useState('');
+
+
+  
+    console.log(addProductAndGlass)
+
     const [salesBy,setSalesBy] = useState('');
     console.log(salesBy);
     const todayDate =  moment().format('YYYY-MM-DD');
@@ -40,6 +46,10 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             reset()
         }
       }, [reset, dispatch, resetForm])
+
+      useEffect(() => {
+        setGlassType(addProductAndGlass?.join(','))
+      }, [addProductAndGlass])
 
       
       const onSubmit = (data) => {
@@ -127,6 +137,8 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             setDeleteGlass('')
       }
 
+      console.log(addProductAndGlass?.join(','))
+
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'customer' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
@@ -166,21 +178,39 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                     <p style={{marginBottom:'5px'}} className={imgmodal.useFont} htmlFor="">Add Glass Type for Individual Product: </p>
                     
                     <label className={imgmodal.useFont} htmlFor="">Select Product: </label>
-                    <select style={{marginRight: '10px'}} name="" id="">
+                    <select style={{marginRight: '10px'}} name="" id="" onChange={(e) => setItemName(e.target.value)}>
+                    <option value="">select product</option>
                        {
-                        salesList?.map( (item, index) =>  <option key={index+1} value={` ${item?.productName}=`}>{item?.productName}</option>)
+                        salesList?.map( (item, index) =>  <option key={index+1} value={`${item?.productName}=`}>{item?.productName}</option>)
                        }
+                      
                     </select>
                     <label className={imgmodal.useFont} htmlFor="">Select Glass Type: </label>
-                    <select name="" id="" onChange={(e) => setDeleteGlass(e.target.value)}>
+                    <select name="" id="" onChange={(e) => setGlassTypeForProduct(e.target.value)}>
                         <option value="">select glass type</option>
                             {   !isLoading
                                 ?
-                                allGlass?.map((item, index) => <option key={index+1} value={`${item?.glassType},`}>{item?.glassType}</option> )
+                                allGlass?.map((item, index) => <option key={index+1} value={`${item?.glassType}`}>{item?.glassType}</option> )
                                 :
                         <option value="">Loading...</option>
                             }
                     </select>
+                    <button onClick={() => {
+                        setAddProductAndGlass(prev => [...prev, `${itemName}${glassTypeForProduct}`] )
+                       
+                    }} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px' }}>Add</button>
+                    <br />
+                    <br />
+                    <div>
+                        {
+                            addProductAndGlass?.map((item,index) => <span className={imgmodal.useFont} key={index+1}> {index+1}: {item} <i onClick={() => {
+                                const deletedItem =addProductAndGlass?.filter((_, i)  => i !== index )
+                                setAddProductAndGlass(deletedItem)
+                            }} style={{cursor: 'pointer'}} className="uil uil-times"></i>,</span> )
+                        }
+
+                    </div>
+                    <br />
                     <hr />
                     <br />
                     <form className={imgmodal.useFont} onSubmit={handleSubmit(onSubmit)}>
