@@ -4,111 +4,31 @@ import { useForm } from "react-hook-form";
 import imgmodal from './ImgModal.module.scss';
 import customerContainer from './CustomerContainer.module.scss';
 import { calculateTotalPrice } from "../../calculation/calculateSum";
-import moment from "moment";
+// import moment from "moment";
 import { useEffect, useState } from "react";
 import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import useUpdateCustomerInfo from "../../../data/saleData/useUpdateCustomerInfo";
 import useSaleData from "../../../data/saleData/useSaleData";
 import { toast } from "react-toastify";
+import { useGetGlassData } from "../../../data/glassTypeData/useGlassTypeData";
 
 const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCustomerInfo}) => {
-    console.log(getCustomerInfo)
-    console.log(salesList)
+   
+   
     const totalPrice = calculateTotalPrice(salesList?.map(sale => sale?.actualSalesPrice * sale?.quantity))
-    console.log(totalPrice)
+   
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
 
-    console.log();
+    const {glassData} = useGetGlassData();
+         const allGlass = glassData?.result;
 
-    const glassTypeOption = [
-        {
-            name:'White',
-        },
-        {
-            name:'ARC',
-        },
-        {
-            name:'HMC',
-        },
-        {
-            name:'Blue Cut',
-        },
-        {
-            name:'Photo Chromic',
-        },
-        {
-            name:'Hmc Blue Cut',
-        },
-        {
-            name:'Photo Blue Cut',
-        },
-        {
-            name:'Elements',
-        },
-        {
-            name:'White Moon',
-        },
-        {
-            name:'MC Moon',
-        },
-        {
-            name:'Blue Cut Moon',
-        },
-        {
-            name:'Photo Moon',
-        },
-        {
-            name:'Photo Blue Cut Moon',
-        },
-        {
-            name:'White DEE',
-        },
-        {
-            name:'MC DEE',
-        },
-        {
-            name:'Blue Cut DEE',
-        },
-        {
-            name:'Photo DEE',
-        },
-        {
-            name:'White Progressive',
-        },
-        {
-            name:'MC Progressive',
-        },
-        {
-            name:'Blue Cut Progressive',
-        },
-        {
-            name:'Photo Progressive',
-        },
-        {
-            name:'Photo Blue Cut Progressive',
-        },
-        {
-            name:'HMC Blue Cut Progressive',
-        },
-        {
-            name:'AO Progressive',
-        },
-        {
-            name:'Hard Coat',
-        },
-        {
-            name:'Polycarbonate',
-        },
-        {
-            name:'Colour',
-        },
-    ]
-
-
+     const [glassTypeForProduct, setGlassTypeForProduct] = useState('');
+    const [itemName, setItemName] = useState('');
+    const [addProductAndGlass, setAddProductAndGlass] = useState([]);
     const [glassType, setGlassType] = useState('');
     const [salesBy,setSalesBy] = useState('');
     console.log(salesBy);
-    const todayDate =  moment().format('YYYY-MM-DD');
+    // const todayDate =  moment().format('YYYY-MM-DD');
     const {
         register,
         handleSubmit,
@@ -122,9 +42,18 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
   
   
     useEffect(() => {
-        setGlassType(getCustomerInfo?.glassType);
+        const isEqualAvailable = getCustomerInfo?.glassType?.split(',')?.some(str => str.includes('='));
+        if(isEqualAvailable){
+            setAddProductAndGlass([getCustomerInfo?.glassType])
+        }else{
+            setGlassType(getCustomerInfo?.glassType);
+        }
     }, [getCustomerInfo]);
 
+    useEffect(() => {
+        setGlassType(addProductAndGlass?.join(','))
+    }, [addProductAndGlass])
+    console.log(getCustomerInfo?.glassType?.split('=')?.[0])
 
       useEffect(() => {
         if (getCustomerInfo) {
@@ -177,7 +106,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
             advance: data?.advance === '' ? undefined : data?.advance,
             todayPaid:data?.advance === '' ? undefined : data?.advance,
             paymentHistory: data?.advance === '' ? undefined : `+${data?.advance}`,
-            paymentDate: todayDate,
+            // paymentDate: todayDate,
             
             discount: data?.discount === '' ? undefined : data?.discount,
             leftAxis: data?.leftAxis === '' ? undefined : data?.leftAxis,
@@ -195,7 +124,6 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
             recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
             comment:data?.comment === '' ? undefined : `${data?.comment}=${data?.pd}`,
-
         }
        
         const newData = {
@@ -213,6 +141,52 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
                         <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
                     </div>
                     <br />
+                     <p style={{marginBottom:'5px'}} className={imgmodal.useFont} htmlFor="">Add Glass Type for Individual Product: </p>
+                                        
+                                        <label className={imgmodal.useFont} htmlFor="">Select Product: </label>
+                                        <select   style={{marginRight: '10px'}} name="" id="" onChange={(e) => setItemName(e.target.value)}>
+                                        <option value="">select product</option>
+                                           {
+                                            salesList?.map( (item, index) =>  <option key={index+1} value={`${item?.productName}=`}>{item?.productName}</option>)
+                                           }
+                                          
+                                        </select>
+                                        <label className={imgmodal.useFont} htmlFor="">Select Glass Type: </label>
+                                        <select name="" id="" onChange={(e) => setGlassTypeForProduct(e.target.value)}>
+                                            <option value="">select glass type</option>
+                                                {   !isLoading
+                                                    ?
+                                                    allGlass?.map((item, index) => <option key={index+1} value={`${item?.glassType}`}>{item?.glassType}</option> )
+                                                    :
+                                            <option value="">Loading...</option>
+                                                }
+                                        </select>
+                                        <button onClick={() => {
+                                             if(!itemName){
+                                                toast.error('please select productName')
+                                                return 
+                                            }
+                                            if(!glassTypeForProduct){
+                                                toast.error('plase select glass type')
+                                                return
+                                            }
+                                            setAddProductAndGlass(prev => [...prev, `${itemName}${glassTypeForProduct}`] )
+                                           
+                                        }} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px' }}>Add</button>
+                                        <br />
+                                        <br />
+                                        <div>
+                                            {
+                                                addProductAndGlass?.map((item,index) => <span className={imgmodal.useFont} key={index+1}> {index+1}: {item} <i onClick={() => {
+                                                    const deletedItem =addProductAndGlass?.filter((_, i)  => i !== index )
+                                                    setAddProductAndGlass(deletedItem)
+                                                }} style={{cursor: 'pointer'}} className="uil uil-times"></i>,</span> )
+                                            }
+                    
+                                        </div>
+                                        <br />
+                                        <hr />
+                                        <br />
                     <form className={imgmodal.useFont} onSubmit={handleSubmit(onSubmit)}>
                         <h4>Add Customer Information:</h4>
                         <div className={`${customerContainer.main} flex_between `}>
@@ -280,7 +254,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
                                 <select value={glassType} name="" id="" onChange={(e) => setGlassType(e.target.value)}>
                                     <option value="">select glass type</option>
                                     {
-                                        glassTypeOption?.map((item, index) => <option key={index+1} value={item?.name}>{item?.name}</option> )
+                                        allGlass?.map((item, index) => <option key={index+1} value={item?.glassType}>{item?.glassType}</option> )
                                     }
                                 </select>
                                 <br />

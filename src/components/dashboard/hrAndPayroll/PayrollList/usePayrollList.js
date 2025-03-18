@@ -58,10 +58,11 @@ const usePayrollList = () => {
         date: '',
         advance: '',
         incentive: '',
+        totalSalary: '',
         overtime: '',
         transectionId: '',
     }
-
+    const [paymentMethod, setPaymentMethod] = useState('');
 
     const [updateEmployeeData, setUdpateEmployeeData] = useState(initialEmployeeData);
 
@@ -70,6 +71,10 @@ const usePayrollList = () => {
 
     useEffect(() => {
         setUdpateEmployeeData(findPayrollList || '')
+    }, [findPayrollList])
+
+    useEffect(() => {
+        setPaymentMethod(findPayrollList?.paymentMethod)
     }, [findPayrollList])
 
     const { mutate: editPayrollData } = useUpdatePayrollData(payrollRefetch, setUdpateEmployeeData, initialEmployeeData, setEdit)
@@ -83,7 +88,9 @@ const usePayrollList = () => {
             advance: updateEmployeeData?.advance,
             incentive: updateEmployeeData?.incentive,
             overtime: updateEmployeeData?.overtime,
+            totalSalary: updateEmployeeData?.totalSalary,
             transectionId: updateEmployeeData?.transectionId,
+            paymentMethod: paymentMethod
 
         }
 
@@ -124,6 +131,6 @@ const usePayrollList = () => {
     const totalOvertime = calculateTotalPrice(modifiedEmployeeDataWithIndexId?.map(data => Number(data?.overtime)));
     const totalPaid = paidAmount + totalIncentive + totalOvertime;
 
-    return { employeeData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId, paidAmount, totalIncentive, totalOvertime, totalPaid, currentYearMonth, month }
+    return { employeeData, allPayrollData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, setEmployeeId, paidAmount, totalIncentive, totalOvertime, totalPaid, currentYearMonth, month, paymentMethod, setPaymentMethod }
 };
 export default usePayrollList;

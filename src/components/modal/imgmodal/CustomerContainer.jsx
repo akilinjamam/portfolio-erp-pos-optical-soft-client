@@ -196,6 +196,14 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                             }
                     </select>
                     <button onClick={() => {
+                        if(!itemName){
+                            toast.error('please select productName')
+                            return 
+                        }
+                        if(!glassTypeForProduct){
+                            toast.error('plase select glass type')
+                            return
+                        }
                         setAddProductAndGlass(prev => [...prev, `${itemName}${glassTypeForProduct}`] )
                        
                     }} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px' }}>Add</button>

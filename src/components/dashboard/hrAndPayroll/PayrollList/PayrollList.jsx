@@ -5,9 +5,9 @@ import payrollList from './PayrollList.module.scss';
 import { addPayrollList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import usePayrollList from "./usePayrollList";
 import PayrollListTable from "./PayrollListTable";
-import { payrollInput } from "../Payroll/payrollInput";
+import { payrollListInput } from "./payrollListInput";
 const PayrollList = ({hideSection, hideField}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month} = usePayrollList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData = employeeData?.result;
@@ -26,7 +26,7 @@ const PayrollList = ({hideSection, hideField}) => {
                             <div className='flex_top'>
                               <div style={{width:'49%'}}>
                                 {
-                                  payrollInput?.map((input, index) => {
+                                  payrollListInput?.map((input, index) => {
                                     return (
                                       <div key={index+1} className={`${payrollList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
@@ -38,6 +38,18 @@ const PayrollList = ({hideSection, hideField}) => {
                                     )
                                   })
                                 }
+                                <div  className={`${payrollList.inputFields} flex_between`}>
+                                        <label htmlFor="">Payment Method:</label>
+                                        <select value={paymentMethod} name="" id="" onChange={(e) => setPaymentMethod(e.target.value)}>
+                                            <option value="">Select Payment Method</option>
+                                            <option value="cash">cash</option>
+                                            <option value="bank">bank</option>
+                                            <option value="bkash">bkash</option>
+                                            <option value="nogod">nogod</option>
+                                        </select>
+                                    </div>
+                                
+                                
                               </div>
                               <div style={{width:'49%'}}>
                                 

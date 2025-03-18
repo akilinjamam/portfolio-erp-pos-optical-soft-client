@@ -3,12 +3,12 @@
     font-family: v.$fs;
     div{
         .inputAreaOne, .inputAreaTwo{
-            height: 220px;
+            height: 240px;
             position: relative;
             // background-color: green;
             .container{
                 width: 100%;
-                height: 210px;
+                height: 230px;
                 background-color: rgb(209, 222, 247);
                 border-radius: 10px;
                 border: 1px solid gray;
@@ -40,7 +40,7 @@
                     width: 70%;
                 }
                 select{
-                    width: 50%;
+                    width: 70%;
                 }
             }
 
