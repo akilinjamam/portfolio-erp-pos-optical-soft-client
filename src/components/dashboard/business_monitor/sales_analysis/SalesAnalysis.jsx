@@ -3,60 +3,80 @@ import salesAnalysis from './SalesAnalysis.module.scss';
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import SalesAnalysisChart from './SalesAnalysisChart';
-import useOneMonthSaleData from '../../../../data/saleData/useOneMonthSalesData';
-import { useEffect } from 'react';
+// import useOneMonthSaleData from '../../../../data/saleData/useOneMonthSalesData';
+// import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSalesAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import useSalesAnalysis from './useSalesAnalysis';
 
 const SalesAnalysis = () => {
+
+  // const testArray = [
+  //   {
+  //     customerName: 'john',
+  //     advance: '500',
+  //     createdAt: '2025-03-18',
+  //     products: [
+  //       {
+  //         productName: 'test productOne',
+  //         price: 200,
+  //         quantity: 2
+  //       },
+  //       {
+  //         productName: 'test productTwo',
+  //         price: 300,
+  //         quantity: 2
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     customerName: 'Jeck',
+  //     advance: '400',
+  //     createdAt: '2025-03-18',
+  //     products: [
+  //       {
+  //         productName: 'test productOne',
+  //         price: 500,
+  //         quantity: 2
+  //       },
+  //       {
+  //         productName: 'test productTwo',
+  //         price: 400,
+  //         quantity: 2
+  //       },
+  //     ]
+  //   },
+  //   {
+  //     customerName: 'Jesmin',
+  //     advance: '500',
+  //     createdAt: '2025-03-19',
+  //     products: [
+  //       {
+  //         productName: 'test productOne',
+  //         price: 500,
+  //         quantity: 2
+  //       },
+  //       {
+  //         productName: 'test productTwo',
+  //         price: 400,
+  //         quantity: 2
+  //       },
+  //     ]
+  //   },
+  // ]
+
+  // output: [{totalSale: value, totalAdvance: value, totalDue: value}]
+
+
   const dispatch = useDispatch();
     const [month, setMonth] = useState('');
-    const nextMonth = (month) => {
-      if (!month) return ''; // Handle empty, null, or undefined values
+   
+  
+    const {accumulatedSalesInfo, isLoading, saleData} = useSalesAnalysis('', month)
     
-      const [year, mon] = month.split('-').map(Number); // Convert month to number
-      let newMonth = mon + 1;
-      let newYear = year;
-    
-      if (newMonth > 12) {
-        newMonth = 1; 
-        newYear += 1;
-      }
-    
-      return `${newYear}-${String(newMonth).padStart(2, '0')}`; // Ensure "01"-"09" format
-    };
-    
-    const {saleData, isLoading, refetch} = useOneMonthSaleData('', month, nextMonth(month));
-
-    useEffect(() => {
-      refetch()
-    },[refetch, month])
-
-    const formatSalesData = (salesData) => {
-        if (!salesData || !Array.isArray(salesData)) {
-          return []; 
-        }
-      
-        const salesByDate = salesData.reduce((acc, sale) => {
-          const date = new Date(sale.createdAt).toISOString().split("T")[0];
-      
-          const totalSale = sale.products?.reduce((sum, product) => {
-            return sum + (product.actualSalesPrice || 0) * (product.quantity || 0);
-          }, 0);
-      
-          acc[date] = (acc[date] || 0) + totalSale;
-          return acc;
-        }, {});
-      
-        return Object.entries(salesByDate).map(([date, sales]) => ({
-          date,
-          sales,
-        }));
-      };
-    
-    const salesGroupeByDate = formatSalesData(saleData?.result);
-    console.log(formatSalesData(saleData?.result))
+    const salesGroupeByDate = accumulatedSalesInfo;
+   
     
     const highestSale = salesGroupeByDate?.reduce((max, sale) => 
     (sale.sales > max.sales ? sale : max),  { date: "", sales: 0 } 
@@ -71,9 +91,7 @@ const SalesAnalysis = () => {
 
     const netSales = totalSales - totalDiscount;
     const totalDue = netSales - totalPaid;
-    
-    console.log(totalSales,totalPaid, totalDiscount)
-    
+     
   if (isLoading) {
     return <CommonLoading />
   }
