@@ -98,7 +98,7 @@ const ProfitExpenseList = ({hideSection, hideField}) => {
           
                 
           </section>
-          <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
+          <section style={{height: '52vh'}}  className={`${employeeList.tableArea}`}>
               <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} monthYear={date} />
           </section>
            {

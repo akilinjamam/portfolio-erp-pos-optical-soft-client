@@ -40,12 +40,12 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                     <div ref={contentToPrint} style={{width:'250px', margin:'auto'}}>
                         <br />
                         <div style={{marginBottom:'300px'}}>
-                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy'/>
+                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy' updateCustomerInfo={true} />
                         </div>
                         <br />
                        
                         <div>
-                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy'/>
+                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy' updateCustomerInfo={true}/>
                         </div>
                     </div>
                     

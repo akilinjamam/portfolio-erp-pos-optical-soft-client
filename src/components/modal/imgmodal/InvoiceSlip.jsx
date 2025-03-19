@@ -3,23 +3,16 @@ import moment from "moment";
 import { calculateTotalPrice } from "../../calculation/calculateSum";
 import useSalesRecord from "../../dashboard/salesModule/salesRecord/useSalesRecord";
 import Barcode from "react-barcode";
-import { invoiceCalculation } from "../../../invoiceCalculation/invoiceCalculation";
 import { useEffect } from "react";
 
-const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) => {
+const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added', updateCustomerInfo}) => {
 
     const {saleData, refetch} = useSalesRecord();
-
-    console.log(saleData?.upcomingInvoiceNumber)
 
     useEffect(() => {
       refetch()
     },[refetch])
 
-    const invoiceNumber = invoiceCalculation(saleData)
-    // const totalPriceArray = salesList?.map(item => (Number(item?.actualSalesPrice) * Number(item?.quantity)))
-    // const totalPriceValue = calculateTotalPrice(totalPriceArray)
-    console.log(invoiceNumber)
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"DM Sans", sans-serif', fontSize:'9px'}}>
       
@@ -49,8 +42,8 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
           <p><strong>Payment Method:</strong></p>
         </div>
         <div style={{textAlign:"right"}}>
-          <p style={{fontWeight:'bold', fontSize:'10px'}}>{saleData?.upcomingInvoiceNumber?.toString()?.slice(8)}</p>
-          <p><strong></strong> {moment().format("YYYY-MM-DD")}</p>
+          <p style={{fontWeight:'bold', fontSize:'10px'}}>{updateCustomerInfo ? getCustomerInfo?.invoiceBarcode?.slice(8) : saleData?.upcomingInvoiceNumber?.toString()?.slice(8)}</p>
+          <p><strong></strong> {updateCustomerInfo ? getCustomerInfo?.createdAt?.slice(0,10) :moment().format("YYYY-MM-DD") }</p>
           <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate : 'blank'}</p>
           <p >{getCustomerInfo?.customerName ? getCustomerInfo?.customerName : 'blank'}</p>
           <p >{getCustomerInfo?.phoneNumber ? getCustomerInfo?.phoneNumber : 'blank'}</p>
@@ -130,7 +123,7 @@ const InvoiceSlip = ({getCustomerInfo, salesList, copy='Copy will be added'}) =>
         </table>
 
         <div style={{ width:"100%", display:'flex', alignItems:'center', justifyContent:'center', marginLeft:'5px'}}>
-            <Barcode  format="CODE128" fontSize={15} width={1.8} height={30} value={saleData?.upcomingInvoiceNumber}/>   
+            <Barcode  format="CODE128" fontSize={15} width={1.8} height={30} value={updateCustomerInfo ? getCustomerInfo?.invoiceBarcode : saleData?.upcomingInvoiceNumber}/>   
         </div>
       </div>
 
