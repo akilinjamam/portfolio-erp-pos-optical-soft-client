@@ -7,7 +7,9 @@ const useOneMonthSaleData = (query, from , to) => {
     const {data:getAllData, refetch, isLoading, error} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData'], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
     const saleData = getAllData
 
-    
+        const totalSales = saleData?.result?.flatMap(sale => sale?.products?.map(item => Number(item?.quantity) * Number(item?.actualSalesPrice)))
+        const totalSalesResult = calculateTotalPrice(totalSales)
+       
         const filterCashSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Cash')
         const filterBankSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Bank')
         const filterBkashSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Bkash')
@@ -24,7 +26,7 @@ const useOneMonthSaleData = (query, from , to) => {
         const totalDiscount = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.discount)))
   
    
-    const totalSalesItem = saleData?.result?.length;
+        const totalSalesItem = saleData?.result?.length;
 
         const totalCashSales = filterCashSales?.map(sale => Number(sale?.paymentHistory?.split('+')?.slice(1,2)))
 
@@ -60,9 +62,9 @@ const useOneMonthSaleData = (query, from , to) => {
         const totalBkashValue = totalBkashValueSale + totalBkashValueDue
         const totalNogodValue = totalNogodValueSale + totalNogodValueDue
 
-        console.log(totalCashValueDue)
-
-    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalDiscount, totalSalesItem, isLoading, error, refetch }
+        console.log(totalBankValueDue)
+       
+    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalSalesResult, totalDiscount, totalSalesItem, isLoading, error, refetch }
 };
 
 export default useOneMonthSaleData;

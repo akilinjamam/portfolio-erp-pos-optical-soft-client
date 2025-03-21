@@ -5,11 +5,14 @@ import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import useOneMonthSaleData from '../../../../data/saleData/useOneMonthSalesData';
  
 const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField, monthYear}) => {
 
 
   const {profitExpenseData, refetch, isLoading: isLoadingProfitExpenseData} = useGetProfitExpenseAccountsData(monthYear)
+  const {totalCashValue} = useOneMonthSaleData('', '', '');  
+  console.log(totalCashValue)
   console.log(profitExpenseData?.result)
 
   useEffect(() => {
