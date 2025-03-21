@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import moment from 'moment-timezone';
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
@@ -64,7 +65,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.customerName}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>
                             
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.createdAt?.slice(0,10)}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left', width:'120px'}}>{moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.referredBy}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
                                 {sale?.products?.map((item, index) => <p key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
