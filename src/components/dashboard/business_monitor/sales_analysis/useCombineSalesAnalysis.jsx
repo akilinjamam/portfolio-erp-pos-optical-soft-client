@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
-import useCombineSalesAnalysis from "./useCombineSalesAnalysis";
+import useGetAccountsData from "../../../../data/accountsData/useGetAccountsData";
 
-const useSalesAnalysis = (query, month ) => {
+const useCombineSalesAnalysis = (query, month ) => {
 
     const nextMonth = (month) => {
         if (!month) return ''; 
@@ -20,8 +20,6 @@ const useSalesAnalysis = (query, month ) => {
       };
 
     const {saleData, isLoading, refetch} = useOneMonthSaleData('', month, nextMonth(month));
-    const {accumulatedSalesInfo: test } = useCombineSalesAnalysis('',month, nextMonth(month));
-    console.log(test)
     
         useEffect(() => {
           refetch()
@@ -39,9 +37,13 @@ const useSalesAnalysis = (query, month ) => {
                 return sum + (product.actualSalesPrice || 0) * (product.quantity || 0);
               }, 0);
               const totalDue = totalSale - totalAdvance;
+              const firstInstallment = sale?.paymentHistory?.split('+')?.[1];
+              const secondInstallment = sale?.paymentHistory?.split('+')?.[2];
+              const discount = sale?.discount;
+
     
               if(!acc[date]){
-                acc[date] = { sales: 0, totalAdvance: 0, totalDue: 0 };
+                acc[date] = { sales: 0, totalAdvance: 0, totalDue: 0, firstInstallment: 0, secondInstallment: 0, discount: 0 };
               }
     
               console.log(totalSale)
@@ -49,6 +51,9 @@ const useSalesAnalysis = (query, month ) => {
               acc[date].sales += totalSale;
               acc[date].totalAdvance += totalAdvance;
               acc[date].totalDue += totalDue;
+              acc[date].firstInstallment += Number(firstInstallment) || 0;
+              acc[date].secondInstallment += Number(secondInstallment) || 0;
+              acc[date].discount += Number(discount) || 0;
               
               return acc;
             }, {});
@@ -58,13 +63,54 @@ const useSalesAnalysis = (query, month ) => {
               date,
               ...data
             }));
-          };
+        };
         
         console.log(formatSalesData(saleData?.result))
         const accumulatedSalesInfo =formatSalesData(saleData?.result);
+        const year = month.split('-')?.[0]
+        const singleMonth = month.split('-')?.[1]
+       
+        const {accountsData} = useGetAccountsData(year, singleMonth, '');
+
+        const totalExpenseData = accountsData?.result?.map(item => {
+
+            const expense = item?.expenses?.map(expense => {
+                return (
+                    {
+                        expenseName: expense?.expenseName,
+                        expenseAmount: expense?.expenseAmount
+                    }
+                )
+            })
+
+            return (
+                {
+                    date: item?.date,
+                    expenses: expense
+                }
+            )
+        })
+
+        console.log(totalExpenseData)
 
         return {accumulatedSalesInfo, isLoading, refetch, saleData}
     
 };
 
-export default useSalesAnalysis;
+// const thirdArray = [
+//   {
+//     date: '2025-03-17',
+//     totalPaid: '20000'
+//   },
+//   {
+//     date: '2025-03-20',
+//     totalPaid: '30000'
+//   },
+//   {
+//     date: '2025-03-26',
+//     totalPaid: '40000'
+//   }
+// ]
+
+
+export default useCombineSalesAnalysis;
