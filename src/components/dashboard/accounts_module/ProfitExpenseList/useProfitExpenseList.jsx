@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import useGetFinalAccountsData from "../../../../data/accountsData/useGetFinalAccountsDtaa";
 import useUpdateFinalAccountsData from "../../../../data/accountsData/useUpdateFinalAccountData";
 import useDeleteFinalAccountsData from "../../../../data/accountsData/useDeleteFinalAccountsData";
+import useCurrentDate from "../../../../data/saleData/useCurrentDate";
 
 
 const useProfitExpenseList = () => {
-
-    const [date, setDate] = useState('');
+    const {todayMonth } = useCurrentDate()
+    const [date, setDate] = useState(todayMonth);
     
     const year = date?.split('-')?.[0]
     const month = date?.split('-')?.[1]

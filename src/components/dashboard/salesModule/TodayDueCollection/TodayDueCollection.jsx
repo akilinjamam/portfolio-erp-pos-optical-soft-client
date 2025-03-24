@@ -9,12 +9,15 @@ import { calculateTotalPrice } from "../../../calculation/calculateSum";
 
 import TodayDueCollectionTable from './TodayDueCollectionTable';
 import useGetDueCollectionSaleData from '../../../../data/saleData/useGetDueCollectionSaleData';
+import useCurrentDate from '../../../../data/saleData/useCurrentDate';
 
 const TodayDueCollection = () => {
 
     const dispatch = useDispatch();
+
+    const {today} = useCurrentDate()
    
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(today);
     
 
     const {dueCollectionSaleData, isLoading, refetch} = useGetDueCollectionSaleData(date);

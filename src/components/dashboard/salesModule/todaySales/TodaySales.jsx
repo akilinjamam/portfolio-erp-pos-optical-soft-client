@@ -8,12 +8,15 @@ import { calculateTotalPrice } from "../../../calculation/calculateSum";
 
 import useGetLastSalesAndAccountsData from "../../../../data/accountsData/useGetLastSalesAccountsData";
 import TodaySalesTable from "./TodaySalesTable";
+import useCurrentDate from '../../../../data/saleData/useCurrentDate';
 
 const TodaySales = () => {
 
     const dispatch = useDispatch();
+
+    const {today} = useCurrentDate()
    
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(today);
     
 
     const {lastSaleAndAccountsData, totalBankValue, totalBkashValue, totalNogodValue, totalCashValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue, isLoading, refetch} = useGetLastSalesAndAccountsData(date);
