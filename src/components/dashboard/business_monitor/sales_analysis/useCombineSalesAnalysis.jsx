@@ -271,7 +271,7 @@ const useCombineSalesAnalysis = (month) => {
             };
           });
         
-          return mergedArray;
+          return mergedArray?.slice()?.reverse();
         };
         
         

@@ -96,7 +96,7 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.bank}+{sale?.bkash}+{sale?.nogod} = {sale?.bank + sale?.bkash + sale?.nogod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.extraProfitAmount}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.deficit}/{sale?.cashOver}</td>           
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{(sale?.bank + sale?.bkash + sale?.nogod + (sale?.profitAllocation - sale?.cashOver - sale?.deficit)) - (sale?.totalExpense) -(sale?.totalFixedExpense) -(sale?.payrollPaid) - (sale?.vendorPaid)}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{(sale?.bank + sale?.bkash + sale?.nogod + (sale?.profitAllocation - sale?.cashOver - sale?.deficit)) -(sale?.totalFixedExpense) -(sale?.payrollPaid) - (sale?.vendorPaid)}</td>
                         </tr>
                     ))
                 }
