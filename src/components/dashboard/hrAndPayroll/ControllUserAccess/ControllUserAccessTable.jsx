@@ -40,6 +40,7 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             stock_analysis: paginatedDataContainer?.stock_analysis,
             sales_analysis: paginatedDataContainer?.sales_analysis,
             best_sale_performer: paginatedDataContainer?.best_sale_performer,
+            cash_flow_summery: paginatedDataContainer?.cash_flow_summery
 
 
         })
@@ -201,6 +202,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.expenses_profit_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, expenses_profit_list: access?.expenses_profit_list ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Expenses Profit List <i className={`uil uil-${access?.expenses_profit_list ? 'unlock' : 'lock'}`}></i></span>
+                        </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.cash_flow_summery} type="checkbox" name="" id="" onClick={() => setAccess({...access, cash_flow_summery: access?.cash_flow_summery ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Cash Flow Summery <i className={`uil uil-${access?.cash_flow_summery ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
 

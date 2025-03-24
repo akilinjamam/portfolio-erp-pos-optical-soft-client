@@ -41,7 +41,8 @@ const useControllUserAccess = (id) => {
         profit_category_analysis:false,
         stock_analysis: false,
         sales_analysis: false,
-        best_sale_performence: false
+        best_sale_performence: false,
+        cash_flow_summery: false
 
     })
 
