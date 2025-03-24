@@ -40,6 +40,7 @@ export const homeNavigator = [
             six: '/dashboard/accounts_module/due_collection_list',
             seven: '/dashboard/accounts_module/add_fixed_expenses',
             eight: '/dashboard/accounts_module/expenses_profit_list',
+            nine: '/dashboard/accounts_module/cash_flow_summery',
         }
     },
     {

@@ -18,8 +18,8 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
     }
 
     return (
-        <div style={{ overflowX: `${ tableScroll ? 'scroll' : '' }`, width: "100%" }} ref={contentToPrint}>
-            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px', width:`${tableScroll ? '1000px' : '99%'}`}}>
+        <div style={{ overflowX: `${ tableScroll ? 'scroll' : '' }`, width: "100%" }} >
+            <table ref={contentToPrint} style={{borderCollapse:'collapse', fontSize:'10.5px', margin:'auto', paddingBottom:'10px', width:`${tableScroll ? '1100px' : '99%'}`}}>
                 <thead style={{position:'sticky', top:'0', backgroundColor:'#f1f1f1'}}>
                     {/* <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>

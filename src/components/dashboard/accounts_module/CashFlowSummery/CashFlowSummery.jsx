@@ -42,7 +42,7 @@ const CashFlowSummery = () => {
                 <input value={month} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
                
             </div>
-            <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
+            <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh',}}>
                 <CashFlowSummeryTable tableScroll={false} paginatedDataContainer={finalMergedData} isLoading={isLoading} />
             </div>
            
