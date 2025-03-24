@@ -70,6 +70,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
             comment: getCustomerInfo?.comment?.split('=')?.[0] || '',
             pd: getCustomerInfo?.comment?.split('=')?.[1] || '',
             paymentMethod: getCustomerInfo?.paymentMethod || '',
+            duePaymentMethod: getCustomerInfo?.duePaymentMethod || '',
             leftSph: getCustomerInfo?.leftSph || '',
             leftCyl: getCustomerInfo?.leftCyl || '',
             leftAxis: getCustomerInfo?.leftAxis || '',
@@ -123,6 +124,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
             delivered:data?.delivered === '' ? undefined : data?.delivered,
             recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
+            duePaymentMethod: data?.paymentMethod === '' ? undefined : data?.duePaymentMethod,
             comment:data?.comment === '' ? undefined : `${data?.comment}=${data?.pd}`,
         }
        
@@ -133,6 +135,8 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
         updateCustomerData(newData)
         dispatch(closeModal())
       }
+
+      console.log(getCustomerInfo?.paymentHistory?.split('+')?.[2])
 
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'updateCustomer' ) ? imgmodal.open : imgmodal.close}`} >
@@ -292,6 +296,24 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
                                     <option value="Nogod">Nogod</option>
                                     <option value="Rocket">Rocket</option>
                                 </select>
+                                <br />
+                                <br />
+                               
+                                { getCustomerInfo?.paymentHistory?.split('+')?.[2] !== undefined
+                                    && <label htmlFor="">Due Payment Method:</label>}
+                                <br />
+                                {
+                                    getCustomerInfo?.paymentHistory?.split('+')?.[2] !== undefined
+                                    &&
+                                    <select name="" id="" {...register('duePaymentMethod')} required>
+                                        <option value="">Select Due Payment Method</option>
+                                        <option value="Bank">Bank</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Bkash">Bkash</option>
+                                        <option value="Nogod">Nogod</option>
+                                        <option value="Rocket">Rocket</option>
+                                    </select>
+                                }
                                 <br />
                                 <br />
                             </div>

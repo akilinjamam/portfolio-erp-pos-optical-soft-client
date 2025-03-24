@@ -69,6 +69,7 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Total Expenses</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Ending Cash Reserved</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Deficit</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Cash Over</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Profit Allocation</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Bank</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Bkash</th>
@@ -122,6 +123,7 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
                 </td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.endingCashReserved}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.deficit}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.cashOver}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.profitAllocation}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayBankValue}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayBkashValue}</td>

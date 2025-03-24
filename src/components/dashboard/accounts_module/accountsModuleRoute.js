@@ -47,4 +47,10 @@ export const accountsModuleRoute = [
         icon: 'uil uil-file-alt',
         color: 'rgb(143, 409, 237)'
     },
+    {
+        value: 'Cash Flow Summery',
+        link: '/dashboard/accounts_module/cash_flow_summery',
+        icon: 'uil uil-chart-line',
+        color: 'rgb(243, 159, 187)'
+    },
 ]

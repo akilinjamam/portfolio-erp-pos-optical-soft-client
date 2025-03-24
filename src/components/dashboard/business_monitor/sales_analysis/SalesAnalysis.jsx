@@ -73,7 +73,7 @@ const SalesAnalysis = () => {
     const [month, setMonth] = useState('');
    
   
-    const {accumulatedSalesInfo, isLoading, saleData} = useSalesAnalysis('', month)
+    const {accumulatedSalesInfo, isLoading, saleData} = useSalesAnalysis(month)
     
     const salesGroupeByDate = accumulatedSalesInfo;
    

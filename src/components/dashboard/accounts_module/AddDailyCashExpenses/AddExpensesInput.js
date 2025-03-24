@@ -37,4 +37,18 @@ export const addOnterExpensesInput = [
         name: 'endingCashReserved',
         id: ''
     },
+    {
+        value: 'deficit',
+        placeholder: 'Deficit',
+        type: 'number',
+        name: 'deficit',
+        id: ''
+    },
+    {
+        value: 'cashOver',
+        placeholder: 'Cash Over',
+        type: 'number',
+        name: 'cashOver',
+        id: ''
+    },
 ]

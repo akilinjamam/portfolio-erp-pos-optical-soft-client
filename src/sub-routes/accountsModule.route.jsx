@@ -2,6 +2,7 @@ import AddExpenses from "../components/dashboard/accounts_module/AddDailyCashExp
 import AddFixedExpenses from "../components/dashboard/accounts_module/AddFixedExpenses/AddFixedExpenses"
 import AddVendor from "../components/dashboard/accounts_module/AddVendor/AddVendor"
 import AddVendorBill from "../components/dashboard/accounts_module/AddVendorBill/AddVendorBill"
+import CashFlowSummery from "../components/dashboard/accounts_module/CashFlowSummery/CashFlowSummery"
 import DailyCashExpensesList from "../components/dashboard/accounts_module/DailyCashExpensesList/DailyCashExpensesList"
 import DailyDueCollection from "../components/dashboard/accounts_module/DueCollection/DailyDueCollection"
 import ProfitExpenseList from "../components/dashboard/accounts_module/ProfitExpenseList/ProfitExpenseList"
@@ -41,6 +42,10 @@ const accountsRoute = [
     {
         path:'due_collection_list',
         element: <DailyDueCollection/>
+    },
+    {
+        path:'cash_flow_summery',
+        element: <CashFlowSummery/>
     },
       
 ]

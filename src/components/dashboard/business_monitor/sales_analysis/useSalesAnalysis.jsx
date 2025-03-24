@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
 import useCombineSalesAnalysis from "./useCombineSalesAnalysis";
 
-const useSalesAnalysis = (query, month ) => {
+const useSalesAnalysis = (month) => {
 
     const nextMonth = (month) => {
         if (!month) return ''; 
@@ -20,7 +20,7 @@ const useSalesAnalysis = (query, month ) => {
       };
 
     const {saleData, isLoading, refetch} = useOneMonthSaleData('', month, nextMonth(month));
-    const {accumulatedSalesInfo: test } = useCombineSalesAnalysis('',month, nextMonth(month));
+    const {finalMergedData: test } = useCombineSalesAnalysis(month);
     console.log(test)
     
         useEffect(() => {

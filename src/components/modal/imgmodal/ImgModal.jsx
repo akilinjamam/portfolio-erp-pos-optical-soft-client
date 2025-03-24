@@ -29,6 +29,7 @@ import UpdateCustomerInfo from './UpdateCustomerInfo';
 import StockAnalysisModal from './StockAnalysisModal';
 import SalesAnalysisModal from './SalesAnalysisModal';
 import BestSalePerformerModal from './BestSalePerformerModal';
+import CashFlowSummeryModal from './CashFlowSummerModal';
 
 const ImgModal = () => {
 
@@ -58,6 +59,7 @@ const ImgModal = () => {
 
         const salesAnalysisData = useSelector(state => state.imgModal.salesAnalysisData)
         const salesDetailData = useSelector(state => state.imgModal.salesDetail)
+        const cashFlow = useSelector(state => state.imgModal.cashFlow)
 
         const dispatch = useDispatch();
         
@@ -89,6 +91,7 @@ const ImgModal = () => {
             <ProfitExpenseAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={analysisData} />
             <StockAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={stockAnalysisData} categoryWiseStockDetail={categoryWiseStockDetail}/>
             <SalesAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={salesAnalysisData} salesDetail={salesDetailData}/>
+            <CashFlowSummeryModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} cashFlow={cashFlow}/>
 
         </div>
     );

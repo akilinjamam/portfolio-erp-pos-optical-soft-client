@@ -27,7 +27,9 @@ const useAddExpenses = () => {
     const initialOtherExpensesData = {
         date: '',
         startingCashReserved: '',
-        endingCashReserved: ''
+        endingCashReserved: '',
+        deficit: '',
+        cashOver: ''
     }
     const [expensesData, setExpensesData] = useState(initialExpensesData);
     const [otherExpensesData, setOtherExpensesData] = useState(initialOtherExpensesData)
@@ -161,7 +163,8 @@ const useAddExpenses = () => {
         const accountsData = {
             ...otherExpensesData, 
             startingCashReserved: otherExpensesData?.startingCashReserved === '' ? '0' : otherExpensesData?.startingCashReserved,
-            deficit: '0',
+            deficit: otherExpensesData?.deficit === '' ? '0' : otherExpensesData?.deficit,
+            cashOver: otherExpensesData?.cashOver === '' ? '0' : otherExpensesData?.cashOver,
             dueSalesAmount: dueSales,
             expenses: showData,
             todayBankValue,

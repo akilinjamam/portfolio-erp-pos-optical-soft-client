@@ -54,7 +54,7 @@ const SalesRecord = () => {
                     dispatch(openModal('sales'))
                     dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue}))
                 }} title="print" className="uil uil-print"></i>
-                <span>Total : {saleData?.total}</span>
+                <span>Total : {totalSalesItem}</span>
                 <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
                    
                     setHandleQuery(e.target.value)   
