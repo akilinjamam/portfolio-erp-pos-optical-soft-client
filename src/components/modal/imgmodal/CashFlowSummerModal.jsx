@@ -1,21 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
-import { useReactToPrint } from 'react-to-print';
+// import { useReactToPrint } from 'react-to-print';
 import CashFlowSummeryTable from '../../dashboard/accounts_module/CashFlowSummery/CashFlowSummeryTable';
+import usePrint from '../../../print/usePrint';
+
 
 const CashFlowSummeryModal = ({type, open, dispatch, closeModal, cashFlow}) => {
   
-    const contentToPrint = useRef(null);
-    const handlePrint = useReactToPrint({
-        documentTitle: "Print This Document",
-        onBeforePrint: () => console.log("before printing..."),
-        onAfterPrint: () => console.log("after printing..."),
-        removeAfterPrint: true,
-    });
+    const {contentToPrint, handlePrint} = usePrint()
 
-    
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'cash-flow-summery') ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container} ${imgmodal.sizeStock}`}>
@@ -32,7 +27,7 @@ const CashFlowSummeryModal = ({type, open, dispatch, closeModal, cashFlow}) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                    <div  ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
                     <CashFlowSummeryTable tableScroll={true} contentToPrint={contentToPrint} paginatedDataContainer={cashFlow}/>
                     </div>        
                 </section>
