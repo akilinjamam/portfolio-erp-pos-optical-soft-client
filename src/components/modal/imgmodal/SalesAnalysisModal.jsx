@@ -4,6 +4,7 @@ import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import SalesAnalysisChart from '../../dashboard/business_monitor/sales_analysis/SalesAnalysisChart';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const SalesAnalysisModal = ({type, open, dispatch, closeModal, analysisData, salesDetail}) => {
     console.log(salesDetail)
@@ -33,6 +34,7 @@ const SalesAnalysisModal = ({type, open, dispatch, closeModal, analysisData, sal
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                    <ReportTitle/>
                     <SalesAnalysisChart allSalesPriceData={analysisData} highestSale={salesDetail?.highestSale} lowestSale={salesDetail?.lowestSale} totalSales={salesDetail?.totalSales} netSales={salesDetail?.netSales} totalDiscount={salesDetail?.totalDiscount} totalPaid={salesDetail?.totalPaid} totalDue={salesDetail?.totalDue} />
                     </div>        
                 </section>

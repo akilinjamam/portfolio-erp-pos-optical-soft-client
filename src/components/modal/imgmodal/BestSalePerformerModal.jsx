@@ -4,6 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
 import BestSalePerformerTable from '../../dashboard/hrAndPayroll/BestSalePerformer/BestSalePerfomerTable';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const BestSalePerformerModal = ({open, type, dispatch, closeModal }) => {
 
@@ -36,7 +37,8 @@ const BestSalePerformerModal = ({open, type, dispatch, closeModal }) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
+                    <div ref={contentToPrint} style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
+                    <ReportTitle/>
                     <BestSalePerformerTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue}/>
                     </div>        
                 </section>

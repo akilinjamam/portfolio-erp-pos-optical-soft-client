@@ -4,6 +4,7 @@ import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import StockAnalysisChart from '../../dashboard/business_monitor/stockAnalysis/StockAnalysisChart';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const StockAnalysisModal = ({type, open, dispatch, closeModal, analysisData, categoryWiseStockDetail}) => {
 
@@ -33,6 +34,7 @@ const StockAnalysisModal = ({type, open, dispatch, closeModal, analysisData, cat
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                    <ReportTitle/>
                     <StockAnalysisChart analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseStockDetail?.categoryWiseAvailableQuantity} categoryWiseStockOunt={categoryWiseStockDetail?.categoryWiseStockOunt} categoryWiseTotalQuantity={categoryWiseStockDetail?.categoryWiseTotalQuantity} categoryName={categoryWiseStockDetail?.categoryName} />
                     </div>        
                 </section>

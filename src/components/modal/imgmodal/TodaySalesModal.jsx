@@ -4,6 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
 import TodaySalesTable from '../../dashboard/salesModule/todaySales/TodaySalesTable';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
 
@@ -49,8 +50,9 @@ const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px', overflowX:'hidden', height:"450px", scrollbarWidth:'none', minHeight:'auto'}}  className={`${imgmodal.stockContainer}`}>
-                        <div>
-                            <TodaySalesTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashPaidValue={totalCashPaidValue} totalBankPaidValue={totalBankPaidValue} totalBkashPaidValue={totalBkashPaidValue} totalNogodPaidValue={totalNogodPaidValue}/>
+                        <div ref={contentToPrint}>
+                            <ReportTitle/>
+                            <TodaySalesTable paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashPaidValue={totalCashPaidValue} totalBankPaidValue={totalBankPaidValue} totalBkashPaidValue={totalBkashPaidValue} totalNogodPaidValue={totalNogodPaidValue}/>
                         </div>
                     </div>        
                 </section>

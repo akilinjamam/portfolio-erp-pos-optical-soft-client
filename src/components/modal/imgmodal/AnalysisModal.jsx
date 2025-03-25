@@ -4,6 +4,7 @@ import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import ProfitCategoryAnalysisChart from '../../dashboard/business_monitor/profitCategoryAnalysis/ProfitCategoryAnalysisChart';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 
 
@@ -36,6 +37,7 @@ const AnalysisModal = ({type, open, dispatch, closeModal, analysisData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                        <ReportTitle/>
                         <ProfitCategoryAnalysisChart  analysisData={analysisData}/>
                     </div>        
                 </section>

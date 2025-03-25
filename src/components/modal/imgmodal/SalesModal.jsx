@@ -4,6 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import SalesRecordTable from '../../dashboard/salesModule/salesRecord/salesRecordTable';
 import { useSelector } from 'react-redux';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const SalesModal = ({open, type, dispatch, closeModal }) => {
 
@@ -42,7 +43,8 @@ const SalesModal = ({open, type, dispatch, closeModal }) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
+                    <div ref={contentToPrint} style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
+                    <ReportTitle/>
                     <SalesRecordTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue}/>
                     </div>        
                 </section>

@@ -4,6 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import CustomerListTable from '../../dashboard/administration_module/customer_list/CutomerListTable';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const CustomerListModal = ({open, type, dispatch, closeModal }) => {
 
@@ -33,8 +34,9 @@ const CustomerListModal = ({open, type, dispatch, closeModal }) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                        <CustomerListTable contentToPrint={contentToPrint} paginatedDataContainer={customerListData} />
+                    <div ref={contentToPrint} style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
+                        <ReportTitle/>
+                        <CustomerListTable paginatedDataContainer={customerListData} />
                     </div>        
                 </section>
         </div>

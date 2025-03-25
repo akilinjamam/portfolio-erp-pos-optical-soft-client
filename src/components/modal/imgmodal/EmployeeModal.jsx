@@ -4,6 +4,7 @@ import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import EmployeeListModalTable from '../../dashboard/hrAndPayroll/EmployeeList/EmployeeListModalTable';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const EmployeeModal = ({type, open, dispatch, closeModal, employeeData}) => {
 
@@ -32,6 +33,7 @@ const EmployeeModal = ({type, open, dispatch, closeModal, employeeData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                    <ReportTitle/>
                     <EmployeeListModalTable paginatedDataContainer={employeeData}/>
                     </div>        
                 </section>

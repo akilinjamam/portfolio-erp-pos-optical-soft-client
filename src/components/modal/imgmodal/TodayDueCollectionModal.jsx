@@ -4,6 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
 import TodayDueCollectionTable from '../../dashboard/salesModule/TodayDueCollection/TodayDueCollectionTable';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
 
@@ -40,8 +41,9 @@ const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div style={{marginTop:'10px'}}  className={`${imgmodal.stockContainer}`}>
-                    <TodayDueCollectionTable contentToPrint={contentToPrint} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount}/>
+                    <div  ref={contentToPrint} style={{marginTop:'10px', overflowX: 'hidden', overflowY:'scroll', height:'499px', scrollbarWidth: "none", msOverflowStyle: "none"}}  className={`${imgmodal.stockContainer}`}>
+                    <ReportTitle/>
+                    <TodayDueCollectionTable  paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount}/>
                     </div>        
                 </section>
         </div>

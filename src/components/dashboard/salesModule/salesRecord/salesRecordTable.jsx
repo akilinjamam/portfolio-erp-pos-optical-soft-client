@@ -5,7 +5,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
-const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue}) => {
+const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue}) => {
     
 
     if(isLoading){
@@ -17,7 +17,7 @@ const SalesRecordTable = ({contentToPrint, paginatedDataContainer, isLoading, to
     }
 
     return (
-        <div ref={contentToPrint}>
+        <div >
             <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px'}}>
                 <thead>
                     <tr>

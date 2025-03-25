@@ -6,6 +6,7 @@ import { useReactToPrint } from 'react-to-print';
 
 import VendorListTable from '../../dashboard/accounts_module/VendorList/VendorlistTable';
 import useVendorList from '../../dashboard/accounts_module/VendorList/useVendorList';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 const VendorModal = ({type, open, dispatch, closeModal, vendorData}) => {
 
@@ -38,6 +39,7 @@ const VendorModal = ({type, open, dispatch, closeModal, vendorData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                        <ReportTitle/>
                         <VendorListTable  paginatedDataContainer={vendorData} totalPaid={totalPaid} hideField={true}/>
                     </div>        
                 </section>

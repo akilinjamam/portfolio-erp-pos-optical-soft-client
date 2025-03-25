@@ -5,7 +5,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue}) => {
+const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue}) => {
    
 
     if(isLoading){
@@ -17,7 +17,7 @@ const TodaySalesTable = ({contentToPrint, paginatedDataContainer, isLoading, tot
     }
 
     return (
-        <div ref={contentToPrint}>
+        <div >
             <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px'}}>
                 <thead>
                     <tr>

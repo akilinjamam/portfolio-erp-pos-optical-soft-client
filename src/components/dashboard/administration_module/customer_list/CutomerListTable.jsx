@@ -3,7 +3,7 @@ import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const CustomerListTable = ({contentToPrint, paginatedDataContainer, isLoading}) => {
+const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
 
     if(isLoading){
         return (
@@ -14,7 +14,7 @@ const CustomerListTable = ({contentToPrint, paginatedDataContainer, isLoading}) 
     }
 
     return (
-        <div ref={contentToPrint} style={{marginTop:'10px'}} >
+        <div  style={{marginTop:'10px'}} >
            <table style={{borderCollapse:'collapse' ,fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
                 <thead>
                     <tr>

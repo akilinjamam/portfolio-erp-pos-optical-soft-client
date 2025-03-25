@@ -3,7 +3,7 @@ import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const BestSalePerformerTable = ({contentToPrint, paginatedDataContainer, isLoading, totalSalesValue}) => {
+const BestSalePerformerTable = ({ paginatedDataContainer, isLoading, totalSalesValue}) => {
     
 
     if(isLoading){
@@ -15,8 +15,8 @@ const BestSalePerformerTable = ({contentToPrint, paginatedDataContainer, isLoadi
     }
 
     return (
-        <div ref={contentToPrint}>
-            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px'}}>
+        <div >
+            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
                 <thead>
                     
                     <tr>

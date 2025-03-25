@@ -4,6 +4,7 @@ import '../../../global_style/global_style.css'
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import VendorListTable from '../../dashboard/accounts_module/DailyCashExpensesList/DailyCashExpensesTable';
+import ReportTitle from '../../../ReportTitle/ReportTitle';
 
 
 const ExpenseListModal = ({type, open, dispatch, closeModal, expenseData}) => {
@@ -34,6 +35,7 @@ const ExpenseListModal = ({type, open, dispatch, closeModal, expenseData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
+                        <ReportTitle/>
                         <VendorListTable  paginatedDataContainer={expenseData}/>
                     </div>        
                 </section>
