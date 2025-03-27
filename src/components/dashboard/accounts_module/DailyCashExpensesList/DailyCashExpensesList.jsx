@@ -95,7 +95,7 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
                 
           </section>
           <section style={{height: '42vh'}}  className={`${cashList.tableArea}`}>
-              <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} hideField={hideField} />
+              <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} hideField={hideField} hideSection={hideSection} />
           </section>
            {
             !isLoading

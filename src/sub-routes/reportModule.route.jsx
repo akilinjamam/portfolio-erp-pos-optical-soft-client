@@ -48,10 +48,6 @@ const reportModuleRoute = [
         element: <DailyCashExpensesList hideField={true} hideSection={true}/>
       },
       {
-        path:'expenses_list',
-        element: <DailyCashExpensesList hideField={true} hideSection={true}/>
-      },
-      {
         path:'vendor_list',
         element: <VendorList hideField={true} hideSection={true}/>
       },
