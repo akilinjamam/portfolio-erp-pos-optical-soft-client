@@ -12,32 +12,32 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 const StockAnalysis = () => {
 
-    const [date, setDate] = useState({
-      from: '',
-      to: ''
-    }) 
-    
-    const {products, refetch, isLoading} = useProductData('', date?.from, date?.to, '', '')
-    const analysisData = products?.result
-    
-    const categoryCount = analysisData?.reduce((acc, item) => {
+  const [date, setDate] = useState({
+    from: '',
+    to: ''
+  })
+
+  const { products, refetch, isLoading } = useProductData('', date?.from, date?.to, '', '')
+  const analysisData = products?.result
+
+  const categoryCount = analysisData?.reduce((acc, item) => {
     acc[item?.category] = (acc[item?.category] || 0) + Number(item?.quantity);
     return acc;
-    }, {});
+  }, {});
 
-    const [month, setMonth] = useState('Optical Frame');
-  
-    const findByCategory = products?.result?.filter(item => item?.category === month)
+  const [month, setMonth] = useState('Optical Frame');
+
+  const findByCategory = products?.result?.filter(item => item?.category === month)
 
   useEffect(() => {
     refetch
-  },[refetch, month, date])
+  }, [refetch, month, date])
 
   const dispatch = useDispatch();
 
 
   const categoryWiseAvailableQuantity = calculateTotalPrice(findByCategory?.map(item => Number(item?.quantity)))
-   
+
   const categoryWiseTotalQuantity = calculateTotalPrice(findByCategory?.map(item => Number(item?.stockAmount)))
   const categoryWiseStockOunt = calculateTotalPrice(findByCategory?.map(item => Number(item?.stockAmount))) - calculateTotalPrice(findByCategory?.map(item => Number(item?.quantity)))
 
@@ -56,23 +56,23 @@ const StockAnalysis = () => {
             <form action="">
               <div className='flex_top'>
 
-                <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
-                    <label style={{marginRight:'5px'}} htmlFor="">Find By Category: </label>
-                    <select style={{marginBottom:'3px'}} name="" id="" onChange={(e) => setMonth(e.target.value)}>
-                       {
-                            Object?.keys(categoryCount)?.map((item, index) => {
-                                return (
-                                    <option key={index+1} value={item}>{item}</option>
-                                )
-                            })
-                       }
-                    </select>
-                    <br />
-                    <label style={{marginRight:'81px'}} htmlFor="">From:</label>
-                    <input  style={{marginBottom:'3px'}} type="date" name="" id="" onChange={(e) => setDate({...date, from: e.target.value})} />
-                    <br />
-                    <label style={{marginRight:'98px'}} htmlFor="">To:</label>
-                    <input  style={{marginBottom:'3px'}} type="date" name="" id="" onChange={(e) => setDate({...date, to: e.target.value})} />
+                <div style={{ width: '100%', fontSize: '13px', padding: '10px 0' }}>
+                  <label style={{ marginRight: '5px' }} htmlFor="">Find By Category: </label>
+                  <select style={{ marginBottom: '3px' }} name="" id="" onChange={(e) => setMonth(e.target.value)}>
+                    {
+                      Object?.keys(categoryCount)?.map((item, index) => {
+                        return (
+                          <option key={index + 1} value={item}>{item}</option>
+                        )
+                      })
+                    }
+                  </select>
+                  <br />
+                  <label style={{ marginRight: '81px' }} htmlFor="">From:</label>
+                  <input style={{ marginBottom: '3px' }} type="date" name="" id="" onChange={(e) => setDate({ ...date, from: e.target.value })} />
+                  <br />
+                  <label style={{ marginRight: '98px' }} htmlFor="">To:</label>
+                  <input style={{ marginBottom: '3px' }} type="date" name="" id="" onChange={(e) => setDate({ ...date, to: e.target.value })} />
                 </div>
               </div>
 
@@ -87,15 +87,15 @@ const StockAnalysis = () => {
         <div className={`${stockAnalysis.inputAreaTwo} flex_center`}>
           <div className={`${stockAnalysis.container} `}>
             <div className={`${stockAnalysis.titleName} flex_center`}>Details</div>
-              <div style={{ width: '65px' }} className={`${stockAnalysis.border_remover}`}></div>
-            
-              <div className={`${stockAnalysis.inputAreaTwoContainer}`}>
-                  <h4>Category wise Stock</h4>
-                  <br />
-                  <p>Total: {categoryWiseTotalQuantity}</p>
-                  <p>Available: {categoryWiseAvailableQuantity}</p>
-                  <p>sockout: {categoryWiseStockOunt}</p>
-                 
+            <div style={{ width: '65px' }} className={`${stockAnalysis.border_remover}`}></div>
+
+            <div className={`${stockAnalysis.inputAreaTwoContainer}`}>
+              <h4>Category wise Stock</h4>
+              <br />
+              <p>Total: {categoryWiseTotalQuantity}</p>
+              <p>Available: {categoryWiseAvailableQuantity}</p>
+              <p>stockout: {categoryWiseStockOunt}</p>
+
               <div className={`${stockAnalysis.uploading}`}>
 
               </div>
@@ -109,7 +109,7 @@ const StockAnalysis = () => {
           <div className={`${stockAnalysis.inputPart} flex_left`}>
             <i title="print" className="uil uil-print" onClick={() => {
               dispatch(openModal('stock-analysis'))
-              dispatch(addStockAnalysis({data:analysisData, categoryWishStockDetail: {categoryWiseAvailableQuantity, categoryWiseTotalQuantity, categoryWiseStockOunt, categoryName: month}}))
+              dispatch(addStockAnalysis({ data: analysisData, categoryWishStockDetail: { categoryWiseAvailableQuantity, categoryWiseTotalQuantity, categoryWiseStockOunt, categoryName: month } }))
             }}></i>
 
 
@@ -122,7 +122,7 @@ const StockAnalysis = () => {
 
       </section>
       <section className={`${stockAnalysis.tableArea}`}>
-        <StockAnalysisChart analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseAvailableQuantity} categoryWiseTotalQuantity={categoryWiseTotalQuantity} categoryWiseStockOunt={categoryWiseStockOunt} categoryName={month}/>
+        <StockAnalysisChart analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseAvailableQuantity} categoryWiseTotalQuantity={categoryWiseTotalQuantity} categoryWiseStockOunt={categoryWiseStockOunt} categoryName={month} />
       </section>
 
     </div>
