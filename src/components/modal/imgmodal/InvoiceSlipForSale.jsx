@@ -4,14 +4,19 @@ import { calculateTotalPrice } from "../../calculation/calculateSum";
 import useSalesRecord from "../../dashboard/salesModule/salesRecord/useSalesRecord";
 import Barcode from "react-barcode";
 import { useEffect } from "react";
+import CommonLoading from "../../commonLoagin/CommonLoading";
 
 const InvoiceSlipForSale = ({getCustomerInfo, salesList, copy='Copy will be added', updateCustomerInfo}) => {
 
-    const {saleData, refetch} = useSalesRecord();
+    const {saleData, refetch, isLoading} = useSalesRecord();
 
     useEffect(() => {
       refetch()
     },[refetch])
+
+    if(isLoading){
+        return <CommonLoading/>
+    }
 
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"DM Sans", sans-serif', fontSize:'9px'}}>
