@@ -7,6 +7,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
 const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue}) => {
     
+    console.log(paginatedDataContainer)
 
     if(isLoading){
         return (
@@ -68,7 +69,7 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
                             <td style={{border:'1px solid #dddddd',textAlign:'left', width:'120px'}}>{sale?.createdAt?.slice(0, 10)}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.referredBy}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
-                                {sale?.products?.map((item, index) => <p key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
+                                {sale?.products?.map((item, index) => <p title={ `Purchase Price: ${item?.purchasePrice}, Available Product: ${item?.remainingQuantity}, Barcode: ${item?.barcode}` } key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )}
                             </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                 {calculateTotalPrice(sale?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
