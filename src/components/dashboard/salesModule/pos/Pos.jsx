@@ -31,10 +31,11 @@ const Pos = () => {
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {  
-            refetch()
             console.log(data)
             if(data?.data?.success){
                 toast.success('product added to sale list')
+                refetch()
+                refetchProduct
                 setListOfSalesItem([])
                 dispatch(clearCustomerInfo())
             }
@@ -46,12 +47,16 @@ const Pos = () => {
     })
 
 
-
-    
     const lock = useSelector(state => state.imgModal.lock)
     const dispatch = useDispatch();
-    const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray} = usePos()
+    const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray, refetch: refetchProduct} = usePos()
 
+    useEffect(() => {
+        refetch()
+    },[refetch])
+    useEffect(() => {
+        refetchProduct   
+    },[refetchProduct])
     
    
     const [barcodeId, setBarcodeId] = useState();
@@ -548,6 +553,7 @@ const Pos = () => {
                                 dispatch(openModal('customer'))
                             }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
                             <button onClick={() => {
+                                refetch()
                                 dispatch(openModal('invoice'))
                             }} className={`${pos.submitInvoice}`}>Print Invoice</button>
                        </div>

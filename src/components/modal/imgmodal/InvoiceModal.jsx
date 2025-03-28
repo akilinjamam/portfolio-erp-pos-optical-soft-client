@@ -4,7 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import { invoiceCalculation } from '../../../invoiceCalculation/invoiceCalculation';
 import useSaleData from '../../../data/saleData/useSaleData';
-import InvoiceSlip from './InvoiceSlip';
+import InvoiceSlipForSale from './InvoiceSlipForSale';
 
 const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerInfo  }) => {
     
@@ -39,12 +39,12 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                     <div ref={contentToPrint} style={{width:'250px', margin:'auto'}}>
                         <br />
                         <div style={{marginBottom:'300px'}}>
-                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy' updateCustomerInfo={false}/>
+                            <InvoiceSlipForSale getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy' updateCustomerInfo={false}/>
                         </div>
                         <br />
                        
                         <div>
-                            <InvoiceSlip getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy' updateCustomerInfo={false}/>
+                            <InvoiceSlipForSale getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy' updateCustomerInfo={false}/>
                         </div>
                     </div>
                     
