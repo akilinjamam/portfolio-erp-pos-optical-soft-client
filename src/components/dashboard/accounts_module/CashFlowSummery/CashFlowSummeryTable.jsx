@@ -21,28 +21,7 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
         <div style={{ overflowX: `${ tableScroll ? 'scroll' : '' }`, width: "100%" }} >
             <table ref={contentToPrint} style={{borderCollapse:'collapse', fontSize:'10.5px', margin:'auto', paddingBottom:'10px', width:`${tableScroll ? '1100px' : '99%'}`}}>
                 <thead style={{position:'sticky', top:'0', backgroundColor:'#f1f1f1'}}>
-                    {/* <tr>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sales =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                       
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bkash =</th>
-                       
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                    </tr> */}
+                    
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
@@ -101,27 +80,7 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                     ))
                 }
                 
-                {/* <tr style={{fontWeight:'bold'}}>
-                    
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
-                    
-                </tr> */}
+    
                 </tbody>
             </table>
         </div>
