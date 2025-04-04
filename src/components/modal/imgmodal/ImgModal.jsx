@@ -30,6 +30,7 @@ import StockAnalysisModal from './StockAnalysisModal';
 import SalesAnalysisModal from './SalesAnalysisModal';
 import BestSalePerformerModal from './BestSalePerformerModal';
 import CashFlowSummeryModal from './CashFlowSummerModal';
+import DeveloperInfo from './DeveloperInfo';
 
 const ImgModal = () => {
 
@@ -92,6 +93,7 @@ const ImgModal = () => {
             <StockAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={stockAnalysisData} categoryWiseStockDetail={categoryWiseStockDetail}/>
             <SalesAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={salesAnalysisData} salesDetail={salesDetailData}/>
             <CashFlowSummeryModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} cashFlow={cashFlow}/>
+            <DeveloperInfo dispatch={dispatch} closeModal={closeModal} open={open} type={type}/>
 
         </div>
     );

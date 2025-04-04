@@ -12,12 +12,14 @@
             background-color:rgb(49, 49, 49);
             border-radius: 5px;
             padding: 9px 15PX;
+            
             p{
                 font-family: v.$fs;
                 color: v.$pest;
                 font-weight: bold;
                 font-size: 15px;
                 display: flex;
+                cursor: pointer;
             }
        }
     }
