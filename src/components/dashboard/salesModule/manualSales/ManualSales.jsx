@@ -7,11 +7,14 @@ import useManualSales from './useManualSales';
 import { manualSalesInput } from './manualSalesInput';
 import { useDispatch} from 'react-redux';
 import { openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { useEffect } from 'react';
 
 const ManualSales = () => {
-  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, uploading, handlePost, category, setCategory, isPending} = useManualSales()
+  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, uploading, handlePost, category, setCategory, isPending, refetch} = useManualSales()
 
-
+  useEffect(() => {
+    refetch()
+  }, [refetch])
   
 
 
@@ -101,6 +104,7 @@ const ManualSales = () => {
                                   <button
                                   onClick={(e) => {
                                     e.preventDefault()
+                                    refetch()
                                     dispatch(openModal('invoice'))
                                   }}
                                   style={{border:'none', width:'auto', padding:'3px 7px', borderRadius:"5px", color:'white', fontWeight:'bold', backgroundColor:'gray', cursor:'pointer'}} >

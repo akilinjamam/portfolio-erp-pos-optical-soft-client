@@ -14,6 +14,9 @@ const InvoiceSlipForSale = ({getCustomerInfo, salesList, copy='Copy will be adde
       refetch()
     },[refetch])
 
+
+    console.log(saleData?.upcomingInvoiceNumber)
+
     if(isLoading){
         return <CommonLoading/>
     }

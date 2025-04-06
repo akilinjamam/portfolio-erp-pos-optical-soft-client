@@ -60,7 +60,7 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
 
         <tr>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>SL</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Sales Amount</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Cash Sales Amount</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Due Sales Amount</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Starting Cash Reserved</th>
           <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Total Sales Amount</th>

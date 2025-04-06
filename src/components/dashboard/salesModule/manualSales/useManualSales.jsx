@@ -8,8 +8,11 @@ import moment from "moment";
 import { addSalesList } from "../../../modal/imgmodal/imgModalSlice";
 import { fetchPostSaleData } from "../../../../data/fetchedData/fetchSaleData";
 import { useMutation } from "@tanstack/react-query";
+import useSalesRecord from "../salesRecord/useSalesRecord";
 
 const useManualSales = () => {
+
+    const {refetch} = useSalesRecord('', '', '')
 
     const {saleData} = useSaleData()
 
@@ -190,7 +193,7 @@ const useManualSales = () => {
         }
     },[isSuccess,isError])
 
-    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, uploading, setUploading, handlePost , category, setCategory, isPending }
+    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, uploading, setUploading, handlePost , category, setCategory, isPending, refetch }
 };
 
 
