@@ -101,7 +101,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>collector</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Quantity</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Category</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Stock-in Date</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Size</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Material</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Frame Type</th>
@@ -136,6 +136,7 @@ if(isLoading){
                           <p>Total: {data?.stockAmount}</p>
                           <p> Stockout: {Number(data?.stockAmount) - Number(data?.quantity)}</p>
                           <p>Available: {Number(data?.quantity)}</p>
+                          <p>Last Stockout Date: {data?.updatedAt?.slice(0,10)}</p>
                       </div>
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.category}</td>
