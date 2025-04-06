@@ -10,8 +10,15 @@ import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
 import { resetFormState } from "./imgModalSlice";
 import { useSelector } from "react-redux";
+import { useRef } from "react";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
+
+    const inputRef = useRef(null);
+
+    const handleInputScroll = () => {
+        inputRef.current.blur();
+    }
 
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
 
@@ -269,9 +276,6 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                         &&
                                         employeeData?.result?.map((employee,index) => <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option> )
                                     }
-                                    {
-                                        <option value="">Developer</option>
-                                    }
                                     { isLoading &&
                                         <option value="">Loading...</option>
                                     }
@@ -304,12 +308,12 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                                 <label htmlFor="">Discount: </label>
                                 <br />
-                                <input type="number" name="" id="" {...register('discount')}/>
+                                <input type="number" name="" id="" {...register('discount')} ref={inputRef} onWheel={handleInputScroll}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">advance:<span style={{color:'red'}}>*</span></label>
                                 <br />
-                                <input type="number" name="" id="" {...register('advance')}/>
+                                <input  type="number" name="" id="" {...register('advance')} ref={inputRef} onWheel={handleInputScroll} />
                                 <br />
                                 <br />
                                 <label htmlFor="">Comment:</label>
