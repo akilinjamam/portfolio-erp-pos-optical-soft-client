@@ -14,10 +14,12 @@ import { useRef } from "react";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
 
-    const inputRef = useRef(null);
+    const inputRefForAdvance = useRef(null);
+    const inputRefForDiscount = useRef(null);
 
     const handleInputScroll = () => {
-        inputRef.current.blur();
+        inputRefForAdvance.current.blur();
+        inputRefForDiscount.current.blur();
     }
 
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
@@ -308,12 +310,12 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                                 <label htmlFor="">Discount: </label>
                                 <br />
-                                <input type="number" name="" id="" {...register('discount')} ref={inputRef} onWheel={handleInputScroll}/>
+                                <input type="number" name="" id="" {...register('discount')} ref={inputRefForDiscount} onWheel={handleInputScroll}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">advance:<span style={{color:'red'}}>*</span></label>
                                 <br />
-                                <input  type="number" name="" id="" {...register('advance')} ref={inputRef} onWheel={handleInputScroll} />
+                                <input  type="number" name="" id="" {...register('advance')} ref={inputRefForAdvance} onWheel={handleInputScroll} />
                                 <br />
                                 <br />
                                 <label htmlFor="">Comment:</label>
