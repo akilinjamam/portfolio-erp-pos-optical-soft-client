@@ -54,7 +54,6 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
       
       const onSubmit = (data) => {
           dispatch(resetFormState())
-         
         if(salesList.length < 1){
             toast.error('please add products to Sales list first')
             return
