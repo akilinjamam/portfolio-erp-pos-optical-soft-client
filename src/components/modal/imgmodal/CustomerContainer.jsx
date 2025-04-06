@@ -10,17 +10,8 @@ import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
 import { resetFormState } from "./imgModalSlice";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
-
-    const inputRefForAdvance = useRef(null);
-    const inputRefForDiscount = useRef(null);
-
-    const handleInputScroll = () => {
-        inputRefForAdvance.current.blur();
-        inputRefForDiscount.current.blur();
-    }
 
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
 
@@ -63,7 +54,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
       
       const onSubmit = (data) => {
           dispatch(resetFormState())
-          
+         
         if(salesList.length < 1){
             toast.error('please add products to Sales list first')
             return
@@ -310,12 +301,12 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                                 <label htmlFor="">Discount: </label>
                                 <br />
-                                <input type="number" name="" id="" {...register('discount')} ref={inputRefForDiscount} onWheel={handleInputScroll}/>
+                                <input type="number" name="" id="" {...register('discount')}  onWheel={(e) => e.target.blur()}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">advance:<span style={{color:'red'}}>*</span></label>
                                 <br />
-                                <input  type="number" name="" id="" {...register('advance')} ref={inputRefForAdvance} onWheel={handleInputScroll} />
+                                <input     type="number" name="" id="" {...register('advance')}  onWheel={(e) => e.target.blur()}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">Comment:</label>
