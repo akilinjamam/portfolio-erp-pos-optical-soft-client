@@ -5,7 +5,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
-const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue}) => {
+const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesQuantity}) => {
     
     console.log(paginatedDataContainer)
 
@@ -35,8 +35,8 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBkashValue}</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Nogod =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalNogodValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold Quantity =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesQuantity}</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>

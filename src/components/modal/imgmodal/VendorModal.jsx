@@ -27,7 +27,7 @@ const VendorModal = ({type, open, dispatch, closeModal, vendorData}) => {
                 <section className={`${imgmodal.container} ${imgmodal.sizeStock}`}>
                     <div className={`${imgmodal.cancelBtn} flex_between`}>
                         <div>
-                        <button>Total payroll Data : {vendorData?.length} </button>
+                        <button>Total Vendor Data : {vendorData?.length} </button>
                         <button 
                         onClick={() => {
                         handlePrint(null, () => contentToPrint.current);

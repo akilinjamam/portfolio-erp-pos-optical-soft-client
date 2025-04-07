@@ -9,6 +9,10 @@ const useOneMonthSaleData = (query, from , to) => {
 
         const totalSales = saleData?.result?.flatMap(sale => sale?.products?.map(item => Number(item?.quantity) * Number(item?.actualSalesPrice)))
         const totalSalesResult = calculateTotalPrice(totalSales)
+
+        const salesQuantity= saleData?.result?.flatMap(sale => sale?.products?.map(item => Number(item?.quantity)))
+        const totalSalesQuantity = calculateTotalPrice(salesQuantity)
+       
        
         const filterCashSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Cash')
         const filterBankSales = saleData?.result?.filter(sale => sale?.paymentMethod === 'Bank')
@@ -64,7 +68,7 @@ const useOneMonthSaleData = (query, from , to) => {
 
         console.log(totalCashValueDue)
        
-    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalSalesResult, totalDiscount, totalSalesItem, isLoading, error, refetch }
+    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalSalesResult, totalDiscount, totalSalesItem, totalSalesQuantity, isLoading, error, refetch }
 };
 
 export default useOneMonthSaleData;

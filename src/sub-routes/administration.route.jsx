@@ -4,6 +4,7 @@ import GlassList from "../components/dashboard/administration_module/glass_list/
 import ManageSales from "../components/dashboard/administration_module/manage_sales/ManageSales";
 import ProductEntry from "../components/dashboard/administration_module/product_entry/ProductEntry";
 import ProductList from "../components/dashboard/administration_module/product_list/ProductList";
+import SoldProduct from "../components/dashboard/administration_module/sold_product/SoldProduct";
 import SupplierList from "../components/dashboard/administration_module/supplier_list/SupplierList";
 
 const administrationRoute = [
@@ -34,6 +35,10 @@ const administrationRoute = [
       {
         path:'manage_sales',
         element: <ManageSales/>
+      },
+      {
+        path:'sold_product',
+        element: <SoldProduct/>
       },
 ]
 

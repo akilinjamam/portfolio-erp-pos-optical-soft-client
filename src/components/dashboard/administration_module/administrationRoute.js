@@ -40,5 +40,11 @@ export const administrationRoute = [
         link: '/dashboard/administration_module/manage_sales',
         icon: 'uil uil-bill',
         color: 'rgb(213, 409, 237)'
-    }
+    },
+    {
+        value: 'Sold Product',
+        link: '/dashboard/administration_module/sold_product',
+        icon: 'uil uil-shopping-bag',
+        color: 'rgb(187, 237, 192)'
+    },
 ]

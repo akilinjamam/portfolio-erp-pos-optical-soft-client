@@ -91,6 +91,7 @@ export const homeNavigator = [
             six: '/dashboard/administration_module/supplier_list',
             seven: '/dashboard/administration_module/glass_list',
             eight: '/dashboard/administration_module/manage_sales',
+            nine: '/dashboard/administration_module/sold_product',
         }
     },
     {
