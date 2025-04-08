@@ -15,6 +15,7 @@ const SoldProduct = () => {
     // const dispatch = useDispatch();
    
     const [handleQuery, setHandleQuery] = useState('');
+    const [category, setCategory] = useState('');
     const [totalSaleQuantity, setTotalSaleQuantity] = useState(0)
     console.log(handleQuery)
     const [range, setRange] = useState({
@@ -45,7 +46,15 @@ const SoldProduct = () => {
             setTotalSaleQuantity(totalQuantity)
             setModifiedProductDataWithIndexId(findProducts)
         }
-    }, [saleData?.result, handleQuery,totalQuantity])
+
+        if(category && !handleQuery){
+            const findProducts = allProducts?.filter(item => item?.category === category)
+            const totalQuantity = calculateTotalPrice(findProducts?.map((item) => item?.quantity))
+            setTotalSaleQuantity(totalQuantity)
+            setModifiedProductDataWithIndexId(findProducts)
+
+        }
+    }, [saleData?.result, handleQuery,totalQuantity, category])
 
    
 
@@ -61,11 +70,17 @@ const SoldProduct = () => {
                     dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId}))
                 }} title="print" className="uil uil-print"></i> */}
                 <span>Total : {totalSalesItem}</span>
-                <input style={{width: '230px'}} placeholder='Product Name / Category / Barcode' value={handleQuery} type="text" name="" id="" onChange={(e) => {
+                <input style={{width: '230px'}} placeholder='Product Name / Barcode' value={handleQuery} type="text" name="" id="" onChange={(e) => {
                    
                     setHandleQuery(e.target.value)   
                 }}/>
                 <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
+
+                <input style={{width: '230px'}} placeholder='Category' value={category} type="text" name="" id="" onChange={(e) => {
+                   
+                    setCategory(e.target.value)   
+                }}/>
+                <i onClick={() => setCategory('')} className="uil uil-times"></i>
                 <label htmlFor="">From: </label>
                 <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                 <label htmlFor="">To: </label>

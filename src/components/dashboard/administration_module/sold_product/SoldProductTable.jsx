@@ -33,6 +33,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
