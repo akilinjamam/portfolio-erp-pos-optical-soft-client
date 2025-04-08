@@ -38,6 +38,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product Name</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Quantity</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Category</th>
                        
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Frame Type</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Material</th>
@@ -57,6 +58,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.indexId ? sale?.indexId : index+1}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.productName}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.quantity}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.category}</td>
                             
                             <td style={{border:'1px solid #dddddd',textAlign:'left', width:'120px'}}>{sale?.frameType}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.material}</td>

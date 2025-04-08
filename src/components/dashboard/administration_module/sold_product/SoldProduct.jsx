@@ -1,6 +1,6 @@
 import soldProducts from './SoldProduct.module.scss';
-import { useDispatch } from "react-redux";
-import { addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
+// import { useDispatch } from "react-redux";
+// import { addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useState } from "react";
 import Pagination from "../../pagination/Pagination";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ import SoldProductTable from "./SoldProductTable";
 
 const SoldProduct = () => {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
    
     const [handleQuery, setHandleQuery] = useState('');
     const [totalSaleQuantity, setTotalSaleQuantity] = useState(0)
@@ -40,7 +40,7 @@ const SoldProduct = () => {
             setTotalSaleQuantity(totalQuantity)
             setModifiedProductDataWithIndexId(modifiedProducts)
         }else{
-            const findProducts = allProducts?.filter(item => item?.productName?.toLowerCase()?.includes(handleQuery?.toLowerCase()))
+            const findProducts = allProducts?.filter(item => item?.productName?.toLowerCase()?.includes(handleQuery?.toLowerCase()) || item?.category?.toLowerCase()?.includes(handleQuery?.toLowerCase()) || item?.barcode?.toLowerCase()?.includes( handleQuery?.toLowerCase())) 
             const totalQuantity = calculateTotalPrice(findProducts?.map((item) => item?.quantity))
             setTotalSaleQuantity(totalQuantity)
             setModifiedProductDataWithIndexId(findProducts)
@@ -56,12 +56,12 @@ const SoldProduct = () => {
     return (
         <div className={soldProducts.main}>
             <div className={`${soldProducts.title} flex_left`}>
-                <i onClick={() => {
+                {/* <i onClick={() => {
                     dispatch(openModal('sales'))
                     dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId}))
-                }} title="print" className="uil uil-print"></i>
+                }} title="print" className="uil uil-print"></i> */}
                 <span>Total : {totalSalesItem}</span>
-                <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
+                <input style={{width: '230px'}} placeholder='Product Name / Category / Barcode' value={handleQuery} type="text" name="" id="" onChange={(e) => {
                    
                     setHandleQuery(e.target.value)   
                 }}/>
