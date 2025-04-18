@@ -20,6 +20,8 @@ const CashFlowSummery = () => {
     console.log(yearMonth)
     const {finalMergedData, isLoading,refetch, refetchAcc, refetchFinalAcc, refetchPayroll, refetchVendor} = useCombineSalesAnalysis(month ? month : yearMonth);
 
+    const totalProfitAllocation = finalMergedData?.map((sale) => (sale?.bank + sale?.bkash + sale?.nogod + (sale?.profitAllocation - sale?.cashOver - sale?.deficit)) -(sale?.totalFixedExpense) -(sale?.payrollPaid) - (sale?.vendorPaid)).reduce((acc, item) => acc + item, 0);
+
     useEffect(() => {
         refetch()
         refetchAcc()
@@ -43,7 +45,7 @@ const CashFlowSummery = () => {
                
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh',}}>
-                <CashFlowSummeryTable tableScroll={false} paginatedDataContainer={finalMergedData} isLoading={isLoading} />
+                <CashFlowSummeryTable tableScroll={false} paginatedDataContainer={finalMergedData} isLoading={isLoading} totalProfitAllocation={totalProfitAllocation}/>
             </div>
            
         </div>

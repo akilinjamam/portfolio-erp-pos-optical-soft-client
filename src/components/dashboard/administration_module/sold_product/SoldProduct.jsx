@@ -62,6 +62,10 @@ const SoldProduct = () => {
         refetch()
     },[refetch,handleQuery, range])
 
+
+    const totalCategory = [...new Set(saleData?.result?.flatMap(item => item?.products)?.map(item => item?.category))]
+    
+
     return (
         <div className={soldProducts.main}>
             <div className={`${soldProducts.title} flex_left`}>
@@ -76,10 +80,19 @@ const SoldProduct = () => {
                 }}/>
                 <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
 
-                <input style={{width: '230px'}} placeholder='Category' value={category} type="text" name="" id="" onChange={(e) => {
-                   
-                    setCategory(e.target.value)   
-                }}/>
+                <select style={{marginRight:'10px'}} name="" id="" onChange={(e) => {
+                   setCategory(e.target.value)   
+               }}>  
+                    <option value=''>select category</option>
+                    {
+                        totalCategory?.map((item, index) => {
+                            return(
+                                <option key={index + 1} value={item}>{item}</option>
+                            )
+                        }
+                    )
+                    }
+                </select>
                 <i onClick={() => setCategory('')} className="uil uil-times"></i>
                 <label htmlFor="">From: </label>
                 <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>

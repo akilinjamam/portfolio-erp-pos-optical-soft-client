@@ -5,7 +5,7 @@ import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
-const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading, tableScroll}) => {
+const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading, tableScroll, totalProfitAllocation}) => {
     
     console.log(paginatedDataContainer)
 
@@ -80,6 +80,26 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                     ))
                 }
                 
+                <tr>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold', width: '130px'}}>Total Profit Allocation =</td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>{totalProfitAllocation}</td>            
+                </tr>
     
                 </tbody>
             </table>
