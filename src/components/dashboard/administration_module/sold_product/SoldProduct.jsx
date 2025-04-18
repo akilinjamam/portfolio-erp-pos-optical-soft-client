@@ -80,7 +80,7 @@ const SoldProduct = () => {
                 }}/>
                 <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
 
-                <select style={{marginRight:'10px'}} name="" id="" onChange={(e) => {
+                <select style={{marginRight:'10px'}} name="" id="" value={category} onChange={(e) => {
                    setCategory(e.target.value)   
                }}>  
                     <option value=''>select category</option>
