@@ -90,12 +90,13 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td>Total Profit = {calculatetotalProfit}</td>
         <td>{totalBankAmount}</td>
         <td>{totalBkashAmount}</td>
         <td>{totalNogodAmount}</td>
         <td>{totalBankAmount + totalBkashAmount + totalNogodAmount + calculatetotalProfit}</td>
-        <td></td>
+       
 
         {
           data?.map((data, index) => {

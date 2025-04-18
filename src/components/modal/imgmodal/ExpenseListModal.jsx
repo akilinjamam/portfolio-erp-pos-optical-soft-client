@@ -36,7 +36,7 @@ const ExpenseListModal = ({type, open, dispatch, closeModal, expenseData}) => {
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
                         <ReportTitle/>
-                        <VendorListTable  paginatedDataContainer={expenseData}/>
+                        <VendorListTable  paginatedDataContainer={expenseData} hideField={true} hideSection={true}/>
                     </div>        
                 </section>
         </div>
