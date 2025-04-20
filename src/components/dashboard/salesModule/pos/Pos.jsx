@@ -116,6 +116,7 @@ const Pos = () => {
   const calculationValue = [1,2,3,4,5,6,7,8,9,'Delete',0,'Add Item']
   useEffect(() => {
     const handleKeyPress = (e) => {
+        console.log(e.key)
        if(!lock){
         if(quantity){
             if(quantityArray.length === 13){
@@ -129,7 +130,7 @@ const Pos = () => {
                 setQuantityArray(prevArray => [...prevArray, findKey]);
             }
     
-            if(e.key === 'Delete'){
+            if(e.key === 'Delete' || e.key === 'Backspace'){
                 let lastValue = [...quantityArray];
                 lastValue.pop()
                 setQuantityArray(lastValue)
@@ -150,7 +151,7 @@ const Pos = () => {
                 setPriceArray(prevArray => [...prevArray, findKey]);
             }
     
-            if(e.key === 'Delete'){
+            if(e.key === 'Delete' || e.key === 'Backspace'){
                 let lastValue = [...priceArray];
                 lastValue.pop()
                 setPriceArray(lastValue)
