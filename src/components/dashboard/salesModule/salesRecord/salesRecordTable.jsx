@@ -61,7 +61,7 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
                 <tbody>
                 {
                     paginatedDataContainer?.map((sale, index) => (
-                        <tr key={index+1}>
+                        <tr style={{background: `${sale?.recorderName === 'developer' ? 'pink': ''}`}} key={index+1}>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.indexId ? sale?.indexId : index+1}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.customerName}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>

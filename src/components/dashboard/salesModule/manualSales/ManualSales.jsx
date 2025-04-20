@@ -8,6 +8,7 @@ import { manualSalesInput } from './manualSalesInput';
 import { useDispatch} from 'react-redux';
 import { openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const ManualSales = () => {
   const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, uploading, handlePost, category, setCategory, isPending, refetch} = useManualSales()
@@ -105,6 +106,10 @@ const ManualSales = () => {
                                   onClick={(e) => {
                                     e.preventDefault()
                                     refetch()
+                                    if(showData?.length > 0){
+                                      toast.error('print invoice after add to sale')
+                                      return
+                                    }
                                     dispatch(openModal('invoice'))
                                   }}
                                   style={{border:'none', width:'auto', padding:'3px 7px', borderRadius:"5px", color:'white', fontWeight:'bold', backgroundColor:'gray', cursor:'pointer'}} >

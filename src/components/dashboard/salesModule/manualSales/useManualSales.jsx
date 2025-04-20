@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaleData from "../../../../data/saleData/useSaleData";
 import { invoiceCalculation } from "../../../../invoiceCalculation/invoiceCalculation";
 import moment from "moment";
-import { addSalesList } from "../../../modal/imgmodal/imgModalSlice";
+import { addSalesList, clearCustomerInfo, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { fetchPostSaleData } from "../../../../data/fetchedData/fetchSaleData";
 import { useMutation } from "@tanstack/react-query";
 import useSalesRecord from "../salesRecord/useSalesRecord";
@@ -154,11 +154,12 @@ const useManualSales = () => {
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {  
-
-            console.log(data)
             if(data?.data?.success){
+                localStorage.setItem('salesInfo', JSON.stringify(data?.data?.result?.[0]));
+                dispatch(openModal('invoice'))
                 toast.success('product added to sale list')
                 setShowData([])
+                dispatch(clearCustomerInfo())
             }
         },
         onError: (data) => {
@@ -175,7 +176,7 @@ const useManualSales = () => {
                 toast.error('please fill up all marked input fields from Customer Info')
                 return
             }
-           
+           refetch()
             mutate(customerInfoData)
 
         }else{

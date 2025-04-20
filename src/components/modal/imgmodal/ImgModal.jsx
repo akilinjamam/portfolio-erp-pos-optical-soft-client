@@ -50,8 +50,7 @@ const ImgModal = () => {
 
         const salesList = useSelector(state => state.imgModal.salesList)
         const salesListForSalesInvoice = useSelector(state => state.imgModal.salesListForSalesInvoice)
-  
-        const getCustomerInfo = useSelector(state => state.imgModal.customerInfo);
+
         const getCustomerInfoForSalesInvoice = useSelector(state => state.imgModal.customerInfoForSalesInvoice);
         const singleBarcode = useSelector(state => state.imgModal.singleBarcodes)
         const analysisData = useSelector(state => state.imgModal.profitCalegoryAnalysisData)   
@@ -79,7 +78,7 @@ const ImgModal = () => {
             <TodayDueCollectionModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <DailyDueCollectionModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <CustomerListModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
-            <InvoiceModal salesList={salesList}  getCustomerInfo={getCustomerInfo}  closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
+            <InvoiceModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <SalesInvoiceModal salesList={salesListForSalesInvoice}  getCustomerInfo={getCustomerInfoForSalesInvoice}  closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <SalesAdjustModal salesList={salesListForSalesInvoice}  getCustomerInfo={getCustomerInfoForSalesInvoice}  closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <EmployeeModal dispatch={dispatch} closeModal={closeModal}  employeeData={employeeData} open={open} type={type}/>

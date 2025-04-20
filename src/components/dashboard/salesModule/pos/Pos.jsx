@@ -31,8 +31,12 @@ const Pos = () => {
             return await fetchPostSaleData(data)
         },
         onSuccess: (data) => {  
-            console.log(data)
+            console.log(data?.data?.result?.[0]?.invoiceBarcode)
+            
+
             if(data?.data?.success){
+                localStorage.setItem('salesInfo', JSON.stringify(data?.data?.result?.[0]));
+                dispatch(openModal('invoice'))
                 toast.success('product added to sale list')
                 refetch()
                 refetchProduct
@@ -448,6 +452,7 @@ const Pos = () => {
     },[listOfSalesItem, dispatch])
 
 
+
     return (
        <div onDoubleClick={() => {
         setQuantity(false)
@@ -554,6 +559,10 @@ const Pos = () => {
                             }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
                             <button onClick={() => {
                                 refetch()
+                                if (listOfSalesItem?.length > 0) {
+                                    toast.error('print invoice after add to sale')
+                                    return 
+                                } 
                                 dispatch(openModal('invoice'))
                             }} className={`${pos.submitInvoice}`}>Print Invoice</button>
                        </div>

@@ -6,9 +6,11 @@ import { invoiceCalculation } from '../../../invoiceCalculation/invoiceCalculati
 import useSaleData from '../../../data/saleData/useSaleData';
 import InvoiceSlipForSale from './InvoiceSlipForSale';
 
-const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerInfo  }) => {
-    
-    const {saleData} = useSaleData()
+const InvoiceModal = ({dispatch,closeModal, type, open}) => {
+   
+    const getSalesInfo = localStorage.getItem('salesInfo');
+    const salesInfo = JSON.parse(getSalesInfo);
+    const {saleData} = useSaleData();
 
       const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
@@ -39,12 +41,12 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                     <div ref={contentToPrint} style={{width:'250px', margin:'auto'}}>
                         <br />
                         <div style={{marginBottom:'300px'}}>
-                            <InvoiceSlipForSale getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Customer Copy' updateCustomerInfo={false}/>
+                            <InvoiceSlipForSale getCustomerInfo={salesInfo} salesList={salesInfo?.products} copy='Customer Copy' updateCustomerInfo={false}/>
                         </div>
                         <br />
                        
                         <div>
-                            <InvoiceSlipForSale getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy' updateCustomerInfo={false}/>
+                            <InvoiceSlipForSale getCustomerInfo={salesInfo} salesList={salesInfo?.products} copy='Office Copy' updateCustomerInfo={false}/>
                         </div>
                     </div>
                     

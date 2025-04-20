@@ -1,25 +1,14 @@
 /* eslint-disable react/prop-types */
 import moment from "moment";
 import { calculateTotalPrice } from "../../calculation/calculateSum";
-import useSalesRecord from "../../dashboard/salesModule/salesRecord/useSalesRecord";
+
 import Barcode from "react-barcode";
-import { useEffect } from "react";
-import CommonLoading from "../../commonLoagin/CommonLoading";
+
+
 
 const InvoiceSlipForSale = ({getCustomerInfo, salesList, copy='Copy will be added', updateCustomerInfo}) => {
 
-    const {saleData, refetch, isLoading} = useSalesRecord();
-
-    useEffect(() => {
-      refetch()
-    },[refetch])
-
-
-    console.log(saleData?.upcomingInvoiceNumber)
-
-    if(isLoading){
-        return <CommonLoading/>
-    }
+   
 
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"DM Sans", sans-serif', fontSize:'9px'}}>
@@ -50,7 +39,7 @@ const InvoiceSlipForSale = ({getCustomerInfo, salesList, copy='Copy will be adde
           <p><strong>Payment Method:</strong></p>
         </div>
         <div style={{textAlign:"right"}}>
-          <p style={{fontWeight:'bold', fontSize:'10px'}}>{saleData?.upcomingInvoiceNumber?.toString()?.slice(8)}</p>
+          <p style={{fontWeight:'bold', fontSize:'10px'}}>{getCustomerInfo?.invoiceBarcode?.toString()?.slice(8)}</p>
           <p><strong></strong> {updateCustomerInfo ? getCustomerInfo?.createdAt?.slice(0,10) :moment().format("YYYY-MM-DD") }</p>
           <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate : 'blank'}</p>
           <p >{getCustomerInfo?.customerName ? getCustomerInfo?.customerName : 'blank'}</p>
@@ -131,7 +120,7 @@ const InvoiceSlipForSale = ({getCustomerInfo, salesList, copy='Copy will be adde
         </table>
 
         <div style={{ width:"100%", display:'flex', alignItems:'center', justifyContent:'center', marginLeft:'5px'}}>
-            <Barcode  format="CODE128" fontSize={15} width={1.8} height={30} value={saleData?.upcomingInvoiceNumber}/>   
+            <Barcode  format="CODE128" fontSize={15} width={1.8} height={30} value={getCustomerInfo?.invoiceBarcode}/>   
         </div>
       </div>
 
