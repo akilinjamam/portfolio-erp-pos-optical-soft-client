@@ -77,7 +77,7 @@ const Login = () => {
                     <br />
                     <div>
                         <h4 >Developed By</h4>
-                        <img style={{width: '300px', height:'100px'}}  src={brandImage} alt="" />
+                        <img style={{width: '300px', height:'94px'}}  src={brandImage} alt="" />
                     </div>
                 </div>
             </div>
