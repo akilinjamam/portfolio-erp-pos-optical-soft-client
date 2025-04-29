@@ -4,7 +4,7 @@ import logo from '../../images/logo.png';
 import { allInputLoginData } from "./logInputItems";
 import { fetchPostLoginData } from "../../data/fetchedData/fetchLoginData";
 import { useNavigate } from "react-router-dom";
-
+import brandImage from '../../images/Byte-Dynamo-without-bg.png'
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -74,8 +74,12 @@ const Login = () => {
                         </div>
                         <input className={signin.submit} type="submit" value={`${loading ? 'Loading...' : 'Sign In'}`} required />
                     </form>
+                    <br />
+                    <div>
+                        <h4 >Developed By</h4>
+                        <img style={{width: '300px', height:'100px'}}  src={brandImage} alt="" />
+                    </div>
                 </div>
-                
             </div>
         </div>
     );
