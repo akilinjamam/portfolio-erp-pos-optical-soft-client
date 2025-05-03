@@ -19,7 +19,7 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
 
     return (
         <div >
-            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px'}}>
+            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
                 <thead>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>

@@ -31,7 +31,7 @@ const useDailyCashExpensesList = () => {
 
    
 
-    const { accountsData, refetch: refetch } = useGetAccountsData(queryValues.year, queryValues.month, date)
+    const { accountsData, refetch: refetch, isLoading } = useGetAccountsData(queryValues.year, queryValues.month, date)
     const allAccountsData = accountsData?.result
     
     console.log(accountsData?.result)
@@ -103,6 +103,6 @@ const useDailyCashExpensesList = () => {
         deleteAccounts(idsForDelete)
     }
 
-    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId }
+    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId, isLoading }
 };
 export default useDailyCashExpensesList;

@@ -60,10 +60,10 @@ const ImgModal = () => {
         const salesAnalysisData = useSelector(state => state.imgModal.salesAnalysisData)
         const salesDetailData = useSelector(state => state.imgModal.salesDetail)
         const cashFlow = useSelector(state => state.imgModal.cashFlow)
-
+        const totalProfitAllocation = useSelector(state => state.imgModal.totalProfitAllocation)
         const dispatch = useDispatch();
         
-    return (
+return (
         <div>
             <ImgContainer open={open} type={type} dispatch={dispatch} closeModal={closeModal} img={img}/>
             <BarcodeContainer open={open} type={type} barcode={barcode} closeModal={closeModal}  dispatch={dispatch} />
@@ -91,7 +91,7 @@ const ImgModal = () => {
             <ProfitExpenseAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={analysisData} />
             <StockAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={stockAnalysisData} categoryWiseStockDetail={categoryWiseStockDetail}/>
             <SalesAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={salesAnalysisData} salesDetail={salesDetailData}/>
-            <CashFlowSummeryModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} cashFlow={cashFlow}/>
+            <CashFlowSummeryModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} cashFlow={cashFlow} totalProfitAllocation={totalProfitAllocation}/>
             <DeveloperInfo dispatch={dispatch} closeModal={closeModal} open={open} type={type}/>
 
         </div>

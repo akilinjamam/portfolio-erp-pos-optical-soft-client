@@ -35,7 +35,7 @@ const CashFlowSummery = () => {
             <div className={`${salesRecord.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('cash-flow-summery'))
-                    dispatch(addCashFlowData(finalMergedData))
+                    dispatch(addCashFlowData({cashFlow: finalMergedData, profitAllocation: totalProfitAllocation}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : </span>
                

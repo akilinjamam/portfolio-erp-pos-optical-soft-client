@@ -3,7 +3,7 @@ import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
-const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted, selectDeleted, idsForDelete, setIdsForDelete, hideField, hideSection }) => {
+const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted, selectDeleted, idsForDelete, setIdsForDelete, hideField, hideSection }) => {
 
 
   const data = paginatedDataContainer
@@ -39,14 +39,11 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
   const totalNogodAmount = calculateTotalPrice(data?.map(bank => bank?.todayNogodValue))
 
 
-  const totalSaleAmount = data?.map(sale => Number(sale?.totalSalesAmount));
-  const calculatetotalSales = calculateTotalPrice(totalSaleAmount)
-
   const totalProfitAmount = data?.map(sale => Number(sale?.profitAllocation));
   const calculatetotalProfit = calculateTotalPrice(totalProfitAmount)
 
 
-  console.log(calculatetotalSales)
+  console.log(isLoading)
 
 
   if (isLoading) {
@@ -159,4 +156,4 @@ const VendorListTable = ({ paginatedDataContainer, isLoading, setEdit, edit, sho
   );
 };
 
-export default VendorListTable;
+export default DailyCashExpenseTable;

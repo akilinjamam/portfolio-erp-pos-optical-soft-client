@@ -39,7 +39,9 @@ export const imgModalSlice = createSlice({
         categoryWishStockDetail: {},
         resetForm: false,
         monthYear: '',
-        cashFlow: []
+        cashFlow: [],
+        totalProfitAllocation: 0,
+        soldQuantity: 0,
     },
     reducers: {
         openModal: (state, action) => {
@@ -91,6 +93,7 @@ export const imgModalSlice = createSlice({
             state.totalBankPaid = action.payload.totalBankPaidValue;
             state.totalBkashPaid = action.payload.totalBkashPaidValue;
             state.totalNogodPaid = action.payload.totalNogodPaidValue;
+            state.totalSalesQuantity = action.payload.totalSalesQuantity;
         },
         addBestPerformerData: (state, action) => {
             state.salesData = action.payload.modifiedData;
@@ -138,8 +141,10 @@ export const imgModalSlice = createSlice({
             state.monthYear = action.payload;
         },
         addCashFlowData: (state, action) => {
-            state.cashFlow = action.payload;
-        }
+            state.cashFlow = action.payload.cashFlow;
+            state.totalProfitAllocation = action.payload.profitAllocation;
+        },
+
     }
 })
 

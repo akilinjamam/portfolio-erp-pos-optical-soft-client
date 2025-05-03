@@ -7,7 +7,7 @@ import CashFlowSummeryTable from '../../dashboard/accounts_module/CashFlowSummer
 import usePrint from '../../../print/usePrint';
 
 
-const CashFlowSummeryModal = ({type, open, dispatch, closeModal, cashFlow}) => {
+const CashFlowSummeryModal = ({type, open, dispatch, closeModal, cashFlow, totalProfitAllocation}) => {
   
     const {contentToPrint, handlePrint} = usePrint()
 
@@ -28,7 +28,7 @@ const CashFlowSummeryModal = ({type, open, dispatch, closeModal, cashFlow}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div  ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                    <CashFlowSummeryTable tableScroll={true} contentToPrint={contentToPrint} paginatedDataContainer={cashFlow}/>
+                    <CashFlowSummeryTable tableScroll={true} contentToPrint={contentToPrint} paginatedDataContainer={cashFlow} totalProfitAllocation={totalProfitAllocation}/>
                     </div>        
                 </section>
         </div>

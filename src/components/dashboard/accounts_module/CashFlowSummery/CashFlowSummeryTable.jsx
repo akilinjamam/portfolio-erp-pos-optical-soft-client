@@ -97,7 +97,7 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold', width: '130px'}}>Total Profit Allocation =</td>            
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>Total =</td>            
                     <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>{totalProfitAllocation}</td>            
                 </tr>
     
