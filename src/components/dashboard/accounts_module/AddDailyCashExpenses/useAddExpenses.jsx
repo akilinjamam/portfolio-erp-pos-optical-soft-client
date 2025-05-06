@@ -112,7 +112,7 @@ const useAddExpenses = () => {
 
     const dueSales = dueCollectionSaleData?.result?.dueCashPaidValue ? dueCollectionSaleData?.result?.dueCashPaidValue : '0';
     
-    
+    console.log(otherExpensesData?.startingCashReserved)
     const handlePost = async () => {
 
         if(!otherExpensesData?.date){

@@ -108,7 +108,7 @@ const AddExpenses = () => {
                     <div className={`${addExpenses.inputAreaTwoContainer}`}>
                         <div style={{display: `${otherExpensesData?.date ? 'block' : 'none'}`}}>
                           <p>Total Sales: {lastSaleAndAccountsData?.result?.totalSales  &&  lastSaleAndAccountsData?.result?.totalSales }</p>
-                          <p>(+) Starting Cash Reserved: {lastSaleAndAccountsData?.result?.total  &&  (lastSaleAndAccountsData?.result?.beginingCashReserved === '0' ? (otherExpensesData?.startingCashReserved ? otherExpensesData?.startingCashReserved : 0 ) : lastSaleAndAccountsData?.result?.beginingCashReserved  )}</p>
+                          <p>(+) Starting Cash Reserved: {lastSaleAndAccountsData?.result?.total  &&  (lastSaleAndAccountsData?.result?.beginingCashReserved === '0' ? (otherExpensesData?.startingCashReserved ? otherExpensesData?.startingCashReserved : 0 ) : (otherExpensesData?.startingCashReserved ? otherExpensesData?.startingCashReserved : lastSaleAndAccountsData?.result?.beginingCashReserved)  )}</p>
                           <p>(+) Daily Due Collection Amount: {dueSales}</p>
                           <p style={{marginBottom: '10px'}}>Total: {Number(conditionalTotalSales ? conditionalTotalSales : 0) + Number(dueSales ? dueSales : 0)}</p>
                           <hr />
