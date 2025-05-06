@@ -9,6 +9,7 @@ import useGetLastSalesAndAccountsData from "../../../../data/accountsData/useGet
 
 const useAddExpenses = () => {
     
+    const [inInput, setInInput] = useState(false);
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -77,15 +78,17 @@ const useAddExpenses = () => {
     useEffect(() => {
 
         const handleExpenseList = (e) => {
-            if(e.key === 'l' || e.key === 'L'){
-                const allData = {
-                    ...expensesData
-                }
-                if(expensesData?.expenseAmount && expensesData?.expenseName ){
-                    setShowData((prevData) => [...prevData, allData]);
-                    setExpensesData(initialExpensesData)
-                }else{
-                    toast.error('please fillup Expense Name and Expense Amount input ')
+            if(!inInput){
+                if(e.key === 'l' || e.key === 'L'){
+                    const allData = {
+                        ...expensesData
+                    }
+                    if(expensesData?.expenseAmount && expensesData?.expenseName ){
+                        setShowData((prevData) => [...prevData, allData]);
+                        setExpensesData(initialExpensesData)
+                    }else{
+                        toast.error('please fillup Expense Name and Expense Amount input ')
+                    }
                 }
             }
         }
@@ -188,7 +191,7 @@ const useAddExpenses = () => {
         }
     },[isSuccess,isError])
 
-    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales, }
+    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales, setInInput }
 };
 
 

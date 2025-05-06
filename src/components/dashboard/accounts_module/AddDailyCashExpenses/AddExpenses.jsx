@@ -7,7 +7,7 @@ import AddExpensesTable from './AddExpensesTable';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 const AddExpenses = () => {
-  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, lastSaleAndAccountsData, dueSales} = useAddExpenses();
+  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, lastSaleAndAccountsData, dueSales, setInInput} = useAddExpenses();
 
   const totalExpenses = showData?.map(expense => Number(expense?.expenseAmount));
   const calculationOfTotalExpense = calculateTotalPrice(totalExpenses);
@@ -30,7 +30,19 @@ const AddExpenses = () => {
                                 return (
                                 <div key={index+1} className={`${addExpenses.inputFields} flex_between`}>
                                 <label htmlFor="">{input.placeholder}:</label>
-                                <input value={expensesData[input.name]}   type={input.type} 
+                                <input
+                                onMouseOver={() => {
+                                  if(input.name === 'expenseName'){
+                                    setInInput(true)
+                                  }
+                                }}
+                                onMouseLeave={() => {
+                                  if(input.name === 'expenseName'){
+                                    setInInput(false)
+                                  }
+                                }}
+                                
+                                value={expensesData[input.name]}   type={input.type} 
                                     onChange={(e) => {setExpensesData({...expensesData, [input.value]: e.target.value})}}
                                     required
                                 />
