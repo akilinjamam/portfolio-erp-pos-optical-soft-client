@@ -3,12 +3,12 @@
     font-family: v.$fs;
     div{
         .inputAreaOne, .inputAreaTwo{
-            height: 220px;
+            height: 120px;
             position: relative;
             // background-color: green;
             .container{
                 width: 100%;
-                height: 210px;
+                height: 110px;
                 background-color: rgb(209, 222, 247);
                 border-radius: 10px;
                 border: 1px solid gray;
@@ -58,10 +58,10 @@
             }
         }
         .inputAreaOne{
-            width: 79%;
+            width: 99.5%;
         }
         .inputAreaTwo{
-            width: 20%;
+            width: 0%;
             position: relative;
             .inputAreaTwoContainer{
                 width: 100%;

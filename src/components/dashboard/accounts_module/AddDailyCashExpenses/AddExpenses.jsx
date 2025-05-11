@@ -24,7 +24,7 @@ const AddExpenses = () => {
                     <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${addExpenses.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
-                  <div style={{width:'49%'}}>
+                  <div style={{width:'69%'}}>
                             {
                               addExpensesInput?.map((input, index) => {
                                 return (

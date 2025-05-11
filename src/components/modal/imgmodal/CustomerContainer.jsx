@@ -333,6 +333,29 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                         </div>
                         <h4>Add Glass Power:</h4>
                         <div className={`${customerContainer.main} flex_between `}>
+                        <div className={`${customerContainer.partTwo}`}>
+                                <br />
+                                <label htmlFor="">Right Sph: </label>
+                                <br />
+                                <input type="number" name="" id="" step="0.01" {...register('rightSph')}/>
+                                <br />
+                                <br />
+                                <label htmlFor="">Right Cyl: </label>
+                                <br />
+                                <input type="number" name="" id="" step="0.01" {...register('rightCyl')}/>
+                                <br />
+                                <br />
+                                <label htmlFor="">Right Axis: </label>
+                                <br />
+                                <input type="number" name="" id="" step="0.01" {...register('rightAxis')}/>
+                                <br />
+                                <br />
+                                <label htmlFor="">Right Near:</label>
+                                <br />
+                                <input  name="" id="" step="0.01" {...register('rightNear')}/>
+                                <br />
+                                <br />
+                            </div>
                             <div className={`${customerContainer.partOne}`}>
                                 <br />
                                 <label htmlFor=""> Left Sph: </label>
@@ -356,29 +379,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                                 <br />
                             </div>
-                            <div className={`${customerContainer.partTwo}`}>
-                                <br />
-                                <label htmlFor="">Right Sph: </label>
-                                <br />
-                                <input type="number" name="" id="" step="0.01" {...register('rightSph')}/>
-                                <br />
-                                <br />
-                                <label htmlFor="">Right Cyl: </label>
-                                <br />
-                                <input type="number" name="" id="" step="0.01" {...register('rightCyl')}/>
-                                <br />
-                                <br />
-                                <label htmlFor="">Right Axis: </label>
-                                <br />
-                                <input type="number" name="" id="" step="0.01" {...register('rightAxis')}/>
-                                <br />
-                                <br />
-                                <label htmlFor="">Right Near:</label>
-                                <br />
-                                <input  name="" id="" step="0.01" {...register('rightNear')}/>
-                                <br />
-                                <br />
-                            </div>
+                            
                         </div>
                         <input onClick={() => dispatch(resetFormState())} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
                     </form>

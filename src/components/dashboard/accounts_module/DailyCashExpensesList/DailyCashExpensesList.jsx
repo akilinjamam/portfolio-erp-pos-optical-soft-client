@@ -62,7 +62,7 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
                   </div>
                 </div>
                 <div className={`${cashList.inputAreaTwo} flex_center`}>
-                  <div className={`${cashList.container} `}>
+                  {/* <div className={`${cashList.container} `}>
                         <div className={`${cashList.titleName} flex_center`}></div>
                         <div style={{width: '0'}} className={`${cashList.border_remover}`}></div>
                         <br />
@@ -70,7 +70,7 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
                             
                               
                             </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
           <section className={`${cashList.navigationIcon} flex_between`}>
@@ -94,7 +94,7 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
           
                 
           </section>
-          <section style={{height: '42vh'}}  className={`${cashList.tableArea}`}>
+          <section style={{height: '55vh'}}  className={`${cashList.tableArea}`}>
               <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} hideField={hideField} hideSection={hideSection} />
           </section>
            {
