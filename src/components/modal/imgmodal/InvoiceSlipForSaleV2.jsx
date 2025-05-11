@@ -19,7 +19,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
       <div style={{ textAlign: 'center',  paddingBottom: '10px' }}>
         <div>
             <h5 style={{textAlign:'left', width:'86%', margin:'auto',fontWeight:'bolder'}}>NEW</h5>
-            <h2 style={{fontWeight:'bolder', fontSize:'19px', marginBottom:'-4px'}}> AL-ARAFAT OPTICAL </h2>
+            <h2 style={{fontWeight:'bolder', fontSize:'19px', marginBottom:'-4px', marginTop:'-3px'}}> AL-ARAFAT OPTICAL </h2>
         </div>
         <div>
             <h5 style={{textAlign:'left', width:'85%', margin:'auto',fontWeight:'bold'}}>নিউ</h5>
@@ -80,23 +80,23 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Sph.</th>
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Cyl.</th>
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Axis</th>
-                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Near Add</th>
+                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center', width:'55px'  }}>Near Add</th>
               </tr>
             </thead>
             <tbody>
             <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>R</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center',fontWeight:'bold'  }}>{getCustomerInfo?.rightSph === 'blank' ? '--' : getCustomerInfo?.rightSph}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightCyl === 'blank' ? '--' : getCustomerInfo?.rightCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightAxis === 'blank' ? '--' : getCustomerInfo?.rightAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightNear === 'blank' ? '--' : getCustomerInfo?.rightNear }</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center',fontWeight:'bold'  }}>{getCustomerInfo?.rightSph === 'blank' ? '--' : getCustomerInfo?.rightSph}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightCyl === 'blank' ? '--' : getCustomerInfo?.rightCyl}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightAxis === 'blank' ? '--' : getCustomerInfo?.rightAxis}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightNear === 'blank' ? '--' : getCustomerInfo?.rightNear }</td>
               </tr>
               <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>L</td>
-                <td style={{ height:'20px', fontSize:'10px' , textAlign:'center', fontWeight:'bold' }}>{getCustomerInfo?.leftSph === 'blank' ? '--' : getCustomerInfo?.leftSph}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftCyl === 'blank' ? '--' : getCustomerInfo?.leftCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftAxis === 'blank' ? '--' : getCustomerInfo?.leftAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftNear === 'blank' ? '--' : getCustomerInfo?.leftNear}</td>
+                <td style={{ height:'20px', fontSize:'12px' , textAlign:'center', fontWeight:'bold' }}>{getCustomerInfo?.leftSph === 'blank' ? '--' : getCustomerInfo?.leftSph}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftCyl === 'blank' ? '--' : getCustomerInfo?.leftCyl}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftAxis === 'blank' ? '--' : getCustomerInfo?.leftAxis}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftNear === 'blank' ? '--' : getCustomerInfo?.leftNear}</td>
                 
               </tr>
               
@@ -148,7 +148,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
       <div style={{ marginTop: '5px', textAlign: 'center', fontSize: '9px', fontwaight:'bold' }}>
         <p>বিঃদ্রঃ ডেলিভারি বিকাল ৫ টার পর। ১৫ দিনের মধ্যে ডেলিভারি না নিলে পরে হারানো গেলে অথবা পুরানো জিনিস মেরামতের সময় নষ্ট হলে কোম্পানি দায়ী থাকবে না।</p>
       </div>
-      <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '10px', width:'100%', height:'30px', backgroundColor:'black', display:'flex', alignItems:'center', justifyContent:"space-between",color:'white', padding: '0 5px' }}>
+      <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '10px', width:'100%', height:'30px', border:'1px solid black',  display:'flex', alignItems:'center', justifyContent:"space-between", padding: '0 5px' }}>
             <p>{copy}</p>
             <p>Any Complain: 01521-484359</p>
       </div>

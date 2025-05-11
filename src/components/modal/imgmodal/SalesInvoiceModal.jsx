@@ -45,7 +45,7 @@ const InvoiceModal = ({dispatch,closeModal, type, open, salesList, getCustomerIn
                         <br />
                        
                         <div>
-                            <InvoiceSlipForSaleV2 getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Office Copy' updateCustomerInfo={true}/>
+                            <InvoiceSlipForSaleV2 getCustomerInfo={getCustomerInfo} salesList={salesList} copy='Branch Copy' updateCustomerInfo={true}/>
                         </div>
                     </div>
                     
