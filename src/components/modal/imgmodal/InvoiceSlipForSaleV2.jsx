@@ -11,19 +11,19 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
    
 
     return (
-        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '3px solid #000', padding: '10px', fontFamily: '"inter", sans-serif', fontSize:'9px', position:'relative'}}>
+        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '2px solid #000', padding: '10px', fontFamily: '"inter", sans-serif', fontSize:'9px', position:'relative'}}>
         <div>
-            <img src={glassImg} alt="glass" style={{ width: '50%', height: 'auto', marginBottom: '10px', position:'absolute',top:'-1px', left:'-3px' }} />
+            <img src={glassImg} alt="glass" style={{ width: '40%', height: 'auto', marginBottom: '10px', position:'absolute',top:'-1px', left:'-3px' }} />
         </div>
       {/* Header Section */}
       <div style={{ textAlign: 'center',  paddingBottom: '10px' }}>
         <div>
             <h5 style={{textAlign:'left', width:'86%', margin:'auto',fontWeight:'bolder'}}>NEW</h5>
-            <h2 style={{fontWeight:'bolder', fontSize:'19px'}}> AL-ARAFAT OPTICAL </h2>
+            <h2 style={{fontWeight:'bolder', fontSize:'19px', marginBottom:'-4px'}}> AL-ARAFAT OPTICAL </h2>
         </div>
         <div>
-            <h5 style={{textAlign:'left', width:'70%', margin:'auto',fontWeight:'bold'}}>নিউ</h5>
-            <h2 style={{fontWeight:'bolder', fontSize:'12px'}}> আল-আরাফাত অপটিক্যাল </h2>
+            <h5 style={{textAlign:'left', width:'85%', margin:'auto',fontWeight:'bold'}}>নিউ</h5>
+            <h2 style={{fontWeight:'bolder', fontSize:'15px', marginTop:'-3px'}}> আল-আরাফাত অপটিক্যাল </h2>
         </div>
         <p style={{ fontSize: '9px', fontWeight:'bolder', margin:'5px 0' }}>
         
@@ -38,35 +38,36 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
 
       {/* Invoice Details */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '5px', fontSize:'11px' }}>
-        <div>
+        <div style={{width:'50%', textAlign:"left"}}>
           {/* <p><strong>Sold By:</strong> {getCustomerInfo?.recorderName}</p> */}
           {/* <p style={{ fontSize:'10px'}}><strong>Invoice No:</strong></p> */}
-          <p><strong>Order Date:</strong></p>
-          <p><strong>Delivery Date:</strong></p>
-          <p><strong>Total Quantity:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Order Date:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Delivery Date:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Total Quantity:</strong></p>
           <br />
-          <p><strong>Name:</strong></p>
-          <p><strong>Mobile:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Name:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Mobile:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Payment Method:</strong></p>
+          <p style={{letterSpacing:'1px'}}><strong>Lense:</strong></p>
           {/* <p><strong>Glass:</strong></p> */}
-          <p><strong>Lense:</strong></p>
-          <p><strong>Payment Method:</strong></p>
+         
         </div>
-        <div style={{textAlign:"right"}}>
+        <div style={{textAlign:"right", width:'50%'}}>
           {/* <p style={{fontWeight:'bold', fontSize:'10px'}}>{getCustomerInfo?.invoiceBarcode?.toString()?.slice(8)}</p> */}
-          <p><strong></strong> {updateCustomerInfo ? getCustomerInfo?.createdAt?.slice(0,10) :moment().format("YYYY/MM/DD") }</p>
-          <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate?.slice(0,4)+'/'+getCustomerInfo?.deliveryDate?.slice(5,7)+
-          '/'+getCustomerInfo?.deliveryDate?.slice(8) : '--'}</p>
+          <p><strong></strong> {updateCustomerInfo ? getCustomerInfo?.createdAt?.slice(8,10)?.split('')?.join(' ') + ' '+'/'+ ' ' + getCustomerInfo?.createdAt?.slice(5,7)?.split('')?.join(' ')+' '+ '/' + ' ' + getCustomerInfo?.createdAt?.slice(0,4)?.split('')?.join(' ') :moment().format("DD/MM/YYYY")?.split("")?.join(" ") }</p>
+          <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate?.slice(8)?.split("")?.join(" ")+' '+'/'+' ' + getCustomerInfo?.deliveryDate?.slice(5,7)?.split("")?.join(" ")+' '+
+          '/'+' '+getCustomerInfo?.deliveryDate?.slice(0,4)?.split("")?.join(" ") : '--'}</p>
           <p ><strong></strong> {calculateTotalPrice(salesList?.map(amount => Number(amount?.quantity)))}</p>
           <br />
-          <p >{getCustomerInfo?.customerName ? getCustomerInfo?.customerName : 'blank'}</p>
-          <p >{getCustomerInfo?.phoneNumber === 'blank' ? '--' : getCustomerInfo?.phoneNumber}</p>
+          <p >{getCustomerInfo?.customerName ? (getCustomerInfo?.customerName?.length  >  10 ? getCustomerInfo?.customerName?.slice(0,10)?.split("")?.join('  ')+'..' : getCustomerInfo?.customerName?.split("")?.join('  ')) : 'blank'}</p>
+          <p >{getCustomerInfo?.phoneNumber === 'blank' ? '--' : getCustomerInfo?.phoneNumber?.split('')?.join(' ')}</p>
           {/* <p >{getCustomerInfo?.glassType ? getCustomerInfo?.glassType : 'blank'}</p> */}
-          <p >{getCustomerInfo?.lense === 'blank' ? '--' :getCustomerInfo?.lense }</p>
-          <p >{getCustomerInfo?.paymentMethod === 'blank' ? '--': getCustomerInfo?.paymentMethod}</p>
+         <p>{getCustomerInfo?.paymentMethod === 'blank' ? '--': getCustomerInfo?.paymentMethod}</p>
+        <p> {getCustomerInfo?.lense === 'blank' ? '--' :getCustomerInfo?.lense }</p>
           {/* <p ><strong>Payment Staus:</strong> {(totalPriceValue === (Number(getCustomerInfo?.advance) + Number(getCustomerInfo?.discount))) ? 'Paid' : 'Not-Paid'}</p> */}
         </div>
       </div>
-
+      
     
       {/* Eye Prescription Section */}
       <div style={{ width:'100%',marginTop: '5px' }}>
@@ -79,23 +80,23 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Sph.</th>
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Cyl.</th>
                 <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Axis</th>
-                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Near</th>
+                <th style={{ padding: '3px', fontSize:'10px', textAlign:'center'  }}>Near Add</th>
               </tr>
             </thead>
             <tbody>
             <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>R</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightSph === 'blank' ? '--' : getCustomerInfo?.rightSph}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightCyl === 'blank' ? '--' : getCustomerInfo?.rightCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightAxis === 'blank' ? '--' : getCustomerInfo?.rightAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.rightNear === 'blank' ? '--' : getCustomerInfo?.rightNear }</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center',fontWeight:'bold'  }}>{getCustomerInfo?.rightSph === 'blank' ? '--' : getCustomerInfo?.rightSph}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightCyl === 'blank' ? '--' : getCustomerInfo?.rightCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightAxis === 'blank' ? '--' : getCustomerInfo?.rightAxis}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightNear === 'blank' ? '--' : getCustomerInfo?.rightNear }</td>
               </tr>
               <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>L</td>
-                <td style={{ height:'20px', fontSize:'10px' , textAlign:'center' }}>{getCustomerInfo?.leftSph === 'blank' ? '--' : getCustomerInfo?.leftSph}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftCyl === 'blank' ? '--' : getCustomerInfo?.leftCyl}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftAxis === 'blank' ? '--' : getCustomerInfo?.leftAxis}</td>
-                <td style={{ height:'20px', fontSize:'10px', textAlign:'center'  }}>{getCustomerInfo?.leftNear === 'blank' ? '--' : getCustomerInfo?.leftNear}</td>
+                <td style={{ height:'20px', fontSize:'10px' , textAlign:'center', fontWeight:'bold' }}>{getCustomerInfo?.leftSph === 'blank' ? '--' : getCustomerInfo?.leftSph}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftCyl === 'blank' ? '--' : getCustomerInfo?.leftCyl}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftAxis === 'blank' ? '--' : getCustomerInfo?.leftAxis}</td>
+                <td style={{ height:'20px', fontSize:'10px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftNear === 'blank' ? '--' : getCustomerInfo?.leftNear}</td>
                 
               </tr>
               
@@ -117,21 +118,22 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
         <table style={{ width: '100%', borderCollapse: 'collapse' }} border="1">
           <tbody>
             <tr>
-              <td style={{ padding: '2px', fontWeight:'bold', fontSize:'10px', width:'70%'}}>TOTAL</td>
-              <td style={{ padding: '2px', fontSize:'10px', textAlign:'right' }}>{calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))}</td>
+              <td style={{ padding: '2px', fontWeight:'bold', fontSize:'11px', width:'70%'}}>TOTAL</td>
+              <td style={{ padding: '2px', fontSize:'12px', textAlign:'center', fontWeight:'bold' }}>{calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))}</td>
             </tr>
             <tr>
-              <td style={{ padding: '2px', fontSize:'10px', fontWeight:'bold' }}>ADVANCE</td>
-              <td style={{ padding: '2px', fontSize:'10px',  textAlign:'right'  }}>{getCustomerInfo?.advance !== undefined ? getCustomerInfo?.advance : 0}</td>
+              <td style={{ padding: '2px', fontSize:'11px', fontWeight:'bold' }}>ADVANCE</td>
+              <td style={{ padding: '2px', fontSize:'12px',  textAlign:'center', fontWeight:'bold'}}>{getCustomerInfo?.advance !== undefined ? getCustomerInfo?.advance : 0}</td>
             </tr>
             <tr>
-              <td style={{ padding: '2px', fontSize:'10px', fontWeight:'bold' }}>DUE</td>
-              <td style={{ padding: '2px',  textAlign:'right', fontSize:'10px'  }}>{(calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))) - (getCustomerInfo?.discount !== undefined ? Number(getCustomerInfo?.discount) : 0) - (getCustomerInfo?.advance !== undefined ? Number(getCustomerInfo?.advance) : 0)}  </td>
+              <td style={{ padding: '2px', fontSize:'11px',  fontWeight:'bold' }}>DISCOUNT</td>
+              <td style={{ padding: '2px', fontSize:'12px',  textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.discount !== undefined ? getCustomerInfo?.discount : 0}</td>
             </tr>
             <tr>
-              <td style={{ padding: '2px', fontSize:'10px',  fontWeight:'bold' }}>DISCOUNT</td>
-              <td style={{ padding: '2px', fontSize:'10px',  textAlign:'right'  }}>{getCustomerInfo?.discount !== undefined ? getCustomerInfo?.discount : 0}</td>
+              <td style={{ padding: '2px', fontSize:'11px', fontWeight:'bold' }}>DUE</td>
+              <td style={{ padding: '2px',  textAlign:'center', fontSize:'12px' , fontWeight:'bold' }}>{(calculateTotalPrice(salesList?.map(amount => Number(amount?.actualSalesPrice) * amount?.quantity))) - (getCustomerInfo?.discount !== undefined ? Number(getCustomerInfo?.discount) : 0) - (getCustomerInfo?.advance !== undefined ? Number(getCustomerInfo?.advance) : 0)}  </td>
             </tr>
+            
             
             
           </tbody>
