@@ -11,7 +11,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
    
 
     return (
-        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '2px solid #000', padding: '10px', fontFamily: '"inter", sans-serif', fontSize:'9px', position:'relative'}}>
+        <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"inter", sans-serif', fontSize:'9px', position:'relative'}}>
         <div>
             <img src={glassImg} alt="glass" style={{ width: '40%', height: 'auto', marginBottom: '10px', position:'absolute',top:'-1px', left:'-3px' }} />
         </div>
@@ -32,7 +32,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
         </p>
         
         <p style={{ fontSize: '17px', fontWeight:'bolder' }}>
-          INVOICE: <span style={{fontWeight:'bolder', fontSize:'17px', }}>{getCustomerInfo?.invoiceBarcode?.toString()?.slice(8)}</span>
+          INVOICE: <span style={{ fontSize:'17px', }}>{getCustomerInfo?.invoiceBarcode?.toString()?.slice(8)}</span>
         </p>
       </div>
 
@@ -59,7 +59,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
           '/'+' '+getCustomerInfo?.deliveryDate?.slice(0,4)?.split("")?.join(" ") : '--'}</p>
           <p ><strong></strong> {calculateTotalPrice(salesList?.map(amount => Number(amount?.quantity)))}</p>
           <br />
-          <p >{getCustomerInfo?.customerName ? (getCustomerInfo?.customerName?.length  >  10 ? getCustomerInfo?.customerName?.slice(0,10)?.split("")?.join('  ')+'..' : getCustomerInfo?.customerName?.split("")?.join('  ')) : 'blank'}</p>
+          <p >{getCustomerInfo?.customerName ? (getCustomerInfo?.customerName?.length > 18 ? getCustomerInfo?.customerName?.slice(0,18)+'..' : getCustomerInfo?.customerName) : 'blank'}</p>
           <p >{getCustomerInfo?.phoneNumber === 'blank' ? '--' : getCustomerInfo?.phoneNumber?.split('')?.join(' ')}</p>
           {/* <p >{getCustomerInfo?.glassType ? getCustomerInfo?.glassType : 'blank'}</p> */}
          <p>{getCustomerInfo?.paymentMethod === 'blank' ? '--': getCustomerInfo?.paymentMethod}</p>
@@ -110,7 +110,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
       <div style={{ margin: '10px 0', fontSize:'9px' }}>
         <h3>PD: {getCustomerInfo?.comment?.split('=')?.[1] === undefined ? '--' : getCustomerInfo?.comment?.split('=')?.[1]}</h3>
         <h3>Remarks: {getCustomerInfo?.comment?.split('=')?.[0] === 'blank' ? '--' : getCustomerInfo?.comment?.split('=')?.[0]}</h3>
-        <h2>Glass Type: <span>{getCustomerInfo?.glassType === 'blank' ? '--' : getCustomerInfo?.glassType}</span></h2>
+        <p style={{fontSize:'14px'}}>Glass Type: <span >{getCustomerInfo?.glassType === 'blank' ? '--' : getCustomerInfo?.glassType}</span></p>
       </div>
 
       {/* Total Section */}
