@@ -495,9 +495,9 @@ const Pos = () => {
         return () => {
             document.removeEventListener('keydown', handleCustoemerInfoPress);
         }
-    })
+    },[keyGruard, dispatch])
 
-    console.log(keyGruard)
+   
 
     useEffect(() => {
         const handleSearchPress = (e) => {
