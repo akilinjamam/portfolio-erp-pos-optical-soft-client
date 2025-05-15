@@ -48,6 +48,7 @@ export const imgModalSlice = createSlice({
         totalBankDueCollection: 0,
         totalBkashDueCollection: 0,
         totalNogodDueCollection: 0,
+        vendorBillData: []
 
     },
     reducers: {
@@ -157,11 +158,14 @@ export const imgModalSlice = createSlice({
             state.cashFlow = action.payload.cashFlow;
             state.totalProfitAllocation = action.payload.profitAllocation;
         },
+        addVendorBillData: (state, action) => {
+            state.vendorBillData = action.payload.vendorBillData;
+        }
 
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState, addMonthYear, addCashFlowData } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState, addMonthYear, addCashFlowData, addVendorBillData } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

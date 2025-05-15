@@ -31,6 +31,7 @@ import SalesAnalysisModal from './SalesAnalysisModal';
 import BestSalePerformerModal from './BestSalePerformerModal';
 import CashFlowSummeryModal from './CashFlowSummerModal';
 import DeveloperInfo from './DeveloperInfo';
+import VendorBillModal from './VendorBillModal';
 
 const ImgModal = () => {
 
@@ -61,6 +62,7 @@ const ImgModal = () => {
         const salesDetailData = useSelector(state => state.imgModal.salesDetail)
         const cashFlow = useSelector(state => state.imgModal.cashFlow)
         const totalProfitAllocation = useSelector(state => state.imgModal.totalProfitAllocation)
+        const vendorBillData = useSelector(state => state.imgModal.vendorBillData);
         const dispatch = useDispatch();
         
 return (
@@ -92,6 +94,7 @@ return (
             <StockAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={stockAnalysisData} categoryWiseStockDetail={categoryWiseStockDetail}/>
             <SalesAnalysisModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} analysisData={salesAnalysisData} salesDetail={salesDetailData}/>
             <CashFlowSummeryModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} cashFlow={cashFlow} totalProfitAllocation={totalProfitAllocation}/>
+            <VendorBillModal dispatch={dispatch} closeModal={closeModal} open={open} type={type} vendorData={vendorBillData}/>
             <DeveloperInfo dispatch={dispatch} closeModal={closeModal} open={open} type={type}/>
 
         </div>

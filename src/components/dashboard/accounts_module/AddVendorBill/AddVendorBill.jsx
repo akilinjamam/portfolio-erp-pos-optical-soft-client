@@ -1,5 +1,5 @@
 import '../../../../global_style/global_style.css'
-import { addVendorList, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addVendorBillData, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import Pagination from '../../pagination/Pagination';
 import addVendorBill from './AddVendorBill.module.scss';
 import { vendorBillInput } from './addVendorBillInput';
@@ -86,8 +86,8 @@ const AddVendorBill = () => {
                           <div className={`${addVendorBill.inputPart} flex_left`}>
                               <i
                               onClick={() => {
-                                dispatch(openModal('vendor'))
-                                dispatch(addVendorList(modifiedVendorDataWithIndexId))
+                                dispatch(openModal('vendor-bill'))
+                                dispatch(addVendorBillData({vendorBillData:modifiedVendorDataWithIndexId}))
                               }}
                               title="print" className="uil uil-print"></i>
                               <span>Total : {modifiedVendorDataWithIndexId?.length} </span>
