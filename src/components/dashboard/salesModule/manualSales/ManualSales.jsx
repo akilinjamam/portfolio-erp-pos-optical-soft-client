@@ -95,7 +95,7 @@ const ManualSales = () => {
                                   }
                                  
                                   <button
-                                    title='SHORTCUT: T'
+                                    title='SHORTCUT: PRESS CONTROL'
                                     onClick={(e) => {
                                       e.preventDefault();
                                       dispatch(openModal('customer'))} 

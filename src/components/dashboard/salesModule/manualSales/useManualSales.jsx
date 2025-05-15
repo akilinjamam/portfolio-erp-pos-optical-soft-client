@@ -84,6 +84,7 @@ const useManualSales = () => {
         products: showData,
         lense: customerInfo?.lense === undefined ? 'blank' : customerInfo?.lense,
         glassType: customerInfo?.glassType === undefined ? 'blank' : customerInfo?.glassType,
+        totalQuantity: customerInfo?.totalQuantity === undefined ? '0' : customerInfo?.totalQuantity,
     }
 
     setCustomerInfoData(customerData)
@@ -242,7 +243,7 @@ const useManualSales = () => {
         
         const handleAddCustomerAndInvoicePress = (e) => {
             
-            if(e.key == 'T' || e.key ==='t'){
+            if(e.key == 'Control'){
                 if(!switchKey){
                     setSwitchKey(true)
                     dispatch(openModal('customer'))

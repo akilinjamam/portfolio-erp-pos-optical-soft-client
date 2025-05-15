@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useDeleteSupplierData from "../../../../data/supplierData/useDeleteSupplierData";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
 import useUpdateSaleInfoData from "../../../../data/saleData/useUpdateSalesInfoData";
 import useUpdateProductInfoData from "../../../../data/saleData/useUpdateProductInfoData";
+import useDeletSalesInfoData from "../../../../data/saleData/useDeleteSalesInfoData";
 
 
 const useManageSales = () => {
@@ -95,11 +95,11 @@ const useManageSales = () => {
         refetch()
     }, [refetch, query, range])
 
-    const {mutate:deleteEmployees} = useDeleteSupplierData(refetch, setIdsForDelete, setSelectDeleted)
+    const {mutate:deleteSalesInfoData} = useDeletSalesInfoData(refetch, setIdsForDelete, setSelectDeleted)
 
     const deleteProducts = async (e) => {
         e.preventDefault()
-        deleteEmployees(idsForDelete)
+        deleteSalesInfoData({ids: idsForDelete})
     }
 
     const initialProductData = {

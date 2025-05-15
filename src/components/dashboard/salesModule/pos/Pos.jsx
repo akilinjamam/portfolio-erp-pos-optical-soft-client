@@ -374,7 +374,8 @@ const Pos = () => {
                 comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
                 recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
                 paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,      
-                invoiceBarcode:invoice === undefined ? 'blank' : invoice      
+                invoiceBarcode:invoice === undefined ? 'blank' : invoice,
+                totalQuantity: customerInfo?.totalQuantity === undefined ? '0' : customerInfo?.totalQuantity,      
             }
             if(listOfSalesItem?.length > 0){
                 mutate(saleData)
@@ -421,7 +422,8 @@ const Pos = () => {
                             comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
                             recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
                             paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,
-                            invoiceBarcode:invoice === undefined ? 'blank' : invoice
+                            invoiceBarcode:invoice === undefined ? 'blank' : invoice,
+                             totalQuantity: customerInfo?.totalQuantity === undefined ? '0' : customerInfo?.totalQuantity,
                         }
 
                         if(listOfSalesItem?.length > 0){
@@ -478,7 +480,8 @@ const Pos = () => {
 
     useEffect(() => {
         const handleCustoemerInfoPress = (e) => {
-            if(e.key === 't' || e.key === 'T'){
+            console.log(e.key)
+            if(e.key === 'Control'){
                 if(!keySwitch){
                     dispatch(openModal('customer'))
                     setKeySwitch(true)   
@@ -609,7 +612,7 @@ const Pos = () => {
                             </div>
                        </div>
                        <div className={`${pos.submitSale} flex_between`}>
-                            <button title='SHORTCUT: T' onClick={() => {
+                            <button title='SHORTCUT: PRESS CONTROL' onClick={() => {
                                 dispatch(openModal('customer'))
                             }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
                             <button title='SHORTCUT: J' onClick={() => {

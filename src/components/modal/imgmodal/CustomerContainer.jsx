@@ -104,6 +104,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
             comment:data?.comment === '' ? undefined : `${data?.comment}=${data?.pd}`,
+            totalQuantity:data?.totalQuantity === '' ? undefined : data?.totalQuantity,
 
         }
         console.log(modifiedValue)
@@ -311,6 +312,11 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <label htmlFor="">PD:</label>
                                 <br />
                                 <input type="text"  name="" id="" {...register('pd')}/>
+                                <br />
+                                <br />
+                                <label htmlFor="">Total Quantity:</label>
+                                <br />
+                                <input type="text"  name="" id="" {...register('totalQuantity')}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">Payment Method: <span style={{color:'red'}}>*</span></label>

@@ -48,7 +48,7 @@ export const imgModalSlice = createSlice({
         totalBankDueCollection: 0,
         totalBkashDueCollection: 0,
         totalNogodDueCollection: 0,
-        vendorBillData: []
+        vendorBillData: [],
 
     },
     reducers: {

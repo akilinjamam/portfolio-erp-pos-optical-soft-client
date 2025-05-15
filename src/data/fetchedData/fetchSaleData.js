@@ -87,10 +87,16 @@ export const fetchUpdateSalesInfoData = async (id, data) => {
     }
 }
 
-export const fetchDeleteSalesInfoData = async (id, data) => {
-    console.log(id);
+export const fetchDeleteSalesInfoData = async (ids) => {
+    const token = localStorage.getItem('user');
     try {
-        const result = await axios.delete(`${url}/sales/delete-sales-info/${id}`, data)
+        const result = await axios.post(`${url}/sales/delete-sales`, ids, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
 

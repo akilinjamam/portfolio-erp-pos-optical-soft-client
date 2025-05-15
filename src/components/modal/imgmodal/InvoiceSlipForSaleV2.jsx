@@ -57,7 +57,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
           <p><strong></strong> {updateCustomerInfo ? getCustomerInfo?.createdAt?.slice(8,10)?.split('')?.join(' ') + ' '+'/'+ ' ' + getCustomerInfo?.createdAt?.slice(5,7)?.split('')?.join(' ')+' '+ '/' + ' ' + getCustomerInfo?.createdAt?.slice(0,4)?.split('')?.join(' ') :moment().format("DD/MM/YYYY")?.split("")?.join(" ") }</p>
           <p ><strong></strong> {getCustomerInfo?.deliveryDate ? getCustomerInfo?.deliveryDate?.slice(8)?.split("")?.join(" ")+' '+'/'+' ' + getCustomerInfo?.deliveryDate?.slice(5,7)?.split("")?.join(" ")+' '+
           '/'+' '+getCustomerInfo?.deliveryDate?.slice(0,4)?.split("")?.join(" ") : '--'}</p>
-          <p ><strong></strong> {calculateTotalPrice(salesList?.map(amount => Number(amount?.quantity)))}</p>
+          <p ><strong></strong> {(getCustomerInfo?.totalQuantity === '0' || getCustomerInfo?.totalQuantity === undefined) ? calculateTotalPrice(salesList?.map(amount => Number(amount?.quantity))) : getCustomerInfo?.totalQuantity}</p>
           <br />
           <p >{getCustomerInfo?.customerName ? (getCustomerInfo?.customerName?.length > 18 ? getCustomerInfo?.customerName?.slice(0,18)+'..' : getCustomerInfo?.customerName) : 'blank'}</p>
           <p >{getCustomerInfo?.phoneNumber === 'blank' ? '--' : getCustomerInfo?.phoneNumber?.split('')?.join(' ')}</p>

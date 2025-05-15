@@ -70,6 +70,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
             comment: getCustomerInfo?.comment?.split('=')?.[0] || '',
             pd: getCustomerInfo?.comment?.split('=')?.[1] || '',
             paymentMethod: getCustomerInfo?.paymentMethod || '',
+            totalQuantity: getCustomerInfo?.totalQuantity || '',
             duePaymentMethod: getCustomerInfo?.duePaymentMethod || '',
             leftSph: getCustomerInfo?.leftSph || '',
             leftCyl: getCustomerInfo?.leftCyl || '',
@@ -125,6 +126,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
             recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
             duePaymentMethod: data?.paymentMethod === '' ? undefined : data?.duePaymentMethod,
+            totalQuantity: data?.totalQuantity === '' ? undefined : data?.totalQuantity,
             comment:data?.comment === '' ? undefined : `${data?.comment}=${data?.pd}`,
         }
        
@@ -284,6 +286,12 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
                                 <label htmlFor="">PD:</label>
                                 <br />
                                 <input type="text"  name="" id="" {...register('pd')}/>
+                                <br />
+                               
+                                <br />
+                                <label htmlFor="">Total Quantity:</label>
+                                <br />
+                                <input type="text"  name="" id="" {...register('totalQuantity')}/>
                                 <br />
                                 <br />
                                 <label htmlFor="">Payment Method:</label>
