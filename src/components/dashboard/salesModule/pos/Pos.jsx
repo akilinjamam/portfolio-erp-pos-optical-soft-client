@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSalesList, clearCustomerInfo, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addSalesList, clearCustomerInfo, closeModal, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
@@ -14,7 +14,7 @@ import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalcul
 import useSalesRecord from '../salesRecord/useSalesRecord';
 const Pos = () => {
     
-    const [keySwitch, setKeySwitch] = useState(false)
+    // const [keySwitch, setKeySwitch] = useState(false)
     const {saleData} = useSaleData()
     
     const invoiceNumber = invoiceCalculation(saleData)
@@ -457,18 +457,16 @@ const Pos = () => {
     useEffect(() => {
         const handlePrintPress = (e) => {
             if(e.key ==='j' || e.key === 'J'){
-                if(!keySwitch){
-                        refetch()
-                        if (listOfSalesItem?.length > 0) {
+                 refetch()
+                    if (listOfSalesItem?.length > 0) {
                         toast.error('print invoice after add to sale')
                         return 
                     }    
                 dispatch(openModal('invoice'))
-                setKeySwitch(true)
-                }else{
-                    // dispatch(closeModal())
-                    setKeySwitch(false)
-                }
+            }
+
+            if(e.key === 'Escape'){
+                dispatch(closeModal())
             }
         }
         document.addEventListener('keydown', handlePrintPress);
@@ -482,13 +480,10 @@ const Pos = () => {
         const handleCustoemerInfoPress = (e) => {
             console.log(e.key)
             if(e.key === 'Control'){
-                if(!keySwitch){
-                    dispatch(openModal('customer'))
-                    setKeySwitch(true)   
-                }else{
-                    // dispatch(closeModal())
-                    setKeySwitch(false)
-                }
+                 dispatch(openModal('customer'))
+            }
+            if(e.key === 'Escape'){
+                dispatch(closeModal())
             }
         }
 

@@ -11,7 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import useSalesRecord from "../salesRecord/useSalesRecord";
 
 const useManualSales = () => {
-    const [switchKey, setSwitchKey] = useState(false);
+    // const [switchKey, setSwitchKey] = useState(false);
     const {refetch} = useSalesRecord('', '', '')
 
     const {saleData} = useSaleData()
@@ -244,23 +244,11 @@ const useManualSales = () => {
         const handleAddCustomerAndInvoicePress = (e) => {
             
             if(e.key == 'Control'){
-                if(!switchKey){
-                    setSwitchKey(true)
-                    dispatch(openModal('customer'))
-                }else{
-                    setSwitchKey(false)
-                    dispatch(closeModal())
-                } 
+                dispatch(openModal('customer'))
             }
 
             if(e.key == 'J' || e.key ==='j'){
-                if(!switchKey){
-                    setSwitchKey(true)
-                    dispatch(openModal('invoice'))
-                }else{
-                    setSwitchKey(false)
-                    dispatch(closeModal())
-                } 
+                dispatch(openModal('invoice'))
             }
             if(e.key == 'C' || e.key ==='c'){
                e.preventDefault()
@@ -270,6 +258,10 @@ const useManualSales = () => {
             if(e.key == 'S' || e.key ==='s'){
                 editProduct(e)
                e.preventDefault()
+            }
+            if(e.key == 'Escape'){
+               
+                dispatch(closeModal())
             }
         }
 
