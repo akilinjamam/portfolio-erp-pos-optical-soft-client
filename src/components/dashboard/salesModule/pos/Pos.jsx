@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSalesList, clearCustomerInfo, closeModal, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addSalesList, clearCustomerInfo, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
@@ -466,7 +466,7 @@ const Pos = () => {
                 dispatch(openModal('invoice'))
                 setKeySwitch(true)
                 }else{
-                    dispatch(closeModal())
+                    // dispatch(closeModal())
                     setKeySwitch(false)
                 }
             }
@@ -486,7 +486,7 @@ const Pos = () => {
                     dispatch(openModal('customer'))
                     setKeySwitch(true)   
                 }else{
-                    dispatch(closeModal())
+                    // dispatch(closeModal())
                     setKeySwitch(false)
                 }
             }
