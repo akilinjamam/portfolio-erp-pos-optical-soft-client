@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
 import useGetSingleVendorData from "../../../../data/vendorData/useGetSingleVendorData";
 import usePostVendorBillData from "../../../../data/vendorData/usePostVendorBill";
-import useGetAllVendorData from "../../../../data/vendorData/useGetVendorData";
 import { useDispatch } from "react-redux";
+import useGetAllVendorBillData from "../../../../data/vendorData/useGetVendorBillData";
 
 const useAddVendorBill = () => {
 
@@ -81,16 +81,14 @@ const useAddVendorBill = () => {
 
 
 
-    const {payroll: oneVendorBillHistory, refetch:refetchVendor, isLoading} = useGetAllVendorData(supplierId, month?.split('-')?.[0], month?.split('-')?.[1]);
+    const {payroll: oneVendorBillHistory, refetch:refetchVendor, isLoading} = useGetAllVendorBillData(supplierId, month?.split('-')?.[0], month?.split('-')?.[1]);
 
     useEffect(() => {
-        if(supplierId){
-            // const filterAccordingToBillingDate = oneVendorBillHistory?.data?.result?.filter(f => f?.billingDate !== '')
-             const employeesAddedWithIndexId = oneVendorBillHistory?.data?.result?.slice()?.reverse()?.map((d, i) => ({
+         const filterAccordingToBillingDate = oneVendorBillHistory?.data?.result?.filter(f => f?.billingDate !== '')
+             const employeesAddedWithIndexId = filterAccordingToBillingDate?.slice()?.reverse()?.map((d, i) => ({
             ...d, indexId: i + 1
         }))
         setModifiedVendorDataWithIndexId(employeesAddedWithIndexId)
-    }
     }, [oneVendorBillHistory])
 
     useEffect(() => {

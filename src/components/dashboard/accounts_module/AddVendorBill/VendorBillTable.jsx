@@ -23,7 +23,7 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Bill Amount</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Bill Amount</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Billing Date</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Date</th>
+                  {/* <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Date</th> */}
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Billing No</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Paid</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Paid</th>
@@ -50,7 +50,7 @@ if(isLoading){
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.singleBillAmount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.billAmount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.billingDate}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentDate}</td>
+                    {/* <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentDate}</td> */}
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.billNo}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paid}</td>
