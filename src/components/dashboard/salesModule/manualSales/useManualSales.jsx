@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaleData from "../../../../data/saleData/useSaleData";
 import { invoiceCalculation } from "../../../../invoiceCalculation/invoiceCalculation";
 import moment from "moment";
-import { addSalesList, clearCustomerInfo, closeModal, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import { addKeyGuard, addSalesList, clearCustomerInfo, closeModal, openModal, removeKeyGuard } from "../../../modal/imgmodal/imgModalSlice";
 import { fetchPostSaleData } from "../../../../data/fetchedData/fetchSaleData";
 import { useMutation } from "@tanstack/react-query";
 import useSalesRecord from "../salesRecord/useSalesRecord";
@@ -15,6 +15,8 @@ const useManualSales = () => {
     const {refetch} = useSalesRecord('', '', '')
     const [inInput, setInInput] = useState(false);
     const {saleData} = useSaleData()
+
+    const keyGuard = useSelector(state => state.imgModal.keyGuard);
 
     const dispatch = useDispatch();
     
@@ -199,8 +201,10 @@ const useManualSales = () => {
     useEffect(() => {
         const handleAddToListPress = (e) => {
             if(e.key == 'L' || e.key ==='l'){
-                handleSubmit(e)
+               if(!keyGuard){
+                 handleSubmit(e)
                 e.preventDefault()
+               }
             }
         }
 
@@ -215,7 +219,9 @@ const useManualSales = () => {
         const handleAddToSalePress = (e) => {
             if(e.key == 'I' || e.key ==='i'){
                if(!inInput){
-                 handlePost()
+                 if(!keyGuard){
+                    handlePost()
+                 }
                }
             }
         }
@@ -229,11 +235,13 @@ const useManualSales = () => {
         const handleResetPress = (e) => {
             if(e.key == 'R' || e.key ==='r'){
                if(!inInput){
-                 e.preventDefault();
-                setShowData([]);
-                setEmployeeData(initialEmployeeData)
-                setCategory('')
-                setUploading(false)
+                 if(!keyGuard){
+                    e.preventDefault();
+                    setShowData([]);
+                    setEmployeeData(initialEmployeeData)
+                    setCategory('')
+                    setUploading(false)
+                 }
                }
             }
         }
@@ -249,28 +257,35 @@ const useManualSales = () => {
             
             if(e.key == 'Control'){
                 dispatch(openModal('customer'))
+                dispatch(addKeyGuard())
             }
 
             if(e.key == 'J' || e.key ==='j'){
                if(!inInput){
-                 dispatch(openModal('invoice'))
+                    if(!keyGuard){
+                         dispatch(openModal('invoice'))
+                    }
                }
             }
             if(e.key == 'C' || e.key ==='c'){
               if(!inInput){
-                 e.preventDefault()
-                setEdit('')                    
-                setEmployeeData(initialEmployeeData)
+                 if(!keyGuard){
+                   e.preventDefault()
+                    setEdit('')                    
+                    setEmployeeData(initialEmployeeData)
+                 }
               }
             }
             if(e.key == 'S' || e.key ==='s'){
                if(!inInput){
-                 editProduct(e)
-                e.preventDefault()
+                if(!keyGuard){
+                    editProduct(e)
+                    e.preventDefault()
+                }
                }
             }
             if(e.key == 'Escape'){
-               
+                dispatch(removeKeyGuard())
                 dispatch(closeModal())
             }
         }
