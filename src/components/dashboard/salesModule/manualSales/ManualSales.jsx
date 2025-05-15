@@ -6,7 +6,7 @@ import ManualSalesTable from './ManualSalesTable';
 import useManualSales from './useManualSales';
 import { manualSalesInput } from './manualSalesInput';
 import { useDispatch} from 'react-redux';
-import { openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addKeyGuard, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
@@ -98,7 +98,10 @@ const ManualSales = () => {
                                     title='SHORTCUT: PRESS CONTROL'
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      dispatch(openModal('customer'))} 
+                                      dispatch(openModal('customer'))
+                                      dispatch(addKeyGuard())
+                                    } 
+                                      
                                     }
                                    style={{border:'none', width:'auto', padding:'3px 7px', borderRadius:"5px", color:'white', fontWeight:'bold', backgroundColor:'gray', cursor:'pointer',}} >
                                       ADD CUSTOMER INFO

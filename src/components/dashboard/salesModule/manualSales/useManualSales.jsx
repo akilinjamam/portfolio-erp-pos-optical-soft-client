@@ -197,7 +197,7 @@ const useManualSales = () => {
         }
     },[isSuccess,isError])
 
-
+console.log(keyGuard)
     useEffect(() => {
         const handleAddToListPress = (e) => {
             if(e.key == 'L' || e.key ==='l'){
@@ -269,7 +269,7 @@ const useManualSales = () => {
             }
             if(e.key == 'C' || e.key ==='c'){
               if(!inInput){
-                 if(!keyGuard){
+                 if(keyGuard  === false){
                    e.preventDefault()
                     setEdit('')                    
                     setEmployeeData(initialEmployeeData)
