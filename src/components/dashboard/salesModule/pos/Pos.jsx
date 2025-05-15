@@ -179,21 +179,21 @@ const Pos = () => {
                     setPrice(false)
                     setIsScanned(true)
                 }
-                if(e.key === 'q'){
+                if(e.key === 'q' || e.key === 'Q' ){
                     setQuantity(true)
                     setPrice(false)
                     setIsScanned(false)
                     setSearchByBarcode(false)
                     setInInput(false)
                 }
-                if(e.key === 'p'){
+                if(e.key === 'p' || e.key === 'P'){
                     setPrice(true)
                     setQuantity(false)
                     setIsScanned(false)
                     setSearchByBarcode(false)
                     setInInput(false)
                 }
-                if(e.key === 's'){
+                if(e.key === 's' || e.key === 'S'){
                     setIsScanned(true)
                     setPrice(false)
                     setQuantity(false)

@@ -139,7 +139,17 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             setDeleteGlass('')
       }
 
-      console.log(addProductAndGlass?.join(','))
+     useEffect(() => {
+  const handleKeyDown = (e) => {
+    if ((e.altKey || e.metaKey) && e.key === 's') {
+      e.preventDefault(); // prevent browser's default save
+      handleSubmit(onSubmit)(); // trigger form submit
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+});
 
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'customer' ) ? imgmodal.open : imgmodal.close}`} >
@@ -386,7 +396,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                             </div>
                             
                         </div>
-                        <input onClick={() => dispatch(resetFormState())} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
+                        <input title="SHORTCUT: alt + s" onClick={() => dispatch(resetFormState())} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
                     </form>
                 </section>
             </div>
