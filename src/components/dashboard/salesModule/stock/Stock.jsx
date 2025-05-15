@@ -20,9 +20,9 @@ const Stock = () => {
         to: ''
     });
     const {products, isLoading} = useProductData(query, range.from, range.to);
-    const [stocks, setStocks] = useState(true);
+    const [stocks, setStocks] = useState(undefined);
     
-    console.log(range)
+    console.log(stocks)
     // eslint-disable-next-line no-unused-vars
     const [paginatedIndex, setPaginatedIndex] = useState();
     const [filteredStock, setFilteredStock] = useState([]);
@@ -31,8 +31,13 @@ const Stock = () => {
     const [modifiedProductDataWithIndexId, setModifiedProductDataWithIndexId] = useState([])
     
     useEffect(() => {
-        const filteredByStock = products?.result?.slice()?.reverse()?.filter(f => f?.inStock === stocks)
+        if(stocks === undefined){
+            const filteredByStock = products?.result?.slice()?.reverse()
         setFilteredStock(filteredByStock)
+        }else{
+            const filteredByStock = products?.result?.slice()?.reverse()?.filter(f => f?.inStock === stocks)
+        setFilteredStock(filteredByStock)
+        }
     },[products, stocks])
 
        useEffect(() => {
@@ -70,7 +75,16 @@ const Stock = () => {
                     ></i>
                     <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
                     <i onClick={() => setQuery('')} className="uil uil-times"></i>
-                    <select value={stocks} name="" id="" onChange={(e) => setStocks(e?.target?.value === 'true') }>
+                    <select value={stocks} name="" id="" onChange={(e) => {
+                        console.log(e.target.value)
+                        if(e.target.value === 'both'){
+                            setStocks(undefined)
+                        }else{
+                            setStocks(e?.target?.value === 'true')
+                        }
+                        
+                    } }>
+                        <option value={'both'}>stock-in-out</option>
                         <option value={true}>stock-in</option>
                         <option value={false}>stock-out</option>
                     </select>
