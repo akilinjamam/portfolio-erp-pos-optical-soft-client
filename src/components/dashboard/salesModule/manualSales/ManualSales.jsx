@@ -35,7 +35,7 @@ const ManualSales = () => {
                                 return (
                                   <div key={index+1} className={`${manualSales.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input  onMouseOver={() => {setInInput(true)}} onMouseOut={() => {setInInput(false)}} value={employeeData[input.name]}   type={input.type} 
+                                    <input onBlur={() => setInInput(false)} onMouseOver={() => {setInInput(true)}} onMouseOut={() => {setInInput(false)}} value={employeeData[input.name]}   type={input.type} 
                                         onChange={(e) => {setEmployeeData({...employeeData, [input.value]: e.target.value})}}
                                       
                                     />
