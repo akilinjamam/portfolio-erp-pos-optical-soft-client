@@ -15,6 +15,8 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
 
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
 
+    
+
     const [addGlass, setAddGlass] = useState('');
     const [deleteGlass, setDeleteGlass] = useState('');
     const [itemName, setItemName] = useState('');

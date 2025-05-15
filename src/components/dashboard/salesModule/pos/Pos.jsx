@@ -16,7 +16,8 @@ const Pos = () => {
     
     const keyGruard = useSelector(state => state.imgModal.keyGuard);
     const {saleData} = useSaleData()
-    
+    const [inInput, setInInput] = useState(false)
+
     const invoiceNumber = invoiceCalculation(saleData)
     
     const {refetch} = useSalesRecord('', '', '')
@@ -183,12 +184,14 @@ const Pos = () => {
                     setPrice(false)
                     setIsScanned(false)
                     setSearchByBarcode(false)
+                    setInInput(false)
                 }
                 if(e.key === 'p'){
                     setPrice(true)
                     setQuantity(false)
                     setIsScanned(false)
                     setSearchByBarcode(false)
+                    setInInput(false)
                 }
                 if(e.key === 's'){
                     setIsScanned(true)
@@ -197,6 +200,7 @@ const Pos = () => {
                     setPriceArray([])
                     setQuantityArray([])
                     setSearchByBarcode(false)
+                    setInInput(false)
                 }
             }
         }
@@ -475,14 +479,16 @@ const Pos = () => {
         }
     })
 
+    console.log(inInput)
 
     useEffect(() => {
         const handleCustoemerInfoPress = (e) => {
             console.log(e.key)
             if(e.key === 'Control'){
-               
-                dispatch(addKeyGuard())
-                dispatch(openModal('customer'))
+                if(!inInput){
+                    dispatch(addKeyGuard())
+                    dispatch(openModal('customer'))
+                }
             }
             if(e.key === 'Escape'){
                 dispatch(closeModal())
@@ -495,9 +501,9 @@ const Pos = () => {
         return () => {
             document.removeEventListener('keydown', handleCustoemerInfoPress);
         }
-    },[keyGruard, dispatch])
+    },[keyGruard, dispatch, inInput])
 
-   
+    console.log(keyGruard)
 
     useEffect(() => {
         const handleSearchPress = (e) => {
@@ -512,6 +518,7 @@ const Pos = () => {
             document.removeEventListener('keydown', handleSearchPress);
         }
     })
+
 
     return (
        <div onDoubleClick={() => {
@@ -576,6 +583,7 @@ const Pos = () => {
                                     setPrice(false)
                                     setIsScanned(false)
                                     setSearchByBarcode(false)
+                                    setInInput(false)
                                 }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
                                     Quantity
                                 </div>
@@ -585,6 +593,7 @@ const Pos = () => {
                                     setQuantity(false)
                                     setIsScanned(false)
                                     setSearchByBarcode(false)
+                                    setInInput(false)
                                 }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
                                     Price
                                 </div>
@@ -596,6 +605,7 @@ const Pos = () => {
                                     setPriceArray([])
                                     setQuantityArray([])
                                     setSearchByBarcode(false)
+                                    setInInput(false)
                                 }} style={{border: `${isScanned ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.scanBtn} flex_center`}>
                                     Scan
                                 </div>
@@ -609,7 +619,7 @@ const Pos = () => {
                                     )
                                     })
                                     :
-                                    <input placeholder='search by typing barcode' style={{height:'20px', border:'none', outline:'none', padding:'0 5px', borderRadius:'5px'}} type="number" name="" id="" onChange={(e) => setBarcodeId(e.target.value)}/>
+                                    <input onClick={() => setInInput(true)} onBlur={() => setInInput(false)} onMouseLeave={() => setInInput(false)} placeholder='search by typing barcode' style={{height:'20px', border:'none', outline:'none', padding:'0 5px', borderRadius:'5px'}} type="number" name="" id="" onChange={(e) => setBarcodeId(e.target.value)}/>
                                 }
                             </div>
                        </div>
