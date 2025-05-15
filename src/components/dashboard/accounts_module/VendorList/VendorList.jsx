@@ -12,7 +12,7 @@ const VendorList = ({hideSection, hideField}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData, totalPaid} = useVendorList();
     const vendorData = modifiedEmployeeDataWithIndexId
 
-    const allEmployeeData =supplierData?.result;
+    const allEmployeeData =supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
 
     const dispatch = useDispatch();
 
