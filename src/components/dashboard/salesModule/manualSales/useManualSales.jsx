@@ -13,7 +13,7 @@ import useSalesRecord from "../salesRecord/useSalesRecord";
 const useManualSales = () => {
     // const [switchKey, setSwitchKey] = useState(false);
     const {refetch} = useSalesRecord('', '', '')
-
+    const [inInput, setInInput] = useState(false);
     const {saleData} = useSaleData()
 
     const dispatch = useDispatch();
@@ -214,7 +214,9 @@ const useManualSales = () => {
     useEffect(() => {
         const handleAddToSalePress = (e) => {
             if(e.key == 'I' || e.key ==='i'){
-                handlePost()
+               if(!inInput){
+                 handlePost()
+               }
             }
         }
 
@@ -224,14 +226,16 @@ const useManualSales = () => {
         }
     })
     useEffect(() => {
-        const handleResetPress = () => {
-            // if(e.key == 'R' || e.key ==='r'){
-            //     e.preventDefault();
-            //     setShowData([]);
-            //     setEmployeeData(initialEmployeeData)
-            //     setCategory('')
-            //     setUploading(false)
-            // }
+        const handleResetPress = (e) => {
+            if(e.key == 'R' || e.key ==='r'){
+               if(!inInput){
+                 e.preventDefault();
+                setShowData([]);
+                setEmployeeData(initialEmployeeData)
+                setCategory('')
+                setUploading(false)
+               }
+            }
         }
 
         document.addEventListener('keydown', handleResetPress)
@@ -248,16 +252,22 @@ const useManualSales = () => {
             }
 
             if(e.key == 'J' || e.key ==='j'){
-                dispatch(openModal('invoice'))
+               if(!inInput){
+                 dispatch(openModal('invoice'))
+               }
             }
             if(e.key == 'C' || e.key ==='c'){
-               e.preventDefault()
+              if(!inInput){
+                 e.preventDefault()
                 setEdit('')                    
                 setEmployeeData(initialEmployeeData)
+              }
             }
             if(e.key == 'S' || e.key ==='s'){
-                editProduct(e)
-               e.preventDefault()
+               if(!inInput){
+                 editProduct(e)
+                e.preventDefault()
+               }
             }
             if(e.key == 'Escape'){
                
@@ -271,8 +281,9 @@ const useManualSales = () => {
         }
     })
     
+    console.log(inInput)
 
-    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, uploading, setUploading, handlePost , category, setCategory, isPending, refetch }
+    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, uploading, setUploading, handlePost , category, setCategory, isPending, refetch, setInInput }
 };
 
 

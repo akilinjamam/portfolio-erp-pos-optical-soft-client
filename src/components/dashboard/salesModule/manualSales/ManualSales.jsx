@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const ManualSales = () => {
-  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, handlePost, category, setCategory, isPending, refetch} = useManualSales()
+  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, handlePost, category, setCategory, isPending, refetch,setInInput} = useManualSales()
 
   useEffect(() => {
     refetch()
@@ -35,7 +35,7 @@ const ManualSales = () => {
                                 return (
                                   <div key={index+1} className={`${manualSales.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input onBlur={() => {console.log(true)}} value={employeeData[input.name]}   type={input.type} 
+                                    <input  onMouseOver={() => {setInInput(true)}} onMouseOut={() => {setInInput(false)}} value={employeeData[input.name]}   type={input.type} 
                                         onChange={(e) => {setEmployeeData({...employeeData, [input.value]: e.target.value})}}
                                       
                                     />
