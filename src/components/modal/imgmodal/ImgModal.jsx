@@ -63,6 +63,8 @@ const ImgModal = () => {
         const cashFlow = useSelector(state => state.imgModal.cashFlow)
         const totalProfitAllocation = useSelector(state => state.imgModal.totalProfitAllocation)
         const vendorBillData = useSelector(state => state.imgModal.vendorBillData);
+        const stockTotalInfo = useSelector(state => state.imgModal.stockTotalInfo);
+
         const dispatch = useDispatch();
         
 return (
@@ -72,7 +74,7 @@ return (
             <SingleBarcodeContainer open={open} type={type} barcode={singleBarcode} closeModal={closeModal}  dispatch={dispatch} />
             <CustomerContainer closeModal={closeModal} dispatch={dispatch} open={open} customerInfo={customerInfo} type={type} salesList={salesList}/>
             <UpdateCustomerInfo closeModal={closeModal} dispatch={dispatch} open={open} type={type} getCustomerInfo={getCustomerInfoForSalesInvoice} salesList={salesListForSalesInvoice}/>
-            <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
+            <StockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} stockTotalInfo={stockTotalInfo}/>
             <GlassStockModal closeModal={closeModal} dispatch={dispatch} open={open} stockData={stockData} type={type} />
             <SalesModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>
             <BestSalePerformerModal closeModal={closeModal} dispatch={dispatch} open={open} type={type}/>

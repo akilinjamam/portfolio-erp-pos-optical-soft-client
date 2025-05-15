@@ -5,7 +5,9 @@ import StockTable from '../../dashboard/salesModule/stock/StockTable';
 import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 
-const StockModal = ({type, open, dispatch, closeModal, stockData}) => {
+const StockModal = ({type, open, dispatch, closeModal, stockData, stockTotalInfo}) => {
+
+    console.log(stockTotalInfo)
 
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
@@ -32,7 +34,7 @@ const StockModal = ({type, open, dispatch, closeModal, stockData}) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px'}} ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                    <StockTable paginatedDataContainer={stockData}/>
+                    <StockTable paginatedDataContainer={stockData} stockTotalInfo={stockTotalInfo?.stockTotalInfo}/>
                     </div>        
                 </section>
         </div>

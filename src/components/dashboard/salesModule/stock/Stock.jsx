@@ -6,7 +6,8 @@ import useProductData from "../../../../data/productData/useProductData";
 import { useEffect } from "react";
 import CommonLoading from "../../../commonLoagin/CommonLoading";
 import { useDispatch } from "react-redux";
-import { addStockData, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import { addStockData, addStockTotalInfo, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import { calculateTotalPrice } from "../../../calculation/calculateSum";
 
 
 const Stock = () => {
@@ -37,7 +38,18 @@ const Stock = () => {
        useEffect(() => {
         const modified = filteredStock?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
-    },[filteredStock])
+    },[filteredStock]);
+
+
+    const availableQuantity = calculateTotalPrice(filteredStock?.map(item => Number(item?.quantity)));
+    const totalStockAmount = calculateTotalPrice(filteredStock?.map(item => Number(item?.stockAmount)));
+    const stockOut = totalStockAmount - availableQuantity;
+    
+    const stockTotalInfo = {
+        availableQuantity : availableQuantity,
+        totalStockAmount: totalStockAmount,
+        stockOut: stockOut
+    }
 
     if(isLoading){
         return <CommonLoading/>
@@ -52,6 +64,7 @@ const Stock = () => {
                     className="uil uil-print"
                     onClick={() => {
                         dispatch(addStockData(filteredStock))
+                        dispatch(addStockTotalInfo({stockTotalInfo}))
                         dispatch(openModal('stock'))
                     }}
                     ></i>
@@ -70,7 +83,7 @@ const Stock = () => {
                 </div>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none' ,width:"99.5%", minHeight:'auto', maxHeight:'70vh'}}>
-                <StockTable paginatedDataContainer={paginatedDataContainer}/>
+                <StockTable paginatedDataContainer={paginatedDataContainer} showData={modifiedProductDataWithIndexId} stockTotalInfo={stockTotalInfo}/>
             </div>
             <Pagination showData={modifiedProductDataWithIndexId} setPaginatedIndex={setPaginatedIndex} setPaginatedDataContainer={setPaginatedDataContainer} limit={50}  />
         </div>
