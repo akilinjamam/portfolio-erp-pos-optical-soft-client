@@ -56,7 +56,7 @@ const TodayDueCollection = () => {
             <div className={`${todaySales.title} flex_left`}>
                 <i onClick={() => {
                     dispatch(openModal('today-due-collection'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount}))
+                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalDueCollection, totalCashDueCollection, totalBankDueCollection, totalBkashDueCollection, totalNogodDueCollection}))
                 }} title="print" className="uil uil-print"></i>
                 <span>Total : {dueCollectionSaleData?.result?.result?.length}</span>
                 
@@ -68,7 +68,7 @@ const TodayDueCollection = () => {
                 }} className="uil uil-times"></i>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <TodayDueCollectionTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalDueCollection={totalDueCollection} totalCashDueCollection={totalCashDueCollection} totalBankDueCollection={totalBankDueCollection} totalBkashDueCollection={totalBkashDueCollection} totalNogodDueCollection={totalNogodDueCollection}  />
+                <TodayDueCollectionTable showReportTitle={false} paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalDueCollection={totalDueCollection} totalCashDueCollection={totalCashDueCollection} totalBankDueCollection={totalBankDueCollection} totalBkashDueCollection={totalBkashDueCollection} totalNogodDueCollection={totalNogodDueCollection}  />
             </div>
             {
                 ((modifiedProductDataWithIndexId) )

@@ -113,7 +113,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
       }
 
       const {glassData, refetch} = useGetGlassData();
-      const allGlass = glassData?.result;
+      const allGlass = glassData?.result?.sort((a, b) => a.glassType.toLowerCase() > b.glassType.toLowerCase() ? 1 : -1);
       const {mutate: addGlassType} = usePostGlassTypeData(refetch);
 
       const {mutate: deleteGlassType} = useDeleteGlassData(refetch)
@@ -169,11 +169,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                     <button style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '1px 5px', border:'none', cursor:'pointer', marginLeft:'5px', }} onClick={handleDelete}>Delete</button>
                     <br />
                     <br />
-                    {/* 
-                    5628440600190
-                    5621706100450
-                    5614786300290
-                    */}
+                   
                     <p style={{marginBottom:'5px'}} className={imgmodal.useFont} htmlFor="">Add Glass Type for Individual Product: </p>
                     
                     <label className={imgmodal.useFont} htmlFor="">Select Product: </label>
@@ -266,7 +262,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                     <option value="">select employeeName</option>
                                     { !isLoading
                                         &&
-                                        employeeData?.result?.map((employee,index) => <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option> )
+                                        employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1).map((employee,index) => <option key={index+1} value={employee?.employeeName}>{employee?.employeeName}</option> )
                                     }
                                     { isLoading &&
                                         <option value="">Loading...</option>

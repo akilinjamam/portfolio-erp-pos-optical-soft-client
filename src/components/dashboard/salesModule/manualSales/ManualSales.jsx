@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 const ManualSales = () => {
-  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, uploading, handlePost, category, setCategory, isPending, refetch} = useManualSales()
+  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, setUploading, handlePost, category, setCategory, isPending, refetch} = useManualSales()
 
   useEffect(() => {
     refetch()
@@ -62,13 +62,13 @@ const ManualSales = () => {
                               <div className={`${manualSales.inputAreaOne_footer_container} flex_around`}>
                                   { !edit
                                   &&
-                                    <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD TO LIST</button>
+                                    <button title='SHORTCUT: L' type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD TO LIST</button>
                                   }
                                   { edit 
                                     ?
-                                    <button onClick={editProduct} className={`commonButton btnColor_green`}>SAVE</button>
+                                    <button title='SHORTCUT: S' onClick={editProduct} className={`commonButton btnColor_green`}>SAVE</button>
                                     :
-                                  <button onClick={(e) => {
+                                  <button title='SHORTCUT: I' onClick={(e) => {
                                     e.preventDefault()
                                     handlePost()
                                   }} className={`commonButton btnColor_green`}>{isPending ? 'Loading....' : 'ADD TO SALE'}</button>
@@ -76,18 +76,18 @@ const ManualSales = () => {
                                   {
                                     edit
                                     ? 
-                                    <button onClick={(e) => {
+                                    <button title='SHORTCUT: C' onClick={(e) => {
                                       e.preventDefault()
                                       setEdit('')
                                     
                                       setEmployeeData(initialEmployeeData)
                                     } } className={`commonButton btnColor_red`}>CANCEL</button>
                                     :
-                                    <button onClick={(e) => {
+                                    <button title='SHORTCUT: R' onClick={(e) => {
                                       e.preventDefault();
                                       setShowData([]);
                                       setEmployeeData(initialEmployeeData)
-                                     setCategory('')
+                                      setCategory('')
                                       setUploading(false)
                                     }} className={`commonButton btnColor_orangeRed`}>
                                       RESET
@@ -95,6 +95,7 @@ const ManualSales = () => {
                                   }
                                  
                                   <button
+                                    title='SHORTCUT: T'
                                     onClick={(e) => {
                                       e.preventDefault();
                                       dispatch(openModal('customer'))} 
@@ -103,6 +104,7 @@ const ManualSales = () => {
                                       ADD CUSTOMER INFO
                                     </button>
                                   <button
+                                  title='SHORTCUT: J'
                                   onClick={(e) => {
                                     e.preventDefault()
                                     refetch()
@@ -122,7 +124,7 @@ const ManualSales = () => {
               </div>
             </div>
             <div className={`${manualSales.inputAreaTwo} flex_center`}>
-              <div className={`${manualSales.container} `}>
+              {/* <div className={`${manualSales.container} `}>
                     <div className={`${manualSales.titleName} flex_center`}></div>
                     <div style={{width: ''}} className={`${manualSales.border_remover}`}></div>
                         <div className={`${manualSales.inputAreaTwoContainer}`}>
@@ -135,7 +137,7 @@ const ManualSales = () => {
                               
                         </div>
 
-              </div>
+              </div> */}
             </div>
           </div> 
             <ManualSalesTable setShowData={setShowData} showData={showData} paginatedDataContainer={paginatedDataContainer} paginatedIndex={paginatedIndex} setEdit={setEdit} edit={edit}/>

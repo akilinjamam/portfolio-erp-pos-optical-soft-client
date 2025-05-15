@@ -4,7 +4,7 @@ import imgmodal from './ImgModal.module.scss';
 import { useReactToPrint } from 'react-to-print';
 import { useSelector } from 'react-redux';
 import TodayDueCollectionTable from '../../dashboard/salesModule/TodayDueCollection/TodayDueCollectionTable';
-import ReportTitle from '../../../ReportTitle/ReportTitle';
+
 
 const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
 
@@ -14,7 +14,13 @@ const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
    const totalPaid = useSelector(state => state.imgModal.totalPaid)
    const totalDiscount = useSelector(state => state.imgModal.totalDiscount)
 
-   
+    const totalTodayPaid = useSelector(state => state.imgModal.totalTodayPaid)
+    const totalDueCollection = useSelector(state => state.imgModal.totalDueCollection)   
+    const totalCashDueCollection = useSelector(state => state.imgModal.totalCashDueCollection)
+    const totalBankDueCollection = useSelector(state => state.imgModal.totalBankDueCollection)
+    const totalBkashDueCollection = useSelector(state => state.imgModal.totalBkashDueCollection)
+    const totalNogodDueCollection = useSelector(state => state.imgModal.totalNogodDueCollection)    
+
     const contentToPrint = useRef(null);
     const handlePrint = useReactToPrint({
         documentTitle: "Print This Document",
@@ -41,9 +47,9 @@ const TodayDueCollectionModal = ({open, type, dispatch, closeModal }) => {
                         onClick={() => dispatch(closeModal())} 
                         className="uil uil-times"></i>
                     </div>
-                    <div  ref={contentToPrint} style={{marginTop:'10px', overflowX: 'hidden', overflowY:'scroll', height:'499px', scrollbarWidth: "none", msOverflowStyle: "none"}}  className={`${imgmodal.stockContainer}`}>
-                    <ReportTitle/>
-                    <TodayDueCollectionTable  paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount}/>
+                    <div  style={{marginTop:'10px', overflowX: 'hidden', overflowY:'scroll', height:'499px', scrollbarWidth: "none", msOverflowStyle: "none"}}  className={`${imgmodal.stockContainer}`}>
+                    
+                    <TodayDueCollectionTable contentToPrint={contentToPrint} showReportTitle={true} paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalDueCollection={totalDueCollection} totalCashDueCollection={totalCashDueCollection} totalBankDueCollection={totalBankDueCollection} totalBkashDueCollection={totalBkashDueCollection} totalNogodDueCollection={totalNogodDueCollection}/>
                     </div>        
                 </section>
         </div>

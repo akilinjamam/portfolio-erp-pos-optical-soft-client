@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
+import ReportTitle from '../../../../ReportTitle/ReportTitle';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
-const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalDueCollection, totalCashDueCollection, totalBankDueCollection, totalBkashDueCollection, totalNogodDueCollection}) => {
+const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalDueCollection, totalCashDueCollection, totalBankDueCollection, totalBkashDueCollection, totalNogodDueCollection, showReportTitle, contentToPrint}) => {
     
   
 
@@ -17,14 +18,15 @@ const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSales
     }
 
     return (
-        <div>
-            <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+        <div style={{padding: `${showReportTitle && '0 5px'}`}} ref={contentToPrint}>
+            {showReportTitle && <ReportTitle/>}
+            <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px'}}>
                 <thead>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Paid</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDueCollection}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Cash =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashDueCollection}</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBankDueCollection}</th>
@@ -38,12 +40,13 @@ const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSales
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Phone Number</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Address</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Address</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
@@ -57,6 +60,7 @@ const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSales
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Status</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold By</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Invoice No</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,6 +92,7 @@ const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSales
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.duePaymentMethod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.invoiceBarcode}</td>
                         </tr>
                     ))
                 }
@@ -106,6 +111,7 @@ const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSales
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalTodayPaid}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDiscount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue - totalPaid - totalDiscount}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>

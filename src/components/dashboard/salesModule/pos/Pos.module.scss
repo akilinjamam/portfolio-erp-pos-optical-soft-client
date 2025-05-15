@@ -1,6 +1,7 @@
 @use '../../../../global_style/reusable_variables/index' as v;
 .main{
     font-family: v.$fs;
+    user-select: none;
     div{
         .inputAreaOne, .inputAreaTwo{
         

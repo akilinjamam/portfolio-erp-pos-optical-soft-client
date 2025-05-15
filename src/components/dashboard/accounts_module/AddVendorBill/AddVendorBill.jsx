@@ -1,10 +1,13 @@
 import '../../../../global_style/global_style.css'
+import { addVendorList, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import Pagination from '../../pagination/Pagination';
 import addVendorBill from './AddVendorBill.module.scss';
 import { vendorBillInput } from './addVendorBillInput';
 import useAddVendorBill from './useAddVendorBill';
+import VendorBillTable from './VendorBillTable';
 
 const AddVendorBill = () => {
-  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid} = useAddVendorBill()
+  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid, dispatch, setMonth, modifiedVendorDataWithIndexId, isLoading, paginatedDataContainer, setPaginatedDataContainer, setPaginatedIndex} = useAddVendorBill()
   
     return (
         <div className={`${addVendorBill.main} full_width`}>
@@ -78,6 +81,35 @@ const AddVendorBill = () => {
               </div>
             </div>
           </div> 
+          <section className={`${addVendorBill.navigationIcon} flex_between`}>
+                          { 
+                          <div className={`${addVendorBill.inputPart} flex_left`}>
+                              <i
+                              onClick={() => {
+                                dispatch(openModal('vendor'))
+                                dispatch(addVendorList(modifiedVendorDataWithIndexId))
+                              }}
+                              title="print" className="uil uil-print"></i>
+                              <span>Total : {modifiedVendorDataWithIndexId?.length} </span>
+                          
+                             
+                              <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
+                          </div>
+                          }
+                          
+                    </section>
+                    <section className={`${addVendorBill.navigationIcon} only_flex`}>
+                    
+                          
+                    </section>
+                    <section style={{height: '42vh'}}  className={`${addVendorBill.tableArea}`}>
+                        <VendorBillTable isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} />
+                    </section>
+                     {
+                      !isLoading
+                      &&
+                      <Pagination showData={modifiedVendorDataWithIndexId} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
+                     }      
         </div>
     );
 };

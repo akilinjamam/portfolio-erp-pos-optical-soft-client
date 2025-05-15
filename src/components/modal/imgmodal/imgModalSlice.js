@@ -42,6 +42,13 @@ export const imgModalSlice = createSlice({
         cashFlow: [],
         totalProfitAllocation: 0,
         soldQuantity: 0,
+        totalTodayPaid: 0,
+        totalDueCollection: 0,
+        totalCashDueCollection: 0,
+        totalBankDueCollection: 0,
+        totalBkashDueCollection: 0,
+        totalNogodDueCollection: 0,
+
     },
     reducers: {
         openModal: (state, action) => {
@@ -84,6 +91,7 @@ export const imgModalSlice = createSlice({
             state.totalSalesValue = action.payload.totalSalesValue;
             state.totalSalesItem = action.payload.totalSalesItem;
             state.totalPaid = action.payload.totalPaid;
+            state.totalTodayPaid = action.payload.totalTodayPaid;
             state.totalDiscount = action.payload.totalDiscount;
             state.totalCash = action.payload.totalCash;
             state.totalBank = action.payload.totalBank;
@@ -94,6 +102,11 @@ export const imgModalSlice = createSlice({
             state.totalBkashPaid = action.payload.totalBkashPaidValue;
             state.totalNogodPaid = action.payload.totalNogodPaidValue;
             state.totalSalesQuantity = action.payload.totalSalesQuantity;
+            state.totalDueCollection = action.payload.totalDueCollection;
+            state.totalCashDueCollection = action.payload.totalCashDueCollection;
+            state.totalBankDueCollection = action.payload.totalBankDueCollection;
+            state.totalBkashDueCollection = action.payload.totalBkashDueCollection;
+            state.totalNogodDueCollection = action.payload.totalNogodDueCollection;
         },
         addBestPerformerData: (state, action) => {
             state.salesData = action.payload.modifiedData;

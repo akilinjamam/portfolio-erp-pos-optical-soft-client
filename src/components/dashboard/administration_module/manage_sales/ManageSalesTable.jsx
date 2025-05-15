@@ -110,13 +110,13 @@ if(isLoading){
                         <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.invoiceBarcode}</td>
                      <td  className={`flex_around`}>
                     
-                        {/* <i onClick={() => {
+                        <i onClick={() => {
                           setSelectDeleted(!selectDeleted)
                           setEdit('')
                           if(selectDeleted){
                             setIdsForDelete([])
                           }
-                        }}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i>  */}
+                        }}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
 
 
                       <i onClick={() => {

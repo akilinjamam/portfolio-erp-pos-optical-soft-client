@@ -86,6 +86,18 @@ export const fetchUpdateSalesInfoData = async (id, data) => {
         return error
     }
 }
+
+export const fetchDeleteSalesInfoData = async (id, data) => {
+    console.log(id);
+    try {
+        const result = await axios.delete(`${url}/sales/delete-sales-info/${id}`, data)
+        return result;
+    } catch (error) {
+
+        console.log(error)
+        return error
+    }
+}
 export const fetchUpdateProductInfoData = async (id, data) => {
     try {
         const result = await axios.patch(`${url}/sales/update-product-info/${id}`, data)
@@ -104,6 +116,8 @@ export const fetchCancelAdjustment = async (id) => {
         return error
     }
 }
+
+
 
 
 

@@ -10,8 +10,8 @@ const useProductEntry = () => {
     const { users } = useUserData()
     const { employeeData } = useGetEmployeeData();
     const { supplierData } = useGetSupplierData();
-    const allEmployess = employeeData?.result;
-    const allSuppliers = supplierData?.result;
+    const allEmployess = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
+    const allSuppliers = supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
 
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);

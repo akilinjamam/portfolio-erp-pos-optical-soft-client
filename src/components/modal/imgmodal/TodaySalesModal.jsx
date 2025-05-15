@@ -50,7 +50,7 @@ const TodaySalesModal = ({open, type, dispatch, closeModal }) => {
                         className="uil uil-times"></i>
                     </div>
                     <div style={{marginTop:'10px', overflowX:'hidden', height:"450px", scrollbarWidth:'none', minHeight:'auto'}}  className={`${imgmodal.stockContainer}`}>
-                        <div ref={contentToPrint}>
+                        <div style={{padding: '0 10px'}} ref={contentToPrint}>
                             <ReportTitle/>
                             <TodaySalesTable paginatedDataContainer={saleData} totalSalesValue={totalSalesValue} totalSalesItem={totalSalesItem} totalTodayPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashPaidValue={totalCashPaidValue} totalBankPaidValue={totalBankPaidValue} totalBkashPaidValue={totalBkashPaidValue} totalNogodPaidValue={totalNogodPaidValue}/>
                         </div>

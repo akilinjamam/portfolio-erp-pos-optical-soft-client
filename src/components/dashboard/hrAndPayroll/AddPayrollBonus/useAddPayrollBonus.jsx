@@ -24,7 +24,7 @@ const useAddPayrollBonus = () => {
     const allPayroll = payroll?.result;
    
 
-    const allEmployees = employeeData?.result;
+    const allEmployees = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
 
     const findEmployee = allEmployees?.find(f => f?._id === employeeId);
     console.log(findEmployee)

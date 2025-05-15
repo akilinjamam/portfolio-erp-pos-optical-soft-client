@@ -17,14 +17,14 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
     }
 
     return (
-        <div >
-            <table style={{borderCollapse:'collapse', fontSize:'12.5px', margin:'auto', paddingBottom:'10px'}}>
+        <div style={{width:'100%'}}>
+            <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px'}}>
                 <thead>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sales =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
@@ -37,12 +37,13 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Paid =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Cash Paid =</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash Paid =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashPaidValue}</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank Paid =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalBankPaidValue}</th>
@@ -56,12 +57,13 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Phone Number</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', width:'200px'}}>Address</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Address</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Product(Quantity <i className='uil uil-times'></i> Price) = Total Price per Customer</th>
@@ -75,6 +77,7 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Delivery Status</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Status</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold By</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Invoice No</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,6 +107,7 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.delivered}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.paymentMethod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.invoiceBarcode}</td>
                         </tr>
                     ))
                 }
@@ -122,6 +126,7 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalDiscount}</td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSalesValue - totalDiscount - totalTodayPaid}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>

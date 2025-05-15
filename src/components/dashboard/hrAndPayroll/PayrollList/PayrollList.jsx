@@ -10,7 +10,7 @@ const PayrollList = ({hideSection, hideField}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
-    const allEmployeeData = employeeData?.result;
+    const allEmployeeData = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
     const dispatch = useDispatch();
 
     return (

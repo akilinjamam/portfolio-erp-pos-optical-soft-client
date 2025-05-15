@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaleData from "../../../../data/saleData/useSaleData";
 import { invoiceCalculation } from "../../../../invoiceCalculation/invoiceCalculation";
 import moment from "moment";
-import { addSalesList, clearCustomerInfo, openModal } from "../../../modal/imgmodal/imgModalSlice";
+import { addSalesList, clearCustomerInfo, closeModal, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { fetchPostSaleData } from "../../../../data/fetchedData/fetchSaleData";
 import { useMutation } from "@tanstack/react-query";
 import useSalesRecord from "../salesRecord/useSalesRecord";
 
 const useManualSales = () => {
-
+    const [switchKey, setSwitchKey] = useState(false);
     const {refetch} = useSalesRecord('', '', '')
 
     const {saleData} = useSaleData()
@@ -193,6 +193,91 @@ const useManualSales = () => {
             toast.error(`something went wrong`)
         }
     },[isSuccess,isError])
+
+
+    useEffect(() => {
+        const handleAddToListPress = (e) => {
+            if(e.key == 'L' || e.key ==='l'){
+                handleSubmit(e)
+                e.preventDefault()
+            }
+        }
+
+         document.addEventListener('keydown', handleAddToListPress)
+        return () => {
+            document.removeEventListener('keydown', handleAddToListPress)
+        }
+    })
+
+
+    useEffect(() => {
+        const handleAddToSalePress = (e) => {
+            if(e.key == 'I' || e.key ==='i'){
+                handlePost()
+            }
+        }
+
+         document.addEventListener('keydown', handleAddToSalePress)
+        return () => {
+            document.removeEventListener('keydown', handleAddToSalePress)
+        }
+    })
+    useEffect(() => {
+        const handleResetPress = (e) => {
+            if(e.key == 'R' || e.key ==='r'){
+                e.preventDefault();
+                setShowData([]);
+                setEmployeeData(initialEmployeeData)
+                setCategory('')
+                setUploading(false)
+            }
+        }
+
+        document.addEventListener('keydown', handleResetPress)
+        return () => {
+        document.removeEventListener('keydown', handleResetPress)
+        }
+    })
+    useEffect(() => {
+        
+        const handleAddCustomerAndInvoicePress = (e) => {
+            
+            if(e.key == 'T' || e.key ==='t'){
+                if(!switchKey){
+                    setSwitchKey(true)
+                    dispatch(openModal('customer'))
+                }else{
+                    setSwitchKey(false)
+                    dispatch(closeModal())
+                } 
+            }
+
+            if(e.key == 'J' || e.key ==='j'){
+                if(!switchKey){
+                    setSwitchKey(true)
+                    dispatch(openModal('invoice'))
+                }else{
+                    setSwitchKey(false)
+                    dispatch(closeModal())
+                } 
+            }
+            if(e.key == 'C' || e.key ==='c'){
+               e.preventDefault()
+                setEdit('')                    
+                setEmployeeData(initialEmployeeData)
+            }
+            if(e.key == 'S' || e.key ==='s'){
+                editProduct(e)
+               e.preventDefault()
+            }
+        }
+
+        document.addEventListener('keydown', handleAddCustomerAndInvoicePress)
+        return () => {
+        document.removeEventListener('keydown', handleAddCustomerAndInvoicePress)
+        }
+    })
+    
 
     return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, uploading, setUploading, handlePost , category, setCategory, isPending, refetch }
 };

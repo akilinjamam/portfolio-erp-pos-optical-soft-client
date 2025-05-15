@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSalesList, clearCustomerInfo, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import { addSalesList, clearCustomerInfo, closeModal, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
@@ -14,7 +14,7 @@ import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalcul
 import useSalesRecord from '../salesRecord/useSalesRecord';
 const Pos = () => {
     
-
+    const [keySwitch, setKeySwitch] = useState(false)
     const {saleData} = useSaleData()
     
     const invoiceNumber = invoiceCalculation(saleData)
@@ -452,7 +452,61 @@ const Pos = () => {
         dispatch(addSalesList(listOfSalesItem))
     },[listOfSalesItem, dispatch])
 
+    useEffect(() => {
+        const handlePrintPress = (e) => {
+            if(e.key ==='j' || e.key === 'J'){
+                if(!keySwitch){
+                        refetch()
+                        if (listOfSalesItem?.length > 0) {
+                        toast.error('print invoice after add to sale')
+                        return 
+                    }    
+                dispatch(openModal('invoice'))
+                setKeySwitch(true)
+                }else{
+                    dispatch(closeModal())
+                    setKeySwitch(false)
+                }
+            }
+        }
+        document.addEventListener('keydown', handlePrintPress);
+        return () => {
+            document.removeEventListener('keydown', handlePrintPress);
+        }
+    })
 
+
+    useEffect(() => {
+        const handleCustoemerInfoPress = (e) => {
+            if(e.key === 't' || e.key === 'T'){
+                if(!keySwitch){
+                    dispatch(openModal('customer'))
+                    setKeySwitch(true)   
+                }else{
+                    dispatch(closeModal())
+                    setKeySwitch(false)
+                }
+            }
+        }
+
+        document.addEventListener('keydown', handleCustoemerInfoPress);
+        return () => {
+            document.removeEventListener('keydown', handleCustoemerInfoPress);
+        }
+    })
+
+
+    useEffect(() => {
+        const handleSearchPress = (e) => {
+            if(e.key === 'b' || e.key === 'B'){
+                 setSearchByBarcode(!searchByBarcode)
+            }
+        }
+        document.addEventListener('keydown', handleSearchPress);
+        return () => {  
+            document.removeEventListener('keydown', handleSearchPress);
+        }
+    })
 
     return (
        <div onDoubleClick={() => {
@@ -511,7 +565,7 @@ const Pos = () => {
                     <div className={`${pos.calculationAndSubmit}`}>
                        <div className={`${pos.productCalculation} flex_between`}>
                             <div className={`${pos.priceQuantityCalculation}`}>
-                                <div onClick={(e) => {
+                                <div title='SHORTCUT: Q' onClick={(e) => {
                                     e.stopPropagation()
                                     setQuantity(true)
                                     setPrice(false)
@@ -520,7 +574,7 @@ const Pos = () => {
                                 }} style={{border: `${quantity ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.quantityBtn} flex_center`}>
                                     Quantity
                                 </div>
-                                <div onClick={(e) => {
+                                <div title='SHORTCUT: P' onClick={(e) => {
                                     e.stopPropagation()
                                     setPrice(true)
                                     setQuantity(false)
@@ -529,7 +583,7 @@ const Pos = () => {
                                 }} style={{border: `${price ? '2px solid black' : 'none'}`, cursor:'pointer'}} className={`${pos.priceBtn} flex_center`}>
                                     Price
                                 </div>
-                                <div onClick={(e) => {
+                                <div title='SHORTCUT: S' onClick={(e) => {
                                     e.stopPropagation()
                                     setIsScanned(true)
                                     setPrice(false)
@@ -546,7 +600,7 @@ const Pos = () => {
                                     ?
                                     calculationValue.map((item, index) => {
                                         return (
-                                        <div onClick={() => handleNumber(item)} key={index+1}><p>{item}</p></div>
+                                        <div onClick={() => handleNumber(item)} key={index+1}><p title={item === 'Delete' && 'SHORTCUT: D' || item === 'Add Item' && 'SHORTCUT: L'}>{item}</p></div>
                                     )
                                     })
                                     :
@@ -555,10 +609,10 @@ const Pos = () => {
                             </div>
                        </div>
                        <div className={`${pos.submitSale} flex_between`}>
-                            <button onClick={() => {
+                            <button title='SHORTCUT: T' onClick={() => {
                                 dispatch(openModal('customer'))
                             }} className={`${pos.submitSaleAddCustomer}`}>Add Customer Info</button>
-                            <button onClick={() => {
+                            <button title='SHORTCUT: J' onClick={() => {
                                 refetch()
                                 if (listOfSalesItem?.length > 0) {
                                     toast.error('print invoice after add to sale')
@@ -569,8 +623,8 @@ const Pos = () => {
                        </div>
                        <div className={`${pos.submitSale} flex_between`}>
     
-                            <button onClick={handleSale} className={`${pos.submitSaleAddSale}`}>{isPending ? 'Loading...': 'Add to Sale'}</button>
-                            <button onClick={() => setSearchByBarcode(!searchByBarcode) } title='search by barcode' className={`${pos.submitSale_switch} flex_center`}><i className="uil uil-search"></i></button>
+                            <button title='SHORTCUT: I' onClick={handleSale} className={`${pos.submitSaleAddSale}`}>{isPending ? 'Loading...': 'Add to Sale'}</button>
+                            <button onClick={() => setSearchByBarcode(!searchByBarcode) } title='search by barcode | SHORTCUT: B' className={`${pos.submitSale_switch} flex_center`}><i className="uil uil-search"></i></button>
                        </div>
                     </div>
                     
