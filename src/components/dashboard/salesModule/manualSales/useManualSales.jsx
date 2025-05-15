@@ -224,14 +224,14 @@ const useManualSales = () => {
         }
     })
     useEffect(() => {
-        const handleResetPress = (e) => {
-            if(e.key == 'R' || e.key ==='r'){
-                e.preventDefault();
-                setShowData([]);
-                setEmployeeData(initialEmployeeData)
-                setCategory('')
-                setUploading(false)
-            }
+        const handleResetPress = () => {
+            // if(e.key == 'R' || e.key ==='r'){
+            //     e.preventDefault();
+            //     setShowData([]);
+            //     setEmployeeData(initialEmployeeData)
+            //     setCategory('')
+            //     setUploading(false)
+            // }
         }
 
         document.addEventListener('keydown', handleResetPress)

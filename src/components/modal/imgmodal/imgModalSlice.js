@@ -49,7 +49,8 @@ export const imgModalSlice = createSlice({
         totalBkashDueCollection: 0,
         totalNogodDueCollection: 0,
         vendorBillData: [],
-        stockTotalInfo: {}
+        stockTotalInfo: {},
+        keyGuard: false
 
     },
     reducers: {
@@ -164,12 +165,18 @@ export const imgModalSlice = createSlice({
         },
         addVendorBillData: (state, action) => {
             state.vendorBillData = action.payload.vendorBillData;
+        },
+        addKeyGuard: (state) => {
+            state.keyGuard = true
+        },
+        removeKeyGuard: (state) => {
+            state.keyGuard = false
         }
 
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState, addMonthYear, addCashFlowData, addVendorBillData, addStockTotalInfo } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState, addMonthYear, addCashFlowData, addVendorBillData, addStockTotalInfo, addKeyGuard, removeKeyGuard } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

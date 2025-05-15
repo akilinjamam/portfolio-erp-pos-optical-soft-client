@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSalesList, clearCustomerInfo, closeModal, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import {   addKeyGuard, addSalesList, clearCustomerInfo, closeModal, openModal, removeKeyGuard } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
@@ -14,7 +14,7 @@ import { invoiceCalculation } from '../../../../invoiceCalculation/invoiceCalcul
 import useSalesRecord from '../salesRecord/useSalesRecord';
 const Pos = () => {
     
-    // const [keySwitch, setKeySwitch] = useState(false)
+    const keyGruard = useSelector(state => state.imgModal.keyGuard);
     const {saleData} = useSaleData()
     
     const invoiceNumber = invoiceCalculation(saleData)
@@ -480,10 +480,14 @@ const Pos = () => {
         const handleCustoemerInfoPress = (e) => {
             console.log(e.key)
             if(e.key === 'Control'){
-                 dispatch(openModal('customer'))
+               
+                dispatch(addKeyGuard())
+                dispatch(openModal('customer'))
             }
             if(e.key === 'Escape'){
                 dispatch(closeModal())
+                dispatch(removeKeyGuard())
+               
             }
         }
 
@@ -493,11 +497,14 @@ const Pos = () => {
         }
     })
 
+    console.log(keyGruard)
 
     useEffect(() => {
         const handleSearchPress = (e) => {
             if(e.key === 'b' || e.key === 'B'){
-                 setSearchByBarcode(!searchByBarcode)
+                if(!keyGruard){
+                     setSearchByBarcode(!searchByBarcode)
+                }
             }
         }
         document.addEventListener('keydown', handleSearchPress);

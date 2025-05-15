@@ -8,7 +8,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
-import { resetFormState } from "./imgModalSlice";
+import { removeKeyGuard, resetFormState } from "./imgModalSlice";
 import { useSelector } from "react-redux";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
@@ -146,6 +146,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                         <i onClick={() => { 
                         dispatch(closeModal())
                         dispatch(resetFormState())
+                        dispatch(removeKeyGuard())
                         } } className="uil uil-times"></i>
                     </div>
                     <br />
