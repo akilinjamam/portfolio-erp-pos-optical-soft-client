@@ -7,13 +7,14 @@ import { useDispatch } from 'react-redux';
 import { addSalesListForSalesInvoice, customerInfoForSalesInvoice, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { toast } from 'react-toastify';
 import useUpdateSaleData from '../../../../data/saleData/useUpdateSaleData';
+import CommonLoading from '../../../commonLoagin/CommonLoading';
 
 
 const SalesInvoice = () => {
     const [deliveryStatus, setDeliveryStatus] = useState('');
     const [query, setQuery] = useState('')
     const [barcodeId, setBarcodeId] = useState('');
-    const {saleData, refetch} = useSaleData('', '', '');
+    const {saleData, refetch, isLoading} = useSaleData('', '', '');
 
     const dispatch = useDispatch();
 
@@ -73,6 +74,14 @@ const SalesInvoice = () => {
             }
         }
         updateDeliveryStatus(updateData)
+    }
+
+    if(isLoading){
+        return (
+        <div className='flex_center' style={{width:'100%', height:'500px'}}>
+            <CommonLoading/>
+        </div>
+        )
     }
     
     return (
