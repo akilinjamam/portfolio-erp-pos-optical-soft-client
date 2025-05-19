@@ -86,17 +86,17 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
             <tbody>
             <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>R</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center',fontWeight:'bold'  }}>{getCustomerInfo?.rightSph === 'blank' ? '--' : getCustomerInfo?.rightSph}</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightCyl === 'blank' ? '--' : getCustomerInfo?.rightCyl}</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightAxis === 'blank' ? '--' : getCustomerInfo?.rightAxis}</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightNear === 'blank' ? '--' : getCustomerInfo?.rightNear }</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center',fontWeight:'bold'  }}>{getCustomerInfo?.rightSph === 'blank' ? '--' : (getCustomerInfo?.rightSph?.indexOf('-') === 0 ? getCustomerInfo?.rightSph : `+${getCustomerInfo?.rightSph}`)}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightCyl === 'blank' ? '--' : (getCustomerInfo?.rightCyl?.indexOf('-') === 0 ? getCustomerInfo?.rightCyl : `+${getCustomerInfo?.rightCyl}`)}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightAxis === 'blank' ? '--' : (getCustomerInfo?.rightAxis?.indexOf('-') === 0 ? getCustomerInfo?.rightAxis : `+${getCustomerInfo?.rightAxis}`)}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.rightNear === 'blank' ? '--' : `+${getCustomerInfo?.rightNear}` }</td>
               </tr>
               <tr>
                 <td style={{ height:'20px', fontSize:'10px', textAlign:'center' }}>L</td>
-                <td style={{ height:'20px', fontSize:'12px' , textAlign:'center', fontWeight:'bold' }}>{getCustomerInfo?.leftSph === 'blank' ? '--' : getCustomerInfo?.leftSph}</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftCyl === 'blank' ? '--' : getCustomerInfo?.leftCyl}</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftAxis === 'blank' ? '--' : getCustomerInfo?.leftAxis}</td>
-                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftNear === 'blank' ? '--' : getCustomerInfo?.leftNear}</td>
+                <td style={{ height:'20px', fontSize:'12px' , textAlign:'center', fontWeight:'bold' }}>{getCustomerInfo?.leftSph === 'blank' ? '--' : getCustomerInfo?.leftSph?.indexOf('-') === 0 ? getCustomerInfo?.leftSph : `+${getCustomerInfo?.leftSph}`}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftCyl === 'blank' ? '--' : (getCustomerInfo?.leftCyl?.indexOf('-') === 0 ? getCustomerInfo?.leftCyl : `+${getCustomerInfo?.leftCyl}`)}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftAxis === 'blank' ? '--' : (getCustomerInfo?.leftAxis?.indexOf('-') === 0 ? getCustomerInfo?.leftAxis : `+${getCustomerInfo?.leftAxis}`)}</td>
+                <td style={{ height:'20px', fontSize:'12px', textAlign:'center', fontWeight:'bold'  }}>{getCustomerInfo?.leftNear === 'blank' ? '--' : `+${getCustomerInfo?.leftNear}`}</td>
                 
               </tr>
               
