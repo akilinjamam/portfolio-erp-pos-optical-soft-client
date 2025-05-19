@@ -11,7 +11,7 @@ const useOneMonthSaleData = (query, from , to) => {
         useEffect(() => {
             const interval = setInterval(() => {
                 fetchGetOneMonthSaleData(query, from , to)
-            },500000 )
+            },300000 )
 
             return () => clearInterval(interval)
         },[query, from , to])
