@@ -1,11 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchGetOneMonthSaleData } from "../fetchedData/fetchSaleData";
 import { calculateTotalPrice } from "../../components/calculation/calculateSum";
+import { useEffect } from "react";
 
 
 const useOneMonthSaleData = (query, from , to) => {
     const {data:getAllData, refetch, isLoading, error} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData'], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
     const saleData = getAllData
+
+        useEffect(() => {
+            const interval = setInterval(() => {
+                fetchGetOneMonthSaleData(query, from , to)
+            },500000 )
+
+            return () => clearInterval(interval)
+        },[query, from , to])
 
         const totalSales = saleData?.result?.flatMap(sale => sale?.products?.map(item => Number(item?.quantity) * Number(item?.actualSalesPrice)))
         const totalSalesResult = calculateTotalPrice(totalSales)
