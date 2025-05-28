@@ -19,7 +19,7 @@ const Stock = () => {
         from: '',
         to: ''
     });
-    const {products, isLoading} = useProductData(query, range.from, range.to);
+    const {products, isLoading, newRefetch} = useProductData(query, range.from, range.to);
     const [stocks, setStocks] = useState(undefined);
     
     console.log(stocks)
@@ -56,6 +56,10 @@ const Stock = () => {
         stockOut: stockOut
     }
 
+    useEffect(() => {
+        newRefetch()
+    }, [query, range.from, range.to, stocks, newRefetch]);
+
     if(isLoading){
         return <CommonLoading/>
     }
@@ -74,7 +78,10 @@ const Stock = () => {
                     }}
                     ></i>
                     <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                    <i onClick={() => setQuery('')} className="uil uil-times"></i>
+                    <i onClick={() => {
+                        newRefetch()
+                        setQuery('')
+                    }} className="uil uil-times"></i>
                     <select value={stocks} name="" id="" onChange={(e) => {
                         console.log(e.target.value)
                         if(e.target.value === 'both'){
