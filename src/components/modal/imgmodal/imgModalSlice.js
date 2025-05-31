@@ -50,7 +50,8 @@ export const imgModalSlice = createSlice({
         totalNogodDueCollection: 0,
         vendorBillData: [],
         stockTotalInfo: {},
-        keyGuard: false
+        keyGuard: false,
+        glassType: ''
 
     },
     reducers: {
@@ -171,12 +172,18 @@ export const imgModalSlice = createSlice({
         },
         removeKeyGuard: (state) => {
             state.keyGuard = false
+        },
+        addNewGlassType: (state, action) => {
+            state.glassType = action.payload
+        },
+        removeNewGlassType: (state) => {
+            state.glassType = ''
         }
 
     }
 })
 
-export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState, addMonthYear, addCashFlowData, addVendorBillData, addStockTotalInfo, addKeyGuard, removeKeyGuard } = imgModalSlice.actions
+export const { openModal, closeModal, openImg, openBarcode, customerInfo, addStockData, addSalesData, customerList, addSalesList, addEmployeeList, customerInfoForSalesInvoice, addSalesListForSalesInvoice, addSupplierList, openSingleBarcode, addPayrollList, addVendorList, addExpenseListData, addProfitExpenseData, addAnalysis, addStockAnalysis, addSalesAnalysis, addBestPerformerData, clearCustomerInfo, resetFormState, addMonthYear, addCashFlowData, addVendorBillData, addStockTotalInfo, addKeyGuard, removeKeyGuard, addNewGlassType, removeNewGlassType } = imgModalSlice.actions
 
 
 export default imgModalSlice.reducer

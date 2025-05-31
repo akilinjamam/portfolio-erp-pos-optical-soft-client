@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaleData from "../../../../data/saleData/useSaleData";
 import { invoiceCalculation } from "../../../../invoiceCalculation/invoiceCalculation";
 import moment from "moment";
-import { addKeyGuard, addSalesList, clearCustomerInfo, closeModal, openModal, removeKeyGuard } from "../../../modal/imgmodal/imgModalSlice";
+import { addKeyGuard, addSalesList, clearCustomerInfo, closeModal, openModal, removeKeyGuard, removeNewGlassType } from "../../../modal/imgmodal/imgModalSlice";
 import { fetchPostSaleData } from "../../../../data/fetchedData/fetchSaleData";
 import { useMutation } from "@tanstack/react-query";
 import useSalesRecord from "../salesRecord/useSalesRecord";
@@ -26,7 +26,7 @@ const useManualSales = () => {
 
     const customerInfo = useSelector(state => state.imgModal.customerInfo);
 
-    console.log(invoiceNumber);
+    console.log(customerInfo?.glassType);
     
     let [showData, setShowData] = useState([]);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
@@ -163,6 +163,7 @@ const useManualSales = () => {
                 toast.success('product added to sale list')
                 setShowData([])
                 dispatch(clearCustomerInfo())
+                dispatch(removeNewGlassType())
             }
         },
         onError: (data) => {
@@ -197,7 +198,6 @@ const useManualSales = () => {
         }
     },[isSuccess,isError])
 
-console.log(keyGuard)
     useEffect(() => {
         const handleAddToListPress = (e) => {
             if(e.key == 'L' || e.key ==='l'){
@@ -208,12 +208,15 @@ console.log(keyGuard)
                }
             }
         }
-
-         document.addEventListener('keydown', handleAddToListPress)
+        
+        document.addEventListener('keydown', handleAddToListPress)
         return () => {
             document.removeEventListener('keydown', handleAddToListPress)
         }
     })
+    
+    console.log(inInput)
+    console.log(keyGuard)
 
 
     useEffect(() => {
@@ -297,7 +300,6 @@ console.log(keyGuard)
         }
     })
     
-    console.log(inInput)
 
     return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, uploading, setUploading, handlePost , category, setCategory, isPending, refetch, setInInput }
 };

@@ -8,7 +8,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
-import { removeKeyGuard, resetFormState } from "./imgModalSlice";
+import { addNewGlassType, removeKeyGuard, resetFormState } from "./imgModalSlice";
 import { useSelector } from "react-redux";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
@@ -22,12 +22,13 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
     const [itemName, setItemName] = useState('');
     const [addProductAndGlass, setAddProductAndGlass] = useState([]);
 
-    const [glassType, setGlassType] = useState('');
+   
+    const glassType = useSelector((state) => state.imgModal.glassType);
     const [glassTypeForProduct, setGlassTypeForProduct] = useState('');
 
-
+    
   
-    console.log(addProductAndGlass)
+    console.log(glassType)
 
     const [salesBy,setSalesBy] = useState('');
     console.log(salesBy);
@@ -49,9 +50,10 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
         }
       }, [reset, dispatch, resetForm])
 
+      
       useEffect(() => {
-        setGlassType(addProductAndGlass?.join(','))
-      }, [addProductAndGlass])
+        dispatch(addNewGlassType(addProductAndGlass?.join(',')))
+      }, [addProductAndGlass, dispatch])
 
       
       const onSubmit = (data) => {
@@ -113,6 +115,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
         dispatch(customerInfo(modifiedValue))
         toast.success('customer info added successfully')
         dispatch(closeModal())
+        dispatch(removeKeyGuard());
       }
 
       const {glassData, refetch} = useGetGlassData();
@@ -139,11 +142,14 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             setDeleteGlass('')
       }
 
+    
+
      useEffect(() => {
-  const handleKeyDown = (e) => {
+        const handleKeyDown = (e) => {
     if ((e.altKey || e.metaKey) && e.key === 's') {
       e.preventDefault(); // prevent browser's default save
       handleSubmit(onSubmit)(); // trigger form submit
+      dispatch(removeKeyGuard());
     }
   };
 
@@ -293,7 +299,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                
                                 <label htmlFor="">Glass Type: <span style={{color:'red'}}></span> </label>
                                 <br />
-                                <select name="" id="" onChange={(e) => setGlassType(e.target.value)}>
+                                <select name="" id="" onChange={(e) => dispatch(addNewGlassType(e.target.value))}>
                                     <option value="">select glass type</option>
                                     {   !isLoading
                                         ?

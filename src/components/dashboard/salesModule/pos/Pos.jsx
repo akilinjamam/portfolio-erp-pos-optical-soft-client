@@ -5,7 +5,7 @@ import usePos from './usePos';
 import { toast } from 'react-toastify';
 import PosListTable from './posListTable/PosListTable';
 import { useDispatch, useSelector } from 'react-redux';
-import {   addKeyGuard, addSalesList, clearCustomerInfo, closeModal, openModal, removeKeyGuard } from '../../../modal/imgmodal/imgModalSlice';
+import {   addKeyGuard, addSalesList, clearCustomerInfo, closeModal, openModal, removeKeyGuard, removeNewGlassType } from '../../../modal/imgmodal/imgModalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { fetchPostSaleData } from '../../../../data/fetchedData/fetchSaleData';
 import moment from 'moment';
@@ -43,6 +43,7 @@ const Pos = () => {
                 refetchProduct
                 setListOfSalesItem([])
                 dispatch(clearCustomerInfo())
+                dispatch(removeNewGlassType())
             }
         },
         onError: (data) => {
