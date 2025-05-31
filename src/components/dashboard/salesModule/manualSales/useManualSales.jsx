@@ -201,7 +201,8 @@ console.log(keyGuard)
     useEffect(() => {
         const handleAddToListPress = (e) => {
             if(e.key == 'L' || e.key ==='l'){
-               if(!keyGuard){
+               if(!keyGuard && !inInput){
+                
                  handleSubmit(e)
                 e.preventDefault()
                }
