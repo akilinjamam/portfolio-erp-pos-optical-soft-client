@@ -40,7 +40,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             stock_analysis: paginatedDataContainer?.stock_analysis,
             sales_analysis: paginatedDataContainer?.sales_analysis,
             best_sale_performer: paginatedDataContainer?.best_sale_performer,
-            cash_flow_summery: paginatedDataContainer?.cash_flow_summery
+            cash_flow_summery: paginatedDataContainer?.cash_flow_summery,
+            sold_product: paginatedDataContainer?.sold_product,
+            add_vendor_bill: paginatedDataContainer?.add_vendor_bill,
+            payroll_bonus: paginatedDataContainer?.payroll_bonus
 
 
         })
@@ -54,7 +57,7 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', width:"150px"}}>User Name</th>
                     
-                         
+
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'200px'}}>User Email</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Sales Module</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'250px'}}>Administration Module</th>
@@ -73,7 +76,7 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
 
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{paginatedDataContainer?.email}</td>
 
-
+                    {/* sales module */}
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
                     <div className='only_flex'>
                             <input checked={access?.pos} type="checkbox" name="" id="" onClick={() => setAccess({...access, pos: access?.pos ? false : true })}/>
@@ -108,6 +111,7 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                             <span style={{marginLeft:'5px'}}>Today Due Collection <i className={`uil uil-${access?.today_due_collection ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
                     </td>
+                    {/* administration module */}
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
                     <div className='only_flex'>
                             <input checked={access?.product_entry} type="checkbox" name="" id="" onClick={() => setAccess({...access, product_entry: access?.product_entry ? false : true })}/>
@@ -137,10 +141,14 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                             <input checked={access?.manage_sales} type="checkbox" name="" id="" onClick={() => setAccess({...access, manage_sales: access?.manage_sales ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Manage Sale<i className={`uil uil-${access?.manage_sales ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.sold_product} type="checkbox" name="" id="" onClick={() => setAccess({...access, sold_product: access?.sold_product ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Sold Product <i className={`uil uil-${access?.sold_product ? 'unlock' : 'lock'}`}></i></span>  
+                        </div>
                     </td>
 
 
-
+                    {/* hr & payroll */}
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
                     <div className='only_flex'>
                             <input checked={access?.controll_user_access} type="checkbox" name="" id="" onClick={() => setAccess({...access, controll_user_access: access?.controll_user_access ? false : true })}/>
@@ -156,8 +164,12 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         </div> 
                         <div className='only_flex'>
                             <input checked={access?.payroll} type="checkbox" name="" id="" onClick={() => setAccess({...access, payroll: access?.payroll ? false : true })}/>
-                            <span style={{marginLeft:'5px'}}>Payroll <i className={`uil uil-${access?.payroll ? 'unlock' : 'lock'}`}></i></span>
+                            <span style={{marginLeft:'5px'}}>Add Payroll (Salary) <i className={`uil uil-${access?.payroll ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
+                        <div className='only_flex'>
+                            <input checked={access?.payroll_bonus} type="checkbox" name="" id="" onClick={() => setAccess({...access, payroll_bonus: access?.payroll_bonus ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Add Payroll (Bonus) <i className={`uil uil-${access?.payroll_bonus ? 'unlock' : 'lock'}`}></i></span>    
+                        </div>
                         <div className='only_flex'>
                             <input checked={access?.payroll_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, payroll_list: access?.payroll_list ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Payroll List <i className={`uil uil-${access?.payroll_list ? 'unlock' : 'lock'}`}></i></span>
@@ -169,13 +181,17 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                         <div className='only_flex'>
                             <input checked={access?.best_sale_performer} type="checkbox" name="" id="" onClick={() => setAccess({...access, best_sale_performer: access?.best_sale_performer ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Best Sale Performer <i className={`uil uil-${access?.best_sale_performer ? 'unlock' : 'lock'}`}></i></span>
-                        </div> 
+                        </div>
+                         
                     </td>
 
-
-
+                    {/* accounts module */}
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
-                    <div className='only_flex'>
+                         <div className='only_flex'>
+                            <input checked={access?.add_vendor_bill} type="checkbox" name="" id="" onClick={() => setAccess({...access, add_vendor_bill: access?.add_vendor_bill ? false : true })}/>
+                            <span style={{marginLeft:'5px'}}>Add Vendor Bill <i className={`uil uil-${access?.add_vendor_bill ? 'unlock' : 'lock'}`}></i></span>
+                        </div>
+                        <div className='only_flex'>
                             <input checked={access?.add_vendor} type="checkbox" name="" id="" onClick={() => setAccess({...access, add_vendor: access?.add_vendor ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Add Vendor <i className={`uil uil-${access?.add_vendor ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
@@ -207,9 +223,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                             <input checked={access?.cash_flow_summery} type="checkbox" name="" id="" onClick={() => setAccess({...access, cash_flow_summery: access?.cash_flow_summery ? false : true })}/>
                             <span style={{marginLeft:'5px'}}>Cash Flow Summery <i className={`uil uil-${access?.cash_flow_summery ? 'unlock' : 'lock'}`}></i></span>
                         </div> 
+                       
                     </td>
 
-
+                    {/* business monitor */}
                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>
                         <div className='only_flex'>
                             <input checked={access?.profit_expense_enalysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, profit_expense_enalysis: access?.profit_expense_enalysis ? false : true })}/>
