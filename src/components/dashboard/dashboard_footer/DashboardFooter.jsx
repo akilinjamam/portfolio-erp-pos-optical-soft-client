@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../modal/imgmodal/imgModalSlice';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { useEffect, useState } from 'react';
-import useOneMonthSaleData from '../../../data/saleData/useOneMonthSalesData';
+
 
 
 const DashboardFooter = () => {
     const [remainingTime, setRemainingTime] = useState(null);
     const dispatch = useDispatch();
-    const {isLoading} = useOneMonthSaleData('', '', '')
+  
     useEffect(() => {
         const token = localStorage.getItem('user');
         if (!token) return;
@@ -45,21 +45,13 @@ const DashboardFooter = () => {
         <div className={dashFooter.main}>
             <div className={`${dashFooter.titleBar} flex_center`}>
                 <div className={`${dashFooter.titleBarContainer} flex_between`}>
-                     {
-                     !isLoading ? (
-                        <div className="flex_center">
-                            {remainingTime
-                            ?
-                            <p>
-                                Session Expires in: {remainingTime?.days}  :{remainingTime?.hours} : {remainingTime?.minutes}:  {remainingTime?.seconds}
-                            </p>
-                            :
-                            <p>Session Expired</p>
-                            }
-                        </div>
-                    )
-                    :  
-                    <p>Loading...</p> 
+                     {remainingTime
+                        ?
+                        <p>
+                            Session Expires in: {remainingTime?.days}  :{remainingTime?.hours} : {remainingTime?.minutes}:  {remainingTime?.seconds}
+                        </p>
+                        :
+                        <p>Session Expired</p>
                     }
                     <p onClick={() => dispatch(openModal('developer-info'))}>BYTE DYNAMO</p>
                 </div>
