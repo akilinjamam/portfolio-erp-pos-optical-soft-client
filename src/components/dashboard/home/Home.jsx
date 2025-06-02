@@ -25,6 +25,7 @@ const Home = () => {
 
     const remainingMinutes = Math.floor(remainingTimeInSeconds / 60);
     const remainingHourse = Math.floor(remainingMinutes / 60);
+    const remainingSeconds = remainingTimeInSeconds % 60;
 
 
     const dispath = useDispatch()
@@ -34,13 +35,11 @@ const Home = () => {
         setSlide(!slide)
     }
 
-    
-
     useEffect(() => {
-        if(remainingHourse <= 0){
+        if(remainingHourse <= 0 && remainingMinutes <= 0 && remainingSeconds <= 0){
             return navigate('/login')
         }
-    },[remainingHourse , navigate])
+    },[remainingHourse , remainingMinutes, remainingSeconds, navigate])
 
     useEffect(() => {
         if(exp === undefined){
