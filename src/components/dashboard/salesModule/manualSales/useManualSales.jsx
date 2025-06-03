@@ -224,7 +224,9 @@ const useManualSales = () => {
             if(e.key == 'I' || e.key ==='i'){
                if(!inInput){
                  if(!keyGuard){
-                    handlePost()
+                    if(!isPending){
+                        handlePost()
+                    }
                  }
                }
             }

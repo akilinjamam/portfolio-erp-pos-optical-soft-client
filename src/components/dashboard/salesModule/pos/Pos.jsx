@@ -397,8 +397,9 @@ const Pos = () => {
     useEffect(() => {
         const handleSalePress = (e) => {
             if(!lock){
-                if(e.key === 'i' || e.key === 'I'){
-                    if(customerInfo?.delivered && customerInfo?.deliveryDate && customerInfo?.recorderName && customerInfo?.paymentMethod){
+                if(!isPending){
+                    if(e.key === 'i' || e.key === 'I'){
+                        if(customerInfo?.delivered && customerInfo?.deliveryDate && customerInfo?.recorderName && customerInfo?.paymentMethod){
                         const saleData = {
                             customerName:customerInfo?.customerName === undefined ? 'unknown' : customerInfo?.customerName,
                             phoneNumber:customerInfo?.phoneNumber === undefined ? 'blank' : customerInfo?.phoneNumber,
@@ -442,6 +443,7 @@ const Pos = () => {
                     }
                     
                 }
+                }
             }
             
         }
@@ -452,7 +454,7 @@ const Pos = () => {
         return () => {
             document.removeEventListener('keydown', handleSalePress);
         };
-    },[customerInfo,listOfSalesItem, lock, mutate, invoice])
+    },[customerInfo,listOfSalesItem, lock, mutate, invoice, isPending])
 
 
     useEffect(() => {
