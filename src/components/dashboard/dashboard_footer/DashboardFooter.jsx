@@ -25,8 +25,7 @@ const DashboardFooter = () => {
 
             if (diff <= 0) {
                 clearInterval(interval);
-                setRemainingTime(null); // optional: show session expired
-                // navigate('/login'); // redirect to login if session expired
+                setRemainingTime(null);
                 return;
             }
 
@@ -56,7 +55,6 @@ const DashboardFooter = () => {
                     <p onClick={() => dispatch(openModal('developer-info'))}>BYTE DYNAMO</p>
                 </div>
             </div>
-           
         </div>
     );
 };

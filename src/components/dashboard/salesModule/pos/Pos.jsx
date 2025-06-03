@@ -638,8 +638,15 @@ const Pos = () => {
                             }} className={`${pos.submitInvoice}`}>Print Invoice</button>
                        </div>
                        <div className={`${pos.submitSale} flex_between`}>
-    
-                            <button title='SHORTCUT: I' onClick={handleSale} className={`${pos.submitSaleAddSale}`}>{isPending ? 'Loading...': 'Add to Sale'}</button>
+                            {
+                                isPending
+                                ? 
+                                <button className={`${pos.submitSaleAddSale}`}>Loading...</button>
+                                :
+                                <button onClick={handleSale}  title='SHORTCUT: I' className={`${pos.submitSaleAddSale}`}>
+                                Add to Sale
+                                </button>
+                            }
                             <button onClick={() => setSearchByBarcode(!searchByBarcode) } title='search by barcode | SHORTCUT: B' className={`${pos.submitSale_switch} flex_center`}><i className="uil uil-search"></i></button>
                        </div>
                     </div>
