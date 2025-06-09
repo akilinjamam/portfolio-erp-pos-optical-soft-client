@@ -104,7 +104,7 @@ export const homeNavigator = [
             two: '/dashboard/business_monitor/profit_expense_enalysis',
             three: '/dashboard/business_monitor/profit_category_analysis',
             four: '/dashboard/business_monitor/stock_analysis',
-            five: ''
+            five: '/dashboard/business_monitor/sales_analysis'
         }
     }
 ]

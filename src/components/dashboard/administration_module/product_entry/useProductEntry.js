@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchPostProductData } from "../../../../data/fetchedData/fetchProductData";
-import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
 import useUserData from "../../../../data/userData/useUserData";
 import useGetEmployeeData from "../../../../data/employeeData/useGetEmployeeData";
 import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
+import usePostProductEntryData from "../../../../data/productEntryData/usePostProductEntryData";
 
 const useProductEntry = () => {
     const { users } = useUserData()
@@ -96,27 +95,19 @@ const useProductEntry = () => {
 
     }
 
+
+    const { postProductData, isPending } = usePostProductEntryData(setShowData, setImgHolder, setProductData, initialProductData)
+
     const handlePost = async () => {
 
         if (showData.length >= 1) {
-
-            await fetchPostProductData(showData).then(res => {
-                if (res?.data?.success === true) {
-                    toast.success('product added successfully');
-                    setShowData([])
-                    setImgHolder(undefined)
-                    setProductData(initialProductData)
-                }
-                if (res?.data?.error) {
-                    console.log(res?.data)
-                    toast.error(`${res.data.error?.map(err => err.message.slice(4))}`)
-
-                }
-            })
+            if (!isPending) {
+                postProductData(showData)
+            }
         }
     }
 
-    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost, allEmployess, allSuppliers }
+    return { productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, uploading, setUploading, handlePost, allEmployess, allSuppliers, isPending }
 };
 
 

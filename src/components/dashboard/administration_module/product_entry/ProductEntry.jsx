@@ -7,7 +7,7 @@ import { optionField, textInput } from './productInput';
 import useProductEntry from './useProductEntry';
 
 const ProductEntry = () => {
-  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost, allEmployess, allSuppliers} = useProductEntry();
+  const {productData, setProductData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, category, setCategory, handleSubmit, initialProductData, findProduct, setImgHolder, setUploading, uploading, handlePost, allEmployess, allSuppliers, isPending} = useProductEntry();
 
     return (
         <div className={`${productEntry.main} full_width`}>
@@ -128,7 +128,7 @@ const ProductEntry = () => {
                                   <button onClick={(e) => {
                                     e.preventDefault()
                                     handlePost()
-                                  }} className={`commonButton btnColor_green`}>SUBMIT</button>
+                                  }} className={`commonButton btnColor_green`}>{isPending ? 'LOADING...' : 'SUBMIT'}</button>
                                   }
                                   {
                                     edit
@@ -161,9 +161,9 @@ const ProductEntry = () => {
                     <div className={`${productEntry.titleName} flex_center`}>{edit ? 'Update Image' : 'Upload Image'}</div>
                     <div style={{width: '120px'}} className={`${productEntry.border_remover}`}></div>
                         <div className={`${productEntry.inputAreaTwoContainer}`}>
-                          {edit ? (findProduct?.img !== 'not added' ? <img height={125} width={125} src={findProduct?.img} alt="" /> : <i className="uil uil-image-slash"></i>) : <i className="uil uil-image-upload"></i> }
+                          {edit ? (findProduct?.img !== 'not added' ? <img style={{marginTop:'20px'}} height={125} width={125} src={findProduct?.img} alt="" /> : <i className="uil uil-image-slash"></i>) : <i className="uil uil-image-upload"></i> }
                               {
-                                    textInput?.slice(7,8).map((input, index) => {
+                                    textInput?.slice(8,9).map((input, index) => {
                                       return (
                                         <div key={index+1} className={`${productEntry.inputFields}`}>
                                         

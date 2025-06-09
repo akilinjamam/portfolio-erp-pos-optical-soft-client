@@ -112,9 +112,9 @@ const ProductList = () => {
                         <div style={{width: '120px'}} className={`${productList.border_remover}`}></div>
                         <br />
                             <div className={`${productList.inputAreaTwoContainer}`}>
-                            {updateProductData?.img ? <img height={125} width={125} src={imgHolder ? imgHolder : updateProductData?.img} alt="" /> :  <i className="uil uil-image-upload"></i> }
+                            {updateProductData?.img ? ( updateProductData?.img !== 'not added' ? <img height={125} width={125} src={imgHolder ? imgHolder : updateProductData?.img } alt="" /> : <i className="uil uil-image-upload"></i> ) :  <i className="uil uil-image-upload"></i> }
                                   {
-                                        textInput?.slice(7,8).map((input, index) => {
+                                        textInput?.slice(8,9).map((input, index) => {
                                           return (
                                             <div key={index+1} className={`${productList.inputFields}`}>
                                             
