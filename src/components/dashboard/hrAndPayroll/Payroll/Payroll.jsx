@@ -4,7 +4,7 @@ import { payrollInput } from './payrollInput';
 import useAddPayroll from './useAddPayroll';
 
 const Payroll = () => {
-  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee} = useAddPayroll()
+  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee, isPending} = useAddPayroll()
   
     return (
         <div className={`${addEmployee.main} full_width`}>
@@ -63,7 +63,7 @@ const Payroll = () => {
                   
                         <div className={`${addEmployee.inputAreaOne_footer} flex_right`}>
                               <div className={`${addEmployee.inputAreaOne_footer_container} flex_right`}>
-                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
+                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>{isPending ? 'LOADING...': 'ADD'}</button>
                               </div>
                         </div>
                   </form>

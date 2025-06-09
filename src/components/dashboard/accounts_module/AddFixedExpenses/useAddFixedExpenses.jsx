@@ -95,7 +95,7 @@ const useAddFixedExpenses = () => {
         setExpensesData(initialExpensesData)  
     }
 
-    const {mutate:postFinalAccountsData, isSuccess, isError} = usePostFinalAccountsData(refetch)
+    const {mutate:postFinalAccountsData, isSuccess, isError, isPending} = usePostFinalAccountsData(refetch)
 
       
     const handlePost = async () => {
@@ -112,7 +112,9 @@ const useAddFixedExpenses = () => {
            expenses:showData
         };
 
-        postFinalAccountsData(accountsData)
+        if(!isPending){
+            postFinalAccountsData(accountsData)
+        }
     }
 
     useEffect(() => {
@@ -127,7 +129,7 @@ const useAddFixedExpenses = () => {
         }
     },[isSuccess,isError])
 
-    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, profitExpenseData, setInInput }
+    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, profitExpenseData, setInInput, isPending }
 };
 
 

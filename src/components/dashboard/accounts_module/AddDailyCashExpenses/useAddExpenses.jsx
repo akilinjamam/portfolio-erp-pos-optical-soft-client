@@ -111,7 +111,7 @@ const useAddExpenses = () => {
         setExpensesData(initialExpensesData)  
     }
 
-    const {mutate:postAccountsData, isSuccess, isError} = usePostCreateAccounts(refetch)
+    const {mutate:postAccountsData, isSuccess, isError, isPending} = usePostCreateAccounts(refetch)
 
     const dueSales = dueCollectionSaleData?.result?.dueCashPaidValue ? dueCollectionSaleData?.result?.dueCashPaidValue : '0';
     
@@ -176,7 +176,9 @@ const useAddExpenses = () => {
         };
         console.log(accountsData);
 
-        postAccountsData(accountsData)
+        if(!isPending){
+            postAccountsData(accountsData)
+        }
     }
 
     useEffect(() => {
@@ -191,7 +193,7 @@ const useAddExpenses = () => {
         }
     },[isSuccess,isError])
 
-    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales, setInInput }
+    return {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialExpensesData, initialOtherExpensesData, findSupplier, uploading, setUploading, handlePost, lastSaleAndAccountsData, dueSales, setInInput,  isPending }
 };
 
 

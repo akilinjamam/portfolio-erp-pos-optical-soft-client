@@ -12,7 +12,7 @@ const useAddSupplier = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
 
-    const {mutate:postSupplierData, isSuccess, isError} = usePostSupplierData()
+    const {mutate:postSupplierData, isSuccess, isError, isPending} = usePostSupplierData()
     
     const initialSupplierData = {
         supplierName: '',
@@ -62,7 +62,9 @@ const useAddSupplier = () => {
     const handlePost = async () => {
 
         if (showData.length >= 1) {
-            postSupplierData(showData)
+            if(!isPending){
+                postSupplierData(showData)
+            }
         }
     }
 
@@ -78,7 +80,7 @@ const useAddSupplier = () => {
         }
     },[isSuccess,isError])
 
-    return { supplierData, setSupplierData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialSupplierData, findSupplier, setImgHolder, uploading, setUploading, handlePost }
+    return { supplierData, setSupplierData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialSupplierData, findSupplier, setImgHolder, uploading, setUploading, handlePost, isPending }
 };
 
 

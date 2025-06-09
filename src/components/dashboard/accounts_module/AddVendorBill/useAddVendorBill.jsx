@@ -34,7 +34,7 @@ const useAddVendorBill = () => {
 
     const findEmployee = allSuppliers?.find(f => f?._id === supplierId);
 
-    const { mutate: postPayrollData } = usePostVendorBillData(refetch)
+    const { mutate: postPayrollData, isPending } = usePostVendorBillData(refetch)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -69,7 +69,9 @@ const useAddVendorBill = () => {
 
         console.log(allData)
 
-        postPayrollData(allData)
+        if(!isPending){
+            postPayrollData(allData)
+        }
     }
 
     useEffect(() => {
@@ -97,7 +99,7 @@ const useAddVendorBill = () => {
 
     console.log(month)
 
-    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, findEmployee, lastBillingDate, lastPaymentDate, lastPaid, modifiedVendorDataWithIndexId , useDispatch, setMonth, dispatch, paginatedDataContainer, setPaginatedDataContainer, isLoading, paginatedIndex, setPaginatedIndex}
+    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, findEmployee, lastBillingDate, lastPaymentDate, lastPaid, modifiedVendorDataWithIndexId , useDispatch, setMonth, dispatch, paginatedDataContainer, setPaginatedDataContainer, isLoading, paginatedIndex, setPaginatedIndex, isPending}
 };
 
 

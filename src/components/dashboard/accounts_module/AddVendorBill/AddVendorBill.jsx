@@ -7,7 +7,7 @@ import useAddVendorBill from './useAddVendorBill';
 import VendorBillTable from './VendorBillTable';
 
 const AddVendorBill = () => {
-  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid, dispatch, setMonth, modifiedVendorDataWithIndexId, isLoading, paginatedDataContainer, setPaginatedDataContainer, setPaginatedIndex} = useAddVendorBill()
+  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid, dispatch, setMonth, modifiedVendorDataWithIndexId, isLoading, paginatedDataContainer, setPaginatedDataContainer, setPaginatedIndex, isPending} = useAddVendorBill()
   
     return (
         <div className={`${addVendorBill.main} full_width`}>
@@ -55,7 +55,7 @@ const AddVendorBill = () => {
                   
                         <div className={`${addVendorBill.inputAreaOne_footer} flex_right`}>
                               <div className={`${addVendorBill.inputAreaOne_footer_container} flex_right`}>
-                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
+                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>{isPending ? 'ADDING...': 'ADD'}</button>
                               </div>
                         </div>
                   </form>

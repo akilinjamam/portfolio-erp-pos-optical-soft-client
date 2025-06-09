@@ -14,7 +14,7 @@ const useAddEmployee = () => {
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
 
-    const {mutate:postEmployeeData, isSuccess, isError} = usePostEmployeeData()
+    const {mutate:postEmployeeData, isSuccess, isError, isPending} = usePostEmployeeData()
     
     const initialEmployeeData = {
         employeeName: '',
@@ -68,7 +68,9 @@ const useAddEmployee = () => {
     const handlePost = async () => {
 
         if (showData.length >= 1) {
-            postEmployeeData(showData)
+          if(!isPending){
+              postEmployeeData(showData)
+          }
         }
     }
 
@@ -84,7 +86,7 @@ const useAddEmployee = () => {
         }
     },[isSuccess,isError])
 
-    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, setImgHolder, uploading, setUploading, handlePost }
+    return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, setImgHolder, uploading, setUploading, handlePost, isPending }
 };
 
 

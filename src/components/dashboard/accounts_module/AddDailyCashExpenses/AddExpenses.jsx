@@ -7,7 +7,7 @@ import AddExpensesTable from './AddExpensesTable';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 const AddExpenses = () => {
-  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, lastSaleAndAccountsData, dueSales, setInInput} = useAddExpenses();
+  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, lastSaleAndAccountsData, dueSales, setInInput, isPending} = useAddExpenses();
 
   const totalExpenses = showData?.map(expense => Number(expense?.expenseAmount));
   const calculationOfTotalExpense = calculateTotalPrice(totalExpenses);
@@ -75,7 +75,7 @@ const AddExpenses = () => {
                               <div className={`${addExpenses.inputAreaOne_footer_container} flex_around`}>
                                   { !edit
                                   &&
-                                    <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
+                                    <button type='submit' name='submit' className={`commonButton btnColor_orange`}>{isPending ? 'LOADING...': 'ADD'}</button>
                                   }
                                   { edit 
                                     ?

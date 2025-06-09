@@ -4,7 +4,7 @@ import { vendorInput } from './addVendorInput';
 import useAddVendor from './useVendor';
 
 const AddVendor = () => {
-  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, setPaymentMethod,lastBillingDate, lastPaymentDate, lastPaid} = useAddVendor()
+  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, setPaymentMethod,lastBillingDate, lastPaymentDate, lastPaid, isPending} = useAddVendor()
   
     return (
         <div className={`${addVendor.main} full_width`}>
@@ -63,7 +63,7 @@ const AddVendor = () => {
                   
                         <div className={`${addVendor.inputAreaOne_footer} flex_right`}>
                               <div className={`${addVendor.inputAreaOne_footer_container} flex_right`}>
-                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
+                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>{isPending ? 'LOADING...': 'ADD'}</button>
                               </div>
                         </div>
                   </form>

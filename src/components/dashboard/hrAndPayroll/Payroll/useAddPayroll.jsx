@@ -29,7 +29,7 @@ const useAddPayroll = () => {
     const findEmployee = allEmployees?.find(f => f?._id === employeeId);
     console.log(findEmployee)
 
-    const {mutate:postPayrollData} = usePostPayrollData(refetch)
+    const {mutate:postPayrollData, isPending} = usePostPayrollData(refetch)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -55,7 +55,9 @@ const useAddPayroll = () => {
 
         console.log(allData)
 
-        postPayrollData(allData)
+        if(!isPending){
+            postPayrollData(allData)
+        }
     }
 
     useEffect(() => {
@@ -65,7 +67,7 @@ const useAddPayroll = () => {
         refetchEmployee()
     })
 
-    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee}
+    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee, isPending}
 };
 
 

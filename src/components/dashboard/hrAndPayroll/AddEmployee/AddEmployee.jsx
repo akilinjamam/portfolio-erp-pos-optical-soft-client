@@ -7,7 +7,7 @@ import { textInput } from './employeeInput';
 import useAddEmployee from './useAddEmployee';
 
 const AddEmployee = () => {
-  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, findEmployee, setImgHolder, setUploading, uploading, handlePost} = useAddEmployee()
+  const {employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialEmployeeData, findEmployee, setImgHolder, setUploading, uploading, handlePost, isPending} = useAddEmployee()
 
     return (
         <div className={`${addEmployee.main} full_width`}>
@@ -50,7 +50,7 @@ const AddEmployee = () => {
                                   <button onClick={(e) => {
                                     e.preventDefault()
                                     handlePost()
-                                  }} className={`commonButton btnColor_green`}>SUBMIT</button>
+                                  }} className={`commonButton btnColor_green`}>{isPending ? 'LOADING...': 'SUBMIT'}</button>
                                   }
                                   {
                                     edit

@@ -30,7 +30,7 @@ const useAddVendor = () => {
 
     const findEmployee = allSuppliers?.find(f => f?._id === supplierId);
 
-    const { mutate: postPayrollData } = usePostVendorData(refetch)
+    const { mutate: postPayrollData, isPending } = usePostVendorData(refetch)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -61,7 +61,9 @@ const useAddVendor = () => {
 
         console.log(allData)
 
-        postPayrollData(allData)
+        if (!isPending) {
+            postPayrollData(allData)
+        }
     }
 
     useEffect(() => {
@@ -71,7 +73,7 @@ const useAddVendor = () => {
         refetchEmployee()
     })
 
-    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, setPaymentMethod, findEmployee, lastBillingDate, lastPaymentDate, lastPaid }
+    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, setPaymentMethod, findEmployee, lastBillingDate, lastPaymentDate, lastPaid, isPending }
 };
 
 

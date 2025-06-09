@@ -7,7 +7,7 @@ import { addFixedExpensesInput, addOnterFixedExpensesInput } from './addFixedExp
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 const AddFixedExpenses = () => {
-  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, profitExpenseData, setInInput} = useAddFixedExpenses();
+  const {otherExpensesData, setOtherExpensesData ,expensesData, setExpensesData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, handleSubmit, initialExpensesData, initialOtherExpensesData, setImgHolder, handlePost, profitExpenseData, setInInput, isPending} = useAddFixedExpenses();
 
   const totalFixedExpense = calculateTotalPrice(showData?.map(item => Number(item?.expenseAmount)))
   
@@ -79,7 +79,7 @@ const AddFixedExpenses = () => {
                                   <button onClick={(e) => {
                                     e.preventDefault()
                                     handlePost()
-                                  }} className={`commonButton btnColor_green`}>SUBMIT</button>
+                                  }} className={`commonButton btnColor_green`}>{isPending ? 'LOADING...': 'SUBMIT'}</button>
                                   }
                                   {
                                     edit

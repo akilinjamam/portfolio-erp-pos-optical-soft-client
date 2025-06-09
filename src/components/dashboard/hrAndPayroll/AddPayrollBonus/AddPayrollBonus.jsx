@@ -4,7 +4,7 @@ import { addPayrollBonusInput } from './addPayrollBonusInput';
 import useAddPayrollBonus from './useAddPayrollBonus';
 
 const AddPayrollBonus = () => {
-  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee} = useAddPayrollBonus()
+  const {payrollData, setPayrollData, handleSubmit, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee, isPending} = useAddPayrollBonus()
   
     return (
         <div className={`${addPayrollBonus.main} full_width`}>
@@ -61,7 +61,7 @@ const AddPayrollBonus = () => {
                   
                         <div className={`${addPayrollBonus.inputAreaOne_footer} flex_right`}>
                               <div className={`${addPayrollBonus.inputAreaOne_footer_container} flex_right`}>
-                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>ADD</button>
+                                <button type='submit' name='submit' className={`commonButton btnColor_orange`}>{isPending ? 'LOADING...': 'ADD'}</button>
                               </div>
                         </div>
                   </form>
