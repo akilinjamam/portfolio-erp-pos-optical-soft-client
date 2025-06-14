@@ -28,7 +28,8 @@ const CashFlowSummeryModal = ({type, open, dispatch, closeModal, cashFlow, total
                         className="uil uil-times"></i>
                     </div>
                     <div  ref={contentToPrint} className={`${imgmodal.stockContainer}`}>
-                    <CashFlowSummeryTable tableScroll={true} contentToPrint={contentToPrint} paginatedDataContainer={cashFlow} totalProfitAllocation={totalProfitAllocation}/>
+                    
+                    <CashFlowSummeryTable tableScroll={true} contentToPrint={contentToPrint} paginatedDataContainer={cashFlow} totalProfitAllocation={totalProfitAllocation} showReport={true}/>
                     </div>        
                 </section>
         </div>

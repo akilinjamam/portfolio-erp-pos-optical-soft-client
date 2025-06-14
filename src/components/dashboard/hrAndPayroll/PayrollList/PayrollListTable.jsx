@@ -33,7 +33,7 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:fontsize, margin:'auto', paddingBottom:'10px', width:'99%'}}>
+        <table style={{borderCollapse:'collapse', fontSize:fontsize, margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
           <tr>

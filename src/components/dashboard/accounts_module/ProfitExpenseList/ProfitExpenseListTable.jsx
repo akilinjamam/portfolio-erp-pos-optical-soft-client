@@ -56,7 +56,7 @@ if(isLoading){
 
     return (
         <div>
-          <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
+          <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
               <tr>
@@ -107,7 +107,7 @@ if(isLoading){
         </tbody>
           </table>
            <br />
-          <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
+          <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
               <tr>

@@ -45,7 +45,7 @@ const CashFlowSummery = () => {
                
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh',}}>
-                <CashFlowSummeryTable tableScroll={false} paginatedDataContainer={finalMergedData} isLoading={isLoading} totalProfitAllocation={totalProfitAllocation}/>
+                <CashFlowSummeryTable tableScroll={false} paginatedDataContainer={finalMergedData} isLoading={isLoading} totalProfitAllocation={totalProfitAllocation} showReport={false}/>
             </div>
            
         </div>

@@ -15,7 +15,7 @@ const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
 
     return (
         <div  style={{marginTop:'10px'}} >
-           <table style={{borderCollapse:'collapse' ,fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
+           <table style={{borderCollapse:'collapse' ,fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>SL</th>

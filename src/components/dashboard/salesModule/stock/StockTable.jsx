@@ -5,7 +5,7 @@ const StockTable = ({paginatedDataContainer, stockTotalInfo}) => {
 
     return (
         <div>
-            <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+            <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', fontFamily: "'DM Sans', sans-serif"}}>
             <thead>
                 <tr>
                     <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>

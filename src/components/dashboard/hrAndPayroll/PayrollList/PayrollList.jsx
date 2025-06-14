@@ -110,7 +110,7 @@ const PayrollList = ({hideSection, hideField}) => {
                 
           </section>
           <section style={{height: `${location === '/dashboard/hr_and_payroll_module/payroll_list' ? '42vh': '72vh'}`}}  className={`${payrollList.tableArea}`}>
-              <PayrollListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} paidAmount={paidAmount} totalIncentive={totalIncentive} totalOvertime={totalOvertime} totalPaid={totalPaid} hideField={hideField} fontsize='13.5px'/>
+              <PayrollListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} paidAmount={paidAmount} totalIncentive={totalIncentive} totalOvertime={totalOvertime} totalPaid={totalPaid} hideField={hideField} fontsize='11.5px'/>
           </section>
            {
             !isLoading

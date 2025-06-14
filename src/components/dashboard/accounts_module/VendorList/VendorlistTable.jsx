@@ -6,7 +6,7 @@ const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, show
 
 
   const data = paginatedDataContainer;
-  console.log(data)
+  
   
   const handleDelete = (id, e) => {
     
@@ -33,7 +33,7 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+        <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
           
