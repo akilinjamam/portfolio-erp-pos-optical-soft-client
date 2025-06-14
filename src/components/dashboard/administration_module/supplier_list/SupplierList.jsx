@@ -8,12 +8,14 @@ import supplierList from './SupplierList.module.scss';
 import {addSupplierList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import useSupplierList from "./useSupplierList";
 import SupplierListTable from "./SupplierListTable";
+import useHome from "../../home/useHome";
 
 const SupplierList = ({hideField, hideSection}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery} = useSupplierList();
     const supplierData = modifiedSupplierDataWithIndexId
 
     const dispatch = useDispatch();
+    const {location} = useHome()
     return (
         <div  className={`${supplierList.main} full_width`}>
              <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
@@ -119,7 +121,7 @@ const SupplierList = ({hideField, hideSection}) => {
               
                     
               </section>
-          <section style={{height: '42vh'}}  className={`${supplierList.tableArea}`}>
+          <section style={{height: `${location === '/dashboard/administration_module/supplier_list' ? '42vh' : '72vh'}`}}  className={`${supplierList.tableArea}`}>
               <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} hideField={hideField} />
           </section>
            {

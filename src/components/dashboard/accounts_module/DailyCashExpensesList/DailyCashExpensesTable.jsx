@@ -77,22 +77,22 @@ const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edi
       </thead>
       <tbody>
 
-        <td></td>
-        <td>Total = {calculatetSales}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Total Expenses = {calculateAllExpenses}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Total Profit = {calculatetotalProfit}</td>
-        <td>{totalBankAmount}</td>
-        <td>{totalBkashAmount}</td>
-        <td>{totalNogodAmount}</td>
-        <td>{totalBankAmount + totalBkashAmount + totalNogodAmount + calculatetotalProfit}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total = {calculatetSales}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total Expenses = {calculateAllExpenses}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total Profit = {calculatetotalProfit}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{totalBankAmount}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{totalBkashAmount}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{totalNogodAmount}</td>
+        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{totalBankAmount + totalBkashAmount + totalNogodAmount + calculatetotalProfit}</td>
        
 
         {

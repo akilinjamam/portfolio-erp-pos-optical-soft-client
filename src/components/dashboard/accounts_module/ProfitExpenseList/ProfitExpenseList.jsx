@@ -12,7 +12,7 @@ import ProfitExpenseListTable from "./ProfitExpenseListTable";
 import useProfitexpenseList from "./useProfitExpenseList";
 const ProfitExpenseList = ({hideSection, hideField}) => {
     
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,date, setDate} = useProfitexpenseList()
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,date, setDate, location} = useProfitexpenseList()
     const employeeData = modifiedEmployeeDataWithIndexId
 
     const dispatch = useDispatch();
@@ -98,7 +98,7 @@ const ProfitExpenseList = ({hideSection, hideField}) => {
           
                 
           </section>
-          <section style={{height: '52vh'}}  className={`${employeeList.tableArea}`}>
+          <section style={{height: `${location === '/dashboard/accounts_module/expenses_profit_list' ? '52vh' : '72vh' }`}}  className={`${employeeList.tableArea}`}>
               <ProfitExpenseListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} monthYear={date} />
           </section>
            {

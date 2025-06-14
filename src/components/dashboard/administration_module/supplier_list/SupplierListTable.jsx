@@ -60,19 +60,19 @@ if(isLoading){
             data?.map((data, index) => {
               return(
                 <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
-                    <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left', display:'flex',justifyContent:'space-around'}}>
                       {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
                       <span>{data?.indexId}</span>
                     </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                     <div style={{maxWidth:"100px"}}>
                     {data?.supplierName} 
                     </div>  
                     </td>
                     
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.address}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.mobile}</td>
-                     <td>{data?.img !== 'not added' ? <img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /> : <p style={{textAlign:'center',fontStyle:'italic'}}>blank</p> }</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.address}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.mobile}</td>
+                     <td>{data?.img !== 'not added' ? <img onClick={() => handleModal(data?.img)} style={{display:'block', margin:'auto', borderRadius:'5px', cursor:'pointer'}} height={17} width={17} src={data?.img} alt="" /> : <p style={{textAlign:'left',fontStyle:'italic'}}>blank</p> }</td>
                      <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     
                         <i onClick={() => {

@@ -9,7 +9,7 @@ import VendorListTable from "./VendorlistTable";
 
 
 const VendorList = ({hideSection, hideField}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData, totalPaid} = useVendorList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData, totalPaid, location} = useVendorList();
     const vendorData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData =supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
@@ -99,7 +99,7 @@ const VendorList = ({hideSection, hideField}) => {
           
                 
           </section>
-          <section style={{height: '42vh'}}  className={`${vendorList.tableArea}`}>
+          <section style={{height: `${location === '/dashboard/accounts_module/vendor_list' ? '42vh' : '72vh'}`}}  className={`${vendorList.tableArea}`}>
               <VendorListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={vendorData} totalPaid={totalPaid} hideField={hideField}/>
           </section>
            {

@@ -9,7 +9,7 @@ import { accountListInput } from "./accountListInputs";
 
 
 const DailyCashExpensesList = ({hideField, hideSection}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setDate, } = useDailyCashExpensesList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setDate, location } = useDailyCashExpensesList();
     const accountsData = modifiedAccountsDataWithIndexId
 
    
@@ -94,7 +94,7 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
           
                 
           </section>
-          <section style={{height: '55vh'}}  className={`${cashList.tableArea}`}>
+          <section style={{height: `${location === '/dashboard/accounts_module/expenses_list' ? '55vh' : '72vh'}`}}  className={`${cashList.tableArea}`}>
               <DailyCashExpensesTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={accountsData} hideField={hideField} hideSection={hideSection} />
           </section>
            {

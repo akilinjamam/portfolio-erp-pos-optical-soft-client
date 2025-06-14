@@ -3,9 +3,11 @@ import useGetFinalAccountsData from "../../../../data/accountsData/useGetFinalAc
 import useUpdateFinalAccountsData from "../../../../data/accountsData/useUpdateFinalAccountData";
 import useDeleteFinalAccountsData from "../../../../data/accountsData/useDeleteFinalAccountsData";
 import useCurrentDate from "../../../../data/saleData/useCurrentDate";
+import useHome from "../../home/useHome";
 
 
 const useProfitExpenseList = () => {
+    const {location} = useHome()
     const {todayMonth } = useCurrentDate()
     const [date, setDate] = useState(todayMonth);
     
@@ -84,6 +86,6 @@ const useProfitExpenseList = () => {
         deleteFinalAccounts(idsForDelete)
     }
 
-    return { finalAccountsData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, modifiedEmployeeDataWithIndexId,  selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, date, setDate}
+    return { finalAccountsData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, modifiedEmployeeDataWithIndexId,  selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, date, setDate, location}
 };
 export default useProfitExpenseList;

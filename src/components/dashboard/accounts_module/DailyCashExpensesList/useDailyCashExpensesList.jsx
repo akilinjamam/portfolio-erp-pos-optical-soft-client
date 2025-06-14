@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import useGetAccountsData from "../../../../data/accountsData/useGetAccountsData";
 import useUpdateAccountsData from "../../../../data/accountsData/useUpdateAccountsData";
 import useDeleteAccountsData from "../../../../data/accountsData/useDeleteAccountsData";
+import useHome from "../../home/useHome";
 
 
 const useDailyCashExpensesList = () => {
+
+    const {location} = useHome()
 
     const [query, setQuery] = useState('');
     const [employeeId, setEmployeeId] = useState('')
@@ -103,6 +106,6 @@ const useDailyCashExpensesList = () => {
         deleteAccounts(idsForDelete)
     }
 
-    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId, isLoading }
+    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId, isLoading, location }
 };
 export default useDailyCashExpensesList;

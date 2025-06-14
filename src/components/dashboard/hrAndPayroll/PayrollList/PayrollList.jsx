@@ -7,7 +7,7 @@ import usePayrollList from "./usePayrollList";
 import PayrollListTable from "./PayrollListTable";
 import { payrollListInput } from "./payrollListInput";
 const PayrollList = ({hideSection, hideField}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod} = usePayrollList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod, location} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
@@ -109,7 +109,7 @@ const PayrollList = ({hideSection, hideField}) => {
           
                 
           </section>
-          <section style={{height: '42vh'}}  className={`${payrollList.tableArea}`}>
+          <section style={{height: `${location === '/dashboard/hr_and_payroll_module/payroll_list' ? '42vh': '72vh'}`}}  className={`${payrollList.tableArea}`}>
               <PayrollListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} paidAmount={paidAmount} totalIncentive={totalIncentive} totalOvertime={totalOvertime} totalPaid={totalPaid} hideField={hideField} fontsize='13.5px'/>
           </section>
            {
