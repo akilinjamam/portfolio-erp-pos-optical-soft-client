@@ -3,109 +3,106 @@ export const homeNavigator = [
         route: '/dashboard',
         value: 'Dashboard',
         icon: 'uil uil-dashboard',
-        routes: {
-            one: '/dashboard',
-            two: '',
-            three: '',
-            four: '',
-            five: ''
-        }
+        routes: ['/dashboard'],
     },
     {
         route: '/dashboard/sales_module',
         value: 'Sales Module',
         icon: 'uil uil-shopping-cart',
-        routes: {
-            one: '/dashboard/sales_module',
-            two: '/dashboard/sales_module/pos',
-            three: '/dashboard/sales_module/sales_record',
-            four: '/dashboard/sales_module/stock',
-            five: '/dashboard/sales_module/sales_invoice',
-            six: '/dashboard/sales_module/glass_stock',
-            seven: '/dashboard/sales_module/today_sales',
-            eight: '/dashboard/sales_module/today_due_collection',
-            nine: '/dashboard/sales_module/manual_sale',
-        }
+        routes: [
+            '/dashboard/sales_module',
+            '/dashboard/sales_module/pos',
+            '/dashboard/sales_module/sales_record',
+            '/dashboard/sales_module/stock',
+            '/dashboard/sales_module/sales_invoice',
+            '/dashboard/sales_module/glass_stock',
+            '/dashboard/sales_module/today_sales',
+            '/dashboard/sales_module/today_due_collection',
+            '/dashboard/sales_module/manual_sale',
+        ],
     },
     {
         route: '/dashboard/accounts_module',
         value: 'Account Module',
         icon: 'uil uil-file-info-alt',
-        routes: {
-            one: '/dashboard/accounts_module',
-            two: '/dashboard/accounts_module/add_vendor',
-            three: '/dashboard/accounts_module/vendor_list',
-            four: '/dashboard/accounts_module/add_expenses',
-            five: '/dashboard/accounts_module/expenses_list',
-            six: '/dashboard/accounts_module/due_collection_list',
-            seven: '/dashboard/accounts_module/add_fixed_expenses',
-            eight: '/dashboard/accounts_module/expenses_profit_list',
-            nine: '/dashboard/accounts_module/cash_flow_summery',
-            ten: '/dashboard/accounts_module/add_vendor_bill',
-        }
+        routes: [
+            '/dashboard/accounts_module',
+            '/dashboard/accounts_module/add_vendor',
+            '/dashboard/accounts_module/vendor_list',
+            '/dashboard/accounts_module/add_expenses',
+            '/dashboard/accounts_module/expenses_list',
+            '/dashboard/accounts_module/due_collection_list',
+            '/dashboard/accounts_module/add_fixed_expenses',
+            '/dashboard/accounts_module/expenses_profit_list',
+            '/dashboard/accounts_module/cash_flow_summery',
+            '/dashboard/accounts_module/add_vendor_bill',
+        ],
     },
     {
         route: '/dashboard/hr_and_payroll_module',
         value: 'HR & Payroll',
         icon: 'uil uil-users-alt',
-        routes: {
-            one: '/dashboard/hr_and_payroll_module',
-            two: '/dashboard/hr_and_payroll_module/controll_user_access',
-            three: '/dashboard/hr_and_payroll_module/employee_list',
-            four: '/dashboard/hr_and_payroll_module/payroll',
-            five: '/dashboard/hr_and_payroll_module/payroll_list',
-            six: '/dashboard/hr_and_payroll_module/user_list',
-            seven: '/dashboard/hr_and_payroll_module/add_employee',
-            eight: '/dashboard/hr_and_payroll_module/best_sale_performer',
-            nine: '/dashboard/hr_and_payroll_module/payroll_bonus',
-        }
+        routes: [
+            '/dashboard/hr_and_payroll_module',
+            '/dashboard/hr_and_payroll_module/controll_user_access',
+            '/dashboard/hr_and_payroll_module/employee_list',
+            '/dashboard/hr_and_payroll_module/payroll',
+            '/dashboard/hr_and_payroll_module/payroll_list',
+            '/dashboard/hr_and_payroll_module/user_list',
+            '/dashboard/hr_and_payroll_module/add_employee',
+            '/dashboard/hr_and_payroll_module/best_sale_performer',
+            '/dashboard/hr_and_payroll_module/payroll_bonus',
+        ],
     },
     {
         route: '/dashboard/report_module',
         value: 'Reports Module',
         icon: 'uil uil-calender',
-        routes: {
-            one: '/dashboard/report_module',
-            two: '/dashboard/report_module/customer_list',
-            three: '/dashboard/report_module/sales_record',
-            four: '/dashboard/report_module/employee_list',
-            five: '/dashboard/report_module/supplier_list',
-            six: '/dashboard/report_module/stock',
-            seven: '/dashboard/report_module/today_due_collection',
-            eight: '/dashboard/report_module/today_sales',
-            nine: '/dashboard/report_module/payroll_list',
-            ten: '/dashboard/report_module/vendor_list',
-            eleven: '/dashboard/report_module/expenses_list',
-            twelve: '/dashboard/report_module/expenses_profit_list',
-        }
+        routes: [
+            '/dashboard/report_module',
+            '/dashboard/report_module/customer_list',
+            '/dashboard/report_module/sales_record',
+            '/dashboard/report_module/employee_list',
+            '/dashboard/report_module/supplier_list',
+            '/dashboard/report_module/stock',
+            '/dashboard/report_module/today_due_collection',
+            '/dashboard/report_module/today_sales',
+            '/dashboard/report_module/payroll_list',
+            '/dashboard/report_module/vendor_list',
+            '/dashboard/report_module/expenses_list',
+            '/dashboard/report_module/expenses_profit_list',
+        ],
+
     },
     {
         route: '/dashboard/administration_module',
         value: 'Administration',
         icon: 'uil uil-cog',
-        routes: {
-            one: '/dashboard/administration_module',
-            two: '/dashboard/administration_module/product_entry',
-            three: '/dashboard/administration_module/product_list',
-            four: '/dashboard/administration_module/customer_list',
-            five: '/dashboard/administration_module/add_supplier',
-            six: '/dashboard/administration_module/supplier_list',
-            seven: '/dashboard/administration_module/glass_list',
-            eight: '/dashboard/administration_module/manage_sales',
-            nine: '/dashboard/administration_module/sold_product',
-        }
+        routes: [
+            '/dashboard/administration_module',
+            '/dashboard/administration_module/product_entry',
+            '/dashboard/administration_module/product_list',
+            '/dashboard/administration_module/customer_list',
+            '/dashboard/administration_module/add_supplier',
+            '/dashboard/administration_module/supplier_list',
+            '/dashboard/administration_module/glass_list',
+            '/dashboard/administration_module/manage_sales',
+            '/dashboard/administration_module/sold_product',
+        ],
+
     },
     {
         route: '/dashboard/business_monitor',
         value: 'Business Monitor',
         icon: 'uil uil-signal-alt-3',
-        routes: {
-            one: '/dashboard/business_monitor',
-            two: '/dashboard/business_monitor/profit_expense_enalysis',
-            three: '/dashboard/business_monitor/profit_category_analysis',
-            four: '/dashboard/business_monitor/stock_analysis',
-            five: '/dashboard/business_monitor/sales_analysis'
-        }
+        routes: [
+            '/dashboard/business_monitor',
+            '/dashboard/business_monitor/profit_expense_enalysis',
+            '/dashboard/business_monitor/profit_category_analysis',
+            '/dashboard/business_monitor/stock_analysis',
+            '/dashboard/business_monitor/sales_analysis'
+        ],
+
     }
 ]
 
