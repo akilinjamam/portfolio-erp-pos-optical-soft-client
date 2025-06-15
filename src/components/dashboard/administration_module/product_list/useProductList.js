@@ -3,6 +3,7 @@ import useProductData from "../../../../data/productData/useProductData";
 import { fetchDeleteProductData, fetchUpdateProductData } from "../../../../data/fetchedData/fetchProductData";
 import { toast } from "react-toastify";
 import { customCode } from "../../../customCode/customcode";
+import { useDebounce } from "../../../../handleDebounce/useDebounce";
 
 
 const useProductList = () => {
@@ -14,7 +15,10 @@ const useProductList = () => {
         priceFrom: '',
         priceTo: ''
     })
-    const { products, isLoading, refetch } = useProductData(query, range.from, range.to, range.priceFrom, range.priceTo);
+
+    const debounse = useDebounce(query, 500)
+
+    const { products, isLoading, refetch } = useProductData(debounse, range.from, range.to, range.priceFrom, range.priceTo);
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
@@ -115,7 +119,7 @@ const useProductList = () => {
     useEffect(() => {
         setQuery(query)
         refetch
-    }, [query, refetch])
+    }, [query, refetch, debounse])
 
     const deleteProducts = async (e) => {
         e.preventDefault()
