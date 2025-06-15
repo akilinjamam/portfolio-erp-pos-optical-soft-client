@@ -59,7 +59,7 @@ const BestSalePerformer = () => {
     const totalSalesValue = calculateTotalPrice(total)
     
     useEffect(() => {
-        const modified = formatSalesData(saleData?.result)?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
+        const modified = formatSalesData(saleData?.result)?.sort((a,b) => b?.totalSale - a?.totalSale)?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
     }, [saleData?.result])
 
