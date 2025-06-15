@@ -15,7 +15,7 @@ const BestSalePerformer = () => {
     const dispatch = useDispatch();
    
     const [handleQuery, setHandleQuery] = useState('');
-    console.log(handleQuery)
+ 
     const [range, setRange] = useState({
         from: '',
         to: ''
@@ -51,7 +51,7 @@ const BestSalePerformer = () => {
       const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
       // eslint-disable-next-line no-unused-vars
       const [paginatedIndex,setPaginatedIndex] = useState()
-      console.log(modifiedProductDataWithIndexId)
+   
     
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
 
