@@ -75,9 +75,15 @@ const Home = () => {
         }
     },[username])
  
-    socket.on('updateOnlineUsers', (onlineUsers) => {
-       setShowUser(onlineUsers);
-    })
+    useEffect(() => {
+        socket.on('updateOnlineUsers', (onlineUsers) => {
+        setShowUser(onlineUsers);
+        })
+
+        return () => {
+            socket.off('updateOnlineUsers')
+        }
+    }, [])
 
     const activeRoute = (routes) => {  
         const links = routes
