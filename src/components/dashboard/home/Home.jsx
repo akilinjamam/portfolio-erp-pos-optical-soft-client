@@ -13,7 +13,7 @@ import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { io } from 'socket.io-client';
 const url = import.meta.env.VITE_SOCKET_URL;
 const socket = io(url, {
-    transports: ['websocket'],
+    transports: ['websocket', 'polling'],
     reconnectionAttempts: 5,
     timeout: 20000
 })
