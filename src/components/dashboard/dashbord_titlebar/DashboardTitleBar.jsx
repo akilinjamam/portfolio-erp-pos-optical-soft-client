@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 import useHome from '../home/useHome';
@@ -5,12 +6,11 @@ import dashboardTitle from './DashboardTitleBar.module.scss';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
-const DashboardTitleBar = () => {
+const DashboardTitleBar = ({showUser}) => {
 
     const getToken = localStorage.getItem('user');
     const splitToken = getToken?.split(' ')[1];
     const getUser = decodeJwt(splitToken);
-
 
     const [view, setView] = useState(false);
     const [date, setDate] = useState(new Date());
@@ -74,6 +74,17 @@ const DashboardTitleBar = () => {
                             <hr />
                             <br />
                             <p onClick={handleLogOut}><i className="uil uil-sign-out-alt"></i> Logout</p>
+                            
+                            {
+                                getUser?.username === 'test user' && <p style={{marginTop:'10px'}}><b>Active Users List:</b></p>
+                            }
+                            <div>
+                                {
+                                getUser?.username === 'test user'
+                                &&
+                                showUser?.map((user, index) => <div className='only_flex' key={index+1}><i style={{fontSize:'17px'}} className="uil uil-check"></i> <p>{user}</p> </div> )
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

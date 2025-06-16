@@ -8,13 +8,24 @@ import ImgModal from '../../modal/imgmodal/ImgModal';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../modal/imgmodal/imgModalSlice';
 import DashboardFooter from '../dashboard_footer/DashboardFooter';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
+import { io } from 'socket.io-client';
+const url = import.meta.env.VITE_SOCKET_URL;
+const socket = io(url, {
+    transports: ['websocket'],
+    reconnectionAttempts: 5,
+    timeout: 20000
+})
 const Home = () => {
+
+    const [showUser, setShowUser] = useState([]);
     const token = localStorage.getItem('user');
     const userEmail = localStorage.getItem('userEmail');
    
     const decodeToken = decodeJwt(token);
+
+   const username = decodeToken?.username;
 
     const exp = decodeToken?.exp;
    
@@ -53,6 +64,21 @@ const Home = () => {
         }
     },[userEmail, navigate])
 
+
+    useEffect(() => {
+        if(username){
+            socket.emit('userOnline', username)
+        }
+
+        return () => {
+            socket.disconnect()
+        }
+    },[username])
+ 
+    socket.on('updateOnlineUsers', (onlineUsers) => {
+       setShowUser(onlineUsers);
+    })
+
     const activeRoute = (routes) => {  
         const links = routes
         const active = links?.some(path => location === path)
@@ -86,7 +112,8 @@ const Home = () => {
                     <div style={{width: `${slide ? '95%' : '80%'}`, backgroundColor:'white'}} className={`${home.part2}`}>
                         <ToastContainer style={{marginTop:'40px'}}/>
                         <ImgModal/>
-                        <DashboardTitleBar/>
+                        <DashboardTitleBar showUser={showUser}/>
+                        
                         <Outlet/> 
                         <DashboardFooter/>                  
                     </div>
