@@ -59,7 +59,7 @@ const SalesAnalysis = () => {
                 <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
                     <label style={{marginRight:'5px'}} htmlFor="">Find By 1/3 Month: </label>
                     <select name="" id="" onChange={(e) => setCurrentDate(Number(e.target.value))}>
-                        <option >select slot</option>
+                        <option value={new Date()?.getDate()} >select slot</option>
                         <option value={32}>Full Month</option>
                         <option value={10}>1st</option>
                         <option value={20}>2nd</option>
