@@ -1,73 +1,11 @@
-// import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import salesAnalysis from './SalesAnalysis.module.scss';
-
-import CommonLoading from '../../../commonLoagin/CommonLoading';
 import SalesAnalysisChart from './SalesAnalysisChart';
-// import useOneMonthSaleData from '../../../../data/saleData/useOneMonthSalesData';
-// import { useEffect } from 'react';
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSalesAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import useSalesAnalysis from './useSalesAnalysis';
 
 const SalesAnalysis = () => {
-
-  // const testArray = [
-  //   {
-  //     customerName: 'john',
-  //     advance: '500',
-  //     createdAt: '2025-03-18',
-  //     products: [
-  //       {
-  //         productName: 'test productOne',
-  //         price: 200,
-  //         quantity: 2
-  //       },
-  //       {
-  //         productName: 'test productTwo',
-  //         price: 300,
-  //         quantity: 2
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     customerName: 'Jeck',
-  //     advance: '400',
-  //     createdAt: '2025-03-18',
-  //     products: [
-  //       {
-  //         productName: 'test productOne',
-  //         price: 500,
-  //         quantity: 2
-  //       },
-  //       {
-  //         productName: 'test productTwo',
-  //         price: 400,
-  //         quantity: 2
-  //       },
-  //     ]
-  //   },
-  //   {
-  //     customerName: 'Jesmin',
-  //     advance: '500',
-  //     createdAt: '2025-03-19',
-  //     products: [
-  //       {
-  //         productName: 'test productOne',
-  //         price: 500,
-  //         quantity: 2
-  //       },
-  //       {
-  //         productName: 'test productTwo',
-  //         price: 400,
-  //         quantity: 2
-  //       },
-  //     ]
-  //   },
-  // ]
-
-  // output: [{totalSale: value, totalAdvance: value, totalDue: value}]
-
 
   const dispatch = useDispatch();
     const [month, setMonth] = useState('');
@@ -91,11 +29,12 @@ const SalesAnalysis = () => {
 
     const netSales = totalSales - totalDiscount;
     const totalDue = netSales - totalPaid;
+
      
   if (isLoading) {
-    return <CommonLoading />
-  }
 
+      // retu <CommonLoading />
+  }
   return (
     <div className={`${salesAnalysis.main} full_width`}>
       <div style={{ display: 'flex' }} className={`flex_around`}>
