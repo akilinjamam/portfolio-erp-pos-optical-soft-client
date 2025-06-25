@@ -30,6 +30,8 @@ const SalesAnalysis = () => {
     const netSales = totalSales - totalDiscount;
     const totalDue = netSales - totalPaid;
 
+
+  
      
   if (isLoading) {
 
