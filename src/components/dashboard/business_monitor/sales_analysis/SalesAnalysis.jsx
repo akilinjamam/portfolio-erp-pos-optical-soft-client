@@ -1,12 +1,17 @@
+
 import salesAnalysis from './SalesAnalysis.module.scss';
+
+import CommonLoading from '../../../commonLoagin/CommonLoading';
 import SalesAnalysisChart from './SalesAnalysisChart';
-import {  useState } from 'react';
+
+import {useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSalesAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import useSalesAnalysis from './useSalesAnalysis';
 
 const SalesAnalysis = () => {
 
+ 
   const dispatch = useDispatch();
     const [month, setMonth] = useState('');
    
@@ -30,12 +35,10 @@ const SalesAnalysis = () => {
     const netSales = totalSales - totalDiscount;
     const totalDue = netSales - totalPaid;
 
-
-  
+ 
      
   if (isLoading) {
-
-      // retu <CommonLoading />
+       return <CommonLoading />
   }
   return (
     <div className={`${salesAnalysis.main} full_width`}>
@@ -106,3 +109,31 @@ const SalesAnalysis = () => {
 };
 
 export default SalesAnalysis;
+
+
+/* 
+
+
+ useEffect(() => {
+    const isSameData = previousSalesGroupRef.current === salesGroupeByDate;
+    if(!salesGroupeByDate || isSameData) return
+
+    previousSalesGroupRef.current = salesGroupeByDate
+    
+    if(0 < currentDate && 10 >= currentDate){
+        const first = salesGroupeByDate?.filter(date => Number(date?.date?.slice(8,10)) > 0 && Number(date?.date?.slice(8,10)) <= 10)
+          setSlot(first)
+    }
+    if(10 < currentDate && 20 >= currentDate){
+        const second = salesGroupeByDate?.filter(date => Number(date?.date?.slice(8,10)) > 10 && Number(date?.date?.slice(8,10)) <= 20)
+        setSlot(second)
+    }
+    if(20 < currentDate && 31 >= currentDate){
+        const third = salesGroupeByDate?.filter(date => Number(date?.date?.slice(8,10)) > 20 && Number(date?.date?.slice(8,10)) <= 31)
+        setSlot(third)
+    }
+  }, [currentDate, salesGroupeByDate])
+
+
+
+*/
