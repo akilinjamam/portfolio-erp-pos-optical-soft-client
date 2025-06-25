@@ -74,8 +74,6 @@ const useOneMonthSaleData = (query, from , to) => {
         const totalBankValue = totalBankValueSale + totalBankValueDue
         const totalBkashValue = totalBkashValueSale + totalBkashValueDue
         const totalNogodValue = totalNogodValueSale + totalNogodValueDue
-
-        console.log(totalCashValueDue)
        
     return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalSalesResult, totalDiscount, totalSalesItem, totalSalesQuantity, isLoading, error, refetch }
 };

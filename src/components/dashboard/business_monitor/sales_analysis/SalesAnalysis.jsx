@@ -16,7 +16,7 @@ const SalesAnalysis = () => {
     const [month, setMonth] = useState('');
    
   
-    const {accumulatedSalesInfo, isLoading, saleData} = useSalesAnalysis(month)
+    const {accumulatedSalesInfo, isLoading, saleData, filtered, setCurrentDate} = useSalesAnalysis(month)
     
     const salesGroupeByDate = accumulatedSalesInfo;
    
@@ -24,6 +24,7 @@ const SalesAnalysis = () => {
     const highestSale = salesGroupeByDate?.reduce((max, sale) => 
     (sale.sales > max.sales ? sale : max),  { date: "", sales: 0 } 
     );
+
     const lowestSale = salesGroupeByDate?.reduce((min, sale) =>
     (sale.sales < min.sales ? sale : min), { date: "", sales: Infinity }
     );
@@ -54,6 +55,16 @@ const SalesAnalysis = () => {
                 <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
                     <label style={{marginRight:'5px'}} htmlFor="">Find By Month: </label>
                     <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)} />
+                </div>
+                <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
+                    <label style={{marginRight:'5px'}} htmlFor="">Find By 1/3 Month: </label>
+                    <select name="" id="" onChange={(e) => setCurrentDate(Number(e.target.value))}>
+                        <option >select slot</option>
+                        <option value={32}>Full Month</option>
+                        <option value={10}>1st</option>
+                        <option value={20}>2nd</option>
+                        <option value={30}>3rd</option>
+                    </select>
                 </div>
               </div>
 
@@ -101,7 +112,7 @@ const SalesAnalysis = () => {
 
       </section>
       <section className={`${salesAnalysis.tableArea}`}>
-        <SalesAnalysisChart allSalesPriceData={salesGroupeByDate} highestSale={highestSale} lowestSale={lowestSale} totalSales={totalSales} netSales={netSales} totalDiscount={totalDiscount} totalPaid={totalPaid} totalDue={totalDue}/>
+        <SalesAnalysisChart allSalesPriceData={filtered} highestSale={highestSale} lowestSale={lowestSale} totalSales={totalSales} netSales={netSales} totalDiscount={totalDiscount} totalPaid={totalPaid} totalDue={totalDue}/>
       </section>
 
     </div>
@@ -109,31 +120,3 @@ const SalesAnalysis = () => {
 };
 
 export default SalesAnalysis;
-
-
-/* 
-
-
- useEffect(() => {
-    const isSameData = previousSalesGroupRef.current === salesGroupeByDate;
-    if(!salesGroupeByDate || isSameData) return
-
-    previousSalesGroupRef.current = salesGroupeByDate
-    
-    if(0 < currentDate && 10 >= currentDate){
-        const first = salesGroupeByDate?.filter(date => Number(date?.date?.slice(8,10)) > 0 && Number(date?.date?.slice(8,10)) <= 10)
-          setSlot(first)
-    }
-    if(10 < currentDate && 20 >= currentDate){
-        const second = salesGroupeByDate?.filter(date => Number(date?.date?.slice(8,10)) > 10 && Number(date?.date?.slice(8,10)) <= 20)
-        setSlot(second)
-    }
-    if(20 < currentDate && 31 >= currentDate){
-        const third = salesGroupeByDate?.filter(date => Number(date?.date?.slice(8,10)) > 20 && Number(date?.date?.slice(8,10)) <= 31)
-        setSlot(third)
-    }
-  }, [currentDate, salesGroupeByDate])
-
-
-
-*/

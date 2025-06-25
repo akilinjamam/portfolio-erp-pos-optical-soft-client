@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
-import useCombineSalesAnalysis from "./useCombineSalesAnalysis";
 
 const useSalesAnalysis = (month) => {
+
+  const [currentDate, setCurrentDate] = useState(new Date()?.getDate());
 
     const nextMonth = (month) => {
         if (!month) return ''; 
@@ -20,14 +21,12 @@ const useSalesAnalysis = (month) => {
       };
 
     const {saleData, isLoading, refetch} = useOneMonthSaleData('', month, nextMonth(month));
-    const {finalMergedData: test } = useCombineSalesAnalysis(month);
-    console.log(test)
-    
+   
         useEffect(() => {
           refetch()
         },[refetch, month])
     
-        const formatSalesData = (salesData) => {
+      const formatSalesData = (salesData) => {
             if (!salesData || !Array.isArray(salesData)) {
               return []; 
             }
@@ -44,7 +43,7 @@ const useSalesAnalysis = (month) => {
                 acc[date] = { sales: 0, totalAdvance: 0, totalDue: 0 };
               }
     
-              console.log(totalSale)
+            
           
               acc[date].sales += totalSale;
               acc[date].totalAdvance += totalAdvance;
@@ -53,17 +52,41 @@ const useSalesAnalysis = (month) => {
               return acc;
             }, {});
            
+
+            let filtered = [];
+            
            
-            return Object?.entries(salesByDate)?.map(([date, data]) => ({
+            const finalData =  Object?.entries(salesByDate)?.map(([date, data]) => ({
               date,
               ...data
             }));
-          };
-        
-        console.log(formatSalesData(saleData?.result))
-        const accumulatedSalesInfo =formatSalesData(saleData?.result);
 
-        return {accumulatedSalesInfo, isLoading, refetch, saleData}
+
+              if(0 < currentDate && 10 >= currentDate){
+                const first = finalData?.filter(date => Number(date?.date?.slice(8,10)) > 0 && Number(date?.date?.slice(8,10)) <= 10)
+                filtered = first;
+              }
+              if(10 < currentDate && 20 >= currentDate){
+                  const second = finalData?.filter(date => Number(date?.date?.slice(8,10)) > 10 && Number(date?.date?.slice(8,10)) <= 20)
+                  filtered = second
+              }
+              if(20 < currentDate && 31 >= currentDate){
+                  const third = finalData?.filter(date => Number(date?.date?.slice(8,10)) > 20 && Number(date?.date?.slice(8,10)) <= 31)
+                  filtered = third
+              }
+              if(currentDate === 32){
+                  const third = finalData?.filter(date => Number(date?.date?.slice(8,10)) > 0 && Number(date?.date?.slice(8,10)) <= 31)
+                  filtered = third
+              }
+              
+
+      return {filtered, finalData}
+  };
+        
+       
+        const {filtered, finalData:accumulatedSalesInfo} =formatSalesData(saleData?.result);
+
+        return {accumulatedSalesInfo, isLoading, refetch, saleData, filtered, setCurrentDate}
     
 };
 
