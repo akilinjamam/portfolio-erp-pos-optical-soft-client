@@ -102,7 +102,7 @@ const SalesAnalysis = () => {
           <div className={`${salesAnalysis.inputPart} flex_left`}>
             <i title="print" className="uil uil-print" onClick={() => {
               dispatch(openModal('sales-analysis'))
-              dispatch(addSalesAnalysis({data:salesGroupeByDate,salesDetail: {highestSale, lowestSale,totalSales, netSales, totalPaid, totalDiscount, totalDue}}))
+              dispatch(addSalesAnalysis({data:filtered,salesDetail: {highestSale, lowestSale,totalSales, netSales, totalPaid, totalDiscount, totalDue}}))
             }}></i>
           </div>
         }
