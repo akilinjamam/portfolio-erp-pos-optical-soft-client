@@ -5,9 +5,9 @@ const useLogin = () => {
     const [loading, setLoading] = useState(false);
     const [eye, setEye] = useState(false)
     const [user, setUser] = useState({
-        username: '',
+        username: 'visitor',
         email: '',
-        password: '',
+        password: 'visitor1234',
         confirmPassword: ''
     })
     return [user, setUser, loading, setLoading, eye, setEye]

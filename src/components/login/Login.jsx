@@ -12,6 +12,8 @@ const Login = () => {
     const [user, setUser, loading, setLoading, eye,setEye] = useLogin();
     const navigate = useNavigate();
 
+    console.log(user)
+
     allInputLoginData[1].icon = eye ? 'uil uil-eye' : 'uil uil-eye-slash';
     allInputLoginData[1].type = eye ? 'text' : 'password';
 
@@ -57,7 +59,7 @@ const Login = () => {
                             allInputLoginData?.map((input, index) => {
                                 return (
                                     <div key={index+1}>
-                                        <input  type={input.type} name={input.name} id={input.id} placeholder={input.value_alt}
+                                        <input value={user?.[input.value]} type={input.type} name={input.name} id={input.id} placeholder={input.value_alt}
                                         onChange={(e) => {
                                             setUser({...user, [input.value] : e.target.value })
                                         }}
