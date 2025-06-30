@@ -35,6 +35,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
     const todayDate =  moment().format('YYYY-MM-DD');
     const {
         register,
+        setValue,
         handleSubmit,
         reset,
       } = useForm();
@@ -319,7 +320,22 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <input type="number" name="" id="" {...register('discount')}  onWheel={(e) => e.target.blur()}/>
                                 <br />
                                 <br />
-                                <label htmlFor="">advance:<span style={{color:'red'}}>*</span></label>
+                                <label htmlFor="">Advance:
+                                    <span style={{color:'red'}}>*</span> 
+                                    <span style={{marginLeft:'10px', position:'relative'}}>
+                                        <span>Full Advance</span>
+                                        <input style={{position:'absolute', bottom:'2px', right:'-15px'}} type="checkbox" name="" id="" onChange={(e) => {
+                                            const isChecked = e.target.checked;
+                                            console.log(isChecked)
+                                            if(isChecked){
+                                                const strValue = totalPriceValue?.toString();
+                                                setValue('advance', strValue)
+                                            }else{
+                                                setValue('advance', '')
+                                            }
+                                        }} />
+                                    </span>
+                                </label>
                                 <br />
                                 <input     type="number" name="" id="" {...register('advance')}  onWheel={(e) => e.target.blur()}/>
                                 <br />
