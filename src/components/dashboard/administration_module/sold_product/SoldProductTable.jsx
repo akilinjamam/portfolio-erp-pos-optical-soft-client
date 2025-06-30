@@ -35,6 +35,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
@@ -51,6 +52,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sales Price</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Profit</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sales By</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Invoice</th>
                         
                     </tr>
                 </thead>
@@ -63,9 +65,9 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.quantity}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.category}</td>
                             
-                            <td style={{border:'1px solid #dddddd',textAlign:'left', width:'120px'}}>{sale?.frameType}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.frameType}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.material}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                 {sale?.size}
                             </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
@@ -77,6 +79,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.actualSalesPrice}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.actualSalesPrice - sale?.purchasePrice}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.invoiceBarcode}</td>
                             
                         </tr>
                     ))

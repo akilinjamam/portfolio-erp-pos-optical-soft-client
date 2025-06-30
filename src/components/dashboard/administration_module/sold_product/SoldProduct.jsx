@@ -34,7 +34,7 @@ const SoldProduct = () => {
     const totalQuantity = calculateTotalPrice(paginatedDataContainer?.map((item) => item?.quantity))
     
     useEffect(() => {
-        const allProducts = saleData?.result?.flatMap(item => item?.products?.map(product => ({...product, recorderName: item?.recorderName}) ) )
+        const allProducts = saleData?.result?.flatMap(item => item?.products?.map(product => ({...product, recorderName: item?.recorderName, invoiceBarcode: item?.invoiceBarcode}) ) )
         const modifiedProducts = allProducts?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
         if(!handleQuery){
             const totalQuantity = calculateTotalPrice(modifiedProducts?.map((item) => item?.quantity))
