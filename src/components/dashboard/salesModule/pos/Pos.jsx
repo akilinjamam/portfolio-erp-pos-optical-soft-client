@@ -71,10 +71,8 @@ const Pos = () => {
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
     const finProduct = allProducts?.find(f => f?.barcode === barcodeId)
-
-    // 1718116697332, 1718124380396, 1718116693575, 0380173306547
-    // const finProduct = allProducts?.find(f => f?.barcode === '1718116693575')
-
+    console.log(finProduct?.img);
+    
     if(priceArray?.length > 0) {
         if(quantityArray?.length === 0) {
            if(!quantity){
@@ -658,7 +656,7 @@ const Pos = () => {
             <div className={`${pos.inputAreaTwo} flex_center`}>
                 <div id='last-barcode' className={`${pos.container} flex_center`}>
                     {
-                        finProduct?.img ? <img width={200} height={160} src={finProduct?.img} alt="" /> : barcodeId ? <p>Image not added !</p> : ''
+                        (finProduct?.img !== 'not added') ? <img width={200} height={160} src={finProduct?.img} alt="" /> : barcodeId ? <p>Image not added !</p> : ''
                     }
                 </div>
             </div>
