@@ -656,7 +656,7 @@ const Pos = () => {
             <div className={`${pos.inputAreaTwo} flex_center`}>
                 <div id='last-barcode' className={`${pos.container} flex_center`}>
                     {
-                        (finProduct?.img !== 'not added') ? <img width={200} height={160} src={finProduct?.img} alt="" /> : barcodeId ? <p>Image not added !</p> : ''
+                        (finProduct?.img !== 'not added') ? (finProduct?.img !== undefined ? <img width={200} height={160} src={finProduct?.img} alt="" /> : '') : barcodeId ? <p>Image not added !</p> : ''
                     }
                 </div>
             </div>
