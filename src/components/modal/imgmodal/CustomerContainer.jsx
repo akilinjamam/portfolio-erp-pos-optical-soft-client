@@ -10,13 +10,12 @@ import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import { useDeleteGlassData, useGetGlassData, usePostGlassTypeData } from "../../../data/glassTypeData/useGlassTypeData";
 import { addNewGlassType, removeKeyGuard, resetFormState } from "./imgModalSlice";
 import { useSelector } from "react-redux";
+import useSaleData from "../../../data/saleData/useSaleData";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
 
     const {employeeData, isLoading} = useGetEmployeeData('', '', '');
-
     
-
     const [addGlass, setAddGlass] = useState('');
     const [deleteGlass, setDeleteGlass] = useState('');
     const [itemName, setItemName] = useState('');
@@ -35,10 +34,14 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
     const todayDate =  moment().format('YYYY-MM-DD');
     const {
         register,
-        setValue,
         handleSubmit,
+        getValues,
+        setValue,
         reset,
+        watch
       } = useForm();
+
+     
 
       const arrayOfTotalPriceValue = salesList?.map(item => (item?.actualSalesPrice * item?.quantity))
       const totalPriceValue = calculateTotalPrice(arrayOfTotalPriceValue)
@@ -158,6 +161,48 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
   return () => window.removeEventListener('keydown', handleKeyDown);
 });
 
+
+const {saleData} = useSaleData('', '', '');
+
+const typedPhoneNumber = getValues('phoneNumber');
+const phoneNumber = watch('phoneNumber');
+useEffect(() => {
+    if (!typedPhoneNumber) return;
+    
+    if(saleData?.result?.length > 0){
+        const findCustomerNumber = saleData?.result?.find(item => item?.phoneNumber === typedPhoneNumber);
+
+        if(findCustomerNumber){
+            setValue('phoneNumber', findCustomerNumber?.phoneNumber);
+            setValue('address', findCustomerNumber?.address);
+            setValue('customerName', findCustomerNumber?.customerName);
+            setValue('leftSph', findCustomerNumber?.leftSph);
+            setValue('leftCyl', findCustomerNumber?.leftCyl);
+            setValue('leftAxis', findCustomerNumber?.leftAxis);
+            setValue('leftNear', findCustomerNumber?.leftNear);
+            setValue('rightSph', findCustomerNumber?.rightSph);     
+            setValue('rightCyl', findCustomerNumber?.rightCyl);
+            setValue('rightAxis', findCustomerNumber?.rightAxis);
+            setValue('rightNear', findCustomerNumber?.rightNear);
+           
+        }else{
+            setValue('phoneNumber', typedPhoneNumber);
+            setValue('address', '');
+            setValue('customerName', '');
+            setValue('leftSph', '');
+            setValue('leftCyl', '');
+            setValue('leftAxis', '');
+            setValue('leftNear', '');
+            setValue('rightSph', '');     
+            setValue('rightCyl', '');
+            setValue('rightAxis', '');
+            setValue('rightNear', '');
+        }
+    }
+},[typedPhoneNumber, setValue, saleData, phoneNumber]);
+
+
+
     return (
         <div className={`${imgmodal.main} flex_center  ${(open && type === 'customer' ) ? imgmodal.open : imgmodal.close}`} >
                 <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
@@ -249,7 +294,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
                                 <br />
                                 <label htmlFor="">Phone Number: </label>
                                 <br />
-                                <input type="text" name="" id="" {...register('phoneNumber')}/>
+                                <input type="text" name="" id="" {...register('phoneNumber')} placeholder="if matches, auto fill-up exists"/>
                                 <br />
                                 <br />
                                 <label htmlFor="">Address: </label>
