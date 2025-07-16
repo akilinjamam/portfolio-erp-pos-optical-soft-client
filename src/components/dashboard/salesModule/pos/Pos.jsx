@@ -22,7 +22,7 @@ const Pos = () => {
     
     const {refetch} = useSalesRecord('', '', '')
     let customerInfo = useSelector(state => state.imgModal.customerInfo)
-  
+    console.log(customerInfo)
     
     const invoice = `${moment().format("YYYYMMDD")}${invoiceNumber}`
     console.log(invoice);
@@ -378,7 +378,8 @@ const Pos = () => {
                 delivered:customerInfo?.delivered === undefined ? 'blank' : customerInfo?.delivered,      
                 comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
                 recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
-                paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,      
+                paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,
+                 paymentMethodHistory: customerInfo?.paymentMethodHistory === undefined ? '+Blank' : customerInfo?.paymentMethodHistory,      
                 invoiceBarcode:invoice === undefined ? 'blank' : invoice,
                 totalQuantity: customerInfo?.totalQuantity === undefined ? '0' : customerInfo?.totalQuantity,      
             }
@@ -428,6 +429,7 @@ const Pos = () => {
                             comment:customerInfo?.comment === undefined ? 'blank' : customerInfo?.comment,      
                             recorderName:customerInfo?.recorderName === undefined ? 'blank' : customerInfo?.recorderName,      
                             paymentMethod:customerInfo?.paymentMethod === undefined ? 'blank' : customerInfo?.paymentMethod,
+                            paymentMethodHistory: customerInfo?.paymentMethodHistory === undefined ? '+Blank' : customerInfo?.paymentMethodHistory,
                             invoiceBarcode:invoice === undefined ? 'blank' : invoice,
                              totalQuantity: customerInfo?.totalQuantity === undefined ? '0' : customerInfo?.totalQuantity,
                         }
@@ -669,3 +671,4 @@ const Pos = () => {
 };
 
 export default Pos;
+

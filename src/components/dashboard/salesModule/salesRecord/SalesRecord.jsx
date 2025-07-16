@@ -15,7 +15,7 @@ const SalesRecord = () => {
     const dispatch = useDispatch();
    
     const [handleQuery, setHandleQuery] = useState('');
-    console.log(handleQuery)
+
     const [range, setRange] = useState({
         from: '',
         to: ''
