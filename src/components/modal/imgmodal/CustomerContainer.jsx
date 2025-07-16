@@ -111,6 +111,7 @@ const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, sale
             delivered:data?.delivered === '' ? undefined : data?.delivered,
             recorderName: salesBy === '' ? undefined : salesBy,
             paymentMethod: data?.paymentMethod === '' ? undefined : data?.paymentMethod,
+            paymentMethodHistory:data?.paymentMethod === '' ? undefined : `+${data?.paymentMethod}`,
             comment:data?.comment === '' ? undefined : `${data?.comment}=${data?.pd}`,
             totalQuantity:data?.totalQuantity === '' ? undefined : data?.totalQuantity,
 
