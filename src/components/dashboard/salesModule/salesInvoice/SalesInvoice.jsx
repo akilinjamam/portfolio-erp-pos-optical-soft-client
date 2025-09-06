@@ -44,32 +44,65 @@ const SalesInvoice = () => {
   }, [refetch, date.from, date.to]);
 
   // 🔹 Barcode scanner listener (with cleanup)
+  // useEffect(() => {
+  //   let barcode = "";
+  //   let interval
+
+  //   const handleKeyDown = (e) => {
+  //     if (interval) clearInterval(interval);
+
+  //     if (e.code === "Enter") {
+  //       if (barcode) {
+  //         setBarcodeId(barcode);
+  //         barcode = "";
+  //         return;
+  //       }
+  //     }
+  //     if (e.key !== "Shift") {
+  //       barcode += e.key;
+  //       interval = setInterval(() => (barcode = ""), 20);
+  //     }
+  //   };
+
+  //   document.addEventListener("keydown", handleKeyDown);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //     clearInterval(interval);
+  //   };
+  // }, []);
+
   useEffect(() => {
-    let barcode = "";
-    let interval
+  let barcode = "";
+  let timeout;
 
-    const handleKeyDown = (e) => {
-      if (interval) clearInterval(interval);
+  const handleKeyDown = (e) => {
+    if (timeout) clearTimeout(timeout);
 
-      if (e.code === "Enter") {
-        if (barcode) {
-          setBarcodeId(barcode);
-          barcode = "";
-          return;
-        }
+    if (e.code === "Enter") {
+      if (barcode) {
+        setBarcodeId(barcode);
+        barcode = "";
       }
-      if (e.key !== "Shift") {
-        barcode += e.key;
-        interval = setInterval(() => (barcode = ""), 20);
-      }
-    };
+      return;
+    }
+
+    if (e.key !== "Shift") {
+      barcode += e.key;
+
+      // Reset barcode if no key is pressed for 80ms
+      timeout = setTimeout(() => {
+        barcode = "";
+      }, 80);
+    }
+  };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      clearInterval(interval);
-    };
-  }, []);
+    document.removeEventListener("keydown", handleKeyDown);
+    clearTimeout(timeout);
+  };
+}, []);
+
 
 
   useEffect(() => {
