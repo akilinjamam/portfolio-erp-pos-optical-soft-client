@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 
 const useOneMonthSaleData = (query, from , to) => {
-    const {data:getAllData, refetch, isLoading, error} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData'], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
+    const {data:getAllData, refetch, isLoading, error, isFetching} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData'], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
     const saleData = getAllData
     console.log(saleData)
         useEffect(() => {
@@ -51,7 +51,7 @@ const useOneMonthSaleData = (query, from , to) => {
 
         const totalSalesValue = calculateTotalPrice(total) 
 
-    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalSalesResult, totalDiscount, totalSalesItem, totalSalesQuantity, isLoading, error, refetch }
+    return { saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesValue,totalPaid, totalSalesResult, totalDiscount, totalSalesItem, totalSalesQuantity, isLoading, error, refetch, isFetching }
 };
 
 export default useOneMonthSaleData;
