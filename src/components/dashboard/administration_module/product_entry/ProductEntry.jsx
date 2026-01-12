@@ -11,7 +11,7 @@ const ProductEntry = () => {
 
     return (
         <div className={`${productEntry.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}}  className={`flex_around`}>
             <div className={`${productEntry.inputAreaOne} flex_center`}>
               <div className={`${productEntry.container} `}>
                     <div className={`${productEntry.titleName}`}>{edit ? 'Product Update' : 'Product Entry'}</div>
@@ -52,7 +52,7 @@ const ProductEntry = () => {
                                 return (
                                   <div key={index+1} className={`${productEntry.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={productData[input.name]}   type={input.type} 
+                                    <input placeholder={input.placeholder} value={productData[input.name]}   type={input.type} 
                                         onChange={(e) => {setProductData({...productData, [input.value]: e.target.value})}}
                                         required
                                     />

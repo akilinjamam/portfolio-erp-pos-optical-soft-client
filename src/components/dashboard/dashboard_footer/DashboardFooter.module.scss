@@ -24,3 +24,17 @@
        }
     }
 }
+
+@media screen and (max-width:1242px) {
+    .main{
+        position:fixed;
+        .titleBar{
+            .titleBarContainer{
+                justify-content: center;
+                .displayExpire{
+                    display:none
+                };
+            }
+        }
+    }
+}

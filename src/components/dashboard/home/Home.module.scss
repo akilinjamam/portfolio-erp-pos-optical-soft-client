@@ -79,5 +79,32 @@
         .part2:hover .slideBtn{
             z-index: -1;
         }
+        
     }
+}
+
+@media (max-width: 1242px) {
+  .main{
+    .iconBar{
+        display: none;
+    }
+    .container{
+        .part1{
+            display: none;
+            width: none;
+        }
+        .part2{
+           display: none;
+        }
+        .part2Res{
+            width: 100%;
+            position: static;
+        }
+    }
+  }
+}
+@media (min-width: 1243px) {
+  .main > .container > .part2Res{
+        display: none;
+  }
 }

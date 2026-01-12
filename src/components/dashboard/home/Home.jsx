@@ -123,6 +123,13 @@ const Home = () => {
                         <Outlet/> 
                         <DashboardFooter/>                  
                     </div>
+                    <div className={`${home.part2Res}`}>
+                        <ToastContainer style={{marginTop:'40px'}}/>
+                        <ImgModal/>
+                        <DashboardTitleBar showUser={showUser}/>
+                        <Outlet/> 
+                        <DashboardFooter/>                  
+                    </div>
             </div>
         </div>
     );

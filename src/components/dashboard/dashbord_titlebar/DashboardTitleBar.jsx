@@ -6,6 +6,7 @@ import dashboardTitle from './DashboardTitleBar.module.scss';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
+import Sidebar from '../home/sidebarRes/SidebarRes';
 const DashboardTitleBar = ({showUser}) => {
 
     const getToken = localStorage.getItem('user');
@@ -89,6 +90,7 @@ const DashboardTitleBar = ({showUser}) => {
                     </div>
                 </div>
             </div>
+            <Sidebar/>
         </div>
     );
 };

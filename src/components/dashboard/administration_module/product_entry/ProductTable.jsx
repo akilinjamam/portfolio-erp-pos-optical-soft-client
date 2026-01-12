@@ -3,6 +3,7 @@ import { useDispatch} from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { customCode } from '../../../customCode/customcode';
+import productEntry from './ProductEntry.module.scss';
 const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit, category}) => {
 
  
@@ -27,7 +28,8 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
   const todaysDate = customCode()?.ddmmyy
 
     return (
-        <table>
+      <div className={`${productEntry.table_responsive}`}>
+        <table >
           <thead>
               <tr>
                   <th>SL</th>
@@ -116,7 +118,8 @@ const ProductTable = ({setShowData, showData, paginatedDataContainer,paginatedIn
            }
            
         </tbody>
-      </table>
+        </table>
+      </div>
     );
 };
 
