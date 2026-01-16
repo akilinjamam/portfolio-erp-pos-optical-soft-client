@@ -43,9 +43,22 @@ const CustomerList = () => {
                     dispatch(openModal('customerList'))
                     dispatch(customerList(modifiedSaleDataWithIndexId))
                 }} title="print" className="uil uil-print"></i>
-                <span>Total : {saleData?.total}</span>
+                <span>Total : {saleData?.result?.length}</span>
                 <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
                 <i onClick={() => setQuery('')} className="uil uil-times"></i>
+                <label htmlFor="">From: </label>
+                <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
+                <label htmlFor="">To: </label>
+                <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
+                <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
+            </div>
+            <div className={`${customerLists.titleRes} flex_left`}>
+                
+                <div style={{marginBottom:"5px"}}>
+                    <span>Total : {saleData?.result?.length}</span>
+                <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
+                <i onClick={() => setQuery('')} className="uil uil-times"></i>
+                </div>
                 <label htmlFor="">From: </label>
                 <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                 <label htmlFor="">To: </label>

@@ -4,12 +4,12 @@
     div{
         .inputAreaOne, .inputAreaTwo{
         
-            height: 205px;
+            height: 195px;
             position: relative;
             // background-color: green;
             .container{
                 width: 100%;
-                height: 200px;
+                height: 190px;
                 background-color: rgb(209, 222, 247);
                 border-radius: 10px;
                 border: 1px solid gray;
@@ -41,7 +41,7 @@
                     width: 70%;
                 }
                 select{
-                    width: 50%;
+                    width: 70%;
                 }
             }
 
@@ -70,11 +70,10 @@
                 i{
                     font-size: 80px;
                     color: rgb(167, 167, 167);
-                   
                     position: absolute;
-                    top: 20%;
-                    left: 30%;
-            
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                 }
                 input{
                     position: absolute;
@@ -101,7 +100,14 @@
         }
     }
 
-    table {
+   .table_responsive{
+     width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+     table {
         width: 99%;
         border-collapse: collapse;
         margin: 5px 5px;
@@ -116,5 +122,65 @@
     th {
         background-color: #f4f4f4;
     }
+    /* Prevent table from breaking */
+    .table_responsive table {
+    min-width: 1242px; /* keeps layout intact */
+    }
 
+    /* Optional: smoother scrolling */
+    .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    }
+   }
+    
+
+}
+
+@media (max-width: 1242px) {
+  .main{
+    margin-top: 10px;
+    div{
+        .inputAreaOne, .inputAreaTwo{
+            width: 100% !important;
+            height: auto;
+            .container{
+                height: auto;
+                .inputFields{
+                    label{
+                        display: none;
+                    }
+                }
+            }
+        }
+        .inputAreaOne{
+            .container{
+                .titleName{
+                     top: -10px;
+                }
+                .border_remover{
+                    top: 0;
+                }
+            }
+        }
+        .inputAreaTwo{
+            height: 200px;
+            .container{
+                height: 195px;
+            }
+        }
+    }
+
+     table {
+    font-size: 11px;
+  }
+
+    th, td {
+        padding: 3px;
+        white-space: nowrap;
+    }
+  }
+
+  .inputAreaTwo {
+    margin-top: 10px;
+  }
 }

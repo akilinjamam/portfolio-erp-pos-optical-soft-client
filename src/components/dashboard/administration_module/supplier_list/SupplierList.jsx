@@ -9,6 +9,7 @@ import {addSupplierList, openModal } from "../../../modal/imgmodal/imgModalSlice
 import useSupplierList from "./useSupplierList";
 import SupplierListTable from "./SupplierListTable";
 import useHome from "../../home/useHome";
+import FilterOption from "./FilterOption";
 
 const SupplierList = ({hideField, hideSection}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery} = useSupplierList();
@@ -18,7 +19,7 @@ const SupplierList = ({hideField, hideSection}) => {
     const {location} = useHome()
     return (
         <div  className={`${supplierList.main} full_width`}>
-             <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none' : 'flex'}`, flexWrap: "wrap"}}  className={`flex_around`}>
                 <div className={`${supplierList.inputAreaOne} flex_center`}>
                   <div className={`${supplierList.container} `}>
                         <div className={`${supplierList.titleName}`}>Supplier Update</div>
@@ -100,23 +101,7 @@ const SupplierList = ({hideField, hideSection}) => {
                   </div>
                 </div>
               </div>
-              <section className={`${supplierList.navigationIcon} flex_between`}>
-                    { 
-                    <div className={`${supplierList.inputPart} flex_left`}>
-                        <i
-                        onClick={() => {
-                          dispatch(openModal('supplier'))
-                          dispatch(addSupplierList(supplierData))
-                        }}
-                        title="print" className="uil uil-print"></i>
-                        <span>Total : {supplierData?.length} </span>
-                        <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                        <i onClick={() => setQuery('')}  className="uil uil-times"></i>
-                      
-                    </div>
-                    }
-                    
-              </section>
+              <FilterOption dispatch={dispatch} openModal={openModal} addSupplierList={addSupplierList} supplierData={supplierData} query={query}  setQuery={setQuery}/>
               <section className={`${supplierList.navigationIcon} only_flex`}>
               
                     

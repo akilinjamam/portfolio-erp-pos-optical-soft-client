@@ -25,7 +25,7 @@ const ManualSales = () => {
           <div  className={`flex_around`}>
             <div className={`${manualSales.inputAreaOne} flex_center`}>
               <div className={`${manualSales.container} `}>
-                    <div className={`${manualSales.titleName}`}>{edit ? 'Update Employee' : 'Add Employee'}</div>
+                    <div className={`${manualSales.titleName}`}>{edit ? 'Update Sales' : 'Add Sales'}</div>
                     <div style={{width: `${edit ? '135px' : '120px'}`}}  className={`${manualSales.border_remover} `}></div>
 
                   <form onSubmit={handleSubmit} action="">
@@ -35,7 +35,7 @@ const ManualSales = () => {
                                 return (
                                   <div key={index+1} className={`${manualSales.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input onBlur={() => setInInput(false)} onMouseOver={() => {setInInput(true)}} onMouseOut={() => {setInInput(false)}} value={employeeData[input.name]}   type={input.type} 
+                                    <input placeholder={input.placeholder} onBlur={() => setInInput(false)} onMouseOver={() => {setInInput(true)}} onMouseOut={() => {setInInput(false)}} value={employeeData[input.name]}   type={input.type} 
                                         onChange={(e) => {setEmployeeData({...employeeData, [input.value]: e.target.value})}}
                                       
                                     />

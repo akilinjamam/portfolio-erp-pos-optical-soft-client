@@ -66,25 +66,28 @@ const BestSalePerformer = () => {
     useEffect(() => {
         refetch()
     },[refetch,handleQuery, range])
-
     return (
         <div className={bestSalePerfomer.main}>
             <div className={`${bestSalePerfomer.title} flex_left`}>
-                <i onClick={() => {
+                <div style={{marginBottom: "2px"}}>
+                    <i onClick={() => {
                     dispatch(openModal('best-performer'))
                     dispatch(addBestPerformerData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue}))
-                }} title="print" className="uil uil-print"></i>
-                <span>Total : {saleData?.total}</span>
-                <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
-                   
-                    setHandleQuery(e.target.value)   
-                }}/>
-                <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
-                <label htmlFor="">From: </label>
-                <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                <label htmlFor="">To: </label>
-                <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
+                    }} title="print" className="uil uil-print"></i>
+                    <span>Total : {saleData?.result?.length}</span>
+                    <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
+                    
+                        setHandleQuery(e.target.value)   
+                    }}/>
+                    <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
+                </div>
+               <div>
+                    <label htmlFor="">From: </label>
+                    <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
+                    <label htmlFor="">To: </label>
+                    <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
+                    <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
+               </div>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
                 <BestSalePerformerTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading}  totalSalesValue={totalSalesValue} />

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import payrollListTable from './PayrollList.module.scss';
  
 const PayrollListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, paidAmount, totalPaid, totalIncentive, totalOvertime, hideField, fontsize}) => {
 
@@ -33,7 +34,8 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:fontsize, margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
+     <div className={payrollListTable.table_responsive} >
+       <table style={{borderCollapse:'collapse', fontSize:fontsize, margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
           <tr>
@@ -76,7 +78,7 @@ if(isLoading){
               </tr>
                
           </thead>
-        <tbody>
+          <tbody>
           
            {
             data?.map((data, index) => {
@@ -130,6 +132,7 @@ if(isLoading){
            
         </tbody>
       </table>
+     </div>
     );
 };
 

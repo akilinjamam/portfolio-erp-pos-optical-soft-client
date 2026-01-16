@@ -6,6 +6,7 @@ import { addPayrollList, openModal } from "../../../modal/imgmodal/imgModalSlice
 import usePayrollList from "./usePayrollList";
 import PayrollListTable from "./PayrollListTable";
 import { payrollListInput } from "./payrollListInput";
+import FilterOption from "./FilterOption";
 const PayrollList = ({hideSection, hideField}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod, location} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
@@ -83,28 +84,7 @@ const PayrollList = ({hideSection, hideField}) => {
                   </div>
                 </div> */}
               </div>
-          <section className={`${payrollList.navigationIcon} flex_between`}>
-                { 
-                <div className={`${payrollList.inputPart} flex_left`}>
-                    <i
-                    onClick={() => {
-                      dispatch(openModal('payroll'))
-                      dispatch(addPayrollList(payrollData))
-                    }}
-                    title="print" className="uil uil-print"></i>
-                    <span>Total : {payrollData?.length} </span>
-                
-                    <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
-                        <option value="">Select EmployeeName</option>
-                        {
-                            allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.employeeName}</option> )
-                        }
-                    </select>
-                    <input value={month} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
-                </div>
-                }
-                
-          </section>
+          <FilterOption dispatch={dispatch} openModal={openModal} addPayrollList={addPayrollList} payrollData={payrollData} setEmployeeId={setEmployeeId} month={month} setMonth={setMonth} allEmployeeData={allEmployeeData} />
           <section className={`${payrollList.navigationIcon} only_flex`}>
           
                 

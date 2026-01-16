@@ -3,6 +3,7 @@ import { useDispatch} from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 // import { customCode } from '../../../customCode/customcode';
+import addEmployee from './AddEmployee.module.scss';
 const AddEmployeeTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit}) => {
 
   const dispatch = useDispatch();
@@ -23,11 +24,9 @@ const AddEmployeeTable = ({setShowData, showData, paginatedDataContainer,paginat
     dispatch(openImg(img))
   }
 
-  // const todaysDate = customCode()?.ddmmyy
-
-  console.log(paginatedDataContainer)
 
     return (
+     <div className={addEmployee.table_responsive}>
         <table>
           <thead>
               <tr>
@@ -65,7 +64,8 @@ const AddEmployeeTable = ({setShowData, showData, paginatedDataContainer,paginat
            }
            
         </tbody>
-      </table>
+        </table>
+     </div>
     );
 };
 

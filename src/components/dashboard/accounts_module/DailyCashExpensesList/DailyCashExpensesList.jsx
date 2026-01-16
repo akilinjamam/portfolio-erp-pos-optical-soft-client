@@ -61,17 +61,7 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
                       </form>
                   </div>
                 </div>
-                <div className={`${cashList.inputAreaTwo} flex_center`}>
-                  {/* <div className={`${cashList.container} `}>
-                        <div className={`${cashList.titleName} flex_center`}></div>
-                        <div style={{width: '0'}} className={`${cashList.border_remover}`}></div>
-                        <br />
-                            <div className={`${cashList.inputAreaTwoContainer}`}>
-                            
-                              
-                            </div>
-                  </div> */}
-                </div>
+               
               </div>
           <section className={`${cashList.navigationIcon} flex_between`}>
                 { 

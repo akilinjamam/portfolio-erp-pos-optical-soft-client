@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
+import manualSales from './ManualSales.module.scss';
 
 // import { customCode } from '../../../customCode/customcode';
 const ManualSalesTable = ({setShowData, showData, paginatedDataContainer,paginatedIndex, setEdit, edit}) => {
@@ -20,7 +21,8 @@ const ManualSalesTable = ({setShowData, showData, paginatedDataContainer,paginat
   console.log(paginatedDataContainer)
 
     return (
-        <table>
+     <div className={manualSales.table_responsive}>
+      <table>
           <thead>
               <tr>
                   <th>SL</th>
@@ -73,6 +75,7 @@ const ManualSalesTable = ({setShowData, showData, paginatedDataContainer,paginat
            
         </tbody>
       </table>
+     </div>
     );
 };
 

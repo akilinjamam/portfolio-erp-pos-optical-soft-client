@@ -8,6 +8,7 @@ import {useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSalesAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import useSalesAnalysis from './useSalesAnalysis';
+import SalesAnalysisChartRes from './SalesAnalysisChartRes';
 
 const SalesAnalysis = () => {
 
@@ -43,14 +44,14 @@ const SalesAnalysis = () => {
   }
   return (
     <div className={`${salesAnalysis.main} full_width`}>
-      <div style={{ display: 'flex' }} className={`flex_around`}>
+      <div style={{ display: 'flex', flexWrap: "wrap" }} className={`flex_around`}>
         <div className={`${salesAnalysis.inputAreaOne} flex_center`}>
           <div className={`${salesAnalysis.container} `}>
             <div className={`${salesAnalysis.titleName}`}>Sales Analysis</div>
             <div style={{ width: '123px' }} className={`${salesAnalysis.border_remover} `}></div>
 
             <form action="">
-              <div className='flex_top'>
+              <div style={{flexWrap:"wrap"}} className='flex_top'>
 
                 <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
                     <label style={{marginRight:'5px'}} htmlFor="">Find By Month: </label>
@@ -111,10 +112,12 @@ const SalesAnalysis = () => {
         
 
       </section>
-      <section className={`${salesAnalysis.tableArea}`}>
+      <section className={`${salesAnalysis.tableChart}`}>
         <SalesAnalysisChart allSalesPriceData={filtered} highestSale={highestSale} lowestSale={lowestSale} totalSales={totalSales} netSales={netSales} totalDiscount={totalDiscount} totalPaid={totalPaid} totalDue={totalDue}/>
       </section>
-
+      <section className={`${salesAnalysis.tableChartRes}`}>
+        <SalesAnalysisChartRes allSalesPriceData={filtered} highestSale={highestSale} lowestSale={lowestSale} totalSales={totalSales} netSales={netSales} totalDiscount={totalDiscount} totalPaid={totalPaid} totalDue={totalDue}/>
+      </section>
     </div>
   );
 };

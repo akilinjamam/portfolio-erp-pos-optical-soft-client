@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import StockAnalysisChart from './StockAnalysisChart';
 import useProductData from '../../../../data/productData/useProductData';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
+import StockAnalysisChartRes from './StockAnalysisChartRes';
 
 const StockAnalysis = () => {
 
@@ -47,7 +48,7 @@ const StockAnalysis = () => {
 
   return (
     <div className={`${stockAnalysis.main} full_width`}>
-      <div style={{ display: 'flex' }} className={`flex_around`}>
+      <div style={{ display: 'flex', flexWrap: "wrap" }} className={`flex_around`}>
         <div className={`${stockAnalysis.inputAreaOne} flex_center`}>
           <div className={`${stockAnalysis.container} `}>
             <div className={`${stockAnalysis.titleName}`}>Stock Analysis</div>
@@ -121,8 +122,11 @@ const StockAnalysis = () => {
 
 
       </section>
-      <section className={`${stockAnalysis.tableArea}`}>
+      <section className={`${stockAnalysis.tableChart}`}>
         <StockAnalysisChart analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseAvailableQuantity} categoryWiseTotalQuantity={categoryWiseTotalQuantity} categoryWiseStockOunt={categoryWiseStockOunt} categoryName={month} />
+      </section>
+      <section className={`${stockAnalysis.tableChartRes}`}>
+        <StockAnalysisChartRes analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseAvailableQuantity} categoryWiseTotalQuantity={categoryWiseTotalQuantity} categoryWiseStockOunt={categoryWiseStockOunt} categoryName={month} />
       </section>
 
     </div>

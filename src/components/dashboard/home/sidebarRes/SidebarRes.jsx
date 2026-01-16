@@ -3,10 +3,13 @@ import { useEffect, useMemo, useState } from "react";
 import "./SidebarRes.scss";
 import { homeNavigator } from "../homeNavigator";
 import { useNavigate } from "react-router-dom";
+import useHome from "../useHome";
 
 export default function Sidebar() {
 
         const navigate = useNavigate();
+
+        const {location} = useHome()
 
         const [open, setOpen] = useState(false);
         const [date, setDate] = useState(new Date());
@@ -33,6 +36,13 @@ export default function Sidebar() {
         
                 return () => clearInterval(interval);
         }, []);
+
+
+        const activeRoute = (routes) => {  
+                const links = routes
+                const active = links?.some(path => location === path)
+                 return active ? `green` : ``
+            }
 
   return (
     <>
@@ -69,7 +79,7 @@ export default function Sidebar() {
                 return (
                     <nav key={index}>
                        
-                        <a onClick={() => {
+                        <a style={{color: `${activeRoute(item.routes)}`}} onClick={() => {
                             navigate(item.route)
                             setOpen(false)
                         } } > <i className={item.icon}></i> {item?.value}</a>

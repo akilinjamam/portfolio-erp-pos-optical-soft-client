@@ -71,8 +71,9 @@
                     color: rgb(167, 167, 167);
                    
                     position: absolute;
-                    top: 20%;
-                    left: 30%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
             
                 }
                 input{
@@ -86,6 +87,10 @@
                     display: block;
                     margin: auto;
                     border-radius: 10px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
                 }
                 .uploading{
                     position: absolute;
@@ -125,6 +130,9 @@
                 margin: 0px 20px;
             }
         }
+        .inputPartRes{
+            display: none;
+        }
         .btnPart{
             i{
                 font-size: 12px;
@@ -143,7 +151,14 @@
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
     }
     
-    table {
+     .table_responsive{
+     width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+     table {
         width: 99%;
         border-collapse: collapse;
         margin: 5px 5px;
@@ -158,5 +173,88 @@
     th {
         background-color: #f4f4f4;
     }
+    /* Prevent table from breaking */
+    .table_responsive table {
+    min-width: 1242px; /* keeps layout intact */
+    }
 
+    /* Optional: smoother scrolling */
+    .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    }
+   }
+
+}
+
+@media (max-width:1242px){
+    .main{
+        margin-top: 10px;
+        div{
+            .inputAreaOne, .inputAreaTwo{
+                width:100%;
+                height: auto;
+                margin-bottom: 5px;
+                .container{
+                    height: auto;
+                }
+                .inputFields{
+                    label{
+                        display: none;
+                    }
+                }
+            }
+            .inputAreaOne{
+                .container{
+                    .titleName{
+                        top: -10px;
+                    }
+                    .border_remover{
+                        top: 0px;
+                    }
+                }
+            }
+            .inputAreaTwo{
+                height: 100px;
+                .container{
+                    height: 95px;
+                    .titleName{
+                        top: -7px;
+                    }
+                    .border_remover{
+                        top: 3px;
+                    }
+                }
+                .inputAreaTwoContainer{
+                    img{
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+            }
+            
+        }
+        .navigationIcon{
+            .inputPart{
+                display: none;
+            }
+            .inputPartRes{
+                display: block;
+                font-size: 13px;
+                i{
+                    margin-left: 5px;
+                }
+                input{
+                    margin-left: 5px;
+                }
+            }
+        }
+         table {
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: 3px;
+            white-space: nowrap;
+        }
+    }
 }

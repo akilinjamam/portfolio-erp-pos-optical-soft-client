@@ -522,9 +522,10 @@ const Pos = () => {
         }
     })
 
-
+// html part--------------------------------------------------------------------------------
     return (
-       <div onDoubleClick={() => {
+      <div className={pos.superMain}>
+         <div onDoubleClick={() => {
         setQuantity(false)
         setPrice(false)
         setIsScanned(false)
@@ -664,7 +665,11 @@ const Pos = () => {
             </div>
         </div>
         <PosListTable listOfSalesItem={listOfSalesItem} handleDeleteSale={handleDeleteSale}/>
-       </div>
+        </div>
+        <div className={pos.mobileMain}>
+                Only Available for Desktop Version
+        </div>
+      </div>
     );
 };
 

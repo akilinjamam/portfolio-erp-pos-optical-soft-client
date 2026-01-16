@@ -3,6 +3,7 @@
 import '../../../../global_style/global_style.css'
 // import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import cashflow from './CashFlowSummery.module.scss'
 
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
 const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading, tableScroll, totalProfitAllocation}) => {
@@ -18,7 +19,7 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
     }
 
     return (
-        <div style={{ overflowX: `${ tableScroll ? 'scroll' : '' }`, width: "100%" }} >
+        <div className={cashflow.table_responsive} style={{ overflowX: `${ tableScroll ? 'scroll' : '' }`, width: "100%" }} >
            
             <table ref={contentToPrint} style={{borderCollapse:'collapse', fontSize:'10.5px', margin:'auto', paddingBottom:'10px', width:`${tableScroll ? '1100px' : '99%'}`,  fontFamily: "'DM Sans', sans-serif"}}>
                 <thead style={{position:'sticky', top:'0', backgroundColor:'#f1f1f1'}}>

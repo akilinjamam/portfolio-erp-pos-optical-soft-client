@@ -8,7 +8,7 @@ const AddPayrollBonus = () => {
   
     return (
         <div className={`${addPayrollBonus.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}}  className={`flex_around`}>
             <div className={`${addPayrollBonus.inputAreaOne} flex_center`}>
               <div className={`${addPayrollBonus.container} `}>
                     <div className={`${addPayrollBonus.titleName}`}>Add Payroll</div>

@@ -4,12 +4,12 @@
     div{
         .inputAreaOne, .inputAreaTwo{
         
-            height: 265px;
+            height: auto;
             position: relative;
             // background-color: green;
             .container{
                 width: 100%;
-                height: 260px;
+                height: auto;
                 background-color: rgb(209, 222, 247);
                 border-radius: 10px;
                 border: 1px solid gray;
@@ -47,19 +47,21 @@
 
             .inputAreaOne_footer{
                 width: 100%;
-                height: 55px;
-               
+                height: auto;
                 margin-top: 7px;
                 .inputAreaOne_footer_container{
                     width: 620px;
-                    // background-color: red;
-                    height: 15px;
+                    height: auto
                     
                 }
             }
         }
         .inputAreaOne{
             width: 99.5%;
+            height: auto;
+            .container{
+                height: auto;
+            }
         }
         .inputAreaTwo{
             // width: 20%;
@@ -101,7 +103,14 @@
         }
     }
 
-    table {
+     .table_responsive{
+        width: 100%;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+        min-width: 0;
+     table {
         width: 99%;
         border-collapse: collapse;
         margin: 5px 5px;
@@ -116,5 +125,59 @@
     th {
         background-color: #f4f4f4;
     }
+    /* Prevent table from breaking */
+    .table_responsive table {
+    min-width: 1242px; /* keeps layout intact */
+    }
 
+    /* Optional: smoother scrolling */
+    .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    }
+   }
+
+}
+
+
+@media (max-width:1242px){
+    .main{
+        margin-top: 10px;
+        div{
+            .inputAreaOne{
+                .container{
+                    .inputFields{
+                        margin-top: 2px;
+                        label{
+                            display: none;
+                        }
+                        input{
+                            width: 100%;
+                        }
+                        select{
+                            width: 100%
+                        }
+                    }
+                }
+                .inputAreaOne_footer{
+                        .inputAreaOne_footer_container{
+                            width: 100%;
+                            flex-wrap: wrap;
+                            button{
+                                display: block;
+                                width: 100%;
+                                margin-bottom: 4px;
+                            }
+                        }
+                    }
+            }
+        }
+           table {
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: 3px;
+            white-space: nowrap;
+        }
+    }
 }

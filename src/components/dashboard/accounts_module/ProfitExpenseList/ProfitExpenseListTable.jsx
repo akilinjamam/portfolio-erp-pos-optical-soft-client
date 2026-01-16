@@ -6,6 +6,7 @@ import { calculateTotalPrice } from '../../../calculation/calculateSum';
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import useOneMonthSaleData from '../../../../data/saleData/useOneMonthSalesData';
+import profitExpList from './ProfitExpenseList.module.scss';
  
 const ProfitExpenseListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField, monthYear}) => {
 
@@ -55,7 +56,7 @@ if(isLoading){
 }
 
     return (
-        <div>
+        <div className={profitExpList.table_responsive}>
           <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>

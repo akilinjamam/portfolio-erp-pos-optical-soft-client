@@ -138,7 +138,8 @@ const SalesInvoice = () => {
   }
 
   return (
-    <div className={salesInvoice.main}>
+   <div className={salesInvoice.superMain}>
+     <div className={salesInvoice.main}>
     
       <div className={`${salesInvoice.titleBar} flex_left`}>
         <div className={salesInvoice.titleBarContainer}>
@@ -266,7 +267,11 @@ const SalesInvoice = () => {
           </button>
         </div>
       )}
-    </div>
+      </div>
+     <div className={salesInvoice.mobileMain}>
+          Only Available for Desktop Version
+      </div>
+   </div>
   );
 };
 

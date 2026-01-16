@@ -3,12 +3,12 @@
 import '../../../../global_style/global_style.css'
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import soldProduct from "./SoldProduct.module.scss"
 
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
 const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity}) => {
     
    
-
     if(isLoading){
         return (
         <div className='flex_center' style={{width:'100%', height:'500px'}}>
@@ -18,7 +18,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
     }
 
     return (
-        <div >
+        <div className={soldProduct.table_responsive}>
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     <tr>

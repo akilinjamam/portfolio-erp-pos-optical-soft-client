@@ -143,7 +143,14 @@
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
     }
     
-    table {
+   .table_responsive{
+     width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+     table {
         width: 99%;
         border-collapse: collapse;
         margin: 5px 5px;
@@ -158,5 +165,67 @@
     th {
         background-color: #f4f4f4;
     }
+    /* Prevent table from breaking */
+    .table_responsive table {
+    min-width: 1242px; /* keeps layout intact */
+    }
 
+    /* Optional: smoother scrolling */
+    .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    }
+   }
+
+}
+
+
+@media screen and (max-width:1242px) {
+    .main{
+        margin-top: 10px;
+        div{
+            .inputAreaOne{
+              
+                width:100%;
+                height: 100px;
+                margin: 0px 1px;
+                .container{
+                    height: 95px;
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                    }
+                    .titleName{
+                        top: -10px;
+                    }
+                    .border_remover{
+                        top: 3px;
+                    }
+                }
+            }
+        }
+
+         .navigationIcon{
+            height: auto;
+           
+            .inputPart{
+                i{
+                    display: none;
+                }
+                span{
+                    margin-left: 0;
+                }
+            }
+        }
+
+         table {
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: 3px;
+            white-space: nowrap;
+        }
+       
+    }
 }

@@ -3,7 +3,7 @@
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-
+import salesRecord from './SalesRecord.module.scss';
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
 const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesQuantity}) => {
     
@@ -18,7 +18,7 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
     }
 
     return (
-        <div >
+        <div className={salesRecord.table_responsive}>
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%', fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     <tr>

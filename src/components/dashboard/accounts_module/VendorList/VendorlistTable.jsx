@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import vendorlist from './VendorList.module.scss';
  
 const VendorListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, totalPaid, hideField}) => {
 
@@ -33,7 +34,8 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
+       <div className={vendorlist.table_responsive}>
+         <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
           
@@ -120,7 +122,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+        </table>
+       </div>
     );
 };
 

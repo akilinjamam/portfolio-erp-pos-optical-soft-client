@@ -72,8 +72,9 @@
                     color: rgb(167, 167, 167);
                    
                     position: absolute;
-                    top: 20%;
-                    left: 30%;
+                     top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
             
                 }
                 input{
@@ -117,4 +118,42 @@
         background-color: #f4f4f4;
     }
 
+}
+
+
+@media (max-width:1242px){
+    .main{
+        margin-top: 10px;
+        div{
+            .inputAreaOne, .inputAreaTwo{
+                width: 100%;
+                height: auto;
+                margin-bottom: 5px;
+                .container{
+                    height: auto;
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                }
+                }
+            }
+            .inputAreaOne{
+                .container{
+                    .titleName{
+                        top: -10px;
+                    }
+                    .border_remover{
+                        top: 0;
+                    }
+                }
+            }
+            .inputAreaTwo{
+                    height: 100px;
+                    .container{
+                        height: 95px;
+                    }
+            }
+        }
+    }
 }

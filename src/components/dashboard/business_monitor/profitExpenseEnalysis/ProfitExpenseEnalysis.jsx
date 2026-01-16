@@ -28,7 +28,7 @@ const ProfitExpenseEnalysis = () => {
    
     return (
         <div  className={`${profitExpenseEnalaysis.main} full_width`}>
-             <div style={{display:'flex'}}  className={`flex_around`}>
+             <div style={{display:'flex', flexWrap: "wrap"}}  className={`flex_around`}>
                 <div className={`${profitExpenseEnalaysis.inputAreaOne} flex_center`}>
                   <div className={`${profitExpenseEnalaysis.container} `}>
                         <div className={`${profitExpenseEnalaysis.titleName}`}>Profit Expense Analysis</div>
@@ -37,7 +37,7 @@ const ProfitExpenseEnalysis = () => {
                       <form action="">
                             <div className='flex_top'>
                               
-                              <div style={{width:'100%', fontSize:"13px",padding: '5px 0'}}>
+                              <div className={profitExpenseEnalaysis.inputFields} style={{width:'100%', fontSize:"13px",padding: '5px 0'}}>
                                 <label style={{marginRight:"10px"}} htmlFor="">Find by month:</label>
                                 <input style={{width:'200px'}} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
                               </div>

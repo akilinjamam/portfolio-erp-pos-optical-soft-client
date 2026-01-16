@@ -8,6 +8,7 @@ import { calculateTotalPrice } from "../../../calculation/calculateSum";
 // import useSaleData from "../../../../data/saleData/useSaleData";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
 import SoldProductTable from "./SoldProductTable";
+import FilterOption from './FilterOption';
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const SoldProduct = () => {
@@ -68,38 +69,7 @@ const SoldProduct = () => {
 
     return (
         <div className={soldProducts.main}>
-            <div className={`${soldProducts.title} flex_left`}>
-                {/* <i onClick={() => {
-                    dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId}))
-                }} title="print" className="uil uil-print"></i> */}
-                <span>Total : {totalSalesItem}</span>
-                <input style={{width: '230px'}} placeholder='Product Name / Barcode' value={handleQuery} type="text" name="" id="" onChange={(e) => {
-                   
-                    setHandleQuery(e.target.value)   
-                }}/>
-                <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
-
-                <select style={{marginRight:'10px'}} name="" id="" value={category} onChange={(e) => {
-                   setCategory(e.target.value)   
-               }}>  
-                    <option value=''>select category</option>
-                    {
-                        totalCategory?.map((item, index) => {
-                            return(
-                                <option key={index + 1} value={item}>{item}</option>
-                            )
-                        }
-                    )
-                    }
-                </select>
-                <i onClick={() => setCategory('')} className="uil uil-times"></i>
-                <label htmlFor="">From: </label>
-                <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                <label htmlFor="">To: </label>
-                <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
-            </div>
+            <FilterOption totalSalesItem={totalSalesItem}  handleQuery={handleQuery} setHandleQuery={setHandleQuery} setCategory={setCategory}  category={category} totalCategory={totalCategory} setRange={setRange} range={range}  />
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
                 <SoldProductTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSaleQuantity={totalSaleQuantity} />
             </div>

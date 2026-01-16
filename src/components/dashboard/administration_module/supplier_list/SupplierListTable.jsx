@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import supplierlist from './SupplierList.module.scss'
  
 const SupplierListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField}) => {
 
@@ -41,7 +42,8 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+       <div className={`${supplierlist.table_responsive}`}>
+         <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
           
           <thead>
           
@@ -65,7 +67,7 @@ if(isLoading){
                       <span>{data?.indexId}</span>
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                    <div style={{maxWidth:"100px"}}>
+                    <div >
                     {data?.supplierName} 
                     </div>  
                     </td>
@@ -96,7 +98,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+        </table>
+       </div>
     );
 };
 

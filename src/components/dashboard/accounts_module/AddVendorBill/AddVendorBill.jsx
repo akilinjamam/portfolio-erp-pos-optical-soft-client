@@ -11,7 +11,7 @@ const AddVendorBill = () => {
   
     return (
         <div className={`${addVendorBill.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}}  className={`flex_around`}>
             <div className={`${addVendorBill.inputAreaOne} flex_center`}>
               <div className={`${addVendorBill.container} `}>
                     <div className={`${addVendorBill.titleName}`}>Add Vendor</div>
@@ -39,7 +39,7 @@ const AddVendorBill = () => {
                                 return (
                                   <div key={index+1} className={`${addVendorBill.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={payrollData[input.name]}   type={input.type} 
+                                    <input placeholder={input.placeholder} value={payrollData[input.name]}   type={input.type} 
                                         onChange={(e) => {setPayrollData({...payrollData, [input.value]: e.target.value})}}
                                         
                                     />

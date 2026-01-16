@@ -17,7 +17,7 @@ const AddExpenses = () => {
 
     return (
         <div className={`${addExpenses.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}}  className={`flex_around`}>
             <div className={`${addExpenses.inputAreaOne} flex_center`}>
               <div className={`${addExpenses.container} `}>
                     <div className={`${addExpenses.titleName}`}>{edit ? 'Update Expenses' : 'Add Expenses'}</div>
@@ -31,6 +31,7 @@ const AddExpenses = () => {
                                 <div key={index+1} className={`${addExpenses.inputFields} flex_between`}>
                                 <label htmlFor="">{input.placeholder}:</label>
                                 <input
+                                placeholder={input.placeholder}
                                 onMouseOver={() => {
                                   if(input.name === 'expenseName'){
                                     setInInput(true)
@@ -58,7 +59,7 @@ const AddExpenses = () => {
                                 return (
                                 <div key={index+1} className={`${addExpenses.inputFields} flex_between`}>
                                 <label htmlFor="">{input.placeholder}:</label>
-                                <input value={otherExpensesData[input.name]}   type={input.type} 
+                                <input  placeholder={input.placeholder} value={otherExpensesData[input.name]}   type={input.type} 
                                     onChange={(e) => {setOtherExpensesData({...otherExpensesData, [input.value]: e.target.value})}}
                                     
                                 />

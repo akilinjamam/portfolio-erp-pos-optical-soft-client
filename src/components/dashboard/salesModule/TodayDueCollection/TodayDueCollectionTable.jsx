@@ -3,7 +3,7 @@ import '../../../../global_style/global_style.css'
 import ReportTitle from '../../../../ReportTitle/ReportTitle';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-
+import todayDueCollection from "./TodayDueCollection.module.scss";
 
 const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalDueCollection, totalCashDueCollection, totalBankDueCollection, totalBkashDueCollection, totalNogodDueCollection, showReportTitle, contentToPrint}) => {
     
@@ -18,7 +18,7 @@ const TodayDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSales
     }
 
     return (
-        <div style={{padding: `${showReportTitle && '0 5px'}`}} ref={contentToPrint}>
+        <div className={todayDueCollection.table_responsive} style={{padding: `${showReportTitle && '0 5px'}`}} ref={contentToPrint}>
             {showReportTitle && <ReportTitle/>}
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>

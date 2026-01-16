@@ -3,7 +3,7 @@
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-
+import todaySales from './TodaySales.module.scss';
 
 const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalTodayPaid, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue}) => {
    
@@ -17,7 +17,7 @@ const TodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, t
     }
 
     return (
-        <div style={{width:'100%'}}>
+        <div className={todaySales.table_responsive} style={{width:'100%'}}>
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     <tr>

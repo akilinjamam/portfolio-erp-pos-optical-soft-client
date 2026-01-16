@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
+import userlist from "./UserList.module.scss";
+
 const UserListTable = ({paginatedDataContainer, handleUpdateRemove, handleUpdateRequest}) => {
 
 
     return (
-        <div>
+        <div className={userlist.table_responsive}>
             <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
             <thead>
                 <tr>

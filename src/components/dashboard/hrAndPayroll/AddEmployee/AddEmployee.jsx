@@ -11,7 +11,7 @@ const AddEmployee = () => {
 
     return (
         <div className={`${addEmployee.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}}  className={`flex_around`}>
             <div className={`${addEmployee.inputAreaOne} flex_center`}>
               <div className={`${addEmployee.container} `}>
                     <div className={`${addEmployee.titleName}`}>{edit ? 'Update Employee' : 'Add Employee'}</div>
@@ -24,7 +24,7 @@ const AddEmployee = () => {
                                 return (
                                   <div key={index+1} className={`${addEmployee.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={employeeData[input.name]}   type={input.type} 
+                                    <input placeholder={input.placeholder} value={employeeData[input.name]}   type={input.type} 
                                         onChange={(e) => {setEmployeeData({...employeeData, [input.value]: e.target.value})}}
                                         required
                                     />

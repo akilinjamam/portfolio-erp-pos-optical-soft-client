@@ -161,3 +161,25 @@
     }
 
 }
+
+@media screen and (max-width:1242px) {
+    .main{
+        margin-top: 5px;
+        div{
+            .inputAreaOne, .inputAreaTwo{
+                
+                width:100%;
+                .container{
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        .navigationIcon{
+            display: none;
+        }
+    }
+}
