@@ -65,6 +65,12 @@
 
 @media screen and (max-width:1242px){
     .main{
+        .title{
+            margin-top: 4px;
+            i{
+                display: none;
+            }
+        }
          table {
             font-size: 11px;
         }
