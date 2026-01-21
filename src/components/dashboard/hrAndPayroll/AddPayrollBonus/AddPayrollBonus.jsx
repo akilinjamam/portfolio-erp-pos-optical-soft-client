@@ -34,7 +34,7 @@ const AddPayrollBonus = () => {
                                 return (
                                   <div key={index+1} className={`${addPayrollBonus.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={payrollData[input.name]}   type={input.type} 
+                                    <input placeholder={input.placeholder} value={payrollData[input.name]}   type={input.type} 
                                         onChange={(e) => {setPayrollData({...payrollData, [input.value]: e.target.value})}}
                                         
                                     />

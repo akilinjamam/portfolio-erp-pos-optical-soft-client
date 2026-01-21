@@ -115,8 +115,8 @@ const Home = () => {
                                 <i className={`uil uil-angle-${slide ? 'right' : 'left'}`}></i>
                             </div>
                     </div>
+                    <ToastContainer style={{marginTop:'40px'}}/>
                     <div style={{width: `${slide ? '95%' : '80%'}`, backgroundColor:'white'}} className={`${home.part2}`}>
-                        <ToastContainer style={{marginTop:'40px'}}/>
                         <ImgModal/>
                         <DashboardTitleBar showUser={showUser}/>
                         
