@@ -1,10 +1,10 @@
+import stockTable from "./Stock.module.scss";
 /* eslint-disable react/prop-types */
 const StockTable = ({paginatedDataContainer, stockTotalInfo}) => {
-
     
 
     return (
-        <div>
+        <div className={stockTable.table_responsive}>
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', fontFamily: "'DM Sans', sans-serif"}}>
             <thead>
                 <tr>

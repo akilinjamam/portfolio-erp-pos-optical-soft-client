@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 // import useSaleData from "../../../../data/saleData/useSaleData";
 import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
+import FilterOption from "./FilterOption";
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const SalesRecord = () => {
@@ -49,23 +50,7 @@ const SalesRecord = () => {
 
     return (
         <div className={salesRecord.main}>
-            <div className={`${salesRecord.title} flex_left`}>
-                <i onClick={() => {
-                    dispatch(openModal('sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue, totalSalesQuantity}))
-                }} title="print" className="uil uil-print"></i>
-                <span>Total : {totalSalesItem}</span>
-                <input value={handleQuery} type="text" name="" id="" onChange={(e) => {
-                   
-                    setHandleQuery(e.target.value)   
-                }}/>
-                <i onClick={() => setHandleQuery('')} className="uil uil-times"></i>
-                <label htmlFor="">From: </label>
-                <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                <label htmlFor="">To: </label>
-                <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
-            </div>
+            <FilterOption dispatch={dispatch}  openModal={openModal} addSalesData={addSalesData} modifiedProductDataWithIndexId={modifiedProductDataWithIndexId} totalSalesItem={totalSalesItem} totalSalesValue={totalSalesValue} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalSalesQuantity={totalSalesQuantity} handleQuery={handleQuery} setHandleQuery={setHandleQuery} range={range} setRange={setRange} />
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
                 <SalesRecordTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={saleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalSalesQuantity={totalSalesQuantity} />
             </div>

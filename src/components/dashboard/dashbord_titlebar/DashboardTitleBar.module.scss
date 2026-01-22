@@ -40,3 +40,10 @@
        }
     }
 }
+
+
+@media screen and (max-width:1242px) {
+    .main > .titleBar{
+        display: none;
+    }    
+}

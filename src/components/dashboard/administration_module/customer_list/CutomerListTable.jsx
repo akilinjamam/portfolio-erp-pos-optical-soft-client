@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-
+import customerList from './CustomerList.module.scss'
 
 const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
 
@@ -14,7 +14,7 @@ const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
     }
 
     return (
-        <div  style={{marginTop:'10px'}} >
+        <div className={`${customerList.table_responsive}`}  style={{marginTop:'10px'}} >
            <table style={{borderCollapse:'collapse' ,fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     <tr>

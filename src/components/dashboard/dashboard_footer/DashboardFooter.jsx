@@ -46,7 +46,7 @@ const DashboardFooter = () => {
                 <div className={`${dashFooter.titleBarContainer} flex_between`}>
                      {remainingTime
                         ?
-                        <p>
+                        <p className={`${dashFooter.displayExpire}`}>
                             Session Expires in: {remainingTime?.days}  :{remainingTime?.hours} : {remainingTime?.minutes}:  {remainingTime?.seconds}
                         </p>
                         :

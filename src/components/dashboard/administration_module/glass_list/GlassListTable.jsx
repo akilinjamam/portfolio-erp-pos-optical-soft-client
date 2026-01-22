@@ -4,6 +4,7 @@ import '../../../../global_style/global_style.css'
 import { openImg, openModal, openSingleBarcode } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
+import glassList from './GlassList.module.scss'
  
 const GlassListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
 
@@ -61,7 +62,8 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
+        <div className={`${glassList.table_responsive}`}>
+          <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px'}}>
           
           <thead>
           <tr> 
@@ -167,7 +169,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+          </table>
+        </div>
     );
 };
 

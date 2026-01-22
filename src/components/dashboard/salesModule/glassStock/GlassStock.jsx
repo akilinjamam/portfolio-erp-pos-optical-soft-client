@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { addStockData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import GlassStockTable from "./GlassStockTable";
 import useGlassProductData from '../../../../data/productData/useProductGlassData';
+import FilterOption from './FilterOption';
 
 
 const GlassStock = () => {
@@ -46,28 +47,7 @@ const GlassStock = () => {
     return (
         <div className={`${glassStock.main}`} >
             <div className={`${glassStock.titleBar} flex_left`}>
-                <div className={`${glassStock.titleBarContainer}`}>
-                    <i 
-                    title="print preview"
-                    className="uil uil-print"
-                    onClick={() => {
-                        dispatch(addStockData(filteredStock))
-                        dispatch(openModal('glass-stock'))
-                    }}
-                    ></i>
-                    <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                    <i onClick={() => setQuery('')} className="uil uil-times"></i>
-                    <select value={stocks} name="" id="" onChange={(e) => setStocks(e?.target?.value === 'true') }>
-                        <option value={true}>stock-in</option>
-                        <option value={false}>stock-out</option>
-                    </select>
-                    <label htmlFor="">From :</label>
-                    <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-
-                    <label htmlFor="">To :</label>
-                    <input value={range.to} type="date" name="" id=""  onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    <i onClick={() => setRange({from: '', to: ''})} className="uil uil-times"></i>
-                </div>
+                <FilterOption dispatch={dispatch} addStockData={addStockData} filteredStock={filteredStock} openModal={openModal} query={query} setQuery={setQuery} stocks={stocks} setStocks={setStocks} range={range} setRange={setRange} />
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none' ,width:"99.5%", minHeight:'auto', maxHeight:'70vh'}}>
                 <GlassStockTable paginatedDataContainer={paginatedDataContainer}/>

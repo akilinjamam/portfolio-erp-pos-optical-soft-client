@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import  vendorbillinput  from './AddVendorBill.module.scss';
+
  
 const VendorBillTable = ({paginatedDataContainer, isLoading}) => {
 
@@ -13,6 +15,7 @@ if(isLoading){
 }
 
     return (
+     <div className={vendorbillinput.table_responsive}>
         <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
@@ -64,7 +67,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+        </table>
+     </div>
     );
 };
 

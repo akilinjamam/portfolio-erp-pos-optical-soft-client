@@ -2,6 +2,8 @@
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import dailycashexp from './DailyCashExpensesList.module.scss';
+
 
 const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted, selectDeleted, idsForDelete, setIdsForDelete, hideField, hideSection }) => {
 
@@ -51,7 +53,8 @@ const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edi
   }
 
   return (
-    <table style={{ borderCollapse: 'collapse', fontSize: '11.5px', margin: 'auto', paddingBottom: '10px',  fontFamily: "'DM Sans', sans-serif" }}>
+    <div className={dailycashexp.table_responsive}>
+      <table style={{ borderCollapse: 'collapse', fontSize: '11.5px', margin: 'auto', paddingBottom: '10px',  fontFamily: "'DM Sans', sans-serif" }}>
 
       <thead>
 
@@ -152,7 +155,8 @@ const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edi
 
 
       </tbody>
-    </table>
+      </table>
+    </div>
   );
 };
 

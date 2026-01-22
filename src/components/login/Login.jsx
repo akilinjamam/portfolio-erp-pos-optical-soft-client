@@ -83,11 +83,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <div className={`${signin.displayWidthLimitControll}`}>
-                <div className="flex_center">
-                    <p>Screen Size must have to be more than 1242px</p>
-                </div>
-            </div>
+            
         </div>
     );
 };

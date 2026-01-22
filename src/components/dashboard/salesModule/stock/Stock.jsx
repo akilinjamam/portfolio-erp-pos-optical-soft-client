@@ -8,6 +8,7 @@ import CommonLoading from "../../../commonLoagin/CommonLoading";
 import { useDispatch } from "react-redux";
 import { addStockData, addStockTotalInfo, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
+import FilterOption from "./FilterOption";
 
 
 const Stock = () => {
@@ -67,41 +68,7 @@ const Stock = () => {
     return (
         <div className={`${stock.main}`} >
             <div className={`${stock.titleBar} flex_left`}>
-                <div className={`${stock.titleBarContainer}`}>
-                    <i 
-                    title="print preview"
-                    className="uil uil-print"
-                    onClick={() => {
-                        dispatch(addStockData(filteredStock))
-                        dispatch(addStockTotalInfo({stockTotalInfo}))
-                        dispatch(openModal('stock'))
-                    }}
-                    ></i>
-                    <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                    <i onClick={() => {
-                        newRefetch()
-                        setQuery('')
-                    }} className="uil uil-times"></i>
-                    <select value={stocks} name="" id="" onChange={(e) => {
-                        console.log(e.target.value)
-                        if(e.target.value === 'both'){
-                            setStocks(undefined)
-                        }else{
-                            setStocks(e?.target?.value === 'true')
-                        }
-                        
-                    } }>
-                        <option value={'both'}>stock-in-out</option>
-                        <option value={true}>stock-in</option>
-                        <option value={false}>stock-out</option>
-                    </select>
-                    <label htmlFor="">From :</label>
-                    <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-
-                    <label htmlFor="">To :</label>
-                    <input value={range.to} type="date" name="" id=""  onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    <i onClick={() => setRange({from: '', to: ''})} className="uil uil-times"></i>
-                </div>
+                <FilterOption dispatch={dispatch} addStockData={addStockData} filteredStock={filteredStock} addStockTotalInfo={addStockTotalInfo} stockTotalInfo={stockTotalInfo} openModal={openModal} query={query} setQuery={setQuery} newRefetch={newRefetch} stocks={stocks} setStocks={setStocks} range={range} setRange={setRange}/>
             </div>
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none' ,width:"99.5%", minHeight:'auto', maxHeight:'70vh'}}>
                 <StockTable paginatedDataContainer={paginatedDataContainer} showData={modifiedProductDataWithIndexId} stockTotalInfo={stockTotalInfo}/>

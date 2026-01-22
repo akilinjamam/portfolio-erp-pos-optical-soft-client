@@ -2,6 +2,7 @@
 import '../../../../global_style/global_style.css'
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import manageSales from './ManageSales.module.scss';
  
 const ManageSaleTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete,setUpdateProductData, productId, setProductId, setSaleId, selectProduct, setSelectProduct}) => {
 
@@ -48,10 +49,10 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', }}>
+       <div className={manageSales.table_responsive}>
+         <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', }}>
           
           <thead>
-          
               <tr>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Customer Name</th>
@@ -70,68 +71,69 @@ if(isLoading){
                   <th>Action</th>
               </tr>
           </thead>
-        <tbody>
-          
-           {
-            data?.map((data, index) => {
-              return(
-                <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
-                    <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
-                      {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
-                      <span>{data?.indexId}</span>
-                    </td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
-                    <div style={{maxWidth:"100px"}}>
-                    {data?.customerName} 
-                    </div>  
-                    </td>
-                    
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.phoneNumber}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.referredBy}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
-                                {data?.products?.map((item, index) => <p onClick={() => {
-                                  setProductId(item?._id)
-                                  setSelectProduct(item?._id)
-                                  handleProduct(data?._id,item?.id)
+          <tbody>
+            
+            {
+              data?.map((data, index) => {
+                return(
+                  <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
+                      <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
+                        {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
+                        <span>{data?.indexId}</span>
+                      </td>
+                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+                      <div style={{maxWidth:"100px"}}>
+                      {data?.customerName} 
+                      </div>  
+                      </td>
+                      
+                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.phoneNumber}</td>
+                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
+                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.referredBy}</td>
+                      <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
+                                  {data?.products?.map((item, index) => <p onClick={() => {
+                                    setProductId(item?._id)
+                                    setSelectProduct(item?._id)
+                                    handleProduct(data?._id,item?.id)
 
-                                }} style={{backgroundColor: `${selectProduct === item?._id ? 'lightgreen': ''}`, cursor:'pointer'}} key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )
-                                }
-                            </td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                            {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
-                        </td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.advance}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.discount}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance) - Number(data?.discount)}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.delivered}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.recorderName}</td>
-                        <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.invoiceBarcode}</td>
-                     <td  className={`flex_around`}>
-                    
+                                  }} style={{backgroundColor: `${selectProduct === item?._id ? 'lightgreen': ''}`, cursor:'pointer'}} key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )
+                                  }
+                              </td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                              {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
+                          </td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.advance}</td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.discount}</td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance) - Number(data?.discount)}</td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.delivered}</td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.recorderName}</td>
+                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.invoiceBarcode}</td>
+                      <td  className={`flex_around`}>
+                      
+                          <i onClick={() => {
+                            setSelectDeleted(!selectDeleted)
+                            setEdit('')
+                            if(selectDeleted){
+                              setIdsForDelete([])
+                            }
+                          }}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
+
+
                         <i onClick={() => {
-                          setSelectDeleted(!selectDeleted)
-                          setEdit('')
-                          if(selectDeleted){
-                            setIdsForDelete([])
-                          }
-                        }}  style={{cursor:'pointer'}} className="uil uil-trash-alt btnColor_red_font"></i> 
-
-
-                      <i onClick={() => {
-                        setEdit(data?._id)
-                        setSelectDeleted(false)
-                        setIdsForDelete([])
-                      }} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i>
-                  </td>
-                </tr>
-              )
-            } )
-           }
-           
-        </tbody>
-      </table>
+                          setEdit(data?._id)
+                          setSelectDeleted(false)
+                          setIdsForDelete([])
+                        }} style={{cursor:'pointer'}} className="uil uil-edit btnColor_green_font"></i>
+                    </td>
+                  </tr>
+                )
+              } )
+            }
+            
+          </tbody>
+        </table>
+       </div>
     );
 };
 

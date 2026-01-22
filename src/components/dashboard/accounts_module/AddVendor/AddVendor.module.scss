@@ -109,3 +109,28 @@
     }
 
 }
+
+@media screen and (max-width:1242px) {
+    .main{
+        div{
+            margin-top: 5px;
+            .inputAreaOne, .inputAreaTwo{
+                width: 100%;
+                margin: 2px 2px;
+                .container{
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                    }
+                    .titleName{
+                        top: -10px;
+                    }
+                    .border_remover{
+                        top: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

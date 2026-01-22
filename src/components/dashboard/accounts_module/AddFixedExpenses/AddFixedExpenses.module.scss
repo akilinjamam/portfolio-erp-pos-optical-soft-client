@@ -121,3 +121,30 @@
     }
 
 }
+
+@media screen and (max-width:1242px) {
+    .main{
+        margin-top: 5px;
+        div{
+            .inputAreaOne, .inputAreaTwo{
+                width:100%;
+                height: auto;
+                margin: 4px 1px;
+                .container{
+                    height: auto;
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                    }
+                    .titleName{
+                        top: -10px;
+                    }
+                    .border_remover{
+                        top: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

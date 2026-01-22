@@ -115,6 +115,9 @@
                 margin: 0px 20px;
             }
         }
+        .inputPartRes{
+            display: none;
+        }
         .btnPart{
             i{
                 font-size: 12px;
@@ -126,6 +129,7 @@
     }
     .tableArea{
         width: 100%;
+        height: 42vh;
         // overflow-x: hidden;
         // overflow-y: scroll;
         overflow: auto;
@@ -133,7 +137,14 @@
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
     }
     
-    table {
+   .table_responsive{
+     width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+     table {
         width: 99%;
         border-collapse: collapse;
         margin: 5px 5px;
@@ -148,4 +159,85 @@
     th {
         background-color: #f4f4f4;
     }
+    /* Prevent table from breaking */
+    .table_responsive table {
+    min-width: 1242px; /* keeps layout intact */
+    }
+
+    /* Optional: smoother scrolling */
+    .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    }
+   }
 }
+
+
+@media (max-width:1242px){
+    .main{
+        div{
+            margin-top: 5px;
+            .inputAreaOne, .inputAreaTwo{
+                width:100%;
+                height: auto;
+                .container{
+                    height: auto;
+                    .titleName{
+                        top: -10px;
+                    }
+                    .border_remover{
+                        top: 0px;
+                    }
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                    }
+                    .inputAreaTwoContainer{
+                        .productInputArea{
+                            label{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .inputAreaTwo{
+                height: 140px;
+                .container{
+                    height: 135px;
+                }
+                .inputAreaTwo_footer{
+                    margin-top: 0px;
+                    // background-color: red;
+                }
+            }
+        }
+        .navigationIcon{
+            height: auto;
+            .inputPart{
+                display: none;
+            };
+            .inputPartRes{
+                font-size: 12px;
+                display: block;
+                span,input{
+                    margin-bottom: 5px;
+                }
+            }
+        }
+        .tableArea{
+            height: 20vh;
+        }
+         table {
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: 3px;
+            white-space: nowrap;
+        }
+    }
+}
+
+

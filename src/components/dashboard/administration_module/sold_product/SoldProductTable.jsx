@@ -3,12 +3,12 @@
 import '../../../../global_style/global_style.css'
 
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import soldProduct from "./SoldProduct.module.scss"
 
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
 const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity}) => {
     
    
-
     if(isLoading){
         return (
         <div className='flex_center' style={{width:'100%', height:'500px'}}>
@@ -18,13 +18,15 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
     }
 
     return (
-        <div >
+        <div className={soldProduct.table_responsive}>
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sold Quantity =</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>{totalSaleQuantity}</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
@@ -49,6 +51,8 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Purchase Price</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sales Price</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Profit</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sales By</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Invoice</th>
                         
                     </tr>
                 </thead>
@@ -61,9 +65,9 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.quantity}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.category}</td>
                             
-                            <td style={{border:'1px solid #dddddd',textAlign:'left', width:'120px'}}>{sale?.frameType}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.frameType}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.material}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                                 {sale?.size}
                             </td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
@@ -74,6 +78,8 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.purchasePrice}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.actualSalesPrice}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.actualSalesPrice - sale?.purchasePrice}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.recorderName}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.invoiceBarcode}</td>
                             
                         </tr>
                     ))

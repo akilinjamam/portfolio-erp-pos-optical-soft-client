@@ -9,6 +9,7 @@ import useProductList from "./useProductList";
 import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
+import FilterOption from "./FilterOption";
 const ProductList = () => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, setStocks, range ,setRange} = useProductList();
     const productData = modifiedProductDataWithIndexId
@@ -29,7 +30,7 @@ const ProductList = () => {
     });
     return (
         <div  className={`${productList.main} full_width`}>
-             <div style={{display:`${fullScr ? 'none' : 'flex'}`}}  className={`flex_around`}>
+             <div style={{display:`${fullScr ? 'none' : 'flex'}`, flexWrap:"wrap"}}  className={`flex_around`}>
                 <div className={`${productList.inputAreaOne} flex_center`}>
                   <div className={`${productList.container} `}>
                         <div className={`${productList.titleName}`}>Product Update</div>
@@ -145,56 +146,9 @@ const ProductList = () => {
                   </div>
                 </div>
               </div>
-          <section className={`${productList.navigationIcon} flex_between`}>
-                { 
-                  <div className={productList.inputPart}>
-                  
-                      <input type="text" name="query" id="" value={query} placeholder="search" onChange={(e) => setQuery(e.target.value)} />
-                      <i onClick={() => setQuery('')} className="uil uil-times"></i>
-                      <span>Total Products : {productData?.length}</span>
-
-                      <select name="" id="" onChange={(e) => {
-                        if(e.target.value === 'true' || e.target.value === 'false'){
-                          setStocks(e.target.value === 'true')
-                        }
-                        if(e.target.value === ''){
-                          setStocks('')
-                        }
-                      } }>
-                        <option value="">stock-in & stock-out</option>
-                        <option value="true">stock-in</option>
-                        <option value="false">stock-out</option>
-                      </select>
-                </div>
-                }
-                <div className={productList.btnPart}>
-                    {fullScr ? <i title="barcode" onClick={handlBarcode} className="uil uil-qrcode-scan"></i> : ''}
-                    {fullScr ? <i onClick={() => {handlePrint(null, () => contentToPrint.current)}} title="print" className="uil uil-print"></i> : ''}
-                    { fullScr ? <i title="exit full screen" onClick={() => setFullScr(false)} className="uil uil-compress-arrows"></i> : <i title="full screen" onClick={() => setFullScr(true)} className="uil uil-expand-arrows-alt"></i>}
-                </div>
-          </section>
-          <section className={`${productList.navigationIcon} only_flex`}>
-                { 
-                  <div className={productList.inputPart}>
-                      <label htmlFor="">From: </label>
-                      <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                      <label htmlFor="">To: </label>
-                      <input value={range.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                      <i onClick={() => setRange({from:'', to:''})} className="uil uil-times"></i>
-                </div>
-                }
-                { 
-                  <div className={productList.inputPart}>
-                      <label htmlFor="">From: </label>
-                      <input placeholder="price" value={range.priceFrom} type="text" name="" id="" onChange={(e) => setRange({...range, priceFrom: e.target.value})} style={{padding: '0 2px'}}/>
-                      <label htmlFor="">To: </label>
-                      <input placeholder="price" value={range.priceTo} type="text" name="" id="" onChange={(e) => setRange({...range, priceTo: e.target.value})} style={{padding: '0 2px'}}/>
-                      <i onClick={() => setRange({priceFrom:'', priceTo:''})} className="uil uil-times"></i>
-                </div>
-                }
-                
-          </section>
-          <section style={{height: `${fullScr ? '80vh' : '45vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
+         <FilterOption setQuery={setQuery} query={query} productData={productData} setStocks={setStocks} fullScr={fullScr} handlBarcode={handlBarcode}  handlePrint={handlePrint}  contentToPrint={contentToPrint} setFullScr={setFullScr} range={range} setRange={setRange} />
+         
+          <section style={{height: `${fullScr ? '80vh' : '35vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
               <ProductListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
           </section>
            {

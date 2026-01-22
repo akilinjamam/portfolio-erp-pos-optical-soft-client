@@ -26,7 +26,7 @@ const useAddVendor = () => {
     const lastPaid = payroll?.lastPaid;
 
 
-    const allSuppliers = supplierData?.result.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
+    const allSuppliers = supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
 
     const findEmployee = allSuppliers?.find(f => f?._id === supplierId);
 

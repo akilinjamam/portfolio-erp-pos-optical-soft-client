@@ -8,6 +8,7 @@ import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlic
 
 import useEmployeeList from "./useEmployeeList";
 import EmployeeListTable from "./EmployeeListTable";
+import FilterOption from "./FilterOption";
 const EmployeeList = ({hideField, hideSection}) => {
     const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useEmployeeList();
     const employeeData = modifiedEmployeeDataWithIndexId
@@ -16,11 +17,11 @@ const EmployeeList = ({hideField, hideSection}) => {
 
     return (
         <div  className={`${employeeList.main} full_width`}>
-             <div style={{display:`${hideSection ? 'none': 'flex'}`}}  className={`flex_around`}>
+             <div style={{display:`${hideSection ? 'none': 'flex'}`, flexWrap: "wrap"}}  className={`flex_around`}>
                 <div className={`${employeeList.inputAreaOne} flex_center`}>
                   <div className={`${employeeList.container} `}>
                         <div className={`${employeeList.titleName}`}>Employee Update</div>
-                        <div style={{width: '135px' }}  className={`${employeeList.border_remover} `}></div>
+                        <div style={{width: '150px' }}  className={`${employeeList.border_remover} `}></div>
 
                       <form action="">
                             <div className='flex_top'>
@@ -30,7 +31,7 @@ const EmployeeList = ({hideField, hideSection}) => {
                                     return (
                                       <div key={index+1} className={`${employeeList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
-                                        <input value={updateEmployeeData[input?.value]}    type={input.type} 
+                                        <input placeholder={input.placeholder} value={updateEmployeeData[input?.value]}    type={input.type} 
                                             onChange={(e) => {setUdpateEmployeeData({...updateEmployeeData, [input.value]: e.target.value})}}
                                             required
                                         />
@@ -98,34 +99,12 @@ const EmployeeList = ({hideField, hideSection}) => {
                   </div>
                 </div>
               </div>
-          <section className={`${employeeList.navigationIcon} flex_between`}>
-                { 
-                <div className={`${employeeList.inputPart} flex_left`}>
-                    <i
-                    onClick={() => {
-                      dispatch(openModal('employee'))
-                      dispatch(addEmployeeList(employeeData))
-                    }}
-                    title="print" className="uil uil-print"></i>
-                    <span>Total : {employeeData?.length} </span>
-                    <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
-                    <i onClick={() => setQuery('')}  className="uil uil-times"></i>
-                    <label htmlFor="">From: </label>
-                    <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.from}  type="number" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
-                    <label htmlFor="">To: </label>
-                    <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.to}  type="number" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    <i onClick={() => {
-                      setRange({from: '', to: ''})
-                    }}  className="uil uil-times"></i>
-                </div>
-                }
-                
-          </section>
+         <FilterOption dispatch={dispatch} openModal={openModal} addEmployeeList={addEmployeeList} employeeData={employeeData} query={query} setQuery={setQuery} range={range} setRange={setRange} />
           <section className={`${employeeList.navigationIcon} only_flex`}>
           
                 
           </section>
-          <section style={{height: '42vh'}}  className={`${employeeList.tableArea}`}>
+          <section style={{height: '32vh'}}  className={`${employeeList.tableArea}`}>
               <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} />
           </section>
            {

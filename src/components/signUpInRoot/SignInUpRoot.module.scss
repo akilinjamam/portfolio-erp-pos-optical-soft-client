@@ -6,7 +6,7 @@ $font:"DM Sans", sans-serif;
 
 
 
-div{
+div {
     .main{
     position: fixed;
     top: 0;
@@ -29,6 +29,7 @@ div{
         }
     }
 }
+
 .displayWidthLimitControll {
         display: block;
         background-color: v.$primary;
@@ -45,18 +46,3 @@ div{
         }
 }
 }
-
-@media screen and (max-width: 1242px) {
-    .main {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 1243px) {
-    
-}
-
-
-
-
-

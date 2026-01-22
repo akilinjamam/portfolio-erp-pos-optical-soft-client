@@ -13,7 +13,7 @@ const AddFixedExpenses = () => {
   
     return (
         <div className={`${addFixedExpenses.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}}  className={`flex_around`}>
             <div className={`${addFixedExpenses.inputAreaOne} flex_center`}>
               <div className={`${addFixedExpenses.container} `}>
                     <div className={`${addFixedExpenses.titleName}`}>{edit ? 'Update Expenses' : 'Add Expenses'}</div>

@@ -37,7 +37,7 @@
                 }
 
                 input{
-                    width: 50%;
+                    width: 30%;
                 }
                 select{
                     width: 50%;
@@ -136,29 +136,48 @@
             }
         }
     }
-    .tableArea{
-        width: 100%;
-        // overflow-x: hidden;
-        // overflow-y: scroll;
-        overflow: auto;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    }
     
-    table {
-        width: 99%;
-        border-collapse: collapse;
-        margin: 5px 5px;
-        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        font-size: 12px;
-    }
-    th, td {
-        padding: 4px;
-        border: 1px solid #dddddd;
-        text-align: left;
-    }
-    th {
-        background-color: #f4f4f4;
-    }
+    
+    
 
+}
+
+@media screen and (min-width:1243px) {
+    .main{
+        .tableChart{
+            display: block;
+        }
+        .tableChartRes{
+            display: none;
+        }
+    }
+}
+
+
+@media screen and (max-width:1242px) {
+    .main{
+        margin-top: 5px;
+        div{
+            .inputAreaOne, .inputAreaTwo{
+                
+                width:100%;
+                .container{
+                    .inputFields{
+                        label{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        .navigationIcon{
+            display: none;
+        }
+        .tableChart{
+            display: none;
+        }
+        .tableChartRes{
+            display: block;
+        }
+    }
 }

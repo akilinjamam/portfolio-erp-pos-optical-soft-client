@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import glassStock from "./GlassStock.module.scss"
+
 const GlassStockTable = ({paginatedDataContainer}) => {
 
     return (
-        <div>
+        <div className={`${glassStock.table_responsive}`}>
             <table style={{borderCollapse:'collapse', fontSize:'13.5px', margin:'auto', paddingBottom:'10px', width:'99%'}}>
             <thead>
                 <tr>

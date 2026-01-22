@@ -30,7 +30,7 @@ const ProfitCategoryAnalysis = () => {
 
   return (
     <div className={`${profitCatAnalysis.main} full_width`}>
-      <div style={{ display: 'flex' }} className={`flex_around`}>
+      <div style={{ display: 'flex', flexWrap: "wrap" }} className={`flex_around`}>
         <div className={`${profitCatAnalysis.inputAreaOne} flex_center`}>
           <div className={`${profitCatAnalysis.container} `}>
             <div className={`${profitCatAnalysis.titleName}`}>Profit Category Analysis</div>
@@ -39,7 +39,7 @@ const ProfitCategoryAnalysis = () => {
             <form action="">
               <div className='flex_top'>
 
-                <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
+                <div className={profitCatAnalysis.inputFields} style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
                     <label style={{marginRight:'5px'}} htmlFor="">Find By Month: </label>
                     <input style={{width:'200px'}} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)} />
                 </div>

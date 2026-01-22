@@ -97,11 +97,11 @@ const Layout = ({ children }) => {
             <div className={`${layoutControll.container}`}>
                 {children}
             </div>
-            <div className={`${layoutControll.displayWidthLimitControll}`}>
+            {/* <div className={`${layoutControll.displayWidthLimitControll}`}>
                 <div className="flex_center">
                     <p>Screen Size must have to be more than 1242px</p>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

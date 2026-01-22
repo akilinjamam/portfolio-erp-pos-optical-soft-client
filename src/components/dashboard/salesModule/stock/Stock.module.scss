@@ -3,29 +3,26 @@
 .main{
     font-family: v.$fs;
     .titleBar{
-        width: 99%;
-        margin: auto;
-        margin-bottom: 7px;
+        width: 100%;
+        height: auto;
+        padding: 0px 8px;
+        font-size: 13px;
+        margin-bottom: 6px;
         .titleBarContainer{
-            i{
-                cursor: pointer;
-            }
-            select{
-                margin-left: 10px;
-                margin-right: 10px;
-                width: 150px;
-            }
-            label{
-                margin-left: 10px;
-                margin-right: 10px;
-                font-size: 14px;
-            }
-            input{
-                width: 220px;
-                margin: 0 10px;
-            }
+            display: flex;
+        }
+        i{
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        label{
+            margin: 0 5px
+        }
+        input{
+            margin: 0 10px;
         }
     }
+
     .tableArea{
         width: 100%;
         // overflow-x: hidden;
@@ -35,7 +32,14 @@
         -ms-overflow-style: none;  /* Internet Explorer 10+ */
     }
     
-    table {
+    .table_responsive{
+        width: 100%;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+        min-width: 0;
+     table {
         width: 99%;
         border-collapse: collapse;
         margin: 5px 5px;
@@ -49,5 +53,38 @@
     }
     th {
         background-color: #f4f4f4;
+    }
+    /* Prevent table from breaking */
+    .table_responsive table {
+    min-width: 1242px; /* keeps layout intact */
+    }
+
+    /* Optional: smoother scrolling */
+    .table-responsive {
+    -webkit-overflow-scrolling: touch;
+    }
+   }
+}
+
+@media screen and (max-width:1242px){
+    .main{
+        margin-top: 5px;
+        .titleBar{
+            height: auto;
+            .titleBarContainer{
+                flex-wrap: wrap;
+                i{
+                    display: none;
+                }
+            }
+        }
+         table {
+            font-size: 11px;
+        }
+
+        th, td {
+            padding: 3px;
+            white-space: nowrap;
+        }
     }
 }

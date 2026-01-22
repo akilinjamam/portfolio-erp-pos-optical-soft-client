@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../../../global_style/global_style.css'
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-
+import bestSalePerformerTable from './BestSalePerfomer.module.scss';
 
 const BestSalePerformerTable = ({ paginatedDataContainer, isLoading, totalSalesValue}) => {
     
@@ -15,7 +15,7 @@ const BestSalePerformerTable = ({ paginatedDataContainer, isLoading, totalSalesV
     }
 
     return (
-        <div >
+        <div className={bestSalePerformerTable.table_responsive}>
             <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
                 <thead>
                     

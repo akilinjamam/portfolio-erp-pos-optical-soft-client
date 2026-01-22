@@ -80,7 +80,7 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
                 paymentHistory: `${getCustomerInfo?.paymentHistory}+${payable}`,
                 paymentMethodHistory: `${getCustomerInfo?.paymentMethodHistory}+${duePaymentMethod}`,
                 paymentDate: todayDate,
-                duePaymentMethod
+                duePaymentMethod,
             }
 
             const updatedData = {

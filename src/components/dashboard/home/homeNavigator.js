@@ -18,7 +18,7 @@ export const homeNavigator = [
             '/dashboard/sales_module/glass_stock',
             '/dashboard/sales_module/today_sales',
             '/dashboard/sales_module/today_due_collection',
-            '/dashboard/sales_module/manual_sale',
+            '/dashboard/sales_module/manual_sales',
         ],
     },
     {

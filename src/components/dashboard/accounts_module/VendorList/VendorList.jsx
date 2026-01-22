@@ -21,8 +21,8 @@ const VendorList = ({hideSection, hideField}) => {
              <div style={{display:`${hideSection ? 'none' : 'flex'}`}}  className={`flex_around`}>
                 <div className={`${vendorList.inputAreaOne} flex_center`}>
                   <div className={`${vendorList.container} `}>
-                        <div className={`${vendorList.titleName}`}>Employee Update</div>
-                        <div style={{width: '145px' }}  className={`${vendorList.border_remover} `}></div>
+                        <div className={`${vendorList.titleName}`}>Vendor Update</div>
+                        <div style={{width: '130px' }}  className={`${vendorList.border_remover} `}></div>
 
                       <form action="">
                             <div className='flex_top'>
@@ -32,7 +32,7 @@ const VendorList = ({hideSection, hideField}) => {
                                     return (
                                       <div key={index+1} className={`${vendorList.inputFields} flex_between`}>
                                         <label htmlFor="">{input.placeholder}:</label>
-                                        <input value={updateEmployeeData[input?.value]}    type={input.type} 
+                                        <input placeholder={input.placeholder} value={updateEmployeeData[input?.value]}    type={input.type} 
                                             onChange={(e) => {setUdpateEmployeeData({...updateEmployeeData, [input.value]: e.target.value})}}
                                     
                                         />
@@ -76,21 +76,25 @@ const VendorList = ({hideSection, hideField}) => {
           <section className={`${vendorList.navigationIcon} flex_between`}>
                 { 
                 <div className={`${vendorList.inputPart} flex_left`}>
-                    <i
-                    onClick={() => {
-                      dispatch(openModal('vendor'))
-                      dispatch(addVendorList(vendorData))
-                    }}
-                    title="print" className="uil uil-print"></i>
-                    <span>Total : {vendorData?.length} </span>
+                   <div>
+                      <i
+                      onClick={() => {
+                        dispatch(openModal('vendor'))
+                        dispatch(addVendorList(vendorData))
+                      }}
+                      title="print" className="uil uil-print"></i>
+                      <span>Total : {vendorData?.length} </span>
+                   </div>
                 
-                    <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
-                        <option value="">Select SupplierName</option>
-                        {
-                            allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.supplierName}</option> )
-                        }
-                    </select>
-                    <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
+                   <div>
+                      <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
+                          <option value="">Select SupplierName</option>
+                          {
+                              allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.supplierName}</option> )
+                          }
+                      </select>
+                      <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
+                   </div>
                 </div>
                 }
                 

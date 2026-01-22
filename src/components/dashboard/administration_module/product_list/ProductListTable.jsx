@@ -4,6 +4,7 @@ import '../../../../global_style/global_style.css'
 import { openImg, openModal, openSingleBarcode } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
+import productList from "./ProductList.module.scss"
  
 const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
 
@@ -65,7 +66,8 @@ if(isLoading){
 }
 
     return (
-        <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
+        <div className={`${productList.table_responsive}`}>
+          <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
           <tr> 
@@ -178,7 +180,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+          </table>
+        </div>
     );
 };
 

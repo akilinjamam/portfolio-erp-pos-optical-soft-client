@@ -11,7 +11,7 @@ const AddSupplier = () => {
 
     return (
         <div className={`${addSupplier.main} full_width`}>
-          <div  className={`flex_around`}>
+          <div style={{flexWrap: "wrap"}} className={`flex_around`}>
             <div className={`${addSupplier.inputAreaOne} flex_center`}>
               <div className={`${addSupplier.container} `}>
                     <div className={`${addSupplier.titleName}`}>{edit ? 'Update Supplier' : 'Add Supplier'}</div>
@@ -24,7 +24,7 @@ const AddSupplier = () => {
                                 return (
                                   <div key={index+1} className={`${addSupplier.inputFields} flex_between`}>
                                     <label htmlFor="">{input.placeholder}:</label>
-                                    <input value={supplierData[input.name]}   type={input.type} 
+                                    <input placeholder={input.placeholder} value={supplierData[input.name]}   type={input.type} 
                                         onChange={(e) => {setSupplierData({...supplierData, [input.value]: e.target.value})}}
                                         required
                                     />

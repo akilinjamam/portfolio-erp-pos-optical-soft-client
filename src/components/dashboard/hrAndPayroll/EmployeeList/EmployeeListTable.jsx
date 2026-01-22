@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
+import employeeList from './EmployeeList.module.scss';
+
  
 const EmployeeListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, hideField}) => {
-
 
   const dispatch = useDispatch();
 
@@ -41,6 +42,7 @@ if(isLoading){
 }
 
     return (
+     <div className={employeeList.table_responsive}>
         <table style={{borderCollapse:'collapse', fontSize:'11.5px', margin:'auto', paddingBottom:'10px',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
@@ -103,7 +105,8 @@ if(isLoading){
            }
            
         </tbody>
-      </table>
+        </table>
+     </div>
     );
 };
 
