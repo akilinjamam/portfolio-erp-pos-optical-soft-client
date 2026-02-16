@@ -1,7 +1,7 @@
 import dashFooter from './DashboardFooter.module.scss';
 import '../../../global_style/global_style.css';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../modal/imgmodal/imgModalSlice';
+// import { useDispatch } from 'react-redux';
+// import { openModal } from '../../modal/imgmodal/imgModalSlice';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { useEffect, useState } from 'react';
 
@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 
 const DashboardFooter = () => {
     const [remainingTime, setRemainingTime] = useState(null);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
   
     useEffect(() => {
         const token = localStorage.getItem('user');
@@ -52,7 +52,7 @@ const DashboardFooter = () => {
                         :
                         <p>Session Expired</p>
                     }
-                    <p onClick={() => dispatch(openModal('developer-info'))}>BYTE DYNAMO</p>
+                    {/* <p onClick={() => dispatch(openModal('developer-info'))}>BYTE DYNAMO</p> */}
                 </div>
             </div>
         </div>

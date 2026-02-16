@@ -1,10 +1,10 @@
 import useLogin from "./useLogin";
 import signin from './Login.module.scss';
-import logo from '../../images/logo.png';
+// import logo from '../../images/logo.png';
 import { allInputLoginData } from "./logInputItems";
 import { fetchPostLoginData } from "../../data/fetchedData/fetchLoginData";
 import { useNavigate } from "react-router-dom";
-import brandImage from '../../images/Byte-Dynamo-without-bg.png'
+// import brandImage from '../../images/Byte-Dynamo-without-bg.png'
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -49,7 +49,7 @@ const Login = () => {
     return (
         <div className={`${signin.main} flex_center`}>
             <div className={signin.container}>
-                <img src={logo} alt="" />
+                {/* <img src={logo} alt="" /> */}
                 <p style={{color: 'white'}}></p>
               
                 <div className={signin.registration_form}>
@@ -77,10 +77,10 @@ const Login = () => {
                         <input className={signin.submit} type="submit" value={`${loading ? 'Loading...' : 'Sign In'}`} required />
                     </form>
                     <br />
-                    <div>
+                    {/* <div>
                         <h5 >Developed By</h5>
                         <img style={{width: '200px', height:'63px'}}  src={brandImage} alt="" />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             
