@@ -2,7 +2,7 @@
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE) © 2025 Injamam Islam Chowdhury.
+This project is licensed under the [MIT License](./LICENSE) © 2026 Injamam Islam Chowdhury.
 
 ## ⚠️ Ownership & Credit Notice
 
