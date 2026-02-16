@@ -13,22 +13,20 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
     return (
         <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto', border: '1px solid #000', padding: '10px', fontFamily: '"inter", sans-serif', fontSize:'9px', position:'relative'}}>
         <div>
-            {/* <img src={glassImg} alt="glass" style={{ width: '40%', height: 'auto', marginBottom: '10px', position:'absolute',top:'-1px', left:'-3px' }} /> */}
+           
         </div>
       {/* Header Section */}
       <div style={{ textAlign: 'center',  paddingBottom: '10px' }}>
         <div>
-            {/* <h5 style={{textAlign:'left', width:'86%', margin:'auto',fontWeight:'bolder'}}>NEW</h5> */}
+           
             <h2 style={{fontWeight:'bolder', fontSize:'19px', marginBottom:'-4px', marginTop:'-3px'}}>Company Name </h2>
         </div>
         <div>
-            {/* <h5 style={{textAlign:'left', width:'85%', margin:'auto',fontWeight:'bold'}}>নিউ</h5> */}
-            {/* <h2 style={{fontWeight:'bolder', fontSize:'15px', marginTop:'-3px'}}> আল-আরাফাত অপটিক্যাল </h2> */}
+           
         </div>
         <p style={{ fontSize: '9px', fontWeight:'bolder', margin:'5px 0' }}>
         
-          {/* Minhaz Complex (Ground Floor),<br /> 12-Jamal Khan Road, Chittagong<br />
-          Cell: 01841 631667, 01729 435335 */}
+          
           Company Address, Phone
         </p>
         
