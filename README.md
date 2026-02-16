@@ -1,11 +1,8 @@
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
 ## License
 
-This project is licensed under the [MIT License](./LICENSE) © 2026 Injamam Islam Chowdhury.
+Copyright (c) 2026 Injamam Islam Chowdhury  
+All Rights Reserved.
 
-## ⚠️ Ownership & Credit Notice
+This project is made publicly visible for portfolio and demonstration purposes only.
 
-This project was originally developed by **Injamam Islam Chowdhury** for portfolio purposes.  
-You may not claim this project or any part of it as your own work.  
-Proper credit must be given if any code is reused. Commercial use is not permitted without written permission.
+No permission is granted to use, copy, modify, distribute, sublicense, or sell any part of this software without explicit written consent from the author.
