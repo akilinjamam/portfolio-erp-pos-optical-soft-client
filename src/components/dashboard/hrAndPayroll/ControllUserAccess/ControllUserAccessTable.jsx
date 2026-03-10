@@ -64,11 +64,12 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                             
 
                                 <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'200px'}}>User Email</th>
-                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Sales Module</th>
-                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'250px'}}>Administration Module</th>
+                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'600px'}}>Sales</th>
+                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'250px'}}>Administration</th>
                                 <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'550px'}}>Hr & Payroll</th>
-                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'550px'}}>Accounts Module</th>
-                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'300px'}}>Business Monitor</th>
+                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'550px'}}>Accounts</th>
+                                <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'300px'}}>Business & Branch</th>
+                                
                             
                             </tr>
                         </thead>
@@ -248,6 +249,20 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
                                 <div className='only_flex'>
                                     <input checked={access?.sales_analysis} type="checkbox" name="" id="" onClick={() => setAccess({...access, sales_analysis: access?.sales_analysis ? false : true })}/>
                                     <span style={{marginLeft:'5px'}}>Sales Analysis <i className={`uil uil-${access?.stock_analysis ? 'unlock' : 'lock'}`}></i></span>
+                                </div> 
+                                <br />
+                                {/* branch */}
+                                 <div className='only_flex'>
+                                    <input checked={access?.add_branch} type="checkbox" name="" id="" onClick={() => setAccess({...access, add_branch: access?.add_branch ? false : true })}/>
+                                    <span style={{marginLeft:'5px'}}>Add Branch <i className={`uil uil-${access?.add_branch ? 'unlock' : 'lock'}`}></i></span>
+                                </div> 
+                                <div className='only_flex'>
+                                    <input checked={access?.branch_list} type="checkbox" name="" id="" onClick={() => setAccess({...access, branch_list: access?.branch_list ? false : true })}/>
+                                    <span style={{marginLeft:'5px'}}>Stock Analysis <i className={`uil uil-${access?.branch_list ? 'unlock' : 'lock'}`}></i></span>
+                                </div> 
+                                <div className='only_flex'>
+                                    <input checked={access?.manage_branch} type="checkbox" name="" id="" onClick={() => setAccess({...access, manage_branch: access?.manage_branch ? false : true })}/>
+                                    <span style={{marginLeft:'5px'}}>Manage Branch <i className={`uil uil-${access?.manage_branch ? 'unlock' : 'lock'}`}></i></span>
                                 </div> 
                             </td>
                         
