@@ -47,8 +47,8 @@ const Pos = () => {
             }
         },
         onError: (data) => {
-            toast.error('something went wrong')
-            console.log('failed to add to sale list: ', data)
+            toast.error(data?.message)
+            console.log('failed to add to sale list: ', data?.message)
         }
     })
 
@@ -463,7 +463,8 @@ const Pos = () => {
 
     useEffect(() => {
         const handlePrintPress = (e) => {
-            if(e.key ==='j' || e.key === 'J'){
+            console.log(e.key)
+            if(e.key ==='Alt'){
                  refetch()
                     if (listOfSalesItem?.length > 0) {
                         toast.error('print invoice after add to sale')

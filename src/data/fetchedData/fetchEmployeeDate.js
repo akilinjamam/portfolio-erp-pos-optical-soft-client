@@ -21,11 +21,18 @@ export const fetchGetEmployeeData = async (query, from, to) => {
     }
 }
 export const fetchPostEmployeeData = async (data) => {
+    const thisToken = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/employees/create-employee`, data)
+        const result = await axios.post(`${url}/employees/create-employee`, data, {
+            headers: {
+                Authorization: thisToken,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
-        return error
+        throw error?.response?.data;
     }
 }
 
@@ -34,7 +41,6 @@ export const fetchUpdateEmployeeData = async (id, data) => {
         const result = await axios.patch(`${url}/employees/${id}`, data)
         return result;
     } catch (error) {
-        console.log(error)
         return error
     }
 }

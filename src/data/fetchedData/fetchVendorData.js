@@ -17,16 +17,30 @@ export const fetchGetSingleVendorData = async (id) => {
     }
 }
 export const fetchPostVendorData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/vendors/create-vendor`, data)
+        const result = await axios.post(`${url}/vendors/create-vendor`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
         return error.response?.data?.errorMessage
     }
 }
 export const fetchPostVendorBillData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/vendors/create-vendor-bill`, data)
+        const result = await axios.post(`${url}/vendors/create-vendor-bill`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
         return error.response?.data?.errorMessage

@@ -20,10 +20,17 @@ export const fetchGetSupplierData = async (query) => {
 }
 export const fetchPostSupplierData = async (data) => {
     try {
-        const result = await axios.post(`${url}/suppliers/create-supplier`, data)
+        const token = localStorage.getItem('user')
+        const result = await axios.post(`${url}/suppliers/create-supplier`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
-        return error
+        throw error?.response?.data
     }
 }
 

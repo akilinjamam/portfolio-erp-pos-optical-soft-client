@@ -1,5 +1,6 @@
 import axios from "axios";
 const url = import.meta.env.VITE_DATA_URL;
+
 export const fetchGetLastSaleAndAccountsData = async (date) => {
     try {
         const token = localStorage.getItem('user')
@@ -99,21 +100,35 @@ export const fetchGetAccountsData = async (year, month, date) => {
 
 
 export const fetchPostAccountsData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/accounts/create-account`, data)
+        const result = await axios.post(`${url}/accounts/create-account`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
         console.log(error)
-        return error
+        throw error?.response?.data
     }
 }
 export const fetchPostFinalAccountsData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/finalAccounts/create-final-account`, data)
+        const result = await axios.post(`${url}/finalAccounts/create-final-account`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
         console.log(error)
-        return error
+        throw error?.response?.data
     }
 }
 

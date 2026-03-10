@@ -43,7 +43,7 @@ const TodayDueCollection = () => {
     
     
     useEffect(() => {
-        const modified = dueCollectionSaleData?.result?.result?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
+        const modified = dueCollectionSaleData?.result?.result?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
     }, [dueCollectionSaleData?.result])
 

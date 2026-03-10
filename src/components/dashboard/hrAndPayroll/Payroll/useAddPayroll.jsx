@@ -62,10 +62,10 @@ const useAddPayroll = () => {
 
     useEffect(() => {
         refetch()
-    })
+    },[employeeId])
     useEffect(() => {
         refetchEmployee()
-    })
+    },[employeeId])
 
     return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allEmployees, setEmployeeId, allPayroll, setPaymentMethod, findEmployee, isPending}
 };

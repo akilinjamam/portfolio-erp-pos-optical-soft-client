@@ -44,7 +44,10 @@ const ControllUserAccessTable = ({paginatedDataContainer,  handleUpdate, access,
             cash_flow_summery: paginatedDataContainer?.cash_flow_summery,
             sold_product: paginatedDataContainer?.sold_product,
             add_vendor_bill: paginatedDataContainer?.add_vendor_bill,
-            payroll_bonus: paginatedDataContainer?.payroll_bonus
+            payroll_bonus: paginatedDataContainer?.payroll_bonus,
+            add_branch: paginatedDataContainer?.add_branch,
+            branch_list: paginatedDataContainer?.branch_list,
+            manage_branch: paginatedDataContainer?.manage_branch,
 
 
         })

@@ -189,7 +189,7 @@ const useAddExpenses = () => {
         }
     
         if(isError){
-            toast.error(`something went wrong`)
+            // toast.error(`something went wrong`)
         }
     },[isSuccess,isError])
 

@@ -8,6 +8,7 @@ const useLogin = () => {
         username: '',
         email: '',
         password: '',
+        branchId: '',
         confirmPassword: ''
     })
     return [user, setUser, loading, setLoading, eye, setEye]

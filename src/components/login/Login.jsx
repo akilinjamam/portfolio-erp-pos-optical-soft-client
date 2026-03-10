@@ -6,22 +6,26 @@ import { fetchPostLoginData } from "../../data/fetchedData/fetchLoginData";
 import { useNavigate } from "react-router-dom";
 import brandImage from '../../images/Byte-Dynamo-without-bg.png'
 import { toast } from "react-toastify";
+import InputItems from "./LoginInputItems";
 
 const Login = () => {
+    const inputs = InputItems();
 
     const [user, setUser, loading, setLoading, eye,setEye] = useLogin();
     const navigate = useNavigate();
 
-    allInputLoginData[1].icon = eye ? 'uil uil-eye' : 'uil uil-eye-slash';
-    allInputLoginData[1].type = eye ? 'text' : 'password';
+    allInputLoginData[2].icon = eye ? 'uil uil-eye' : 'uil uil-eye-slash';
+    allInputLoginData[2].type = eye ? 'text' : 'password';
 
     const handleSubmit = async(e) => {
         e.preventDefault();
 
         const data = {
             username: user.username,
-            password: user.password
+            password: user.password,
+            branchId: user.branchId
         }
+        console.log(data)
         setLoading(true)
         await fetchPostLoginData(data).then(res => { 
             if(res?.data?.error){
@@ -54,8 +58,9 @@ const Login = () => {
                     <h4>Sign in to start your session</h4>
                     <form onSubmit={handleSubmit}>
                         {
-                            allInputLoginData?.map((input, index) => {
-                                return (
+                            inputs?.map((input, index) => {
+                                if(input.element === "input"){
+                                    return (
                                     <div key={index+1}>
                                         <input  type={input.type} name={input.name} id={input.id} placeholder={input.value_alt}
                                         onChange={(e) => {
@@ -67,6 +72,21 @@ const Login = () => {
                                         }} className={input.icon}></i>
                                     </div>
                                 )
+                                }
+                                if (input.element === "select") {
+                                    return (
+                                    <select key={index} name={input.name} id={input.id} onChange={(e) => setUser({...user, [input.value]: e.target.value})} >
+                                        <option value="">{input.value_alt}</option>
+
+                                        {input.options.map((opt, i) => (
+                                        <option key={i} value={opt.value}>
+                                            {opt.label}
+                                        </option>
+                                        ))}
+
+                                    </select>
+                                    );
+                                }
                             })
                         }
                         <div className={`${signin.forget_pass} flex_right`}>

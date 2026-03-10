@@ -67,11 +67,14 @@ const useAddVendor = () => {
     }
 
     useEffect(() => {
-        refetch()
-    })
-    useEffect(() => {
         refetchEmployee()
-    })
+    }, [])
+
+    useEffect(() => {
+        if (supplierId) {
+            refetch()
+        }
+    }, [supplierId])
 
     return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, setPaymentMethod, findEmployee, lastBillingDate, lastPaymentDate, lastPaid, isPending }
 };

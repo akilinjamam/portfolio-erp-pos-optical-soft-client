@@ -57,11 +57,18 @@ export const fetchGetDueCollectionSaleData = async (paymentDate) => {
     }
 }
 export const fetchPostSaleData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/sales/create-sale`, data)
+        const result = await axios.post(`${url}/sales/create-sale`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
-        return error
+        throw error?.response?.data
     }
 }
 
