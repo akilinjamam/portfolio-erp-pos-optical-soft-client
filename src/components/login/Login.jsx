@@ -1,7 +1,6 @@
 import useLogin from "./useLogin";
 import signin from './Login.module.scss';
 // import logo from '../../images/logo.png';
-import { allInputLoginData } from "./logInputItems";
 import { fetchPostLoginData } from "../../data/fetchedData/fetchLoginData";
 import { useNavigate } from "react-router-dom";
 // import brandImage from '../../images/Byte-Dynamo-without-bg.png'
@@ -14,8 +13,8 @@ const Login = () => {
     const [user, setUser, loading, setLoading, eye,setEye] = useLogin();
     const navigate = useNavigate();
 
-    allInputLoginData[2].icon = eye ? 'uil uil-eye' : 'uil uil-eye-slash';
-    allInputLoginData[2].type = eye ? 'text' : 'password';
+    inputs[2].type = eye ? 'text' : 'password';
+    inputs[2].icon = eye ? 'uil uil-eye' : 'uil uil-eye-slash';
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -59,7 +58,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         {
                             inputs?.map((input, index) => {
-                                if(input.element === "input"){
+                                if(input.element === "input" || input.element === "password" ){
                                     return (
                                     <div key={index+1}>
                                         <input value={user?.[input.value]} type={input.type} name={input.name} id={input.id} placeholder={input.value_alt}

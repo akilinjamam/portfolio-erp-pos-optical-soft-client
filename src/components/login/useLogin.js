@@ -7,8 +7,8 @@ const useLogin = () => {
         const [user, setUser] = useState({
                 username: 'visitor',
                 email: '',
-                password: '',
-                branchId: '',
+                password: 'visitor1234',
+                branchId: '69b54828cc2ab5bcf16eb734',
                 confirmPassword: ''
         })
         return [user, setUser, loading, setLoading, eye, setEye]
