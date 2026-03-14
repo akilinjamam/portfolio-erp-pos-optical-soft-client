@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
     const findUser = users?.result?.find(f => f?.email === getUser?.email);
     
    
-    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list, glass_stock, glass_list, payroll_list,add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales, today_due_collection, manage_sales, best_sale_performer, stock_analysis, sales_analysis, cash_flow_summery, sold_product, add_vendor_bill, payroll_bonus } = findUser || {};
+    const { pos, stock, sales_invoice, sales_record, product_entry, product_list, customer_list, controll_user_access, employee_list, payroll, user_list, add_employee, add_supplier, supplier_list, glass_stock, glass_list, payroll_list,add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales, today_due_collection, manage_sales, best_sale_performer, stock_analysis, sales_analysis, cash_flow_summery, sold_product, add_vendor_bill, payroll_bonus, add_branch, branch_list, manage_branch } = findUser || {};
 
     useEffect(() => {
         const accessMap = {
@@ -79,6 +79,10 @@ const Layout = ({ children }) => {
             '/dashboard/report_module/vendor_list': vendor_list,
             '/dashboard/report_module/expenses_list': expenses_list,
             '/dashboard/report_module/expenses_profit_list': expenses_profit_list,
+
+            '/dashboard/branch_module/add_branch': add_branch,
+            '/dashboard/branch_module/branch_list': branch_list,
+            '/dashboard/branch_module/manage_branch': manage_branch,
         };
        
 
@@ -90,7 +94,7 @@ const Layout = ({ children }) => {
 
             }
         }
-    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list, glass_stock, glass_list, payroll_list, add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales,  today_due_collection, manage_sales, best_sale_performer, stock_analysis, sales_analysis, cash_flow_summery, payroll_bonus, sold_product, add_vendor_bill]);
+    }, [location,navigate, customer_list, pos, product_entry, product_list,sales_invoice,sales_record,stock, controll_user_access, employee_list, user_list, payroll, findUser, add_employee,add_supplier, supplier_list, glass_stock, glass_list, payroll_list, add_vendor, vendor_list, add_expenses, expenses_list, due_collection_list, add_fixed_expenses, expenses_profit_list, profit_category_analysis,profit_expense_enalysis, manual_sales, today_sales,  today_due_collection, manage_sales, best_sale_performer, stock_analysis, sales_analysis, cash_flow_summery, payroll_bonus, sold_product, add_vendor_bill, add_branch, branch_list, manage_branch]);
 
     return (
         <div className={`${layoutControll.main}`}>

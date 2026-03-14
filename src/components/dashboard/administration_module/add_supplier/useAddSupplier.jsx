@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import usePostSupplierData from "../../../../data/supplierData/usePostSupplierData";
 
 const useAddSupplier = () => {
@@ -76,7 +75,7 @@ const useAddSupplier = () => {
         }
     
         if(isError){
-            toast.error(`something went wrong`)
+            // toast.error(`something went wrong`)
         }
     },[isSuccess,isError])
 

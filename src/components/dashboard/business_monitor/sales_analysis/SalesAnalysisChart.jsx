@@ -34,11 +34,11 @@ const SalesAnalysisChart = ({ allSalesPriceData, highestSale, lowestSale, netSal
 
 
       const data = {
-        labels: allSalesPriceData?.map(item => item?.date),
+        labels: allSalesPriceData?.slice()?.reverse()?.map(item => item?.date),
         datasets: [
           {
             label: "Sales Analysis",
-            data: allSalesPriceData?.map(item => item?.sales),
+            data: allSalesPriceData?.slice()?.reverse()?.map(item => item?.sales),
             borderColor: "rgba(75, 192, 192, 1)", 
             backgroundColor: "green", 
             tension: 0.3, 

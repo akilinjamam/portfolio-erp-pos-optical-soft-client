@@ -45,7 +45,10 @@ const useControllUserAccess = (id) => {
         stock_analysis: false,
         sales_analysis: false,
         best_sale_performence: false,
-        cash_flow_summery: false
+        cash_flow_summery: false,
+        add_branch: false,
+        branch_list: false,
+        manage_branch: false
 
     })
 

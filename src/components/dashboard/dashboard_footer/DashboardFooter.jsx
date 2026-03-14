@@ -3,20 +3,21 @@ import '../../../global_style/global_style.css';
 // import { useDispatch } from 'react-redux';
 // import { openModal } from '../../modal/imgmodal/imgModalSlice';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 
 
 const DashboardFooter = () => {
     const [remainingTime, setRemainingTime] = useState(null);
     // const dispatch = useDispatch();
-  
+    const branchId = useRef('');
     useEffect(() => {
         const token = localStorage.getItem('user');
         if (!token) return;
 
         const splitToken = token.split(' ')[1];
         const exp = decodeJwt(splitToken)?.exp;
+        branchId.current = decodeJwt(splitToken)?.branchName;
         if (!exp) return;
 
         const interval = setInterval(() => {
@@ -47,7 +48,7 @@ const DashboardFooter = () => {
                      {remainingTime
                         ?
                         <p className={`${dashFooter.displayExpire}`}>
-                            Session Expires in: {remainingTime?.days}  :{remainingTime?.hours} : {remainingTime?.minutes}:  {remainingTime?.seconds}
+                            Session Expires in: {remainingTime?.days}  :{remainingTime?.hours} : {remainingTime?.minutes}:  {remainingTime?.seconds} <span style={{marginLeft:"10px", color: "lightgreen"}}> ({branchId.current})</span>
                         </p>
                         :
                         <p>Session Expired</p>

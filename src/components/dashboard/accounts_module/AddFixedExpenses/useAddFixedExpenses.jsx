@@ -125,7 +125,7 @@ const useAddFixedExpenses = () => {
         }
     
         if(isError){
-            toast.error(`something went wrong`)
+            // toast.error(`something went wrong`)
         }
     },[isSuccess,isError])
 

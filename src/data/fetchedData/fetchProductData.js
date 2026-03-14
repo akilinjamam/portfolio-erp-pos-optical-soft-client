@@ -1,7 +1,6 @@
 import axios from "axios"
 
 const url = import.meta.env.VITE_DATA_URL;
-
 export const fetchGetProductData = async (query, from, to, priceFrom, priceTo) => {
     try {
         const token = localStorage.getItem('user')
@@ -45,9 +44,16 @@ export const fetchGetGlassProductData = async (query, from, to, priceFrom, price
     }
 }
 export const fetchPostProductData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
 
-        const result = await axios.post(`${url}/products/create-product`, data)
+        const result = await axios.post(`${url}/products/create-product`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
 

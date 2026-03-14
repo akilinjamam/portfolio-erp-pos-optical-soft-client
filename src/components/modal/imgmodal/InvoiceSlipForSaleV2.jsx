@@ -3,11 +3,20 @@ import moment from "moment";
 import { calculateTotalPrice } from "../../calculation/calculateSum";
 // import glassImg from '../../../images/Vector.png'
 import Barcode from "react-barcode";
+import useGetbranchData from "../../../data/branchData/useGetBranchData";
+import { jwtDecode } from "jwt-decode";
 
 
 
 const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be added', updateCustomerInfo}) => {
 
+     const {branchData} = useGetbranchData()
+  const token = localStorage.getItem("user");
+  const splitToken = token?.split(' ')?.[1];
+ 
+  const branchId = jwtDecode(splitToken)?.branchId;
+  const findBranch = branchData?.result?.find(f => f?._id === branchId);
+  console.log(findBranch)
    
 
     return (
@@ -18,16 +27,21 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
       {/* Header Section */}
       <div style={{ textAlign: 'center',  paddingBottom: '10px' }}>
         <div>
-           
-            <h2 style={{fontWeight:'bolder', fontSize:'19px', marginBottom:'-4px', marginTop:'-3px'}}>Company Name </h2>
+            <h5 style={{textAlign:'left', width:'86%', margin:'auto',fontWeight:'bolder'}}>{findBranch?.name === 'AL-ARAFAT OPTICAL' ? 'NEW' : ''}</h5>
+            <h2 style={{fontWeight:'bolder', fontSize:'19px', marginBottom:'-4px', marginTop:'-3px'}}> {findBranch?.name} </h2>
         </div>
         <div>
-           
+            <h5 style={{textAlign:'left', width:'85%', margin:'auto',fontWeight:'bold'}}>{findBranch?.name === 'AL-ARAFAT OPTICAL' ? 'নিউ' : ''}</h5>
+            <h2 style={{fontWeight:'bolder', fontSize:'15px', marginTop:'-3px'}}> {findBranch?.nameBangla} </h2>
         </div>
-        <p style={{ fontSize: '9px', fontWeight:'bolder', margin:'5px 0' }}>
+        <p style={{ fontSize: '9px', fontWeight:'bolder', padding:'3px 0', width: "170px", margin: "auto" }}>
         
-          
-          Company Address, Phone
+          {/* Minhaz Complex (Ground Floor),<br /> 12-Jamal Khan Road, Chittagong<br /> */}
+          {findBranch?.address}
+        </p>
+        <p style={{ fontSize: '9px', fontWeight:'bolder', padding:'0 0', width: "170px", margin: "auto" }}>
+          {/* Minhaz Complex (Ground Floor),<br /> 12-Jamal Khan Road, Chittagong<br /> */}
+          Cell: {findBranch?.phone}
         </p>
         
         <p style={{ fontSize: '17px', fontWeight:'bolder' }}>
@@ -109,7 +123,7 @@ const InvoiceSlipForSaleV2 = ({getCustomerInfo, salesList, copy='Copy will be ad
       <div style={{ margin: '10px 0', fontSize:'9px' }}>
         <h3>PD: {getCustomerInfo?.comment?.split('=')?.[1] === undefined ? '--' : getCustomerInfo?.comment?.split('=')?.[1]}</h3>
         <h3>Remarks: {getCustomerInfo?.comment?.split('=')?.[0] === 'blank' ? '--' : getCustomerInfo?.comment?.split('=')?.[0]}</h3>
-        <p style={{fontSize:'14px'}}>Glass Type: <span >{getCustomerInfo?.glassType === 'blank' ? '--' : getCustomerInfo?.glassType}</span></p>
+        <p style={{fontSize:'11px'}}>Glass Type: <span >{getCustomerInfo?.glassType === 'blank' ? '--' : getCustomerInfo?.glassType}</span></p>
       </div>
 
       {/* Total Section */}

@@ -4,9 +4,13 @@ import "./SidebarRes.scss";
 import { homeNavigator } from "../homeNavigator";
 import { useNavigate } from "react-router-dom";
 import useHome from "../useHome";
+import decodeJwt from "../../../../jwtDecoder/jwtDecoder";
 
 export default function Sidebar() {
 
+        const token = localStorage.getItem('user');
+        const splitToken = token.split(' ')[1];
+        const branchName = decodeJwt(splitToken)?.branchName;
         const navigate = useNavigate();
 
         const {location} = useHome()
@@ -43,6 +47,8 @@ export default function Sidebar() {
                 const active = links?.some(path => location === path)
                  return active ? `green` : ``
             }
+    
+    
 
   return (
     <>
@@ -68,7 +74,7 @@ export default function Sidebar() {
       {/* Sidebar */}
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <div>
-            <p>MENU</p>
+            <p style={{color: 'lightgreen'}}>{branchName?.length > 23 ? branchName?.slice(0,23) + '...' : branchName }</p>
             <p className="close-btn" onClick={() => setOpen(false)}>
                 ✕
             </p>

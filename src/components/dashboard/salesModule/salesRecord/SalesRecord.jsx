@@ -40,7 +40,7 @@ const SalesRecord = () => {
     
     
     useEffect(() => {
-        const modified = saleData?.result?.slice()?.reverse()?.map((item, index) => ({...item, indexId: index+1}))
+        const modified = saleData?.result?.map((item, index) => ({...item, indexId: index+1}))
         setModifiedProductDataWithIndexId(modified)
     }, [saleData?.result])
 

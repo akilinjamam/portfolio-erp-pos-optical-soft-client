@@ -87,7 +87,7 @@ const Home = () => {
 
     const activeRoute = (routes) => {  
         const links = routes
-        const active = links?.some(path => location === path)
+        const active = links === `/${location?.split('/')?.slice(1,3)?.join('/')}`
          return active ? `${home.iActive}` : `${home.ifontColor}`
     }
 
@@ -95,7 +95,7 @@ const Home = () => {
         <div className={`${home.main}`}>
             <div className={`${home.iconBar}`}>
                 {
-                    homeNavigator?.map((icon, index) => <div className={`${home.navigation_icon} flex_center`} key={index+1}><i onClick={() => navigate(icon.route)} title={slide ? icon.value : ''} className={`${icon.icon} ${activeRoute(icon.routes)}`}></i></div> )
+                    homeNavigator?.map((icon, index) => <div className={`${home.navigation_icon} flex_center`} key={index+1}><i onClick={() => navigate(icon.route)} title={slide ? icon.value : ''} className={`${icon.icon} ${activeRoute(icon.route)}`}></i></div> )
                 }
             </div>
             <div className={`${home.container} only_flex`}>
@@ -103,7 +103,7 @@ const Home = () => {
                             {
                                 homeNavigator?.map((values, index) => 
                                 <div className={`${home.navigation_title} flex_left`} key={index + 1}>
-                                    <p className={`${activeRoute(values.routes)}`} onClick={() => {
+                                    <p className={`${activeRoute(values.route)}`} onClick={() => {
                                         navigate(values.route)
                                         dispath(closeModal())
                                     }}>

@@ -23,7 +23,7 @@ $font:"DM Sans", sans-serif;
             width: 100%;
             max-width: 600px;
             margin: auto;
-            height: 220px;
+            height: 270px;
             border-radius: 20px;
             border: 5px solid v.$lightGray;
             padding: 0 15px;
@@ -36,7 +36,7 @@ $font:"DM Sans", sans-serif;
                 padding: 10px;
             }
 
-            input{
+            input, select{
                 width: 100%;
                 margin-bottom: 25px;
                 height: 30px;
@@ -50,7 +50,7 @@ $font:"DM Sans", sans-serif;
             i{
                 position: absolute;
                 right: 25px;
-                top: 103px;
+                top: 157px;
                 cursor: pointer;
             }
 
@@ -61,7 +61,7 @@ $font:"DM Sans", sans-serif;
             }
             .forget_pass{
                 position: absolute;
-                bottom: 65px;
+                bottom: 60px;
                 right: 20px;
                 text-decoration: underline;
                 font-family: $font;

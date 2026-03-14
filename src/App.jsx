@@ -20,6 +20,8 @@ import AccountsModule from './components/dashboard/accounts_module/AccountsModul
 import accountsRoute from './sub-routes/accountsModule.route';
 import BusinessMonitor from './components/dashboard/business_monitor/BusinessMonitor';
 import businessMonitorRoute from './sub-routes/businessMonitor.route';
+import BranchModule from './components/dashboard/branch_module/BranchModule';
+import branchModuleRoute from './sub-routes/branch.route';
 
 function App() {
 
@@ -85,6 +87,11 @@ function App() {
           path: 'business_monitor',
           element: <BusinessMonitor/>,
           children: businessMonitorRoute
+        },
+        {
+          path: 'branch_module',
+          element: <BranchModule/>,
+          children: branchModuleRoute
         },
       ]
     }

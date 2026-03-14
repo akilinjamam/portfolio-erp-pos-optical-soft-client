@@ -17,16 +17,30 @@ export const fetchGetSinglePayrollData = async (id) => {
     }
 }
 export const fetchPostPayrollData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/payroll/create-payroll`, data)
+        const result = await axios.post(`${url}/payroll/create-payroll`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
         return error.response?.data?.errorMessage
     }
 }
 export const fetchPostPayrollBonusData = async (data) => {
+    const token = localStorage.getItem('user')
     try {
-        const result = await axios.post(`${url}/payroll/create-payroll-bonus`, data)
+        const result = await axios.post(`${url}/payroll/create-payroll-bonus`, data, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
         return result;
     } catch (error) {
         return error.response?.data?.errorMessage

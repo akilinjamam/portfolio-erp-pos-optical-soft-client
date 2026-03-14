@@ -1,9 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import usePostEmployeeData from "../../../../data/employeeData/usePostEmployeeData";
-import { toast } from "react-toastify";
-// import { fetchPostemployeeData } from "../../../../data/fetchedData/fetchemployeeData";
-// import { toast } from "react-toastify";
 
 const useAddEmployee = () => {
     
@@ -81,9 +78,6 @@ const useAddEmployee = () => {
             setEmployeeData(initialEmployeeData)
         }
     
-        if(isError){
-            toast.error(`something went wrong`)
-        }
     },[isSuccess,isError])
 
     return { employeeData, setEmployeeData, showData, setShowData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct,  handleSubmit, initialEmployeeData, findEmployee, setImgHolder, uploading, setUploading, handlePost, isPending }
