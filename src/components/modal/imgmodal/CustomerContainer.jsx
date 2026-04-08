@@ -14,7 +14,7 @@ import useSaleData from "../../../data/saleData/useSaleData";
 
 const CustomerContainer = ({dispatch, customerInfo, closeModal, type, open, salesList}) => {
 
-    const {employeeData, isLoading} = useGetEmployeeData('', '', '');
+    const {employeeData, isLoading} = useGetEmployeeData('', '', '', 1, 100);
     
     const [addGlass, setAddGlass] = useState('');
     const [deleteGlass, setDeleteGlass] = useState('');
