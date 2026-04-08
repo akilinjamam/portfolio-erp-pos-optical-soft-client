@@ -7,9 +7,9 @@ import { useDispatch } from 'react-redux';
 import { addStockAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { useEffect, useState } from 'react';
 import StockAnalysisChart from './StockAnalysisChart';
-import useProductData from '../../../../data/productData/useProductData';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import StockAnalysisChartRes from './StockAnalysisChartRes';
+import useProductOldData from '../../../../data/productData/useProductDataOld';
 
 const StockAnalysis = () => {
 
@@ -18,7 +18,7 @@ const StockAnalysis = () => {
     to: ''
   })
 
-  const { products, refetch, isLoading } = useProductData('', date?.from, date?.to, '', '')
+  const { products, refetch, isLoading } = useProductOldData('', date?.from, date?.to, '', '')
   const analysisData = products?.result
 
   const categoryCount = analysisData?.reduce((acc, item) => {

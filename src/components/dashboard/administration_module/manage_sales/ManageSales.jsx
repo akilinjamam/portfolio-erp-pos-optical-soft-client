@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
-import Pagination from "../../pagination/Pagination";
 import manageSaleList from './ManageSales.module.scss';
 import {addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import useManageSales from "./useManageSales";
 import ManageSaleTable from "./ManageSalesTable";
 import { manageSaleUpdateInput } from "./manageSalesUpdateInput";
 import FilterOption from "./FilterOption";
+import NewPagination from "../../pagination/NewPagination";
 
 const ManageSales = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData,  modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct} = useManageSales()
+    const {isLoading, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData,  modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct, saleData, pageNumber, setPageNumber, count, setCount, totalSoldQuantity} = useManageSales()
     const supplierData = modifiedSupplierDataWithIndexId
 
   
@@ -110,18 +110,18 @@ const ManageSales = () => {
                   </div>
                 </div>
               </div>
-              <FilterOption dispatch={dispatch} openModal={openModal} addSalesData={addSalesData}  supplierData={supplierData} totalSalesItem={totalSalesItem} totalSalesValue={totalSalesValue} totalPaid={totalPaid} totalDiscount={totalDiscount} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashValue={totalCashValue} setQuery={setQuery} setRange={setRange} query={query} range={range} />
+              <FilterOption dispatch={dispatch} openModal={openModal} addSalesData={addSalesData}  supplierData={supplierData} totalSalesItem={totalSalesItem} totalSalesValue={totalSalesValue} totalPaid={totalPaid} totalDiscount={totalDiscount} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashValue={totalCashValue} setQuery={setQuery} setRange={setRange} query={query} range={range} totalSalesQuantity={totalSoldQuantity} />
           <section className={`${manageSaleList.navigationIcon} only_flex`}>
           
                 
           </section>
           <section  className={`${manageSaleList.tableArea}`}>
-              <ManageSaleTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} setUpdateProductData={setUpdateProductData} productId={productId} setProductId={setProductId} setSaleId={setSaleId} selectProduct={selectProduct} setSelectProduct={setSelectProduct} />
+              <ManageSaleTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={saleData?.result} setEdit={setEdit} edit={edit} showData={saleData?.result} setUpdateProductData={setUpdateProductData} productId={productId} setProductId={setProductId} setSaleId={setSaleId} selectProduct={selectProduct} setSelectProduct={setSelectProduct} />
           </section>
            {
             !isLoading
             &&
-            <Pagination showData={supplierData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={50}/>
+            <NewPagination data={saleData} limit={range.limit} pageNumber={pageNumber} setPageNumber={setPageNumber} count={count} setCount={setCount} />
            }      
         </div>
     );

@@ -7,18 +7,20 @@ import useDeleteEmployeeData from "../../../../data/employeeData/useDeleteEmploy
 const useEmployeeList = () => {
 
     const [query, setQuery] = useState('');
+    const [count, setCount] = useState(1);
+    const [pageNumber, setPageNumber] = useState(1)
     const [range, setRange] = useState({
         from: '',
         to: '',
+        limit:10
     })
     
-    const {employeeData, refetch, isLoading} = useGetEmployeeData(query, range.from, range.to)
+    const {employeeData, refetch, isLoading} = useGetEmployeeData(query, range.from, range.to, pageNumber, range.limit)
     
     
    
    
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
-    const [modifiedEmployeeDataWithIndexId, setModifiedEmployeeDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
    
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -76,14 +78,7 @@ const useEmployeeList = () => {
     
 
     useEffect(() => {
-        const employeesAddedWithIndexId = employeeData?.result?.slice()?.reverse()?.map((d, i) => ({
-            ...d, indexId: i + 1
-        }))
-        setModifiedEmployeeDataWithIndexId(employeesAddedWithIndexId)
-    }, [employeeData?.result])
-
-    useEffect(() => {
-        refetch()
+       setPageNumber
     }, [refetch, query, range])
 
     const {mutate:deleteEmployees} = useDeleteEmployeeData(refetch, setIdsForDelete, setSelectDeleted)
@@ -93,6 +88,6 @@ const useEmployeeList = () => {
         deleteEmployees(idsForDelete)
     }
 
-    return { employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedEmployeeDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange}
+    return { employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData, initialEmployeeData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr,  setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, pageNumber, setPageNumber, count, setCount}
 };
 export default useEmployeeList;

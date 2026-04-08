@@ -21,7 +21,7 @@ const FilterOption = ({dispatch, openModal, addSalesData, modifiedProductDataWit
                     <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                     <label htmlFor="">To: </label>
                     <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
+                    <i onClick={() =>setRange({...range,from:'', to:''})} className="uil uil-times"></i>
                </div>
             </div>
     );

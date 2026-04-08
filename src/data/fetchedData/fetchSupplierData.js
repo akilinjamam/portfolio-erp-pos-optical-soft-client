@@ -18,6 +18,24 @@ export const fetchGetSupplierData = async (query) => {
         return error
     }
 }
+export const fetchGetSupplierDataPaginated = async (query, page, limit) => {
+    try {
+        const token = localStorage.getItem('user')
+
+        const value = query ? query : '';
+
+        const result = await axios.get(`${url}/suppliers?searchTerm=${value}&page=${page}&limit=${limit}`, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return result?.data;
+    } catch (error) {
+        return error
+    }
+}
 export const fetchPostSupplierData = async (data) => {
     try {
         const token = localStorage.getItem('user')

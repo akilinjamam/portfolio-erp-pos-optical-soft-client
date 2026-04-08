@@ -3,11 +3,12 @@ import { useDispatch } from 'react-redux';
 import '../../../../global_style/global_style.css'
 import { openImg, openModal, openSingleBarcode } from '../../../modal/imgmodal/imgModalSlice';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import productList from "./ProductList.module.scss"
  
-const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete}) => {
+const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, isFetching, summary}) => {
 
+  console.log(isLoading)
+  console.log(isFetching)
   
   const dispatch = useDispatch();
 
@@ -15,17 +16,6 @@ const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, sho
     dispatch(openModal('img'));
     dispatch(openImg(img))
   }
-
-  const totalSales = showData?.map(data => Number(data?.salesPrice) * Number(data?.quantity));
-  const totalStocks = showData?.map(data => Number(data?.stockAmount));
-  const totalPurchase = showData?.map(data => ( Number(data?.purchasePrice)) * (Number(data?.quantity)) );
-  const totalQuantity = showData?.map(data => Number(data?.quantity));
-  const totalSalesPrice =  calculateTotalPrice(totalSales);
-  const totalPurchasePrice = calculateTotalPrice(totalPurchase);
-  const totalAmountOfQuantity = calculateTotalPrice(totalQuantity);
-  const totalStockAmount = calculateTotalPrice(totalStocks);
-  console.log(totalStockAmount)
-
   
   const data = fullScr ? showData : paginatedDataContainer
   
@@ -73,17 +63,17 @@ if(isLoading){
           <tr> 
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Total</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}> Sales =</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalSalesPrice) }</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(summary.totalSalesPrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Purchase =</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalPurchasePrice) }</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(summary.totalPurchasePrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Available Quantity =</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalAmountOfQuantity}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{summary.totalQuantity}</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Sold Quantity =</td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalStockAmount - totalAmountOfQuantity}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{summary.totalStock - summary.totalQuantity}</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Stock Amount = </td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{totalStockAmount}</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{summary.totalStock}</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}>Profit = </td>
-              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(totalSalesPrice - totalPurchasePrice) }</td>
+              <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{new Intl.NumberFormat('en-IN').format(summary.totalSalesPrice - summary.totalPurchasePrice) }</td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               <td style={{border:'1px solid #dddddd',textAlign:'center'}}></td>
               {
@@ -122,7 +112,7 @@ if(isLoading){
                 <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '') || (!data?.inStock ? 'rgb(102, 0, 51)' : '')}`, color: `${!data?.inStock ? 'white' : ''}`}} key={index+1} >
                     <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
                       {(selectDeleted && !fullScr) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
-                      <span>{data?.indexId}</span>
+                      <span>{data?.sId}</span>
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}} title={data?.productName}>
                     <div style={{maxWidth:"100px"}}>

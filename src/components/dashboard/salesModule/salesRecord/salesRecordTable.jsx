@@ -7,7 +7,7 @@ import salesRecord from './SalesRecord.module.scss';
 /* {moment.utc(sale?.createdAt).tz("Asia/Dhaka").format("YYYY-MM-DD hh:mm:ss A")} */
 const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesQuantity}) => {
     
-    console.log(paginatedDataContainer)
+   
 
     if(isLoading){
         return (
@@ -62,7 +62,7 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
                 {
                     paginatedDataContainer?.map((sale, index) => (
                         <tr style={{background: `${sale?.paymentHistory?.split('+')?.length > 3 ? 'red': ''}`, color: `${sale?.paymentHistory?.split('+')?.length > 3 ? 'white': ''}`}} key={index+1}>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.indexId ? sale?.indexId : index+1}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.sId}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.customerName}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.phoneNumber}</td>
                             

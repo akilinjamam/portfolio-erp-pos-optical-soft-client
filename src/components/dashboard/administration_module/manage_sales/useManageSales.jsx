@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
 import useUpdateSaleInfoData from "../../../../data/saleData/useUpdateSalesInfoData";
 import useUpdateProductInfoData from "../../../../data/saleData/useUpdateProductInfoData";
 import useDeletSalesInfoData from "../../../../data/saleData/useDeleteSalesInfoData";
+import useOneMonthSaleDataPaginated from "../../../../data/saleData/useOneMonthSalesDataPaginated";
 
 
 const useManageSales = () => {
@@ -13,14 +13,19 @@ const useManageSales = () => {
     const [range, setRange] = useState({
         from: '',
         to: '',
+        limit: 50
     })
-
+    const [pageNumber, setPageNumber] = useState(1);
+    const [count, setCount] = useState(1);
     console.log(saleId, productId)
 
     const [updatePaymentMethod, setUpdatePaymentMethod] = useState('');
     
-    const {saleData, refetch, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue } = useOneMonthSaleData(query,range.from, range.to);
-   
+    const {saleData, refetch, isLoading } = useOneMonthSaleDataPaginated(query,range.from, range.to, pageNumber, range.limit, '');
+    console.log(saleData);
+    const summary = saleData?.summary;
+    const totalSalesItem = saleData?.total;
+    const {totalSalesValue, total:totalPaid, totalDiscount, totalBank:totalBankValue, totalBkash:totalBkashValue, totalCash:totalCashValue, totalNogod: totalNogodValue, totalSoldQuantity  } = summary || {}
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
     const [modifiedSupplierDataWithIndexId, setModifiedSupplierDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
@@ -126,9 +131,11 @@ const useManageSales = () => {
         updateProductInfo(updatedData)
     }
 
+ useEffect(() => {
+        setPageNumber(1);
+    }, [query, range]);
 
 
-
-    return { saleData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange,  totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct}
+    return { saleData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange,  totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalCashValue, totalNogodValue, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct, pageNumber, setPageNumber, count, setCount, totalSoldQuantity}
 };
 export default useManageSales;

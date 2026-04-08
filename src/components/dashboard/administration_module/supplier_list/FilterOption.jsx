@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import supplierList from "./SupplierList.module.scss";
 
-const FilterOption = ({dispatch, openModal, addSupplierList, supplierData, query, setQuery}) => {
+const FilterOption = ({dispatch, openModal, addSupplierList, supplierData, query, setQuery, total }) => {
     return (
         <section className={`${supplierList.navigationIcon} flex_between`}>
                     { 
@@ -12,7 +12,7 @@ const FilterOption = ({dispatch, openModal, addSupplierList, supplierData, query
                             dispatch(addSupplierList(supplierData))
                             }}
                             title="print" className="uil uil-print"></i>
-                            <span>Total : {supplierData?.length} </span>
+                            <span>Total : {total} </span>
                             <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
                             <i onClick={() => setQuery('')}  className="uil uil-times"></i>              
                         </div>

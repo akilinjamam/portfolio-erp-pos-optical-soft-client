@@ -38,6 +38,42 @@ export const fetchGetOneMonthSaleData = async (query, from, to) => {
         return error
     }
 }
+export const fetchGetOneMonthSaleDataPaginated = async (query, from, to, page, limit, category, productName) => {
+    try {
+        const token = localStorage.getItem('user')
+        const value = query ? query : '';
+        const fromDate = from ? from : '';
+        const toDate = to ? to : '';
+
+        const result = await axios.get(`${url}/sales/get-one-month-sales-paginated?searchTerm=${value}&from=${fromDate}&to=${toDate}&page=${page}&limit=${limit}&category=${category}&productName=${productName}`, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return result?.data;
+    } catch (error) {
+        return error
+    }
+}
+export const fetchGetSalesByInvoice = async (invoice) => {
+    try {
+        const token = localStorage.getItem('user')
+
+
+        const result = await axios.get(`${url}/sales/get-sales-by-invoice/${invoice}`, {
+            headers: {
+                Authorization: token,
+                "Accepts": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return result?.data;
+    } catch (error) {
+        return error
+    }
+}
 export const fetchGetDueCollectionSaleData = async (paymentDate) => {
     try {
         const token = localStorage.getItem('user')
@@ -123,8 +159,6 @@ export const fetchCancelAdjustment = async (id) => {
         return error
     }
 }
-
-
 
 
 

@@ -1,24 +1,22 @@
 import { useEffect, useState } from "react";
-import useGetSupplierData from "../../../../data/supplierData/useGetSupplierData";
 import useUpdateSupplierData from "../../../../data/supplierData/useUpdateSupplierData";
 import useDeleteSupplierData from "../../../../data/supplierData/useDeleteSupplierData";
+import useGetSupplierDataPaginated from "../../../../data/supplierData/useGetSupplierDataPaginated";
 
 
 const useSupplierList = () => {
 
     const [query, setQuery] = useState('');
+    console.log(query)
+    const [count, setCount] = useState(1);
     const [range, setRange] = useState({
         from: '',
         to: '',
+        limit:10
     })
-    
-    const {supplierData, refetch, isLoading} = useGetSupplierData(query);
-    console.log(supplierData)
+    const [pageNumber, setPageNumber] = useState(1);
+    const {supplierData, refetch, isLoading} = useGetSupplierDataPaginated(query, pageNumber, range.limit);
    
-    
-    
-    const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
-    const [modifiedSupplierDataWithIndexId, setModifiedSupplierDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
    
     const [paginatedIndex, setPaginatedIndex] = useState();
@@ -65,18 +63,10 @@ const useSupplierList = () => {
         editEmployeeData(finalUpdatedData)
         console.log(updatedData)
     }
-    
 
     useEffect(() => {
-        const employeesAddedWithIndexId = supplierData?.result?.slice()?.reverse()?.map((d, i) => ({
-            ...d, indexId: i + 1
-        }))
-        setModifiedSupplierDataWithIndexId(employeesAddedWithIndexId)
-    }, [supplierData?.result])
-
-    useEffect(() => {
-        refetch()
-    }, [refetch, query, range])
+        setPageNumber(1)
+    }, [query, range])
 
     const {mutate:deleteEmployees} = useDeleteSupplierData(refetch, setIdsForDelete, setSelectDeleted)
 
@@ -85,6 +75,6 @@ const useSupplierList = () => {
         deleteEmployees(idsForDelete)
     }
 
-    return { supplierData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedSupplierDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange}
+    return { supplierData, isLoading, updateSupplierData, setUdpateSupplierData, initialSupplierData,  paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr,  setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, pageNumber, setPageNumber, count, setCount }
 };
 export default useSupplierList;

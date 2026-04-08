@@ -13,7 +13,7 @@ import {
 } from "../../../modal/imgmodal/imgModalSlice";
 
 import useUpdateSaleData from "../../../../data/saleData/useUpdateSaleData";
-import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
+import useGetSalesByInvoice from "../../../../data/saleData/useGetSalesByInvoice";
 
 const SalesInvoice = () => {
   const [deliveryStatus, setDeliveryStatus] = useState("");
@@ -22,9 +22,8 @@ const SalesInvoice = () => {
   const [barcodeId, setBarcodeId] = useState("");
   const [date, setDate] = useState({ from: "", to: "" });
 
-  const { saleData, refetch, isLoading, isFetching, isError } =
-    useOneMonthSaleData("", date.from, date.to);
-
+  const { getSalesByInvoice, refetch, isLoading,  isError } = useGetSalesByInvoice(debouncedQuery);
+  console.log(getSalesByInvoice)
   const dispatch = useDispatch();
 
   // 🔹 Debounce the query so we don't search on every keystroke
@@ -34,43 +33,14 @@ const SalesInvoice = () => {
   }, [query]);
 
   // 🔹 Find invoice by query (debounced)
-  const findSalesByInvoiceNumber = saleData?.result?.find(
-    (f) => f?.invoiceBarcode === debouncedQuery
-  );
+  const findSalesByInvoiceNumber = getSalesByInvoice?.result
 
   // 🔹 Refetch when date changes
   useEffect(() => {
     refetch();
   }, [refetch, date.from, date.to]);
 
-  // 🔹 Barcode scanner listener (with cleanup)
-  // useEffect(() => {
-  //   let barcode = "";
-  //   let interval
-
-  //   const handleKeyDown = (e) => {
-  //     if (interval) clearInterval(interval);
-
-  //     if (e.code === "Enter") {
-  //       if (barcode) {
-  //         setBarcodeId(barcode);
-  //         barcode = "";
-  //         return;
-  //       }
-  //     }
-  //     if (e.key !== "Shift") {
-  //       barcode += e.key;
-  //       interval = setInterval(() => (barcode = ""), 20);
-  //     }
-  //   };
-
-  //   document.addEventListener("keydown", handleKeyDown);
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //     clearInterval(interval);
-  //   };
-  // }, []);
-
+  
   useEffect(() => {
   let barcode = "";
   let timeout;
@@ -103,8 +73,6 @@ const SalesInvoice = () => {
   };
 }, []);
 
-
-
   useEffect(() => {
     setQuery(barcodeId);
   }, [barcodeId]);
@@ -125,13 +93,7 @@ const SalesInvoice = () => {
     });
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex_center" style={{ width: "100%", height: "500px" }}>
-        <CommonLoading />
-      </div>
-    );
-  }
+  
 
   if (isError) {
     toast.error("Failed to load sales data. Please try again.");
@@ -167,20 +129,7 @@ const SalesInvoice = () => {
             onChange={(e) => setQuery(e.target.value)}
           />
 
-          {/* Date Filters */}
-          <label>From:</label>
-          <input
-            value={date.from}
-            type="date"
-            onChange={(e) => setDate({ ...date, from: e.target.value })}
-          />
-          <label>To:</label>
-          <input
-            value={date.to}
-            type="date"
-            onChange={(e) => setDate({ ...date, to: e.target.value })}
-          />
-
+         
           {/* Reset Button */}
           <i
             className="uil uil-times"
@@ -191,18 +140,6 @@ const SalesInvoice = () => {
             }}
           ></i>
 
-          {/* Loading / Data Info */}
-          {isFetching ? (
-            <span style={{color:'gray', marginLeft:'10px', animation: "pulse 1.5s ease-in-out infinite", fontSize:'14px'}} >
-              Refreshing...
-            </span>
-          ) : saleData?.result?.length > 0 ? (
-            <span style={{color:'green', marginLeft:'10px', fontSize:'14px'}} className="text-green-600 ml-2">
-              Data Loaded ({saleData.result.length})
-            </span>
-          ) : (
-            <span style={{color:'gray', marginLeft:'10px', fontSize:'14px'}} className="text-gray-500 ml-2">No data found</span>
-          )}
         </div>
       </div>
 
@@ -216,7 +153,12 @@ const SalesInvoice = () => {
           maxHeight: "70vh",
         }}
       >
-        <SalesInvoicTable data={findSalesByInvoiceNumber} />
+        {
+          !isLoading ? <SalesInvoicTable data={findSalesByInvoiceNumber} /> : 
+          <div className="flex_center" style={{ width: "100%", height: "500px" }}>
+        <CommonLoading />
+      </div>
+        }
       </div>
 
       {/* 🔹 Action Buttons */}

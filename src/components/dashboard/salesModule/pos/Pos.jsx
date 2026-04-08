@@ -52,10 +52,10 @@ const Pos = () => {
         }
     })
 
-
+    const [barcodeId, setBarcodeId] = useState();
     const lock = useSelector(state => state.imgModal.lock)
     const dispatch = useDispatch();
-    const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray, refetch: refetchProduct} = usePos()
+    const {allProducts, priceArray, setPriceArray, quantityArray, setQuantityArray, refetch: refetchProduct, isFetching} = usePos(barcodeId)
 
     useEffect(() => {
         refetch()
@@ -65,13 +65,15 @@ const Pos = () => {
     },[refetchProduct])
     
    
-    const [barcodeId, setBarcodeId] = useState();
+    
     const [searchByBarcode, setSearchByBarcode] = useState(false);
     const [isScanned, setIsScanned] = useState(false)
     const [price, setPrice] = useState(false)
     const [quantity, setQuantity] = useState(false)
-    const finProduct = allProducts?.find(f => f?.barcode === barcodeId)
-    console.log(finProduct?.img);
+
+
+    // find product from barcode
+    const finProduct = allProducts
     
     if(priceArray?.length > 0) {
         if(quantityArray?.length === 0) {
@@ -81,7 +83,7 @@ const Pos = () => {
         }
     }
   
-   
+// for scanning barcode    
   useEffect(() => {
       let barcode = '';
       let interval;
@@ -112,7 +114,7 @@ const Pos = () => {
      }
   },[isScanned])
   
-
+//   number pad
   const calculationValue = [1,2,3,4,5,6,7,8,9,'Delete',0,'Add Item']
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -170,6 +172,7 @@ const Pos = () => {
     };
 });
 
+// shortcut key with Enter, q,p,s
     useEffect(() => {
         const handleQuantityAndPrice = (e) => {
             if(!lock){
@@ -534,7 +537,10 @@ const Pos = () => {
          <div  className={`flex_around`}>
             <div className={`${pos.inputAreaOne} flex_center`}>
                 <div className={`${pos.container} flex_between`}>
-                    <div className={`${pos.product_info} flex_between`}>
+                    {
+                        !isFetching
+                        ?
+                        <div className={`${pos.product_info} flex_between`}>
                         <div>
                             <p>Product Name: </p>
                             <p>Quantity: </p>
@@ -559,6 +565,11 @@ const Pos = () => {
                 
                         </div>
                     </div>
+                    :
+                    <div style={{ height:"100%"}}>
+                        <p style={{color: "red"}}>Loading...</p>
+                    </div>
+                    }
                    { (price || quantity)
                         &&
                         <div  className={`${pos.showQuantityAndPrice}`}>

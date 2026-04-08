@@ -13,24 +13,24 @@ const useProductList = () => {
         from: '',
         to: '',
         priceFrom: '',
-        priceTo: ''
+        priceTo: '',
+        limit: 50,
+        inStock: ''
     })
+    const [pageNumber, setPageNumber] = useState(1);
+    const [count, setCount] = useState(1);
+    const debounse = useDebounce(query, 500);
 
-    const debounse = useDebounce(query, 500)
 
-    const { products, isLoading, refetch } = useProductData(debounse, range.from, range.to, range.priceFrom, range.priceTo);
-    const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
-    const [modifiedProductDataWithIndexId, setModifiedProductWithIndexId] = useState([])
+    const { products, isLoading, refetch, isFetching } = useProductData(debounse, range.from, range.to, range.priceFrom, range.priceTo, pageNumber, range.limit, range.inStock);
     // eslint-disable-next-line no-unused-vars
     const [newCustomCode, setNewCustomCode] = useState('');
-    const [paginatedIndex, setPaginatedIndex] = useState();
     const [edit, setEdit] = useState('');
     const [imgHolder, setImgHolder] = useState();
     const [uploading, setUploading] = useState(false);
     const [fullScr, setFullScr] = useState(false)
     const [selectDeleted, setSelectDeleted] = useState(false)
     const [idsForDelete, setIdsForDelete] = useState([]);
-    const [stocks, setStocks] = useState('');
 
     const initialProductData = {
         supplierName: '',
@@ -100,26 +100,8 @@ const useProductList = () => {
         setImgHolder('')
         setEdit('')
     }
-    const [filteredByStock, setFilteredByStock] = useState([]);
-    useEffect(() => {
-        const filtered = products?.result?.filter(f => f?.inStock === stocks);
-        setFilteredByStock(filtered)
-    }, [products, stocks])
 
-
-    const data = stocks === '' ? products?.result : filteredByStock
-
-    useEffect(() => {
-        const productAddedWithIndexId = data?.slice()?.reverse()?.map((d, i) => ({
-            ...d, indexId: i + 1
-        }))
-        setModifiedProductWithIndexId(productAddedWithIndexId)
-    }, [products, data])
-
-    useEffect(() => {
-        setQuery(query)
-        refetch
-    }, [query, refetch, debounse])
+    const data = products?.result
 
     const deleteProducts = async (e) => {
         e.preventDefault()
@@ -129,8 +111,12 @@ const useProductList = () => {
 
     }
 
+    useEffect(() => {
+        setPageNumber(1);
+    }, [debounse, range]);
 
 
-    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, setStocks, range, setRange }
+
+    return { products, isLoading, updateProductData, setUdpateProductData, initialProductData, edit, setEdit, imgHolder, setImgHolder, uploading, setUploading, editProduct, fullScr, setFullScr, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, data, pageNumber, setPageNumber, count, setCount, isFetching }
 };
 export default useProductList;

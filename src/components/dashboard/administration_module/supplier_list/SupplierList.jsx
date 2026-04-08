@@ -2,7 +2,6 @@
 
 import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import Pagination from "../../pagination/Pagination";
 import { textInput } from "../add_supplier/supplierInput";
 import supplierList from './SupplierList.module.scss';
 import {addSupplierList, openModal } from "../../../modal/imgmodal/imgModalSlice";
@@ -10,11 +9,12 @@ import useSupplierList from "./useSupplierList";
 import SupplierListTable from "./SupplierListTable";
 import useHome from "../../home/useHome";
 import FilterOption from "./FilterOption";
+import NewPagination from "../../pagination/NewPagination";
 
 const SupplierList = ({hideField, hideSection}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder, modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery} = useSupplierList();
-    const supplierData = modifiedSupplierDataWithIndexId
-
+    const {supplierData:data, isLoading,  updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder,   setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, pageNumber, setPageNumber, count, setCount} = useSupplierList();
+    const supplierData = data?.result;
+    console.log(data)
     const dispatch = useDispatch();
     const {location} = useHome()
     return (
@@ -101,18 +101,18 @@ const SupplierList = ({hideField, hideSection}) => {
                   </div>
                 </div>
               </div>
-              <FilterOption dispatch={dispatch} openModal={openModal} addSupplierList={addSupplierList} supplierData={supplierData} query={query}  setQuery={setQuery}/>
+              <FilterOption total={data?.total} dispatch={dispatch} openModal={openModal} addSupplierList={addSupplierList} supplierData={supplierData} query={query}  setQuery={setQuery}/>
               <section className={`${supplierList.navigationIcon} only_flex`}>
               
                     
               </section>
           <section style={{height: `${location === '/dashboard/administration_module/supplier_list' ? '42vh' : '72vh'}`}}  className={`${supplierList.tableArea}`}>
-              <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={supplierData} hideField={hideField} />
+              <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={supplierData} setEdit={setEdit} edit={edit} showData={supplierData} hideField={hideField} />
           </section>
            {
             !isLoading
             &&
-            <Pagination showData={supplierData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
+            <NewPagination data={data}  limit={10} pageNumber={pageNumber} setPageNumber={setPageNumber} count={count} setCount={setCount} />
            }      
         </div>
     );

@@ -5,9 +5,9 @@ import { calculateTotalPrice } from "../../calculation/calculateSum";
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import useUpdateSaleData from '../../../data/saleData/useUpdateSaleData';
-import useSaleData from '../../../data/saleData/useSaleData';
 import moment from 'moment';
 import useCancelAdjustmentSaleData from '../../../data/saleData/useCancelAdjustmentSaleData';
+import useGetSalesByInvoice from '../../../data/saleData/useGetSalesByInvoice';
 
 const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, salesList}) => {
         console.log(getCustomerInfo);
@@ -18,7 +18,7 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
         const [discount, setDiscount] = useState(0);
         
 
-        const {refetch} = useSaleData()
+        const {refetch} = useGetSalesByInvoice(getCustomerInfo?.invoiceBarcode)
     
 
       const arrayOfTotalPriceValue = salesList?.map(item => (item?.actualSalesPrice * item?.quantity))

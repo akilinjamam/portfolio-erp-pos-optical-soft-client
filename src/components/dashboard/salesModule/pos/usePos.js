@@ -1,13 +1,13 @@
 import { useState } from "react";
-import useProductData from "../../../../data/productData/useProductData";
+import useGetProductDataByBarcode from "../../../../data/productData/useGetProductDataByBarcode";
 
 
-const usePos = () => {
+const usePos = (barcode) => {
     const [priceArray, setPriceArray] = useState([])
     let [quantityArray, setQuantityArray] = useState([])
-    const { products, refetch } = useProductData()
-    const allProducts = products?.result
-    return { allProducts, setPriceArray, priceArray, quantityArray, setQuantityArray, refetch }
+    const { productByBarcode, refetch, isFetching } = useGetProductDataByBarcode(barcode)
+    const allProducts = productByBarcode?.result;
+    return { allProducts, setPriceArray, priceArray, quantityArray, setQuantityArray, refetch, isFetching }
 };
 
 export default usePos;

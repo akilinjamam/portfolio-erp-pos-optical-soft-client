@@ -13,7 +13,7 @@ const FilterOption = ({dispatch, openModal, addEmployeeList, employeeData, query
                             dispatch(addEmployeeList(employeeData))
                         }}
                         title="print" className="uil uil-print"></i>
-                        <span>Total : {employeeData?.length} </span>
+                        <span>Total : {employeeData?.total} </span>
                         <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
                         <i onClick={() => setQuery('')}  className="uil uil-times"></i>
                     </div>
@@ -23,7 +23,7 @@ const FilterOption = ({dispatch, openModal, addEmployeeList, employeeData, query
                         <label htmlFor="">To: </label>
                         <input style={{padding:'0 2px'}} placeholder="Basic Salary" value={range?.to}  type="number" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
                         <i onClick={() => {
-                        setRange({from: '', to: ''})
+                        setRange({...range,from: '', to: ''})
                         }}  className="uil uil-times"></i>
                    </div>
                 </div>

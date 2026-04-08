@@ -7,7 +7,7 @@ import usePostProductEntryData from "../../../../data/productEntryData/usePostPr
 
 const useProductEntry = () => {
     const { users } = useUserData()
-    const { employeeData } = useGetEmployeeData();
+    const { employeeData } = useGetEmployeeData('', '', '', 1, 100);
     const { supplierData } = useGetSupplierData();
     const allEmployess = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
     const allSuppliers = supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import Pagination from "../../pagination/Pagination";
 import { textInput } from "../AddEmployee/employeeInput";
 import employeeList from './EmployeeList.module.scss';
 import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
@@ -9,9 +8,10 @@ import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlic
 import useEmployeeList from "./useEmployeeList";
 import EmployeeListTable from "./EmployeeListTable";
 import FilterOption from "./FilterOption";
+import NewPagination from "../../pagination/NewPagination";
 const EmployeeList = ({hideField, hideSection}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery} = useEmployeeList();
-    const employeeData = modifiedEmployeeDataWithIndexId
+    const {employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery, count, setCount, pageNumber, setPageNumber } = useEmployeeList();
+     
 
     const dispatch = useDispatch();
 
@@ -105,12 +105,12 @@ const EmployeeList = ({hideField, hideSection}) => {
                 
           </section>
           <section style={{height: '32vh'}}  className={`${employeeList.tableArea}`}>
-              <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={employeeData} hideField={hideField} />
+              <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={employeeData?.result} setEdit={setEdit} edit={edit} showData={employeeData?.result} hideField={hideField} />
           </section>
            {
             !isLoading
             &&
-            <Pagination showData={employeeData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={10}/>
+            <NewPagination data={employeeData}  limit={10} pageNumber={pageNumber} setPageNumber={setPageNumber} count={count} setCount={setCount} />
            }      
         </div>
     );
