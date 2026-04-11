@@ -14,12 +14,8 @@ const SalesRecord = () => {
     const dispatch = useDispatch();
    
     const [handleQuery, setHandleQuery] = useState('');
-<<<<<<< HEAD
-
-=======
     const [pageNumber, setPageNumber] = useState(1);
     const [count, setCount] = useState(1);
->>>>>>> 4f2ec6ea54a1a8f889cef0b9c7891686d458db81
     const [range, setRange] = useState({
         from: '',
         to: '',
