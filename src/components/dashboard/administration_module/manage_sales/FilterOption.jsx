@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import manageSaleList from "./ManageSales.module.scss"
 
-const FilterOption = ({dispatch, openModal, addSalesData, supplierData, totalSalesItem, totalSalesValue, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalNogodValue, totalCashValue, setQuery, setRange, query, range }) => {
+const FilterOption = ({dispatch, openModal, addSalesData, supplierData, totalSalesItem, totalSalesValue, totalPaid, totalDiscount, totalBankValue, totalBkashValue, totalNogodValue, totalCashValue, setQuery, setRange, query, range, totalSalesQuantity }) => {
     return (
         <section className={`${manageSaleList.navigationIcon} flex_between`}>
                     { 
@@ -9,17 +9,17 @@ const FilterOption = ({dispatch, openModal, addSalesData, supplierData, totalSal
                         <i
                         onClick={() => {
                           dispatch(openModal('sales'))
-                          dispatch(addSalesData({modifiedData:supplierData, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue}))
+                          dispatch(addSalesData({modifiedData:supplierData, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue, totalSalesQuantity}))
                         }}
                         title="print" className="uil uil-print"></i>
-                        <span>Total : {supplierData?.length} </span>
+                        <span>Total : {totalSalesItem} </span>
                         <input value={query} type="text" name="" id="" onChange={(e) => setQuery(e.target.value)}/>
                         <i onClick={() => setQuery('')}  className="uil uil-times"></i>
                         <label htmlFor="">From: </label>
                     <input value={range?.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                     <label htmlFor="">To: </label>
                     <input value={range?.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    <i onClick={() =>setRange({from:'', to:''})} className="uil uil-times"></i>
+                    <i onClick={() =>setRange({...range,from:'', to:''})} className="uil uil-times"></i>
                       
                     </div>
                     }

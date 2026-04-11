@@ -19,7 +19,7 @@ const useAddPayrollBonus = () => {
     const [employeeId, setEmployeeId] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
 
-    const {employeeData, refetch: refetchEmployee} = useGetEmployeeData()
+    const {employeeData, refetch: refetchEmployee} = useGetEmployeeData('', '', '', 1, 100)
     const {payroll, refetch} = useGetSinglePayrollData(employeeId);
     const allPayroll = payroll?.result;
    

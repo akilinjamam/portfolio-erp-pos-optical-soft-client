@@ -18,8 +18,9 @@ const useAddPayroll = () => {
     const [payrollData, setPayrollData] = useState(initialPayrollData);
     const [employeeId, setEmployeeId] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
-
-    const {employeeData, refetch: refetchEmployee} = useGetEmployeeData()
+    const page = 1;
+    const limit = 100
+    const {employeeData, refetch: refetchEmployee} = useGetEmployeeData('', '', '', page, limit)
     const {payroll, refetch} = useGetSinglePayrollData(employeeId);
     const allPayroll = payroll?.result;
    

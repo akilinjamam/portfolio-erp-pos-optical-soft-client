@@ -1,6 +1,6 @@
 import axios from "axios"
 const url = import.meta.env.VITE_DATA_URL;
-export const fetchGetEmployeeData = async (query, from, to) => {
+export const fetchGetEmployeeData = async (query, from, to, page, limit) => {
     try {
         const token = localStorage.getItem('user')
 
@@ -8,7 +8,7 @@ export const fetchGetEmployeeData = async (query, from, to) => {
         const fromSalary = from ? from : '';
         const toSalary = to ? to : '';
 
-        const result = await axios.get(`${url}/employees?searchTerm=${value}&from=${fromSalary}&to=${toSalary}`, {
+        const result = await axios.get(`${url}/employees?searchTerm=${value}&from=${fromSalary}&to=${toSalary}&page=${page}&limit=${limit}`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",

@@ -36,12 +36,13 @@ const usePayrollList = () => {
         month: splitedMonth
     }
 
+    const employeePage = 1;
+    const employeeLimit = 100
 
-
-    const { employeeData, refetch, isLoading } = useGetEmployeeData(query, range.from, range.to)
+    const { employeeData, refetch, isLoading } = useGetEmployeeData(query, range.from, range.to, employeePage, employeeLimit)
 
     const { payroll, refetch: payrollRefetch } = useGetAllPayrollData(queryValues.employeeName, queryValues.year, queryValues.month)
-
+    console.log(payroll)
     const allPayrollData = payroll?.data?.result
 
     const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);

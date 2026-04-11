@@ -97,7 +97,7 @@ function App() {
     }
   ])
   
-  // hello bro
+  // hello
   return (
     <>
       <RouterProvider router={router}/>

@@ -1,7 +1,6 @@
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import Pagination from "../../pagination/Pagination";
 import { optionField, textInput } from "../product_entry/productInput";
 import productList from './ProductList.module.scss';
 import ProductListTable from "./ProductListTable";
@@ -10,9 +9,17 @@ import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import FilterOption from "./FilterOption";
+import NewPagination from "../../pagination/NewPagination";
 const ProductList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, setStocks, range ,setRange} = useProductList();
-    const productData = modifiedProductDataWithIndexId
+    const {products,isLoading, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, setStocks, range ,setRange, data, pageNumber, setPageNumber, count, setCount, isFetching} = useProductList();
+    const productData = data
+
+    const summary = {
+      totalPurchasePrice: products?.totalPurchasePrice,
+      totalSalesPrice: products?.totalSalesPrice,
+      totalStock: products?.totalStock,
+      totalQuantity: products?.totalQuantity,
+    }
 
     const dispatch = useDispatch();
 
@@ -146,15 +153,15 @@ const ProductList = () => {
                   </div>
                 </div>
               </div>
-         <FilterOption setQuery={setQuery} query={query} productData={productData} setStocks={setStocks} fullScr={fullScr} handlBarcode={handlBarcode}  handlePrint={handlePrint}  contentToPrint={contentToPrint} setFullScr={setFullScr} range={range} setRange={setRange} />
+         <FilterOption setQuery={setQuery} query={query} productData={productData} setStocks={setStocks} fullScr={fullScr} handlBarcode={handlBarcode}  handlePrint={handlePrint}  contentToPrint={contentToPrint} setFullScr={setFullScr} range={range} setRange={setRange} data={products} />
          
           <section style={{height: `${fullScr ? '80vh' : '35vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
-              <ProductListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
+              <ProductListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} isFetching={isFetching} paginatedDataContainer={productData} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr} summary={summary}/>
           </section>
            {
             !isLoading && !fullScr 
             &&
-            <Pagination showData={productData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={50}/>
+            <NewPagination data={products} limit={range.limit} setPageNumber={setPageNumber} pageNumber={pageNumber} count={count} setCount={setCount} />
            }      
         </div>
     );

@@ -1,23 +1,23 @@
 /* eslint-disable react/prop-types */
 import productList from "./ProductList.module.scss";
 
-const FilterOption = ({setQuery, query, productData,setStocks, fullScr,handlBarcode, handlePrint, contentToPrint,setFullScr, range, setRange}) => {
+const FilterOption = ({setQuery, query, productData,setStocks, fullScr,handlBarcode, handlePrint, contentToPrint,setFullScr, range, setRange, data}) => {
     return (
          <div>
             <section className={`${productList.navigationIcon} flex_between`}>
                 { 
                     <div className={productList.inputPart}>
                     
-                        <span>Total Products : {productData?.length}</span>
+                        <span>Total Products : {data?.total}</span>
                         <input type="text" name="query" id="" value={query} placeholder="search" onChange={(e) => setQuery(e.target.value)} />
                         <i onClick={() => setQuery('')} className="uil uil-times"></i>
 
                         <select name="" id="" onChange={(e) => {
                             if(e.target.value === 'true' || e.target.value === 'false'){
-                            setStocks(e.target.value === 'true')
+                            setRange({...range, inStock: e.target.value})
                             }
                             if(e.target.value === ''){
-                            setStocks('')
+                            setRange({...range, inStock: ''})
                             }
                         } }>
                             <option value="">stock-in & stock-out</option>
@@ -63,7 +63,7 @@ const FilterOption = ({setQuery, query, productData,setStocks, fullScr,handlBarc
                       <input value={range.from} type="date" name="" id="" onChange={(e) => setRange({...range, from: e.target.value})}/>
                       <label htmlFor="">To: </label>
                       <input value={range.to} type="date" name="" id="" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                      <i onClick={() => setRange({from:'', to:''})} className="uil uil-times"></i>
+                      <i onClick={() => setRange({...range, from:'', to:''})} className="uil uil-times"></i>
                 </div>
                 }
                 { 
@@ -72,7 +72,7 @@ const FilterOption = ({setQuery, query, productData,setStocks, fullScr,handlBarc
                       <input placeholder="price" value={range.priceFrom} type="text" name="" id="" onChange={(e) => setRange({...range, priceFrom: e.target.value})} style={{padding: '0 2px'}}/>
                       <label htmlFor="">To: </label>
                       <input placeholder="price" value={range.priceTo} type="text" name="" id="" onChange={(e) => setRange({...range, priceTo: e.target.value})} style={{padding: '0 2px'}}/>
-                      <i onClick={() => setRange({priceFrom:'', priceTo:''})} className="uil uil-times"></i>
+                      <i onClick={() => setRange({...range, priceFrom:'', priceTo:''})} className="uil uil-times"></i>
                 </div>
                 }
                 

@@ -3,12 +3,10 @@ import salesRecord from './SalesRecord.module.scss';
 import { useDispatch } from "react-redux";
 import { addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import { useState } from "react";
-import Pagination from "../../pagination/Pagination";
 import { useEffect } from "react";
-import { calculateTotalPrice } from "../../../calculation/calculateSum";
-// import useSaleData from "../../../../data/saleData/useSaleData";
-import useOneMonthSaleData from "../../../../data/saleData/useOneMonthSalesData";
 import FilterOption from "./FilterOption";
+import useOneMonthSaleDataPaginated from "../../../../data/saleData/useOneMonthSalesDataPaginated";
+import NewPagination from "../../pagination/NewPagination";
 // import { fetchGetSaleData } from "../../../../data/fetchedData/fetchSaleData";
 
 const SalesRecord = () => {
@@ -16,48 +14,39 @@ const SalesRecord = () => {
     const dispatch = useDispatch();
    
     const [handleQuery, setHandleQuery] = useState('');
+<<<<<<< HEAD
 
+=======
+    const [pageNumber, setPageNumber] = useState(1);
+    const [count, setCount] = useState(1);
+>>>>>>> 4f2ec6ea54a1a8f889cef0b9c7891686d458db81
     const [range, setRange] = useState({
         from: '',
-        to: ''
+        to: '',
+        limit: 50
     })
 
-    const {saleData, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, isLoading, refetch, totalSalesQuantity} = useOneMonthSaleData(handleQuery, range.from, range.to);
-    const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
-    const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
-    // eslint-disable-next-line no-unused-vars
-    const [paginatedIndex,setPaginatedIndex] = useState()
-    
-    const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    // paginated data from server
+    const {saleData, refetch, isLoading} = useOneMonthSaleDataPaginated(handleQuery, range.from, range.to, pageNumber, range.limit, '');
+    const summary = saleData?.summary;
+    const {totalCash, totalBank, totalBkash, totalNogod, totalSalesValue, totalDiscount, total, totalSoldQuantity} = summary || {}
 
-    
-
-    const totalPaid = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.advance)))
-    const totalDiscount = calculateTotalPrice(saleData?.result?.map(sale => Number(sale?.discount)))
-  
-    const totalSalesValue = calculateTotalPrice(total)
-    const totalSalesItem = saleData?.result?.length;
-    
-    
-    useEffect(() => {
-        const modified = saleData?.result?.map((item, index) => ({...item, indexId: index+1}))
-        setModifiedProductDataWithIndexId(modified)
-    }, [saleData?.result])
 
     useEffect(() => {
         refetch()
+        setPageNumber(1)
     },[refetch,handleQuery, range])
 
     return (
         <div className={salesRecord.main}>
-            <FilterOption dispatch={dispatch}  openModal={openModal} addSalesData={addSalesData} modifiedProductDataWithIndexId={modifiedProductDataWithIndexId} totalSalesItem={totalSalesItem} totalSalesValue={totalSalesValue} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalSalesQuantity={totalSalesQuantity} handleQuery={handleQuery} setHandleQuery={setHandleQuery} range={range} setRange={setRange} />
+            <FilterOption dispatch={dispatch}  openModal={openModal} addSalesData={addSalesData} modifiedProductDataWithIndexId={saleData?.result} totalSalesItem={saleData?.total} totalSalesValue={totalSalesValue} totalPaid={total} totalDiscount={totalDiscount} totalCashValue={totalCash} totalBankValue={totalBank} totalBkashValue={totalBkash} totalNogodValue={totalNogod} totalSalesQuantity={totalSoldQuantity} handleQuery={handleQuery} setHandleQuery={setHandleQuery} range={range} setRange={setRange} />
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <SalesRecordTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} saleData={saleData} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalSalesQuantity={totalSalesQuantity} />
+                <SalesRecordTable paginatedDataContainer={saleData?.result} isLoading={isLoading} saleData={saleData?.result} totalSalesValue={totalSalesValue} totalSalesItem={ saleData?.total} totalPaid={total} totalDiscount={totalDiscount} totalCashValue={totalCash} totalBankValue={totalBank} totalBkashValue={totalBkash} totalNogodValue={totalNogod} totalSalesQuantity={totalSoldQuantity} />
             </div>
             {
                 !isLoading
                 &&
-                <Pagination showData={modifiedProductDataWithIndexId} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={50}/>
+                <NewPagination data={saleData} limit={range.limit} setPageNumber={setPageNumber} pageNumber={pageNumber} count={count} setCount={setCount} />
             }
         </div>
     );

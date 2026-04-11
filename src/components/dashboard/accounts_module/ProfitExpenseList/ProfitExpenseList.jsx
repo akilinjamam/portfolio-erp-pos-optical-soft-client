@@ -62,18 +62,7 @@ const ProfitExpenseList = ({hideSection, hideField}) => {
                       </form>
                   </div>
                 </div>
-                {/* <div className={`${employeeList.inputAreaTwo} flex_center`}>
-                  <div className={`${employeeList.container} `}>
-                        <div className={`${employeeList.titleName} flex_center`}></div>
-                        <div style={{width: '0px'}} className={`${employeeList.border_remover}`}></div>
-                        <br />
-                            <div className={`${employeeList.inputAreaTwoContainer}`}>
-                           
-                                
-                                  
-                            </div>
-                  </div>
-                </div> */}
+              
               </div>
           <section className={`${employeeList.navigationIcon} flex_between`}>
                 { 

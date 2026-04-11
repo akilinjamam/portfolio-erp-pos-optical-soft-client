@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const useOneMonthSaleData = (query, from , to) => {
     const {data:getAllData, refetch, isLoading, error, isFetching} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData'], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
     const saleData = getAllData
-    console.log(saleData)
+   
         useEffect(() => {
             const interval = setInterval(() => {
                 fetchGetOneMonthSaleData(query, from , to)

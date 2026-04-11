@@ -3,11 +3,11 @@ import { fetchGetEmployeeData } from "../fetchedData/fetchEmployeeDate";
 
 
 
-const useGetEmployeeData = (query, from, to) => {
+const useGetEmployeeData = (query, from, to, page, limit) => {
 
 
 
-    const { data: getAllData, refetch, isLoading, error } = useQuery({ queryKey: ['fetchGetEmplyeeData'], queryFn: () => fetchGetEmployeeData(query, from, to) })
+    const { data: getAllData, refetch, isLoading, error } = useQuery({ queryKey: ['fetchGetEmplyeeData', query, from, to, page, limit], queryFn: () => fetchGetEmployeeData(query, from, to, page, limit) })
     const employeeData = getAllData
 
 

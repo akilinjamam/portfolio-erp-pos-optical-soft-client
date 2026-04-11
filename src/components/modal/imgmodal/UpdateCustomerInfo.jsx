@@ -8,9 +8,9 @@ import { calculateTotalPrice } from "../../calculation/calculateSum";
 import { useEffect, useState } from "react";
 import useGetEmployeeData from "../../../data/employeeData/useGetEmployeeData";
 import useUpdateCustomerInfo from "../../../data/saleData/useUpdateCustomerInfo";
-import useSaleData from "../../../data/saleData/useSaleData";
 import { toast } from "react-toastify";
 import { useGetGlassData } from "../../../data/glassTypeData/useGlassTypeData";
+import useGetSalesByInvoice from "../../../data/saleData/useGetSalesByInvoice";
 
 const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCustomerInfo}) => {
    
@@ -83,7 +83,7 @@ const UpdateCustomerInfo = ({dispatch,  salesList,closeModal, type, open, getCus
           });
         }
       }, [getCustomerInfo, reset]);
-      const {refetch} = useSaleData()
+      const {refetch} = useGetSalesByInvoice(getCustomerInfo?.invoiceBarcode)
       const {mutate: updateCustomerData} = useUpdateCustomerInfo(refetch)
       
     

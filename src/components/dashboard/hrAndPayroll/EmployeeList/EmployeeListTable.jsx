@@ -68,7 +68,7 @@ if(isLoading){
                 <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
                     <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
                       {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
-                      <span>{data?.indexId}</span>
+                      <span>{data?.sId}</span>
                     </td>
                     <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
                     <div style={{maxWidth:"100px"}}>

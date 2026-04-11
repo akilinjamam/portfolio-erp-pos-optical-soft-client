@@ -38,8 +38,8 @@ const StockTable = ({paginatedDataContainer, stockTotalInfo}) => {
                 {
                     paginatedDataContainer?.map((product, index) => {
                         return (
-                            <tr key={product?.indexId}>
-                                <td  style={{border:'1px solid #dddddd',textAlign:'left',}}>{product?.indexId ? product?.indexId : (index+1) }</td>
+                            <tr key={index}>
+                                <td  style={{border:'1px solid #dddddd',textAlign:'left',}}>{product?.sId }</td>
                                 <td  style={{border:'1px solid #dddddd',textAlign:'left', width:'150px'}}>{product?.productName}</td>
                                 <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>{product?.salesPrice}</td>
                                 <td  style={{border:'1px solid #dddddd',textAlign:'left'}}>
