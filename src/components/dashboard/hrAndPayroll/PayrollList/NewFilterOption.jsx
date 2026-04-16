@@ -54,9 +54,9 @@ const FilterOption = ({downloadPdf,  month, setMonth,  total, allEmployeeData, s
                     <div className={salesRecord.dateInputGroup}>
                         <label htmlFor="">Name</label>
                         <select name="" id="" onChange={(e) => setEmployeeId(e.target.value) }>
-                            <option value="">Select EmployeeName</option>
+                            <option value="">Select Name</option>
                                 {
-                                    allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.employeeName}</option> )
+                                    allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.employeeName || employee?.supplierName}</option> )
                                 }
                             </select>
                     </div>

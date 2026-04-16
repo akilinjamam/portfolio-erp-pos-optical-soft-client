@@ -32,6 +32,8 @@ const useAddVendorBill = () => {
 
     const allSuppliers = supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
 
+    console.log(supplierData)
+
     const findEmployee = allSuppliers?.find(f => f?._id === supplierId);
 
     const { mutate: postPayrollData, isPending } = usePostVendorBillData(refetch)
@@ -99,7 +101,7 @@ const useAddVendorBill = () => {
 
     console.log(month)
 
-    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, findEmployee, lastBillingDate, lastPaymentDate, lastPaid, modifiedVendorDataWithIndexId , useDispatch, setMonth, dispatch, paginatedDataContainer, setPaginatedDataContainer, isLoading, paginatedIndex, setPaginatedIndex, isPending}
+    return { payrollData, setPayrollData, handleSubmit, initialPayrollData, allSuppliers, setSupplierId, allPayroll, findEmployee, lastBillingDate, lastPaymentDate, lastPaid, modifiedVendorDataWithIndexId , useDispatch, setMonth, dispatch, paginatedDataContainer, setPaginatedDataContainer, isLoading, paginatedIndex, setPaginatedIndex, isPending, month}
 };
 
 

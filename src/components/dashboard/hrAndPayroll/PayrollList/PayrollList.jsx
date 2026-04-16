@@ -7,12 +7,54 @@ import PayrollListTable from "./PayrollListTable";
 import { payrollListInput } from "./payrollListInput";
 
 import NewFilterOption from "./NewFilterOption";
+import { useMemo } from "react";
+import usePdfDownloader from "../../../../usePdfDownloader";
 const PayrollList = ({hideSection, hideField}) => {
     const {employeeId, paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod, location} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
-   
+
+
+    const dataForPdf = useMemo(() => {
+            const result = paginatedDataContainer?.map((payroll) => {
+        
+                return [
+                    payroll?.indexId,
+                    `Name: ${payroll?.employeeName?.employee}\nID: ${payroll?.transectionId}\nPaymentMethod: ${payroll?.paymentMethod}`,
+                    payroll?.createdAt?.slice(0, 10),
+                    `Basic: ${payroll?.basicSalary}\nNet: ${payroll?.netSalary}\nTotal: ${payroll?.totalSalary}`,
+                    `Current Paid: ${payroll?.paid}\nTotal Paid: ${payroll?.totalPaid}`,
+                    `Current Due: ${payroll?.due}\nPrevious Due: ${payroll?.prevDue}`,
+                    `Current Advance: ${payroll?.advance}\nPrevious Advance: ${payroll?.prevAdvance}`,
+                    `Over Time: ${payroll?.overtime}\nIncentive: ${payroll?.incentive}`,
+                ];
+            });
+        
+            return {
+                header: [
+                    "SL",
+                    "Employee Name",
+                    "Joining Date",
+                    "Address",
+                    "Mobile",
+                    "Nid",
+                    "Employee Id",
+                    "Basic Salary",
+                ],
+                result
+            };
+        }, [paginatedDataContainer]);
+        
+            const summaryData = [
+          { label: "Total Paid", value: totalPaid },
+          { label: "Paid", value: paidAmount },
+          { label: "Overtime", value: totalOvertime },
+          { label: "Incentive", value: totalIncentive },
+        ];
+            
+            const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Payroll List", summaryData, 60)
+
 
     return (
         <div  className={`${payrollList.main} full_width`}>
@@ -74,7 +116,7 @@ const PayrollList = ({hideSection, hideField}) => {
                 </div>
                 
               </div>
-          <NewFilterOption allEmployeeData={allEmployeeData} employeeId={employeeId} month={month} setMonth={setMonth} setEmployeeId={setEmployeeId} total={payrollData?.length} />
+          <NewFilterOption downloadPdf={handleDownloadPDF} allEmployeeData={allEmployeeData} employeeId={employeeId} month={month} setMonth={setMonth} setEmployeeId={setEmployeeId} total={payrollData?.length} />
 
           
           <section className={`${payrollList.navigationIcon} only_flex`}>

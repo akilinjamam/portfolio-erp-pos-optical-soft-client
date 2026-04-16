@@ -10,9 +10,46 @@ import EmployeeListTable from "./EmployeeListTable";
 
 import NewPagination from "../../pagination/NewPagination";
 import FilterOption from "../../salesModule/salesRecord/FilterOption";
+import usePdfDownloader from "../../../../usePdfDownloader";
+import { useMemo } from "react";
 const EmployeeList = ({hideField, hideSection}) => {
     const {employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery, count, setCount, pageNumber, setPageNumber } = useEmployeeList();
      
+     const dataForPdf = useMemo(() => {
+        const result = employeeData?.result?.map((employee, index) => {
+    
+            return [
+                `${index+1}`,
+                `${employee?.employeeName}`,
+                employee?.createdAt?.slice(0, 10),
+                employee?.address,
+                employee?.mobile,
+                employee?.nid,
+                employee?.employeeId,
+                employee?.basicSalary,
+            ];
+        });
+    
+        return {
+            header: [
+                "SL",
+                "Employee Name",
+                "Joining Date",
+                "Address",
+                "Mobile",
+                "Nid",
+                "Employee Id",
+                "Basic Salary",
+            ],
+            result
+        };
+    }, [employeeData]);
+    
+    //     const summaryData = [
+    //   { label: "", value: '' },
+    // ];
+        
+        const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Employee List", [], 40)
 
 
     return (
@@ -100,10 +137,8 @@ const EmployeeList = ({hideField, hideSection}) => {
                 </div>
               </div>
           
-         <FilterOption  handleQuery={query} setHandleQuery={setQuery} range={range} setRange={setRange} totalSalesItem={employeeData?.result?.length}/>
+         <FilterOption downloadPdf={handleDownloadPDF}  handleQuery={query} setHandleQuery={setQuery} range={range} setRange={setRange} totalSalesItem={employeeData?.result?.length}/>
           <section className={`${employeeList.navigationIcon} only_flex`}>
-          
-                
           </section>
           <section style={{height: '32vh'}}  className={`${employeeList.tableArea}`}>
               <EmployeeListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={employeeData?.result} setEdit={setEdit} edit={edit} showData={employeeData?.result} hideField={hideField} />

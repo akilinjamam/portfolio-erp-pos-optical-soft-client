@@ -38,7 +38,7 @@ if(isLoading){
        <table style={{borderCollapse:'collapse', fontSize:fontsize, margin:'auto', paddingBottom:'10px', width:'99%',  fontFamily: "'DM Sans', sans-serif"}}>
           
           <thead>
-            <tr>
+            <tr className={payrollListTable.summary}>
               <th></th>
               <th>Total Paid =</th>
               <th>{totalPaid}</th>
@@ -88,7 +88,7 @@ if(isLoading){
                 <td>
                   <div className={payrollListTable.employee}>
                     {item?.employeeName?.employeeName}
-                    <small>ID: {item?.indexId}</small>
+                    <small>ID: {item?.transectionId}</small>
                     <small>payment Method: {item?.paymentMethod}</small>
                   </div>
                 </td>
@@ -115,7 +115,7 @@ if(isLoading){
                 </td>
                 <td >
                   <p>Over Time: {item?.overtime}</p>
-                  <p>:Incentive {item?.incentive}</p>
+                  <p>Incentive: {item?.incentive}</p>
                 </td>
 
                 {!hideField && (

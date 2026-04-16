@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 
 const useOneMonthSaleData = (query, from , to) => {
-    const {data:getAllData, refetch, isLoading, error, isFetching} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData'], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
+    const {data:getAllData, refetch, isLoading, error, isFetching} = useQuery({ queryKey: ['fetchGetOneMonthSalesSaleData', query, from, to], queryFn: () => fetchGetOneMonthSaleData(query, from, to) })
     const saleData = getAllData
    
         useEffect(() => {
