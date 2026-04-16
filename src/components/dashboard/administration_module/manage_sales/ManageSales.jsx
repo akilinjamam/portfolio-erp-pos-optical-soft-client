@@ -1,18 +1,81 @@
-import { useDispatch } from "react-redux";
 import manageSaleList from './ManageSales.module.scss';
-import {addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
+
 import useManageSales from "./useManageSales";
 import ManageSaleTable from "./ManageSalesTable";
 import { manageSaleUpdateInput } from "./manageSalesUpdateInput";
-import FilterOption from "./FilterOption";
+import FilterOption from "../../salesModule/salesRecord/FilterOption";
 import NewPagination from "../../pagination/NewPagination";
+import usePdfDownloader from '../../../../usePdfDownloader';
+import { useMemo } from 'react';
 
 const ManageSales = () => {
-    const {isLoading, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData,  modifiedSupplierDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesValue, totalSalesItem, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalPaid, range, setRange, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct, saleData, pageNumber, setPageNumber, count, setCount, totalSoldQuantity} = useManageSales()
-    const supplierData = modifiedSupplierDataWithIndexId
+    const {isLoading, updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData,   setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, totalSalesItem, range, setRange, updatePaymentMethod, setUpdatePaymentMethod, updateProductData, setUpdateProductData, productId, setProductId, initialProductData, setSaleId, handleUpdateProduct, selectProduct, setSelectProduct, saleData, pageNumber, setPageNumber, count, setCount} = useManageSales()
 
+    const summary = saleData?.summary;
+    const {totalCash, totalBank, totalBkash, totalNogod, totalSalesValue, totalDiscount, total, totalSoldQuantity} = summary || {}
   
-    const dispatch = useDispatch();
+    const dataForPdf = useMemo(() => {
+    const result = saleData?.result?.map((sale) => {
+
+        const totalAmount = sale?.products?.reduce(
+            (sum, item) => sum + (item.quantity * item.actualSalesPrice),
+            0
+        );
+
+        const due = totalAmount - Number(sale?.advance) - Number(sale?.discount);
+
+        return [
+            sale?.sId,
+            `${sale?.customerName}\n${sale?.phoneNumber}`,
+            sale?.createdAt?.slice(0, 10),
+
+            // Products (multi-line)
+            sale?.products
+                ?.map(item => `${item.productName} (${item.quantity}×${item.actualSalesPrice})`)
+                .join("\n"),
+
+            // Summary (multi-line)
+            `Total: ${totalAmount}\nPaid: ${sale?.advance}\nDue: ${due}\nDiscount: ${sale?.discount}`,
+
+            sale?.delivered,
+            sale?.referredBy,
+            sale?.recorderName,
+            sale?.invoiceBarcode
+        ];
+    });
+
+    return {
+        header: [
+            "SL",
+            "Customer",
+            "Date",
+            "Products",
+            "Summary",
+            "Status",
+            "Referred By",
+            "Sold By",
+            "Invoice"
+        ],
+        result
+    };
+}, [saleData?.result]);
+
+    const summaryData = [
+  { label: "Total Sales", value: totalSalesValue },
+  { label: "Total Paid", value: total },
+  { label: "Total Due", value: totalSalesValue - total - totalDiscount },
+  { label: "Total Discount", value: totalDiscount },
+
+  { label: "Sold Qty", value: totalSoldQuantity },
+  { label: "Cash", value: totalCash },
+  { label: "Bank", value: totalBank },
+  { label: "Bkash", value: totalBkash },
+  { label: "Nogod", value: totalNogod },
+];
+    
+  const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Manage Sales", summaryData)
+  
+  
     return (
         <div  className={`${manageSaleList.main} full_width`}>
              <div style={{display:'flex', flexWrap: "wrap"}}  className={`flex_around`}>
@@ -110,12 +173,13 @@ const ManageSales = () => {
                   </div>
                 </div>
               </div>
-              <FilterOption dispatch={dispatch} openModal={openModal} addSalesData={addSalesData}  supplierData={supplierData} totalSalesItem={totalSalesItem} totalSalesValue={totalSalesValue} totalPaid={totalPaid} totalDiscount={totalDiscount} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashValue={totalCashValue} setQuery={setQuery} setRange={setRange} query={query} range={range} totalSalesQuantity={totalSoldQuantity} />
+              
+              <FilterOption downloadPdf={handleDownloadPDF} range={range} setRange={setRange} handleQuery={query} setHandleQuery={setQuery} totalSalesItem={totalSalesItem}/>
           <section className={`${manageSaleList.navigationIcon} only_flex`}>
           
                 
           </section>
-          <section  className={`${manageSaleList.tableArea}`}>
+          <section style={{height: "32vh"}}  className={`${manageSaleList.tableArea}`}>
               <ManageSaleTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={saleData?.result} setEdit={setEdit} edit={edit} showData={saleData?.result} setUpdateProductData={setUpdateProductData} productId={productId} setProductId={setProductId} setSaleId={setSaleId} selectProduct={selectProduct} setSelectProduct={setSelectProduct} />
           </section>
            {

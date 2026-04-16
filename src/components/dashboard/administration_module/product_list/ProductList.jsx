@@ -1,17 +1,17 @@
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import { optionField, textInput } from "../product_entry/productInput";
 import productList from './ProductList.module.scss';
-import ProductListTable from "./ProductListTable";
 import useProductList from "./useProductList";
-import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
-import { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
-import FilterOption from "./FilterOption";
+
 import NewPagination from "../../pagination/NewPagination";
+import NewFilterOption from "./NewFilterOption";
+import NewProductListTable from "./NewProductListTable";
+import CommonLoading from "../../../commonLoagin/CommonLoading";
+import { useMemo } from "react";
+import usePdfDownloader from "../../../../usePdfDownloader";
 const ProductList = () => {
-    const {products,isLoading, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, setStocks, range ,setRange, data, pageNumber, setPageNumber, count, setCount, isFetching} = useProductList();
+    const {products,isLoading, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder,   setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,  range ,setRange, data, pageNumber, setPageNumber, count, setCount,} = useProductList();
     const productData = data
 
     const summary = {
@@ -21,23 +21,52 @@ const ProductList = () => {
       totalQuantity: products?.totalQuantity,
     }
 
-    const dispatch = useDispatch();
 
-    const handlBarcode = () => {
-      dispatch(openModal('barcode'));
-      dispatch(openBarcode(productData))
-    }
+ const dataForPdf = useMemo(() => {
+    const result = productData?.map((product) => {
 
-    const contentToPrint = useRef(null);
-    const handlePrint = useReactToPrint({
-        documentTitle: "Print This Document",
-        onBeforePrint: () => console.log("before printing..."),
-        onAfterPrint: () => console.log("after printing..."),
-        removeAfterPrint: true,
+        return [
+            product?.sId,
+            `${product?.productName}\n${product?.createdAt?.slice(0, 10)}`,
+            `Total: ${product?.stockAmount}\nStockout: ${Number(product?.stockAmount) - Number(product?.quantity)}\nAvailable: ${product?.quantity}`,
+            `Sales Price: ${product?.salesPrice}\nPurchase Price: ${product?.purchasePrice}\nCategory: ${product?.category}`,
+            `Size: ${product?.size}\nMaterial: ${product?.material}\nFrame Type: ${product?.frameType}\nFrame Shape: ${product?.shape}\nPower: ${product?.power}`,
+            `Supplier: ${product?.supplierName}\nCollector: ${product?.collectorName}\nRecorder: ${product?.recorderName}`,
+            product?.barcode
+        ];
     });
+
+    return {
+        header: [
+            "SL",
+            "Product Details",
+            "Stock",
+            "Pricing & Category",
+            "Features",
+            "Engaged By",
+            "Barcode"
+        ],
+        result
+    };
+}, [productData]);
+
+const {totalSalesPrice, totalPurchasePrice, totalStock, totalQuantity} = summary || {}
+
+
+const summaryData = [
+  { label: "Total Sales", value: totalSalesPrice },
+  { label: "Total Purchase", value: totalPurchasePrice },
+  { label: "Total Stock", value: totalStock},
+  { label: "Available Quantity", value: totalQuantity }
+];
+    
+  const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Product List", summaryData)
+
+  
     return (
         <div  className={`${productList.main} full_width`}>
-             <div style={{display:`${fullScr ? 'none' : 'flex'}`, flexWrap:"wrap"}}  className={`flex_around`}>
+            {/* just make change here only UI */}
+             <div style={{display:"flex", flexWrap:"wrap"}}  className={`flex_around`}>
                 <div className={`${productList.inputAreaOne} flex_center`}>
                   <div className={`${productList.container} `}>
                         <div className={`${productList.titleName}`}>Product Update</div>
@@ -153,13 +182,23 @@ const ProductList = () => {
                   </div>
                 </div>
               </div>
-         <FilterOption setQuery={setQuery} query={query} productData={productData} setStocks={setStocks} fullScr={fullScr} handlBarcode={handlBarcode}  handlePrint={handlePrint}  contentToPrint={contentToPrint} setFullScr={setFullScr} range={range} setRange={setRange} data={products} />
-         
-          <section style={{height: `${fullScr ? '80vh' : '35vh'}`}}  className={`${productList.tableArea}`} ref={contentToPrint}>
-              <ProductListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} isFetching={isFetching} paginatedDataContainer={productData} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr} summary={summary}/>
+              {/* just make change here only UI */}
+          <NewFilterOption pdf={handleDownloadPDF} setHandleQuery={setQuery} handleQuery={query} data={products} range={range} setRange={setRange} />
+    
+          {
+            !isLoading
+            ?
+            <section style={{height: "32vh", width:'99%', margin:'auto', overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none' }}>
+              <NewProductListTable paginatedDataContainer={productData} isLoading={isLoading} edit={edit} idsForDelete={idsForDelete} selectDeleted={selectDeleted} setEdit={setEdit} setIdsForDelete={setIdsForDelete} setSelectDeleted={setSelectDeleted} summary={summary} />
+              
           </section>
+          :
+          <div className='flex_top' style={{width:'100%', height:'500px'}}>
+            <CommonLoading/>
+          </div>
+          }
            {
-            !isLoading && !fullScr 
+            !isLoading  
             &&
             <NewPagination data={products} limit={range.limit} setPageNumber={setPageNumber} pageNumber={pageNumber} count={count} setCount={setCount} />
            }      

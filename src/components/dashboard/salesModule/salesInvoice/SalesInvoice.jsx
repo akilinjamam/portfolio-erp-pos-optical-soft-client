@@ -100,120 +100,119 @@ const SalesInvoice = () => {
   }
 
   return (
-   <div className={salesInvoice.superMain}>
-     <div className={salesInvoice.main}>
-    
-      <div className={`${salesInvoice.titleBar} flex_left`}>
-        <div className={salesInvoice.titleBarContainer}>
+    <div className={salesInvoice.superMain}>
+      <div className={salesInvoice.main}>
         
-          <i
-            title="Print Preview"
-            className="uil uil-print"
-            onClick={() => {
-              if (findSalesByInvoiceNumber) {
-                dispatch(addSalesListForSalesInvoice(products));
-                dispatch(customerInfoForSalesInvoice(getCustomerInfo));
-                dispatch(openModal("salesInvoice"));
-              } else {
-                toast.error("Please scan or type invoice number first");
-              }
-            }}
-          ></i>
+        {/* 🔹 Top Search & Tool Bar */}
+        <div className={salesInvoice.titleBar}>
+          <div className={salesInvoice.searchGroup}>
+            <i 
+              className={`uil uil-search ${salesInvoice.searchIcon}`}
+            ></i>
+            <input
+              className={salesInvoice.invoiceInput}
+              value={query}
+              placeholder="Search by invoice number..."
+              type="text"
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            {query && (
+              <i
+                className={`uil uil-times ${salesInvoice.clearBtn}`}
+                onClick={() => {
+                  setQuery("");
+                  setBarcodeId("");
+                  setDate({ from: "", to: "" });
+                }}
+              ></i>
+            )}
+          </div>
 
-          {/* Search by Invoice */}
-          <input
-            value={query}
-            style={{ padding: "0 2px" }}
-            placeholder="Search by invoice number"
-            type="text"
-            onChange={(e) => setQuery(e.target.value)}
-          />
-
-         
-          {/* Reset Button */}
-          <i
-            className="uil uil-times"
-            onClick={() => {
-              setQuery("");
-              setBarcodeId("");
-              setDate({ from: "", to: "" });
-            }}
-          ></i>
-
+          <div className={salesInvoice.actionIcons}>
+            <button 
+              className={salesInvoice.printBtn}
+              onClick={() => {
+                if (findSalesByInvoiceNumber) {
+                  dispatch(addSalesListForSalesInvoice(products));
+                  dispatch(customerInfoForSalesInvoice(getCustomerInfo));
+                  dispatch(openModal("salesInvoice"));
+                } else {
+                  toast.error("Please scan or type invoice number first");
+                }
+              }}
+            >
+              <i className="uil uil-print"></i> Print Preview
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* 🔹 Table Section */}
-      <div
-        style={{
-          overflowX: "hidden",
-          overflowY: "scroll",
-          scrollbarWidth: "none",
-          width: "99.5%",
-          maxHeight: "70vh",
-        }}
-      >
-        {
-          !isLoading ? <SalesInvoicTable data={findSalesByInvoiceNumber} /> : 
-          <div className="flex_center" style={{ width: "100%", height: "500px" }}>
-        <CommonLoading />
-      </div>
-        }
-      </div>
-
-      {/* 🔹 Action Buttons */}
-      {findSalesByInvoiceNumber && (
-        <div className={`${salesInvoice.adjust} flex_right`}>
-          <button
-            style={{ marginRight: "10px" }}
-            onClick={() => {
-              dispatch(addSalesListForSalesInvoice(products));
-              dispatch(customerInfoForSalesInvoice(getCustomerInfo));
-              dispatch(openModal("updateCustomer"));
-            }}
-            className={salesInvoice.adjustBtn}
-          >
-            Update Customer Info
-          </button>
-
-          <button
-            style={{ marginRight: "10px" }}
-            onClick={() => {
-              dispatch(addSalesListForSalesInvoice(products));
-              dispatch(customerInfoForSalesInvoice(getCustomerInfo));
-              dispatch(openModal("salesAdjust"));
-            }}
-            className={salesInvoice.adjustBtn}
-          >
-            Adjust Payment
-          </button>
-
-          <select
-            style={{ marginRight: "10px" }}
-            value={deliveryStatus}
-            onChange={(e) => {
-              setDeliveryStatus(e.target.value);
-              updateDelivery(e.target.value);
-            }}
-          >
-            <option value="Delivered">Delivered</option>
-            <option value="Not-Delivered">Not-Delivered</option>
-          </select>
-
-          <button
-            style={{ marginRight: "10px" }}
-            onClick={() => updateDelivery(deliveryStatus)}
-            className={salesInvoice.adjustBtn}
-          >
-            Adjust Delivery Status
-          </button>
+        {/* 🔹 Table Section */}
+        <div className={salesInvoice.tableContainer}>
+          {!isLoading ? (
+            <SalesInvoicTable data={findSalesByInvoiceNumber} />
+          ) : (
+            <div className={salesInvoice.loaderContainer}>
+              <CommonLoading />
+            </div>
+          )}
         </div>
-      )}
+
+        {/* 🔹 Action Footer */}
+        {findSalesByInvoiceNumber && (
+          <div className={salesInvoice.footerActions}>
+            <div className={salesInvoice.adjustBtn}>
+              <button
+                onClick={() => {
+                  dispatch(addSalesListForSalesInvoice(products));
+                  dispatch(customerInfoForSalesInvoice(getCustomerInfo));
+                  dispatch(openModal("updateCustomer"));
+                }}
+                className={salesInvoice.secondaryBtn}
+              >
+                Update Customer
+              </button>
+
+              <button
+                onClick={() => {
+                  dispatch(addSalesListForSalesInvoice(products));
+                  dispatch(customerInfoForSalesInvoice(getCustomerInfo));
+                  dispatch(openModal("salesAdjust"));
+                }}
+                className={salesInvoice.secondaryBtn}
+              >
+                Adjust Payment
+              </button>
+            </div>
+
+            <div className={salesInvoice.deliveryGroup}>
+              <select
+                className={salesInvoice.statusSelect}
+                value={deliveryStatus}
+                onChange={(e) => {
+                  setDeliveryStatus(e.target.value);
+                  updateDelivery(e.target.value);
+                }}
+              >
+                <option value="Delivered">Delivered</option>
+                <option value="Not-Delivered">Not-Delivered</option>
+              </select>
+
+              <button
+                onClick={() => updateDelivery(deliveryStatus)}
+                className={salesInvoice.primaryBtn}
+              >
+                Update Status
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-     <div className={salesInvoice.mobileMain}>
-          Only Available for Desktop Version
+
+      <div className={salesInvoice.mobileMain}>
+         <i className="uil uil-desktop"></i>
+         <p>Desktop View Required</p>
       </div>
-   </div>
+    </div>
   );
 };
 

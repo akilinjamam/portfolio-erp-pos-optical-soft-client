@@ -1,33 +1,51 @@
 import { Outlet } from 'react-router-dom';
 import useHome from '../home/useHome';
-import businessMonitor from './BusinessMonitor.module.scss';
-
+import report from '../report_module/ReportModule.module.scss';
 import { businessMonitorRoute } from './businessMonitorRoute';
 
-
 const BusinessMonitor = () => {
-    const {navigate, location} = useHome()
+    const { navigate, location } = useHome();
+   
+    
+    const isRoot = location === '/dashboard/business_monitor';
+
     return (
-        <div  className={`full_width`}>
-            <div style={{display: `${location === '/dashboard/business_monitor' ? 'block' : 'none'}`}}>
-                <div  className={`${businessMonitor.main} flex_top`}>
-                    <div className={`${businessMonitor.container}`}>
-                        {
-                            businessMonitorRoute.map((cart,index) => {
-                                return (
-                                    <div onClick={() => navigate(cart.link) } style={{backgroundColor: `${cart.color}`}} className={`${businessMonitor.allCarts} flex_center`} key={index+1}>
-                                    <div>
-                                    <i className={cart.icon}></i>
-                                    <p>{cart.value}</p>
+        <div className={report.wrapper}>
+            {isRoot && (
+                <div className={report.viewContainer}>
+                    <header className={report.header}>
+                        <div className={report.titleGroup}>
+                            <h1>Business Monitor</h1>
+                            <p>Generate Business Analytical information</p>
+                        </div>
+                    </header>
+
+                    <div className={report.grid}>
+                        {businessMonitorRoute?.map((cart, index) => (
+                            <div 
+                                key={index}
+                                onClick={() => navigate(cart.link)} 
+                                className={report.reportCard}
+                                style={{ '--accent': cart.color }}
+                            >
+                                <div className={report.cardInner}>
+                                    <div className={report.iconCircle}>
+                                        <i className={cart.icon}></i>
                                     </div>
+                                    <div className={report.info}>
+                                        <h3>{cart.value}</h3>
+                                        <span>View Details <i className="uil uil-arrow-right"></i></span>
                                     </div>
-                                )
-                            })
-                        }
-                    </div>   
+                                </div>
+                                <div className={report.glow}></div>
+                            </div>
+                        ))}
+                    </div>
+
+                  
                 </div>
-            </div>
-            <Outlet/>
+            )}
+            <Outlet />
         </div>
     );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import imgmodal from './ImgModal.module.scss';
-import customerContainer from './CustomerContainer.module.scss';
+import adjust from './SalesAdjustModal.module.scss';
 import { calculateTotalPrice } from "../../calculation/calculateSum";
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -94,78 +94,98 @@ const SalesAdjustModal = ({dispatch, getCustomerInfo, closeModal, type, open, sa
     
 
     return (
-        <div className={`${imgmodal.main} flex_center  ${(open && type === 'salesAdjust' ) ? imgmodal.open : imgmodal.close}`} >
-                <section className={`${imgmodal.container}  ${imgmodal.sizeCustomerContainer}`}>
-                    <div className={`${imgmodal.cancelBtn}  flex_right`}>
-                        <i onClick={() => dispatch(closeModal())} className="uil uil-times"></i>
-                    </div>
-                    <br />
-                    <form className={imgmodal.useFont}>
-                        <h4>Adjust Sales:</h4>
-                        <br />
-                        <h4>Total Sales Amount: {totalPriceValue}</h4>
-                        <div className={`${customerContainer.main} flex_between `}>
-                            <div className={`${customerContainer.partOne}`}>
-                               <br /><br />
-                               <label htmlFor="">Total Paid :</label>
-                               <br />
-                               <br />
-                               <input 
-                                value={getCustomerInfo?.advance} 
-                                type="number" 
-                               
-                                />
-                               <br /><br />
-                               <div className='only_flex'>
-                                    <label htmlFor="">Pay Total Due :</label>
-                               </div>
-                               
-                               <br />
-                               <input 
-                                value={payable} 
-                                type="number" 
-                                onChange={(e) => setPayable(e.target.value)} 
-                                />
-                               <br /><br />
-                               <label htmlFor="">Total Discount :</label>
-                               <br />
-                               <br />
-                               <input 
-                                value={discount} 
-                                type="number" 
-                                onChange={(e) => setDiscount(e.target.value)} 
-                                />
-                                <br /><br />
-                                <label htmlFor="">Due Payment Method</label>
-                                <br />
-                                <br />
-                                <select style={{width: '175px'}} value={duePaymentMethod} name="" id="" onChange={(e) => setDuePaymentMethod(e.target.value)}>
-                                    <option value="Cash">Cash</option>
-                                    <option value="Bank">Bank</option>
-                                    <option value="Bkash">Bkash</option>
-                                    <option value="Nogod">Nogod</option>
-                                </select>
-                                
-                            </div>
-                            <div className={`${customerContainer.partTwo}`}>
-                                <br />
-                                <br />
-                            </div>
-                        </div>
-                        <br /><br />
-                        {
-                            payable !== 0
-                            &&
-                            <input onClick={handleUpdate} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', border:'none', cursor:'pointer'}} type="submit" value="save" />
-                        }
-
-                        <button onClick={handleCancelAdjustment} style={{backgroundColor:'#0D2F3F', color:'white', fontWeight:'bold', padding: '3px 5px', marginLeft:'10px', border:'none', cursor:'pointer'}} >
-                            Cancel Adjustment
-                        </button>
-                    </form>
-                </section>
+        <div
+            className={`${imgmodal.main} flex_center ${
+            open && type === "salesAdjust" ? imgmodal.open : imgmodal.close
+            }`}
+        >
+            <section className={`${imgmodal.container}`}>
+            
+            {/* 🔹 Header */}
+            <div className={adjust.header}>
+                <h3>Adjust Sales</h3>
+                <i
+                onClick={() => dispatch(closeModal())}
+                className="uil uil-times"
+                ></i>
             </div>
-    );
+
+            {/* 🔹 Body */}
+            <form className={adjust.form}>
+                
+                <div className={adjust.summary}>
+                <p>Total Sales Amount</p>
+                <h2>{totalPriceValue}</h2>
+                </div>
+
+                <div className={adjust.grid}>
+                
+                {/* LEFT SIDE */}
+                <div className={adjust.formGroup}>
+                    <label>Total Paid</label>
+                    <input
+                    value={getCustomerInfo?.advance}
+                    type="number"
+                    disabled
+                    />
+                </div>
+
+                <div className={adjust.formGroup}>
+                    <label>Pay Due Amount</label>
+                    <input
+                    value={payable}
+                    type="number"
+                    onChange={(e) => setPayable(e.target.value)}
+                    />
+                </div>
+
+                <div className={adjust.formGroup}>
+                    <label>Discount</label>
+                    <input
+                    value={discount}
+                    type="number"
+                    onChange={(e) => setDiscount(e.target.value)}
+                    />
+                </div>
+
+                <div className={adjust.formGroup}>
+                    <label>Payment Method</label>
+                    <select
+                    value={duePaymentMethod}
+                    onChange={(e) => setDuePaymentMethod(e.target.value)}
+                    >
+                    <option value="Cash">Cash</option>
+                    <option value="Bank">Bank</option>
+                    <option value="Bkash">Bkash</option>
+                    <option value="Nogod">Nogod</option>
+                    </select>
+                </div>
+                </div>
+
+                {/* 🔹 Actions */}
+                <div className={adjust.actions}>
+                {payable !== 0 && (
+                    <button
+                    type="button"
+                    onClick={handleUpdate}
+                    className={adjust.primaryBtn}
+                    >
+                    Save Adjustment
+                    </button>
+                )}
+
+                <button
+                    type="button"
+                    onClick={handleCancelAdjustment}
+                    className={adjust.dangerBtn}
+                >
+                    Cancel Adjustment
+                </button>
+                </div>
+            </form>
+            </section>
+        </div>
+);
 };
 
 export default SalesAdjustModal;

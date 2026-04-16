@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import salesRecord from "./FilterOption.module.scss";
+import salesRecord from "../../salesModule/salesRecord/FilterOption.module.scss";
 
-const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataWithIndexId, totalSalesItem = 0, totalSalesValue = 0, totalPaid = 0, totalDiscount=0, totalCashValue=0, totalBankValue=0, totalBkashValue=0, totalNogodValue=0, totalSalesQuantity=0, handleQuery, setHandleQuery, range, setRange}) => {
+const FilterOption = ({downloadPdf,  month, setMonth,  total, allEmployeeData, setEmployeeId, employeeId }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     return (
@@ -11,27 +11,26 @@ const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataW
                 <div className={salesRecord.leftGroup}>
                     {/* Print Button */}
                     <button className={salesRecord.printBtn} onClick={() => {
-                        downloadPdf()
-                        // dispatch(openModal('sales'))
-                        dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue, totalSalesQuantity}))
+                        downloadPdf()        
                     }}>
-                        <i className="uil uil-print"></i>
+                    <i className="uil uil-print"></i>
                        
                     </button>
 
                     {/* Search Input */}
                     <div className={salesRecord.searchContainer}>
-                        {!handleQuery && <i className="uil uil-search"></i>}
+                       
                         <input 
-                            value={handleQuery} 
-                            type="text" 
+                            value={month} 
+                            type="month" 
                             placeholder="Search records..." 
-                            onChange={(e) => setHandleQuery(e.target.value)}
+                            onChange={(e) => setMonth(e.target.value)}
                         />
-                        {handleQuery && <i style={{cursor: "pointer"}} onClick={() => setHandleQuery('')} className="uil uil-times-circle"></i>}
+                        {month && <i style={{cursor: "pointer"}} onClick={() => setMonth('')} className="uil uil-times-circle"></i>}
                     </div>
+                    
                     <div className={salesRecord.countBadge}>
-                        Items: <span>{totalSalesItem}</span>
+                        Items: <span>{total}</span>
                     </div>
                 </div>
 
@@ -53,15 +52,17 @@ const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataW
             <div className={`${salesRecord.drawer} ${isDrawerOpen ? salesRecord.show : ''}`}>
                 <div className={salesRecord.drawerContent}>
                     <div className={salesRecord.dateInputGroup}>
-                        <label>From</label>
-                        <input value={range?.from} type="date" onChange={(e) => setRange({...range, from: e.target.value})}/>
+                        <label htmlFor="">Name</label>
+                        <select name="" id="" onChange={(e) => setEmployeeId(e.target.value) }>
+                            <option value="">Select EmployeeName</option>
+                                {
+                                    allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.employeeName}</option> )
+                                }
+                            </select>
                     </div>
-                    <div className={salesRecord.dateInputGroup}>
-                        <label>To</label>
-                        <input value={range?.to} type="date" onChange={(e) => setRange({...range, to: e.target.value})}/>
-                    </div>
-                    {(range?.from || range?.to) && (
-                        <button className={salesRecord.resetBtn} onClick={() => setRange({...range,from:'', to:''})}>
+                    
+                    {(employeeId) && (
+                        <button className={salesRecord.resetBtn} onClick={() => setEmployeeId('')}>
                             <i className="uil uil-refresh"></i> Reset
                         </button>
                     )}

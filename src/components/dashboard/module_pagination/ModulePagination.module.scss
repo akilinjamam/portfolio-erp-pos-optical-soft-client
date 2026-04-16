@@ -1,22 +1,38 @@
 @use '../../../global_style/reusable_variables/index' as v;
-.pagination{
-    width: 880px;
-    margin: auto;
+
+.pagination {
     display: flex;
-    justify-content: flex-start;
-    margin-top: 5px;
-    .button{
-        width: 97.5px;
-        padding: 10px 20px;
-        height: 30px;
-        margin-right: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: v.$lightPrimary;
-        color: white;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+
+    .button {
+        padding: 8px 20px;
+        background: #f8fafc;
+        border-radius: 8px;
         cursor: pointer;
-        font-family: v.$fs;
-        font-weight: bold;
+        transition: all 0.2s ease;
+        user-select: none;
+
+        p {
+            margin: 0;
+            font-family: v.$fs;
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        &:hover {
+            background: v.$primary;
+            p { color: white; }
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
     }
 }

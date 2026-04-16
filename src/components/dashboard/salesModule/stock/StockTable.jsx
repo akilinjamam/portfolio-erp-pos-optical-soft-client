@@ -1,7 +1,11 @@
+import CommonLoading from "../../../commonLoagin/CommonLoading";
 import stockTable from "./Stock.module.scss";
 /* eslint-disable react/prop-types */
-const StockTable = ({paginatedDataContainer, stockTotalInfo}) => {
+const StockTable = ({paginatedDataContainer, stockTotalInfo, isLoading}) => {
     
+     if(isLoading){
+        return <CommonLoading/>
+    }
 
     return (
         <div className={stockTable.table_responsive}>

@@ -54,20 +54,15 @@ if(isLoading){
           
           <thead>
               <tr>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Customer Name</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Phone Number</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Date</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Reffered By</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>products</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Sales Price</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Paid</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Discount</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Due</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Delivery Status</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Status</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Sold By</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Invoice Number</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Products</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Summary</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Status</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Reffered By</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Invoice</th>
+                 
                   <th>Action</th>
               </tr>
           </thead>
@@ -77,19 +72,24 @@ if(isLoading){
               data?.map((data, index) => {
                 return(
                   <tr style={{background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}`}} key={index+1} >
-                      <td style={{border:'1px solid #dddddd',textAlign:'center', display:'flex',justifyContent:'space-around'}}>
+                      <td style={{border:'1px solid #dddddd',textAlign:'left', display:'flex',justifyContent:'space-around'}}>
                         {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) =>handleDelete(data?._id, e)} type="checkbox" name="" id="" />: '' }
                         <span>{data?.sId}</span>
                       </td>
-                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>
+
+                      <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
                       <div style={{maxWidth:"100px"}}>
-                      {data?.customerName} 
+                        <p style={{fontWeight:"bold"}}>Name: </p> 
+                        <p>{data?.customerName}</p> 
+                        <br />
+                        <p style={{fontWeight:"bold"}}>Phone:</p> 
+                        <p>{data?.phoneNumber}</p> 
+                       
                       </div>  
                       </td>
+
+                      <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.createdAt?.slice(0,10)}</td>
                       
-                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.phoneNumber}</td>
-                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.createdAt?.slice(0,10)}</td>
-                      <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.referredBy}</td>
                       <td style={{border:'1px solid #dddddd',textAlign:'left', width:'250px'}}>
                                   {data?.products?.map((item, index) => <p onClick={() => {
                                     setProductId(item?._id)
@@ -98,18 +98,24 @@ if(isLoading){
 
                                   }} style={{backgroundColor: `${selectProduct === item?._id ? 'lightgreen': ''}`, cursor:'pointer'}} key={index+1}>{index+1}. {item?.productName} ({item?.quantity} <i className='uil uil-times'></i> {item?.actualSalesPrice}) = {item?.quantity * item?.actualSalesPrice} </p> )
                                   }
-                              </td>
+                      </td>
                           <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                              {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}
+                              <p>Total: {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))}</p>
+                              <p>Paid: {data?.advance}</p>
+                              <p>Discount: {data?.discount}</p>
+                              <p>Due: {calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance) - Number(data?.discount)}</p>
                           </td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.advance}</td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.discount}</td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{calculateTotalPrice(data?.products?.map(item => item?.quantity * item?.actualSalesPrice))- Number(data?.advance) - Number(data?.discount)}</td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.delivered}</td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.recorderName}</td>
-                          <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.invoiceBarcode}</td>
-                      <td  className={`flex_around`}>
+
+                          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.delivered}</td>
+
+                          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                            <p>Referred By: {data?.referredBy}</p>
+                            <p>Sold By: {data?.recorderName}</p>
+                            <p>Method: {data?.paymentMethodHistory}</p>
+                          </td>
+
+                          <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.invoiceBarcode}</td>
+                          <td  className={`flex_around`}>
                       
                           <i onClick={() => {
                             setSelectDeleted(!selectDeleted)

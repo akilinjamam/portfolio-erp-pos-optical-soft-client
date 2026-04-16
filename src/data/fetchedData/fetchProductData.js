@@ -65,7 +65,7 @@ export const fetchGetProductDataByBarcode = async (barcode) => {
         return error
     }
 }
-export const fetchGetGlassProductData = async (query, from, to, priceFrom, priceTo) => {
+export const fetchGetGlassProductData = async (query, from, to, priceFrom, priceTo, page, limit, inStock) => {
     try {
         const token = localStorage.getItem('user')
         const value = query ? query : '';
@@ -74,7 +74,7 @@ export const fetchGetGlassProductData = async (query, from, to, priceFrom, price
         const fromPrice = priceFrom ? priceFrom : '';
         const toPrice = priceTo ? priceTo : '';
 
-        const result = await axios.get(`${url}/products/glass?searchTerm=${value}&from=${fromDate}&to=${toDate}&priceFrom=${fromPrice}&priceTo=${toPrice}`, {
+        const result = await axios.get(`${url}/products/glass?searchTerm=${value}&from=${fromDate}&to=${toDate}&priceFrom=${fromPrice}&priceTo=${toPrice}&page=${page}&limit=${limit}&inStock=${inStock}`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",

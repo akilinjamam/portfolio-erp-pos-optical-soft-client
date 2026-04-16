@@ -12,17 +12,17 @@ const FilterOption = ({totalSalesItem, query, setQuery,setCategory, category,tot
                         
                        <div>
                             <select style={{marginRight:'10px'}} name="" id="" value={category} onChange={(e) => {
-                           setCategory(e.target.value)   
-                       }}>  
+                                    setCategory(e.target.value)   
+                            }}>  
                             <option value=''>select category</option>
-                            {
-                                totalCategory?.map((item, index) => {
-                                    return(
-                                        <option key={index + 1} value={item}>{item}</option>
-                                    )
+                                {
+                                    totalCategory?.map((item, index) => {
+                                            return(
+                                                <option key={index + 1} value={item}>{item}</option>
+                                            )
+                                        }
+                                    )   
                                 }
-                            )
-                            }
                             </select>
                             <i onClick={() => setCategory('')} className="uil uil-times"></i>
                        </div>

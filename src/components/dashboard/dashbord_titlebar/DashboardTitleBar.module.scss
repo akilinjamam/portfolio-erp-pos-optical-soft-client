@@ -1,49 +1,177 @@
 @use '../../../global_style/reusable_variables/index' as v;
-.main{
-    .titleBar{
-        width: 100%;
-        height: 49px;
-        .titleBarContainer{
-            width: 99%;
-            height: 40px;
-            background-color:v.$pest;
-            border-radius: 5px;
-            padding: 9px;
-            .mappedRoute{
-                font-family: v.$fs;
-                color: v.$white;
-                font-weight: bold;
-                font-size: 16px;
-                position: relative;
-                span, p{
-                    cursor: pointer;
-                }
-                .userDetails{
-                    width: 200px;
-                    height: auto;
-                    background-color: v.$pest;
-                    position: absolute;
-                    top: 45px;
-                    right: -10px;
-                    z-index: 10;
-                    border-radius: 10px;
-                    padding: 5px;
-                    color: white;
-                    font-size: 15px;
-                    user-select: none;
 
-                    p{
-                        cursor: pointer;
-                    } 
-                }
+.mainWrapper {
+    width: 100%;
+    font-family: v.$fs;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.topHeader {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #edf2f7;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+
+    .breadcrumbArea {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #94a3b8;
+        font-size: 14px;
+
+        i.uil-estate { color: #6366f1; font-size: 18px; }
+
+        .routeStep {
+            cursor: pointer;
+            text-transform: capitalize;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+
+            &:last-child {
+                color: #1e293b;
+                font-weight: 700;
+                pointer-events: none;
             }
-       }
+
+            &:hover:not(:last-child) {
+                color: #6366f1;
+            }
+
+            i { font-size: 18px; color: #cbd5e1; }
+        }
+    }
+
+    .actionArea {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .clockContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            border-right: 1px solid #e2e8f0;
+            padding-right: 15px;
+
+            .datePart { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; }
+            .timePart { font-size: 13px; font-weight: 700; color: #475569; }
+        }
+
+        .profileTrigger {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50px;
+            transition: background 0.2s;
+
+            &:hover { background: #f8fafc; }
+
+            .avatar {
+                width: 35px;
+                height: 35px;
+                background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-weight: 800;
+                font-size: 14px;
+                box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+            }
+
+            .rotate { transform: rotate(180deg); transition: 0.3s; }
+        }
     }
 }
 
+// DROPDOWN STYLING
+.userDropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 220px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 1px solid #f1f5f9;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
 
-@media screen and (max-width:1242px) {
-    .main > .titleBar{
-        display: none;
-    }    
+    .dropdownHeader {
+        padding: 15px;
+        background: #f8fafc;
+        border-bottom: 1px solid #f1f5f9;
+
+        .welcome { font-size: 11px; color: #94a3b8; margin: 0; }
+        .userName { font-size: 14px; color: #1e293b; margin: 2px 0 0 0; }
+    }
+
+    .dropdownContent {
+        padding: 8px;
+
+        .menuItem {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-family: v.$fs;
+            font-size: 13px;
+            color: #475569;
+            transition: all 0.2s;
+
+            &:hover { background: #f1f5f9; color: #6366f1; }
+            
+            &.logout {
+                color: #ef4444;
+                &:hover { background: #fef2f2; }
+            }
+        }
+    }
+}
+
+.activeUsersSection {
+    padding: 10px 15px;
+    border-top: 1px solid #f1f5f9;
+    background: #fafafa;
+
+    .sectionTitle { font-size: 10px; font-weight: 800; color: #cbd5e1; text-transform: uppercase; margin-bottom: 8px; }
+    
+    .userItem {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 5px;
+
+        .statusDot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; }
+    }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media screen and (max-width: 1242px) {
+    .topHeader { display: none; }
 }

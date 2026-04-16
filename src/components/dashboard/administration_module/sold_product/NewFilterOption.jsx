@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import salesRecord from "./FilterOption.module.scss";
+import salesRecord from "../../salesModule/salesRecord/FilterOption.module.scss";
 
-const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataWithIndexId, totalSalesItem = 0, totalSalesValue = 0, totalPaid = 0, totalDiscount=0, totalCashValue=0, totalBankValue=0, totalBkashValue=0, totalNogodValue=0, totalSalesQuantity=0, handleQuery, setHandleQuery, range, setRange}) => {
+const NewFilterOption = ({pdf,handleQuery, setHandleQuery, range, setRange,  data, category, setCategory, totalCategory }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     return (
@@ -11,9 +11,7 @@ const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataW
                 <div className={salesRecord.leftGroup}>
                     {/* Print Button */}
                     <button className={salesRecord.printBtn} onClick={() => {
-                        downloadPdf()
-                        // dispatch(openModal('sales'))
-                        dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue, totalSalesQuantity}))
+                      pdf()
                     }}>
                         <i className="uil uil-print"></i>
                        
@@ -25,13 +23,13 @@ const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataW
                         <input 
                             value={handleQuery} 
                             type="text" 
-                            placeholder="Search records..." 
+                            placeholder="Search products..." 
                             onChange={(e) => setHandleQuery(e.target.value)}
                         />
                         {handleQuery && <i style={{cursor: "pointer"}} onClick={() => setHandleQuery('')} className="uil uil-times-circle"></i>}
                     </div>
                     <div className={salesRecord.countBadge}>
-                        Items: <span>{totalSalesItem}</span>
+                        Items: <span>{data}</span>
                     </div>
                 </div>
 
@@ -53,11 +51,11 @@ const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataW
             <div className={`${salesRecord.drawer} ${isDrawerOpen ? salesRecord.show : ''}`}>
                 <div className={salesRecord.drawerContent}>
                     <div className={salesRecord.dateInputGroup}>
-                        <label>From</label>
+                        <label>Date</label>
                         <input value={range?.from} type="date" onChange={(e) => setRange({...range, from: e.target.value})}/>
                     </div>
                     <div className={salesRecord.dateInputGroup}>
-                        <label>To</label>
+                        <label></label>
                         <input value={range?.to} type="date" onChange={(e) => setRange({...range, to: e.target.value})}/>
                     </div>
                     {(range?.from || range?.to) && (
@@ -66,9 +64,28 @@ const FilterOption = ({downloadPdf, dispatch, addSalesData, modifiedProductDataW
                         </button>
                     )}
                 </div>
+                
+                <div className={salesRecord.drawerContent}>
+                    <div className={salesRecord.dateInputGroup}>
+                        <label htmlFor="">Stock</label>
+                        <select style={{marginRight:'10px'}} name="" id="" value={category} onChange={(e) => {
+                                    setCategory(e.target.value)   
+                            }}>  
+                            <option value=''>select category</option>
+                                {
+                                    totalCategory?.map((item, index) => {
+                                            return(
+                                                <option key={index + 1} value={item}>{item}</option>
+                                            )
+                                        }
+                                    )   
+                                }
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     );
 };
 
-export default FilterOption;
+export default NewFilterOption;

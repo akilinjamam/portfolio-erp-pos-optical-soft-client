@@ -2,10 +2,10 @@
 
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
-import salesRecord from './Table.module.scss';
+import salesRecord from '../salesRecord/Table.module.scss';
 
 
-const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSalesQuantity}) => {
+const NewDueCollectionTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalTodayPaid}) => {
 
     if(isLoading){
         return (
@@ -20,17 +20,10 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
             {/* Top Summary Stats Cards */}
             <div className={salesRecord.summaryGrid}>
                 <div className={salesRecord.statCard}>
-                    <label>Total Sales</label>
-                    <p>৳ {totalSalesValue}</p>
+                    <label>Total Today Paid</label>
+                    <p>৳ {totalTodayPaid}</p>
                 </div>
-                <div className={salesRecord.statCard}>
-                    <label>Total Paid</label>
-                    <p style={{marginBottom: "5px"}} className={salesRecord.textSuccess}>৳ {totalPaid}</p>
-                </div>
-                <div className={salesRecord.statCard}>
-                    <label>Sold Qty</label>
-                    <p>{totalSalesQuantity}</p>
-                </div>
+                
                 <div className={salesRecord.statCard}>
                     <label>Method Summary</label>
                     <div className={salesRecord.miniStats}>
@@ -65,7 +58,7 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
 
                             return (
                                 <tr key={index} className={hasMultiplePayments ? salesRecord.highAlertRow : ''}>
-                                    <td><span className={salesRecord.sidBadge}>{sale?.sId}</span></td>
+                                    <td><span className={salesRecord.sidBadge}>{sale?.indexId}</span></td>
                                     <td>
                                         <div className={salesRecord.customerInfo}>
                                             <strong>{sale?.customerName}</strong>
@@ -95,8 +88,8 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
                                             <span className={`${salesRecord.badge} ${sale?.delivered === 'Delivered' ? salesRecord.bgSuccess : salesRecord.bgWarning}`}>
                                                 {sale?.delivered}
                                             </span>
-                                            <span className={salesRecord.methodBadge}>{sale?.paymentMethodHistory}</span>
                                             <span className={salesRecord.methodBadge}>{sale?.paymentHistory}</span>
+                                            <span className={salesRecord.methodBadge}>{sale?.paymentMethodHistory}</span>
                                         </div>
                                     </td>
                                     <td className={salesRecord.recorderName}>{sale?.referredBy}</td>
@@ -108,9 +101,9 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
                     </tbody>
                     <tfoot>
                         <tr className={salesRecord.footerRow}>
-                            <td colSpan="4">Total Page Summary ({totalSalesItem} Items)</td>
-                            <td>৳ {totalSalesValue}</td>
-                            <td>Paid: {totalPaid}</td>
+                            <td colSpan="5">Total Page Summary ({totalSalesItem} Items)</td>
+                            <td></td>
+                            <td>Paid: {totalTodayPaid}</td>
                             <td>Due: {totalSalesValue - totalDiscount - totalPaid}</td>
                             <td>Discount: {totalDiscount}</td>
                             <td></td>
@@ -122,4 +115,4 @@ const SalesRecordTable = ({ paginatedDataContainer, isLoading, totalSalesValue, 
     );
 };
 
-export default SalesRecordTable;
+export default NewDueCollectionTable;

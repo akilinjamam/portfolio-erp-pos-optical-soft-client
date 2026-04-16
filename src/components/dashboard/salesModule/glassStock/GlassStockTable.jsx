@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
+import CommonLoading from "../../../commonLoagin/CommonLoading";
 import glassStock from "./GlassStock.module.scss"
 
-const GlassStockTable = ({paginatedDataContainer}) => {
+const GlassStockTable = ({paginatedDataContainer, isLoading}) => {
+
+    if(isLoading) return <CommonLoading/>
 
     return (
         <div className={`${glassStock.table_responsive}`}>

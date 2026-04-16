@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
-import { useDispatch } from "react-redux";
+
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import { textInput } from "../AddEmployee/employeeInput";
 import employeeList from './EmployeeList.module.scss';
-import { addEmployeeList, openModal } from "../../../modal/imgmodal/imgModalSlice";
+
 
 import useEmployeeList from "./useEmployeeList";
 import EmployeeListTable from "./EmployeeListTable";
-import FilterOption from "./FilterOption";
+
 import NewPagination from "../../pagination/NewPagination";
+import FilterOption from "../../salesModule/salesRecord/FilterOption";
 const EmployeeList = ({hideField, hideSection}) => {
     const {employeeData, isLoading, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData, uploading, setUploading,setImgHolder, imgHolder, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, range, setRange, query, setQuery, count, setCount, pageNumber, setPageNumber } = useEmployeeList();
      
 
-    const dispatch = useDispatch();
 
     return (
         <div  className={`${employeeList.main} full_width`}>
@@ -99,7 +99,8 @@ const EmployeeList = ({hideField, hideSection}) => {
                   </div>
                 </div>
               </div>
-         <FilterOption dispatch={dispatch} openModal={openModal} addEmployeeList={addEmployeeList} employeeData={employeeData} query={query} setQuery={setQuery} range={range} setRange={setRange} />
+          
+         <FilterOption  handleQuery={query} setHandleQuery={setQuery} range={range} setRange={setRange} totalSalesItem={employeeData?.result?.length}/>
           <section className={`${employeeList.navigationIcon} only_flex`}>
           
                 

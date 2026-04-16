@@ -1,32 +1,51 @@
 import { Outlet } from 'react-router-dom';
 import useHome from '../home/useHome';
-import accounts from './Branch.module.scss';
+import report from '../report_module/ReportModule.module.scss';
 import { branchModuleRoute } from './branchModuleRoute';
 
-
 const BranchModule = () => {
-    const {navigate, location} = useHome()
+    const { navigate, location } = useHome();
+   
+    
+    const isRoot = location === '/dashboard/branch_module';
+
     return (
-        <div  className={`full_width`}>
-            <div style={{display: `${location === '/dashboard/branch_module' ? 'block' : 'none'}`}}>
-                <div  className={`${accounts.main} flex_top`}>
-                    <div className={`${accounts.container}`}>
-                        {
-                            branchModuleRoute.map((cart,index) => {
-                                return (
-                                    <div onClick={() => navigate(cart.link) } style={{backgroundColor: `${cart.color}`}} className={`${accounts.allCarts} flex_center`} key={index+1}>
-                                    <div>
-                                    <i className={cart.icon}></i>
-                                    <p>{cart.value}</p>
+        <div className={report.wrapper}>
+            {isRoot && (
+                <div className={report.viewContainer}>
+                    <header className={report.header}>
+                        <div className={report.titleGroup}>
+                            <h1>Branch Module</h1>
+                            <p>Generate and Mange Branch information</p>
+                        </div>
+                    </header>
+
+                    <div className={report.grid}>
+                        {branchModuleRoute?.map((cart, index) => (
+                            <div 
+                                key={index}
+                                onClick={() => navigate(cart.link)} 
+                                className={report.reportCard}
+                                style={{ '--accent': cart.color }}
+                            >
+                                <div className={report.cardInner}>
+                                    <div className={report.iconCircle}>
+                                        <i className={cart.icon}></i>
                                     </div>
+                                    <div className={report.info}>
+                                        <h3>{cart.value}</h3>
+                                        <span>View Details <i className="uil uil-arrow-right"></i></span>
                                     </div>
-                                )
-                            })
-                        }
-                    </div>   
+                                </div>
+                                <div className={report.glow}></div>
+                            </div>
+                        ))}
+                    </div>
+
+                  
                 </div>
-            </div>
-            <Outlet/>
+            )}
+            <Outlet />
         </div>
     );
 };

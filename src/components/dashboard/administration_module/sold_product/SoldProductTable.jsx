@@ -33,9 +33,7 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}></th>
+
                     </tr>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
@@ -43,10 +41,8 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Quantity</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Category</th>
                        
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Frame Type</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Material</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Size</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Shape</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Features</th>
+                      
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Barcode</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Purchase Price</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Sales Price</th>
@@ -65,14 +61,13 @@ const SoldProductTable = ({ paginatedDataContainer, isLoading, totalSaleQuantity
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.quantity}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.category}</td>
                             
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.frameType}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.material}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                                {sale?.size}
+                                <p>Frame: {sale?.frameType}</p>
+                                <p>Material: {sale?.material}</p>
+                                <p>Size: {sale?.size}</p>
+                                <p>Shape: {sale?.shape}</p>
                             </td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                                {sale?.shape}
-                            </td>
+                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.barcode === 'blank' ? 'Manual Sale Product' : sale?.barcode}</td>
                            
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.purchasePrice}</td>

@@ -1,0 +1,123 @@
+@use '../../../global_style/reusable_variables/index' as v;
+
+.paginationWrapper {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 40;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px); // Blurs the table content behind it
+    -webkit-backdrop-filter: blur(12px);
+    padding: 6px 10px;
+    border-radius: 50px; // Pill shape
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5); // Thin inner light border
+    
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .pageGroup {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+.pageBox {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    transition: all 0.2s ease;
+    user-select: none;
+
+    &:hover:not(.active) {
+        background: #f1f5f9;
+        color: #6366f1;
+    }
+    &:hover {
+        background: #f1f5f9;
+        color: #1e293b;
+    }
+
+    /* Beautiful Gradient for Active State */
+    &.active {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); // Indigo to Purple gradient
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        transform: scale(1.05);
+    }
+}
+
+.iconBox {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #f1f5f9;
+    
+    i {
+        font-size: 20px;
+    }
+
+    &:hover {
+        background: #6366f1;
+        color: white;
+        border-color: #6366f1;
+    }
+}
+
+.separator {
+    color: #cbd5e1;
+    font-size: 12px;
+    padding: 0 5px;
+    letter-spacing: 1px;
+}
+
+.pageInfo {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    background: rgba(248, 250, 252, 0.9);
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    font-weight: 600;
+
+    strong {
+        color: #6366f1;
+    }
+}
+
+// Responsive
+@media (max-width: 1242px) {
+    .paginationWrapper {
+        position: fixed;
+        bottom: 3px;
+        width: 100%;
+    }
+}
