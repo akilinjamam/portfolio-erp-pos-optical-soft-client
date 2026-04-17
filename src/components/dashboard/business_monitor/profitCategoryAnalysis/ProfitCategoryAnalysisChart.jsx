@@ -76,7 +76,7 @@ const ProfitCategoryAnalysisChart = ({analysisData}) => {
       };
 
     return (
-        <div style={{height: '62vh'}}>
+        <div style={{height: '400px'}}>
             <Bar style={{width:'100%'}} data={data} options={options} />
         </div>
     );

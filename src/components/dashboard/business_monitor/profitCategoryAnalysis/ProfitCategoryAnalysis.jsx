@@ -1,97 +1,91 @@
-// import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import profitCatAnalysis from './ProfitCategoryAnalysis.module.scss';
-
+import  { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styles from './ProfitCategoryAnalysis.module.scss';
 import useGetProfitExpenseAccountsData from '../../../../data/accountsData/useGetProfitExpenseAccountsData';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import ProfitCategoryAnalysisChart from './ProfitCategoryAnalysisChart';
-import { useDispatch } from 'react-redux';
 import { addAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
-import { useEffect, useState } from 'react';
 
 const ProfitCategoryAnalysis = () => {
-
-  const [month, setMonth] = useState();
+  const dispatch = useDispatch();
+  const [month, setMonth] = useState('');
   const { profitExpenseData, isLoading, refetch } = useGetProfitExpenseAccountsData(month);
 
-  console.log(profitExpenseData);
-
-  const analysisData = profitExpenseData?.result
+  const analysisData = profitExpenseData?.result;
 
   useEffect(() => {
-    refetch()
-  },[refetch, month])
+    refetch();
+  }, [refetch, month]);
 
-  const dispatch = useDispatch();
+  if (isLoading) return <CommonLoading />;
 
-
-  if (isLoading) {
-    return <CommonLoading />
-  }
+  const handlePrint = () => {
+    dispatch(openModal('analysis'));
+    dispatch(addAnalysis({ data: analysisData }));
+  };
 
   return (
-    <div className={`${profitCatAnalysis.main} full_width`}>
-      <div style={{ display: 'flex', flexWrap: "wrap" }} className={`flex_around`}>
-        <div className={`${profitCatAnalysis.inputAreaOne} flex_center`}>
-          <div className={`${profitCatAnalysis.container} `}>
-            <div className={`${profitCatAnalysis.titleName}`}>Profit Category Analysis</div>
-            <div style={{ width: '193px' }} className={`${profitCatAnalysis.border_remover} `}></div>
-
-            <form action="">
-              <div className='flex_top'>
-
-                <div className={profitCatAnalysis.inputFields} style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
-                    <label style={{marginRight:'5px'}} htmlFor="">Find By Month: </label>
-                    <input style={{width:'200px'}} type="month" name="" id="" onChange={(e) => setMonth(e.target.value)} />
-                </div>
-              </div>
-
-              <div className={`${profitCatAnalysis.inputAreaOne_footer} flex_right`}>
-                <div className={`${profitCatAnalysis.inputAreaOne_footer_container} flex_around`}>
-
-                </div>
-              </div>
-            </form>
-          </div>
+    <div className={styles.dashboardContainer}>
+      {/* Header Section */}
+      <header className={styles.header}>
+        <div className={styles.titleBlock}>
+          <h1>Profit Analysis</h1>
+          <p>Financial breakdown by payment gateway and category</p>
         </div>
-        <div className={`${profitCatAnalysis.inputAreaTwo} flex_center`}>
-          <div className={`${profitCatAnalysis.container} `}>
-            <div className={`${profitCatAnalysis.titleName} flex_center`}>Details</div>
-              <div style={{ width: '65px' }} className={`${profitCatAnalysis.border_remover}`}></div>
-            
-              <div className={`${profitCatAnalysis.inputAreaTwoContainer}`}>
-                  <p>Cash Profit: {profitExpenseData?.result?.cashProfit}</p>
-                  <p>Bank Profit: {profitExpenseData?.result?.bankProfit + analysisData?.bankDueCollection}</p>
-                  <p>Bkash Profit: {profitExpenseData?.result?.bkashProfit + analysisData?.bkashDueCollection}</p>
-                  <p>Nogod Profit: {profitExpenseData?.result?.nogodProfit + analysisData?.nogodDueCollection}</p>
-              <div className={`${profitCatAnalysis.uploading}`}>
+        <div className={styles.actions}>
+          <button onClick={handlePrint} className={styles.printBtn}>
+            <i className="uil uil-print"></i> Export Financial Report
+          </button>
+        </div>
+      </header>
 
-              </div>
+      {/* Main Content (Scrollable) */}
+      <div className={styles.scrollableContent}>
+        <div className={styles.topGrid}>
+          {/* Month Selector Card */}
+          <div className={styles.filterCard}>
+            <h3>Date Selection</h3>
+            <div className={styles.inputBox}>
+              <label>Select Analysis Month</label>
+              <input 
+                type="month" 
+                value={month} 
+                onChange={(e) => setMonth(e.target.value)} 
+              />
+            </div>
+          </div>
 
+          {/* Channel Metrics Grid */}
+          <div className={styles.metricsGrid}>
+            <div className={`${styles.metricCard} ${styles.cash}`}>
+              <span>Cash Profit</span>
+              <h2>{analysisData?.cashProfit?.toLocaleString() || 0} <small>BDT</small></h2>
+            </div>
+            <div className={`${styles.metricCard} ${styles.bank}`}>
+              <span>Bank + Collection</span>
+              <h2>{(analysisData?.bankProfit + (analysisData?.bankDueCollection || 0)).toLocaleString()} <small>BDT</small></h2>
+            </div>
+            <div className={`${styles.metricCard} ${styles.bkash}`}>
+              <span>bKash Profit</span>
+              <h2>{(analysisData?.bkashProfit + (analysisData?.bkashDueCollection || 0)).toLocaleString()} <small>BDT</small></h2>
+            </div>
+            <div className={`${styles.metricCard} ${styles.nagad}`}>
+              <span>Nagad Profit</span>
+              <h2>{(analysisData?.nogodProfit + (analysisData?.nogodDueCollection || 0)).toLocaleString()} <small>BDT</small></h2>
             </div>
           </div>
         </div>
-      </div>
-      <section className={`${profitCatAnalysis.navigationIcon} flex_between`}>
-        {
-          <div className={`${profitCatAnalysis.inputPart} flex_left`}>
-            <i title="print" className="uil uil-print" onClick={() => {
-              dispatch(openModal('analysis'))
-              dispatch(addAnalysis({ data: analysisData }))
-            }}></i>
 
-
+        {/* Chart Visualization */}
+        <section className={styles.chartSection}>
+          <div className={styles.chartHeader}>
+            <h3>Revenue vs. Gateway Performance</h3>
           </div>
-        }
-
-      </section>
-      <section className={`${profitCatAnalysis.navigationIcon} only_flex`}>
-
-
-      </section>
-      <section className={`${profitCatAnalysis.tableArea}`}>
-        <ProfitCategoryAnalysisChart analysisData={analysisData} />
-      </section>
-
+          <div className={styles.chartWrapper}>
+            <ProfitCategoryAnalysisChart analysisData={analysisData} />
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

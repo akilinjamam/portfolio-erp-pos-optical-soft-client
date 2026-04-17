@@ -47,7 +47,7 @@ const AddVendorBill = () => {
   
      
       
-      const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Vendor Bill", [], 30)
+  const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Vendor Bill", [], 30)
 
 
   
@@ -129,7 +129,7 @@ const AddVendorBill = () => {
                     
                           
                     </section>
-                    <section style={{height: '42vh'}}  className={`${addVendorBill.tableArea}`}>
+                    <section style={{height: '38vh', overflowY: "scroll", scrollbarWidth: "none"}}  className={`${addVendorBill.tableArea}`}>
                         <VendorBillTable isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} />
                     </section>
                      {

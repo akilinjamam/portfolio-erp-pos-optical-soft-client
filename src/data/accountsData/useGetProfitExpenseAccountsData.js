@@ -3,7 +3,7 @@ import { fetchGetFinalProfitExpenseAccountsData } from "../fetchedData/fetchAcco
 
 const useGetProfitExpenseAccountsData = (month) => {
 
-    const { data: getAllData, refetch, isLoading, error, isSuccess, isError } = useQuery({ queryKey: ['fetchGetProfitExpenseAccountsData'], queryFn: () => fetchGetFinalProfitExpenseAccountsData(month) })
+    const { data: getAllData, refetch, isLoading, error, isSuccess, isError } = useQuery({ queryKey: ['fetchGetProfitExpenseAccountsData', month], queryFn: () => fetchGetFinalProfitExpenseAccountsData(month) })
     const profitExpenseData = getAllData
 
     return { profitExpenseData, isLoading, error, refetch, isSuccess, isError }

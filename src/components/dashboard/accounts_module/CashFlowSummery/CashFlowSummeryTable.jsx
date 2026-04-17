@@ -29,17 +29,17 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Date</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Sales</th>
                        
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash Collection</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash Due Collection</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Discount</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash Expenses</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Fixed Expenses</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payroll Expenses</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Collection</th>
+                        {/* <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash Due Collection</th> */}
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due & Discount</th>
+                        {/* <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Discount</th> */}
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Expenses</th>
+                        {/* <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Fixed Expenses</th> */}
+                        {/* <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payroll Expenses</th> */}
                        
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Vendor Expenses</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Begining Cash</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Ending Cash</th>
+                        {/* <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Vendor Expenses</th> */}
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Cash Cycle</th>
+                        {/* <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Ending Cash</th> */}
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bank Deposit</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Card/bkash/nogod</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Extra Profit Amount</th>
@@ -56,23 +56,28 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.date}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.sales}</td>
                             
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.cashSalesAmount}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.dueCollecction}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                                {sale?.totalDue}
+                                <p>Cash: {sale?.cashSalesAmount}</p>
+                                <p>Due: {sale?.dueCollecction}</p>
                             </td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                                {sale?.discount}
-                            </td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
-                                {sale?.totalExpense}
-                            </td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.totalFixedExpense}</td>
                            
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.payrollPaid}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.vendorPaid}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.beginingCash}</td>
-                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.endingCash}</td>
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                                <p>Total Due: {sale?.totalDue}</p>
+                                <p>Discount: {sale?.discount}</p>
+                            </td>
+                           
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                                <p>Cash: {sale?.totalExpense} </p>
+                                <p>Fixed: {sale?.totalFixedExpense} </p>
+                                <p>Payroll: {sale?.payrollPaid} </p>
+                                <p>Vendor: {sale?.vendorPaid} </p>
+                            </td>
+                           
+                            <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                                <p>Begining: {sale?.beginingCash}</p>
+                                <p>Ending: {sale?.endingCash}</p>
+                            </td>
+                           
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{(sale?.profitAllocation + sale?.cashOver) - sale?.deficit}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.bank}+{sale?.bkash}+{sale?.nogod} = {sale?.bank + sale?.bkash + sale?.nogod}</td>
                             <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{sale?.extraProfitAmount}</td>
@@ -93,12 +98,7 @@ const CashFlowSummeryTable = ({contentToPrint, paginatedDataContainer, isLoading
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
                     <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
-                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}></td>            
+                             
                     <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>Total =</td>            
                     <td style={{border:'1px solid #dddddd',textAlign:'left', fontWeight:'bold'}}>{totalProfitAllocation}</td>            
                 </tr>
