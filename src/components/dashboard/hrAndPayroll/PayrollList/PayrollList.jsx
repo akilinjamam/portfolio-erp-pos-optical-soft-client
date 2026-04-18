@@ -1,18 +1,60 @@
 /* eslint-disable react/prop-types */
-import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import payrollList from './PayrollList.module.scss';
-import { addPayrollList, openModal } from "../../../modal/imgmodal/imgModalSlice";
+
 import usePayrollList from "./usePayrollList";
 import PayrollListTable from "./PayrollListTable";
 import { payrollListInput } from "./payrollListInput";
-import FilterOption from "./FilterOption";
+
+import NewFilterOption from "./NewFilterOption";
+import { useMemo } from "react";
+import usePdfDownloader from "../../../../usePdfDownloader";
 const PayrollList = ({hideSection, hideField}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod, location} = usePayrollList();
+    const {employeeId, paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, employeeData, totalPaid, paidAmount, totalIncentive, totalOvertime, month, paymentMethod, setPaymentMethod, location} = usePayrollList();
     const payrollData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData = employeeData?.result?.sort((a, b) => a.employeeName.toLowerCase() > b.employeeName.toLowerCase() ? 1 : -1);
-    const dispatch = useDispatch();
+
+
+    const dataForPdf = useMemo(() => {
+            const result = paginatedDataContainer?.map((payroll) => {
+        
+                return [
+                    payroll?.indexId,
+                    `Name: ${payroll?.employeeName?.employee}\nID: ${payroll?.transectionId}\nPaymentMethod: ${payroll?.paymentMethod}`,
+                    payroll?.createdAt?.slice(0, 10),
+                    `Basic: ${payroll?.basicSalary}\nNet: ${payroll?.netSalary}\nTotal: ${payroll?.totalSalary}`,
+                    `Current Paid: ${payroll?.paid}\nTotal Paid: ${payroll?.totalPaid}`,
+                    `Current Due: ${payroll?.due}\nPrevious Due: ${payroll?.prevDue}`,
+                    `Current Advance: ${payroll?.advance}\nPrevious Advance: ${payroll?.prevAdvance}`,
+                    `Over Time: ${payroll?.overtime}\nIncentive: ${payroll?.incentive}`,
+                ];
+            });
+        
+            return {
+                header: [
+                    "SL",
+                    "Employee Name",
+                    "Joining Date",
+                    "Address",
+                    "Mobile",
+                    "Nid",
+                    "Employee Id",
+                    "Basic Salary",
+                ],
+                result
+            };
+        }, [paginatedDataContainer]);
+        
+            const summaryData = [
+          { label: "Total Paid", value: totalPaid },
+          { label: "Paid", value: paidAmount },
+          { label: "Overtime", value: totalOvertime },
+          { label: "Incentive", value: totalIncentive },
+        ];
+            
+            const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Payroll List", summaryData, 60)
+
 
     return (
         <div  className={`${payrollList.main} full_width`}>
@@ -72,24 +114,16 @@ const PayrollList = ({hideSection, hideField}) => {
                       </form>
                   </div>
                 </div>
-                {/* <div className={`${payrollList.inputAreaTwo} flex_center`}>
-                  <div className={`${payrollList.container} `}>
-                        <div className={`${payrollList.titleName} flex_center`}></div>
-                        <div style={{width: '0'}} className={`${payrollList.border_remover}`}></div>
-                        <br />
-                            <div className={`${payrollList.inputAreaTwoContainer}`}>
-                            
-                              
-                            </div>
-                  </div>
-                </div> */}
+                
               </div>
-          <FilterOption dispatch={dispatch} openModal={openModal} addPayrollList={addPayrollList} payrollData={payrollData} setEmployeeId={setEmployeeId} month={month} setMonth={setMonth} allEmployeeData={allEmployeeData} />
+          <NewFilterOption downloadPdf={handleDownloadPDF} allEmployeeData={allEmployeeData} employeeId={employeeId} month={month} setMonth={setMonth} setEmployeeId={setEmployeeId} total={payrollData?.length} />
+
+          
           <section className={`${payrollList.navigationIcon} only_flex`}>
           
                 
           </section>
-          <section style={{height: `${location === '/dashboard/hr_and_payroll_module/payroll_list' ? '42vh': '72vh'}`}}  className={`${payrollList.tableArea}`}>
+          <section  style={{height: `${location === '/dashboard/hr_and_payroll_module/payroll_list' ? '32vh': '58vh'}`, overflowY:"scroll", scrollbarWidth: 'none' }}  className={`${payrollList.tableArea } `}>
               <PayrollListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={payrollData} paidAmount={paidAmount} totalIncentive={totalIncentive} totalOvertime={totalOvertime} totalPaid={totalPaid} hideField={hideField} fontsize='11.5px'/>
           </section>
            {

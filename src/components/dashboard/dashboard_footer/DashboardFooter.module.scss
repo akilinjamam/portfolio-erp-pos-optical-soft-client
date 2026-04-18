@@ -1,40 +1,139 @@
 @use '../../../global_style/reusable_variables/index' as v;
-.main{
+
+.mainWrapper {
     width: 100%;
     position: absolute;
-    bottom:0;
-    .titleBar{
-        width: 100%;
-        height: 49px;
-        .titleBarContainer{
-            width: 99%;
-            height: 40px;
-            background-color:rgb(49, 49, 49);
-            border-radius: 5px;
-            padding: 9px 15PX;
-            
-            p{
-                font-family: v.$fs;
-                color: v.$pest;
-                font-weight: bold;
-                font-size: 15px;
-                display: flex;
-                cursor: pointer;
-            }
-       }
+    bottom: 0;
+    left: 0;
+    font-family: v.$fs;
+    z-index: 50;
+}
+
+.statusBar {
+    width: 100%;
+    background: #0f172a; // Deep Navy
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 6px 0;
+
+    .container {
+        width: 98%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 34px;
     }
 }
 
-@media screen and (max-width:1242px) {
-    .main{
-        position:fixed;
-        .titleBar{
-            .titleBarContainer{
-                justify-content: center;
-                .displayExpire{
-                    display:none
-                };
-            }
+.sessionInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .pulseIndicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        
+        &.active {
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse 2s infinite;
+        }
+        &.expired { background: #ef4444; }
+    }
+
+    .timerWrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .label {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 10px;
+            border-radius: 4px;
+            color: #e2e8f0;
+            font-size: 13px;
+            font-family: 'Courier New', Courier, monospace; // Monospace for numbers
+            font-weight: 700;
+
+            .sep { color: #475569; }
+            .seconds { color: #6366f1; min-width: 25px; }
+        }
+
+        .branchBadge {
+            background: rgba(99, 102, 241, 0.1);
+            color: #818cf8;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
     }
+}
+
+.brandCredit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        .logoSmall .d { color: #6366f1; }
+    }
+
+    .poweredBy {
+        font-size: 10px;
+        color: #64748b;
+        font-style: italic;
+    }
+
+    .logoSmall {
+        display: flex;
+        gap: 4px;
+        font-weight: 900;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        
+        .b { color: #f8fafc; }
+        .d { 
+            color: v.$pest; 
+            transition: color 0.3s;
+        }
+    }
+}
+
+.expiredText {
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@media screen and (max-width: 1242px) {
+    .statusBar { display: none; }
 }

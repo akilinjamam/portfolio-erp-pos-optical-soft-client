@@ -50,27 +50,19 @@ if(isLoading){
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}></th>
                   <th style={{display: `${hideField ? 'none' : ''}`}}></th>
               </tr>
               <tr>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>SL</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Supplier Name</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Mobile</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Bill Amount</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Bill Amount</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Billing Date</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Date</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Billing No</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Total Paid</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Paid</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Previous Due</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Due</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Payment Method</th>
-                  <th style={{border:'1px solid #dddddd',textAlign:'center'}}>Transection Id</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>SL</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Supplier Info</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Bill Amount</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Total Bill Amount</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Billing Date</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Date</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Billing No</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment Info</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Due</th>
+                  <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Payment  & Id</th>
                   <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
               </tr>
           </thead>
@@ -85,19 +77,29 @@ if(isLoading){
                       <span>{data?.indexId}</span>
                     </td>
                     
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.supplierName?.supplierName}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.supplierName?.mobile}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.singleBillAmount}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.billAmount}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.billingDate}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentDate}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.billNo}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.totalPaid}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paid}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.prevDue}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.due}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.paymentMethod}</td>
-                    <td style={{border:'1px solid #dddddd',textAlign:'center'}}>{data?.transectionId}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                      <p>Name: {data?.supplierName?.supplierName}</p>
+                      <p>Mobile: {data?.supplierName?.mobile}</p>
+                    </td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.singleBillAmount}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.billAmount}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.billingDate}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.paymentDate}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>{data?.billNo}</td>
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                      <p>Total Paid: {data?.totalPaid}</p>
+                      <p>Paid: {data?.paid}</p>
+                    </td>
+
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                      <p>Due: {data?.due}</p>
+                      <p>Previous Due: {data?.prevDue}</p>
+                    </td>
+
+                    <td style={{border:'1px solid #dddddd',textAlign:'left'}}>
+                      <p>Payment Method: {data?.paymentMethod}</p>
+                      <p>Id: {data?.transectionId}</p>
+                    </td>           
                     
                      <td style={{display: `${hideField ? 'none' : ''}`}}  className={`flex_around`}>
                     

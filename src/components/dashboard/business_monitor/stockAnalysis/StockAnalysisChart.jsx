@@ -164,17 +164,17 @@ const StockAnalysisChart = ({analysisData, categoryWiseAvailableQuantity, catego
 
     return (
         <div style={{height: '62vh'}}>
-            <div className='only_flex' style={{height: '31vh'}}>
-                <div style={{width:'50%'}}>
-                    <Bar style={{width:'100%'}} data={dataCategoryWishCount} options={optionsCategoryWiseQunatity} />
+            <div >
+                <div style={{width:'100%'}}>
+                    <Bar style={{width:'100%', height: '250px'}} data={dataCategoryWishCount} options={optionsCategoryWiseQunatity} />
                 </div>
-                <div style={{width:'50%'}}>
+                <div style={{width:'100%', height: '250px'}}>
                     <Doughnut style={{width:'100%'}} data={dataCategoryWishDetail} options={optionsCategoryWiseDetail} />
                 </div>
                
             </div>
-            <div style={{height: '31vh'}}>
-                <Bar style={{width:'100%'}} data={data} options={options} />
+            <div >
+                <Bar style={{width:'100%', height:'400px'}} data={data} options={options} />
             </div>       
         </div>
     );

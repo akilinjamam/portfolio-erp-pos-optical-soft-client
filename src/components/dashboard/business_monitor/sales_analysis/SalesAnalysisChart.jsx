@@ -40,7 +40,7 @@ const SalesAnalysisChart = ({ allSalesPriceData, highestSale, lowestSale, netSal
             label: "Sales Analysis",
             data: allSalesPriceData?.slice()?.reverse()?.map(item => item?.sales),
             borderColor: "rgba(75, 192, 192, 1)", 
-            backgroundColor: "green", 
+            backgroundColor: "lightblue", 
             tension: 0.3, 
             pointRadius: 5, 
             fill: true, 
@@ -151,18 +151,19 @@ const SalesAnalysisChart = ({ allSalesPriceData, highestSale, lowestSale, netSal
 
     return (
         <div style={{height: '62vh', width:'100%'}}>
-            <div className='only_flex' style={{height: '25vh'}}>
-                <div style={{width:'50%'}}>
-                    <Bar style={{width:'100%'}} data={dataCategoryWishCount} options={optionsCategoryWiseQunatity} />
+          <div style={{height: '37vh', width: '100%'}}>
+                <Line style={{width:'90%'}} data={data} options={options} />
+            </div>
+            <div  style={{height: '300px'}}>
+                <div style={{width:'100%',}}>
+                    <Bar style={{width:'100%', height: '200px'}} data={dataCategoryWishCount} options={optionsCategoryWiseQunatity} />
                 </div>
-                <div style={{width:'50%'}}>
+                <div style={{width:'100%', height: '500px'}}>
                     <Doughnut style={{width:'100%'}} data={dataCategoryWishDetail} options={optionsCategoryWiseDetail} />
                 </div>
                
             </div>
-            <div style={{height: '37vh', width: '100%'}}>
-                <Line style={{width:'90%'}} data={data} options={options} />
-            </div>       
+                   
         </div>
     );
 };

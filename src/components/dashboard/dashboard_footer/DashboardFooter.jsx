@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import dashFooter from './DashboardFooter.module.scss';
 import '../../../global_style/global_style.css';
 // import { useDispatch } from 'react-redux';
@@ -5,19 +6,20 @@ import '../../../global_style/global_style.css';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { useEffect, useState, useRef } from 'react';
 
-
-
 const DashboardFooter = () => {
     const [remainingTime, setRemainingTime] = useState(null);
     // const dispatch = useDispatch();
     const branchId = useRef('');
+
     useEffect(() => {
         const token = localStorage.getItem('user');
         if (!token) return;
 
         const splitToken = token.split(' ')[1];
-        const exp = decodeJwt(splitToken)?.exp;
-        branchId.current = decodeJwt(splitToken)?.branchName;
+        const decoded = decodeJwt(splitToken);
+        const exp = decoded?.exp;
+        branchId.current = decoded?.branchName;
+        
         if (!exp) return;
 
         const interval = setInterval(() => {
@@ -35,7 +37,12 @@ const DashboardFooter = () => {
             const minutes = Math.floor((diff % (60 * 60)) / 60) || 0;
             const seconds = Math.floor(diff % 60) || 0;
 
-            setRemainingTime({ days:days?.toString()?.padStart(2, '00') ,hours: hours?.toString()?.padStart(2, '00') , minutes: minutes?.toString()?.padStart(2,'00'), seconds: seconds?.toString()?.padStart(2, '00') });
+            setRemainingTime({ 
+                days: days.toString().padStart(2, '0'),
+                hours: hours.toString().padStart(2, '0'), 
+                minutes: minutes.toString().padStart(2, '0'), 
+                seconds: seconds.toString().padStart(2, '0') 
+            });
         }, 1000);
 
         return () => clearInterval(interval);

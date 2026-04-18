@@ -1,18 +1,17 @@
 import todaySales from './TodaySales.module.scss';
-import { useDispatch } from "react-redux";
-import { addSalesData, openModal } from "../../../modal/imgmodal/imgModalSlice";
-import { useState } from "react";
-import Pagination from "../../pagination/Pagination";
+import { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { calculateTotalPrice } from "../../../calculation/calculateSum";
 
 import useGetLastSalesAndAccountsData from "../../../../data/accountsData/useGetLastSalesAccountsData";
-import TodaySalesTable from "./TodaySalesTable";
+
 import useCurrentDate from '../../../../data/saleData/useCurrentDate';
+import NewFilterOption from './NewFilterOption';
+import usePdfDownloader from '../../../../usePdfDownloader';
+import NewTodaySalesTable from './TodaySalesTable';
 
 const TodaySales = () => {
 
-    const dispatch = useDispatch();
 
     const {today} = useCurrentDate()
    
@@ -20,13 +19,13 @@ const TodaySales = () => {
     
 
     const {lastSaleAndAccountsData, totalBankValue, totalBkashValue, totalNogodValue, totalCashValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue, isLoading, refetch} = useGetLastSalesAndAccountsData(date);
-    const [paginatedDataContainer, setPaginatedDataContainer] = useState([]);
+    
     const [modifiedProductDataWithIndexId,setModifiedProductDataWithIndexId] = useState([])
     // eslint-disable-next-line no-unused-vars
-    const [paginatedIndex,setPaginatedIndex] = useState()
-    
 
     const total = lastSaleAndAccountsData?.result?.allSalesDetail?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
+    const soldQty = lastSaleAndAccountsData?.result?.allSalesDetail?.map(sale => calculateTotalPrice(sale?.products?.map(item => Number(item?.quantity))));
+    const totalSoldQty = calculateTotalPrice(soldQty);
     const totalPaid = calculateTotalPrice(lastSaleAndAccountsData?.result?.allSalesDetail?.map(sale => Number(sale?.advance)))
     const totalDiscount = calculateTotalPrice(lastSaleAndAccountsData?.result?.allSalesDetail?.map(sale => Number(sale?.discount)))
 
@@ -52,30 +51,67 @@ const TodaySales = () => {
         refetch()
     },[refetch, date])
 
+
+     const dataForPdf = useMemo(() => {
+        const result = modifiedProductDataWithIndexId?.map((sale) => {
+    
+            const totalAmount = sale?.products?.reduce(
+                (sum, item) => sum + (item.quantity * item.actualSalesPrice),
+                0
+            );
+    
+            const due = totalAmount - Number(sale?.advance) - Number(sale?.discount);
+    
+            return [
+                sale?.indexId,
+                `${sale?.customerName}\n${sale?.phoneNumber}`,
+                sale?.createdAt?.slice(0, 10),
+    
+                // Products (multi-line)
+                sale?.products
+                    ?.map(item => `${item.productName} (${item.quantity}×${item.actualSalesPrice})`)
+                    .join("\n"),
+    
+                // Summary (multi-line)
+                `Total: ${totalAmount}\nPaid: ${sale?.advance}\nDue: ${due}\nDiscount: ${sale?.discount}`,
+                sale?.delivered,
+                `ReferredBy: ${sale?.referredBy}\nSold By: ${sale?.recorderName}`,
+                sale?.invoiceBarcode
+            ];
+        });
+    
+        return {
+            header: [
+                "SL",
+                "Customer",
+                "Date",
+                "Products",
+                "Summary",
+                "Status",
+                "Engaged By",
+                "Invoice"
+            ],
+            result
+        };
+    }, [modifiedProductDataWithIndexId]);
+    
+        const summaryData = [
+      { label: "Total Sales", value: totalSalesValue },
+      { label: "Total Paid", value: totalPaid },
+      { label: "Total Due", value: totalSalesValue - totalPaid - totalDiscount },
+      { label: "Total Discount", value: totalDiscount },
+    ];
+        
+            const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Sales Record", summaryData, 40)
+
     return (
         <div className={todaySales.main}>
-            <div className={`${todaySales.title} flex_left`}>
-                <i onClick={() => {
-                    dispatch(openModal('today-sales'))
-                    dispatch(addSalesData({modifiedData:modifiedProductDataWithIndexId, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCash: totalCashValue, totalBank: totalBankValue, totalBkash: totalBkashValue, totalNogod: totalNogodValue, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue}))
-                }} title="print" className="uil uil-print"></i>
-                <span>Total : {lastSaleAndAccountsData?.result?.allSalesDetail?.length}</span>
-                
-                
-                <input value={date}  type="date" name="" id=""  onChange={(e) => setDate(e.target.value)}/>
-                <i onClick={() => {
-                    setDate('')
-                    setModifiedProductDataWithIndexId([])
-                    }} className="uil uil-times"></i>
-            </div>
+            {/* filter option start */}
+            <NewFilterOption pdf={handleDownloadPDF} date={date} setDate={setDate} totalCount={lastSaleAndAccountsData?.result?.allSalesDetail?.length}  />
+            {/* filter option end */}
             <div style={{overflowX:'hidden', overflowY:'scroll', scrollbarWidth:'none', minHeight:'auto', maxHeight:'70vh'}}>
-                <TodaySalesTable paginatedDataContainer={paginatedDataContainer} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashPaidValue={totalCashPaidValue} totalBankPaidValue={totalBankPaidValue} totalBkashPaidValue={totalBkashPaidValue} totalNogodPaidValue={totalNogodPaidValue}/>
+                <NewTodaySalesTable totalSold={totalSoldQty} paginatedDataContainer={lastSaleAndAccountsData?.result?.allSalesDetail} isLoading={isLoading} totalSalesValue={totalSalesValue} totalSalesItem={ totalSalesItem} totalPaid={totalPaid} totalDiscount={totalDiscount} totalTodayPaid={totalTodayPaid} totalCashValue={totalCashValue} totalBankValue={totalBankValue} totalBkashValue={totalBkashValue} totalNogodValue={totalNogodValue} totalCashPaidValue={totalCashPaidValue} totalBankPaidValue={totalBankPaidValue} totalBkashPaidValue={totalBkashPaidValue} totalNogodPaidValue={totalNogodPaidValue}/>
             </div>
-            {
-                ((modifiedProductDataWithIndexId) )
-                &&
-                <Pagination showData={modifiedProductDataWithIndexId} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={20}/>
-            }
         </div>
     );
 };

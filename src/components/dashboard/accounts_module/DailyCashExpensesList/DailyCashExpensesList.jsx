@@ -1,20 +1,104 @@
 /* eslint-disable react/prop-types */
-import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import cashList from './DailyCashExpensesList.module.scss';
-import {  addExpenseListData, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import DailyCashExpensesTable from "./DailyCashExpensesTable";
 import useDailyCashExpensesList from "./useDailyCashExpensesList";
 import { accountListInput } from "./accountListInputs";
+import NewFilterOption from "./NewFilterOption";
+import { useMemo } from "react";
+import { calculateTotalPrice } from "../../../calculation/calculateSum";
+import usePdfDownloader from "../../../../usePdfDownloader";
 
 
 const DailyCashExpensesList = ({hideField, hideSection}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setDate, location } = useDailyCashExpensesList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateAccountsData, setUdpateAccountsData,edit,setEdit,editProduct, initialAccountsData,  modifiedAccountsDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setDate, location , date, month} = useDailyCashExpensesList();
     const accountsData = modifiedAccountsDataWithIndexId
 
-   
+   const dataForPdf = useMemo(() => {
+         const result = accountsData?.map((vendor) => {
 
-    const dispatch = useDispatch();
+          // const exp = vendor?.expenses?.map((expense, index) => {
+          //   // <p key={index + 1}>{index + 1}. {expense?.expenseName} = {expense?.expenseAmount} </p>
+          //   return {
+          //     expName: expense?.expenseName,
+              
+          //   }
+          // } )
+
+          const exp = vendor?.expenses?.map((expense, index) => `${index+1}. ${expense?.expenseName} = ${expense?.expenseAmount} ` ).join('\n');
+          const totalExp = calculateTotalPrice(vendor?.expenses?.map((expense) => Number(expense?.expenseAmount)));
+          const allocation = vendor?.todayNogodValue + vendor?.todayBkashValue + vendor?.todayBankValue + Number(vendor?.profitAllocation)
+
+          /*  <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>
+                            <p>Cash: {data?.salesAmount}</p>
+                            <p>Due: {data?.dueSalesAmount}</p>
+                          </td>
+                        
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.startingCashReserved}</td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.totalSalesAmount}</td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.date}</td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left', paddingLeft: '5px' }}>
+                            {
+                              data?.expenses?.map((expense, index) => <p key={index + 1}>{index + 1}. {expense?.expenseName} = {expense?.expenseAmount} </p>)
+                            }
+                          </td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left', paddingLeft: '5px' }}>
+                            {
+                              calculateTotalPrice(data?.expenses?.map((expense) => Number(expense?.expenseAmount)))
+                            }
+                          </td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.endingCashReserved}</td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.deficit}</td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>
+                            <p>Cash Over: {data?.cashOver}</p>
+                            <p>Profit Allocation: {data?.profitAllocation}</p>
+                          </td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>
+                            <p>Total Bank: {data?.todayBankValue}</p>
+                            <p>Total Bkash: {data?.todayBkashValue}</p>
+                            <p>Total Nogod: {data?.todayNogodValue}</p>
+                          </td>
+                          <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.todayNogodValue + data?.todayBkashValue + data?.todayBankValue + Number(data?.profitAllocation)}</td> */
+     
+     
+             return [
+                 vendor?.indexId,
+                 `Cash: ${vendor?.salesAmount}\nDue${vendor?.dueSalesAmount}`,
+                 vendor?.startingCashReserved,
+                 vendor?.totalSalesAmount,
+                 vendor?.date,
+                 exp,
+                 totalExp,
+                 vendor?.endingCashReserved,
+                 vendor?.deficit,
+                 `Cashover: ${vendor?.cashOver}\nProfit Allocation: ${vendor?.profitAllocation}`,
+                 `Total Bank: ${vendor?.todayBankValue}\nTotal Bkash Value: ${vendor?.todayBkashValue}\nTotal Nogod: ${vendor?.todayNogodValue}`,
+                 allocation
+             ];
+         });
+     
+         return {
+             header: [
+                 "SL",
+                 "Cash Sales & Due",
+                 "Strting Cash Reserve",
+                 "Total Sales Amount",
+                 "Date",
+                 "Expenses",
+                 "Total Expenses",
+                 "Ending Cash Reserve",
+                 "Deficit",
+                 "Cash & Profit",
+                 "Payment Type",
+                 "Total",
+             ],
+             result
+         };
+     }, [accountsData]);
+     
+        
+         
+     const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Expesne List", [], 30)
 
     return (
         <div  className={`${cashList.main} full_width`}>
@@ -63,23 +147,8 @@ const DailyCashExpensesList = ({hideField, hideSection}) => {
                 </div>
                
               </div>
-          <section className={`${cashList.navigationIcon} flex_between`}>
-                { 
-                <div className={`${cashList.inputPart} flex_left`}>
-                    <i
-                    onClick={() => {
-                      dispatch(openModal('expense'))
-                      dispatch(addExpenseListData(accountsData))
-                    }}
-                    title="print" className="uil uil-print"></i>
-                    <span>Total : {accountsData?.length} </span>
-                
-                    <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
-                    <input type="date" name="" id="" onChange={(e) => setDate(e.target.value)}/>
-                </div>
-                }
-                
-          </section>
+          <NewFilterOption pdf={handleDownloadPDF} date={date} setDate={setDate} month={month} setMonth={setMonth} totalCount={accountsData?.length}/>
+          
           <section className={`${cashList.navigationIcon} only_flex`}>
           
                 

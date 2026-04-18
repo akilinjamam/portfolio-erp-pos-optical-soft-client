@@ -1,125 +1,103 @@
-
-import salesAnalysis from './SalesAnalysis.module.scss';
-
+import  { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styles from './SalesAnalysis.module.scss';
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import SalesAnalysisChart from './SalesAnalysisChart';
-
-import {useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addSalesAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import useSalesAnalysis from './useSalesAnalysis';
-import SalesAnalysisChartRes from './SalesAnalysisChartRes';
+import { addSalesAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 
 const SalesAnalysis = () => {
-
- 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [month, setMonth] = useState('');
-   
-  
-    const {accumulatedSalesInfo, isLoading, saleData, filtered, setCurrentDate} = useSalesAnalysis(month)
-    
+    const { accumulatedSalesInfo, isLoading, saleData, filtered, setCurrentDate } = useSalesAnalysis(month);
+
+    if (isLoading) return <CommonLoading />;
+
+    // Logic remains same
     const salesGroupeByDate = accumulatedSalesInfo;
-   
-    
-    const highestSale = salesGroupeByDate?.reduce((max, sale) => 
-    (sale.sales > max.sales ? sale : max),  { date: "", sales: 0 } 
-    );
-
-    const lowestSale = salesGroupeByDate?.reduce((min, sale) =>
-    (sale.sales < min.sales ? sale : min), { date: "", sales: Infinity }
-    );
-
+    const highestSale = salesGroupeByDate?.reduce((max, sale) => (sale.sales > max.sales ? sale : max), { date: "", sales: 0 });
+    const lowestSale = salesGroupeByDate?.reduce((min, sale) => (sale.sales < min.sales ? sale : min), { date: "", sales: Infinity });
     const totalSales = salesGroupeByDate?.reduce((acc, item) => acc + Number(item?.sales), 0);
     const totalPaid = saleData?.result?.reduce((acc, item) => acc + Number(item?.advance), 0);
     const totalDiscount = saleData?.result?.reduce((acc, item) => acc + Number(item?.discount), 0);
-
     const netSales = totalSales - totalDiscount;
     const totalDue = netSales - totalPaid;
 
- 
-     
-  if (isLoading) {
-       return <CommonLoading />
-  }
-  return (
-    <div className={`${salesAnalysis.main} full_width`}>
-      <div style={{ display: 'flex', flexWrap: "wrap" }} className={`flex_around`}>
-        <div className={`${salesAnalysis.inputAreaOne} flex_center`}>
-          <div className={`${salesAnalysis.container} `}>
-            <div className={`${salesAnalysis.titleName}`}>Sales Analysis</div>
-            <div style={{ width: '123px' }} className={`${salesAnalysis.border_remover} `}></div>
+    const handlePrint = () => {
+        dispatch(openModal('sales-analysis'));
+        dispatch(addSalesAnalysis({
+            data: filtered,
+            salesDetail: { highestSale, lowestSale, totalSales, netSales, totalPaid, totalDiscount, totalDue }
+        }));
+    };
 
-            <form action="">
-              <div style={{flexWrap:"wrap"}} className='flex_top'>
-
-                <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
-                    <label style={{marginRight:'5px'}} htmlFor="">Find By Month: </label>
-                    <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)} />
+    return (
+        <div className={styles.dashboardContainer}>
+            {/* Header Section */}
+            <header className={styles.header}>
+                <div className={styles.titleBlock}>
+                    <h1>Sales Analytics</h1>
+                    <p>Real-time insights into your revenue performance</p>
                 </div>
-                <div style={{ width: '100%', fontSize:'13px', padding:'10px 0' }}>
-                    <label style={{marginRight:'5px'}} htmlFor="">Find By 1/3 Month: </label>
-                    <select name="" id="" onChange={(e) => setCurrentDate(Number(e.target.value))}>
-                        <option value={new Date()?.getDate()} >select slot</option>
-                        <option value={32}>Full Month</option>
-                        <option value={10}>1st</option>
-                        <option value={20}>2nd</option>
-                        <option value={30}>3rd</option>
-                    </select>
+                <div className={styles.actions}>
+                    <button onClick={handlePrint} className={styles.printBtn}>
+                        <i className="uil uil-print"></i> Export Report
+                    </button>
                 </div>
-              </div>
+            </header>
 
-              <div className={`${salesAnalysis.inputAreaOne_footer} flex_right`}>
-                <div className={`${salesAnalysis.inputAreaOne_footer_container} flex_around`}>
-
+            {/* Filter & Metrics Grid */}
+            <div className={styles.topGrid}>
+                <div className={styles.filterCard}>
+                    <h3>Filters</h3>
+                    <div className={styles.filterGroup}>
+                        <div className={styles.inputBox}>
+                            <label>Analysis Month</label>
+                            <input type="month" onChange={(e) => setMonth(e.target.value)} />
+                        </div>
+                        <div className={styles.inputBox}>
+                            <label>Time Slot</label>
+                            <select onChange={(e) => setCurrentDate(Number(e.target.value))}>
+                                <option value={new Date().getDate()}>Default</option>
+                                <option value={32}>Full Month</option>
+                                <option value={10}>1st Decile</option>
+                                <option value={20}>2nd Decile</option>
+                                <option value={30}>3rd Decile</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className={`${salesAnalysis.inputAreaTwo} flex_center`}>
-          <div className={`${salesAnalysis.container} `}>
-            <div className={`${salesAnalysis.titleName} flex_center`}>Details</div>
-              <div style={{ width: '65px' }} className={`${salesAnalysis.border_remover}`}></div>
-            
-              <div className={`${salesAnalysis.inputAreaTwoContainer}`}>
-                  
-                  <br />
-                  <p>Total : {netSales} </p>
-                  <p>Paid: {totalPaid}</p>
-                  <p>Due: {totalDue}</p>
-                 
-              <div className={`${salesAnalysis.uploading}`}>
 
-              </div>
-
+                <div className={styles.metricsWrapper}>
+                    <div className={`${styles.metricCard} ${styles.total}`}>
+                        <span>Total Revenue</span>
+                        <h2>${netSales.toLocaleString()}</h2>
+                    </div>
+                    <div className={`${styles.metricCard} ${styles.paid}`}>
+                        <span>Received</span>
+                        <h2>${totalPaid.toLocaleString()}</h2>
+                    </div>
+                    <div className={`${styles.metricCard} ${styles.due}`}>
+                        <span>Outstanding</span>
+                        <h2>${totalDue.toLocaleString()}</h2>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            {/* Chart Section */}
+            <section className={styles.chartSection}>
+                <SalesAnalysisChart 
+                    allSalesPriceData={filtered} 
+                    highestSale={highestSale} 
+                    lowestSale={lowestSale} 
+                    netSales={netSales} 
+                    totalDiscount={totalDiscount} 
+                    totalDue={totalDue} 
+                    totalPaid={totalPaid} 
+                />
+            </section>
         </div>
-
-      </div>
-      <section className={`${salesAnalysis.navigationIcon} flex_between`}>
-        {
-          <div className={`${salesAnalysis.inputPart} flex_left`}>
-            <i title="print" className="uil uil-print" onClick={() => {
-              dispatch(openModal('sales-analysis'))
-              dispatch(addSalesAnalysis({data:filtered,salesDetail: {highestSale, lowestSale,totalSales, netSales, totalPaid, totalDiscount, totalDue}}))
-            }}></i>
-          </div>
-        }
-      </section>
-      <section className={`${salesAnalysis.navigationIcon} only_flex`}>
-        
-
-      </section>
-      <section className={`${salesAnalysis.tableChart}`}>
-        <SalesAnalysisChart allSalesPriceData={filtered} highestSale={highestSale} lowestSale={lowestSale} totalSales={totalSales} netSales={netSales} totalDiscount={totalDiscount} totalPaid={totalPaid} totalDue={totalDue}/>
-      </section>
-      <section className={`${salesAnalysis.tableChartRes}`}>
-        <SalesAnalysisChartRes allSalesPriceData={filtered} highestSale={highestSale} lowestSale={lowestSale} totalSales={totalSales} netSales={netSales} totalDiscount={totalDiscount} totalPaid={totalPaid} totalDue={totalDue}/>
-      </section>
-    </div>
-  );
+    );
 };
 
 export default SalesAnalysis;

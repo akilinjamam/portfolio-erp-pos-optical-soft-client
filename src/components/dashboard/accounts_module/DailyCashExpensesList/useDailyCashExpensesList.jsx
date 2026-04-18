@@ -106,6 +106,6 @@ const useDailyCashExpensesList = () => {
         deleteAccounts(idsForDelete)
     }
 
-    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId, isLoading, location }
+    return {updateAccountsData, setUdpateAccountsData, initialAccountsData, paginatedDataContainer, setPaginatedDataContainer, paginatedIndex, setPaginatedIndex, edit, setEdit, editProduct, fullScr, setFullScr, modifiedAccountsDataWithIndexId, setQuery, query, selectDeleted, setSelectDeleted, idsForDelete, setIdsForDelete, deleteProducts, range, setRange, setMonth, date, setDate, setEmployeeId, isLoading, location, month }
 };
 export default useDailyCashExpensesList;

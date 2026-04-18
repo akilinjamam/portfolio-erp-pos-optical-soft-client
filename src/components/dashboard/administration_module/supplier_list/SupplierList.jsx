@@ -1,22 +1,52 @@
 /* eslint-disable react/prop-types */
-
-import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
 import { textInput } from "../add_supplier/supplierInput";
 import supplierList from './SupplierList.module.scss';
-import {addSupplierList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import useSupplierList from "./useSupplierList";
 import SupplierListTable from "./SupplierListTable";
 import useHome from "../../home/useHome";
-import FilterOption from "./FilterOption";
+
 import NewPagination from "../../pagination/NewPagination";
+import NewFilterOption from "./NewFilterOption";
+import { useMemo } from "react";
+import usePdfDownloader from "../../../../usePdfDownloader";
 
 const SupplierList = ({hideField, hideSection}) => {
     const {supplierData:data, isLoading,  updateSupplierData, setUdpateSupplierData,edit,setEdit,editProduct, initialSupplierData, uploading, setUploading,setImgHolder, imgHolder,   setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, query, setQuery, pageNumber, setPageNumber, count, setCount} = useSupplierList();
     const supplierData = data?.result;
-    console.log(data)
-    const dispatch = useDispatch();
-    const {location} = useHome()
+    
+    const {location} = useHome();
+
+    const dataForPdf = useMemo(() => {
+            const result = supplierData?.map((supplier) => {
+                return [
+                    supplier?.sId,
+                    supplier?.supplierName,
+                    supplier?.address,
+                    supplier?.mobile,
+                ];
+            });
+        
+            return {
+                header: [
+                    "Id",
+                    "Name",
+                    "Address",
+                    "Phone Number",
+                ],
+                result
+            };
+        }, [supplierData]);
+        
+            const summaryData = [
+          { label: "", value: 0 },
+          
+        ];
+    
+        
+            
+        const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Supplier List", summaryData, 25)
+
     return (
         <div  className={`${supplierList.main} full_width`}>
              <div style={{display:`${hideSection ? 'none' : 'flex'}`, flexWrap: "wrap"}}  className={`flex_around`}>
@@ -101,12 +131,13 @@ const SupplierList = ({hideField, hideSection}) => {
                   </div>
                 </div>
               </div>
-              <FilterOption total={data?.total} dispatch={dispatch} openModal={openModal} addSupplierList={addSupplierList} supplierData={supplierData} query={query}  setQuery={setQuery}/>
+              <NewFilterOption pdf={handleDownloadPDF} setHandleQuery={setQuery} handleQuery={query} data={data} />
+              
               <section className={`${supplierList.navigationIcon} only_flex`}>
               
                     
               </section>
-          <section style={{height: `${location === '/dashboard/administration_module/supplier_list' ? '42vh' : '72vh'}`}}  className={`${supplierList.tableArea}`}>
+          <section style={{height: `${location === '/dashboard/administration_module/supplier_list' ? '32vh' : '72vh'}`}}  className={`${supplierList.tableArea}`}>
               <SupplierListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={supplierData} setEdit={setEdit} edit={edit} showData={supplierData} hideField={hideField} />
           </section>
            {

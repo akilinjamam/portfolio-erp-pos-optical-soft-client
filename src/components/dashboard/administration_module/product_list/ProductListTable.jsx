@@ -5,10 +5,8 @@ import { openImg, openModal, openSingleBarcode } from '../../../modal/imgmodal/i
 import CommonLoading from '../../../commonLoagin/CommonLoading';
 import productList from "./ProductList.module.scss"
  
-const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, isFetching, summary}) => {
+const ProductListTable = ({paginatedDataContainer, isLoading, setEdit, edit, showData, fullScr, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete,  summary}) => {
 
-  console.log(isLoading)
-  console.log(isFetching)
   
   const dispatch = useDispatch();
 

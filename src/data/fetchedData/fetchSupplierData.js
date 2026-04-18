@@ -6,7 +6,7 @@ export const fetchGetSupplierData = async (query) => {
 
         const value = query ? query : '';
 
-        const result = await axios.get(`${url}/suppliers?searchTerm=${value}`, {
+        const result = await axios.get(`${url}/suppliers?searchTerm=${value}&page=${1}&limit=${1000}`, {
             headers: {
                 Authorization: token,
                 "Accepts": "application/json",

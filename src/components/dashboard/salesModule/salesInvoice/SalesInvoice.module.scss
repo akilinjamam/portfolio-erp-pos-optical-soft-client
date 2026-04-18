@@ -1,95 +1,268 @@
-@use '../../../../global_style//reusable_variables/index' as v;
+/* --- Variables & Theme --- */
+$primary: #2563eb;
+$primary-hover: #1d4ed8;
+$bg-super: #f8fafc;
+$bg-card: #ffffff;
+$border-color: #e2e8f0;
+$text-main: #1e293b;
+$text-light: #64748b;
+$danger: #ef4444;
+$success: #10b981;
+$shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
-.superMain{
-    .main{
-    font-family: v.$fs;
-    .titleBar{
-        width: 99%;
-        margin: auto;
-        margin-bottom: 7px;
-        .titleBarContainer{
-            i{
-                cursor: pointer;
-            }
-            select{
-                margin-left: 10px;
-                margin-right: 10px;
-                width: 150px;
-            }
-            label{
-                margin-left: 10px;
-                margin-right: 10px;
-                font-size: 14px;
-            }
-            input{
-                width: 220px;
-                margin: 0 10px;
-            }
-        }
-    }
-    .tableArea{
-        width: 100%;
-        // overflow-x: hidden;
-        // overflow-y: scroll;
-        overflow: auto;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+/* --- 1. SalesInvoice.jsx Layout Styles --- */
+.superMain {
+  padding: 20px;
+  background-color: $bg-super;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.main {
+  background: $bg-card;
+  border-radius: 12px;
+  box-shadow: $shadow;
+  border: 1px solid $border-color;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.titleBar {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+  background: #fff;
+
+  .searchGroup {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 350px;
+
+    .searchIcon {
+      position: absolute;
+      left: 12px;
+      color: $text-light;
     }
 
-    .adjust {
-        width: 99%;
-        height: 50px;
-        margin: auto;
-        padding: 0 7px;
+    .invoiceInput {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
 
-        .adjustBtn{
-            padding: 5px 10px;
-            background-color: green;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer
-        }
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
     }
-    
-    table {
-        width: 99%;
-        border-collapse: collapse;
-        margin: 5px 5px;
-        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-        font-size: 12px;
+
+    .clearBtn {
+      position: absolute;
+      right: 12px;
+      cursor: pointer;
+      color: $text-light;
+      &:hover { color: $danger; }
     }
-    th, td {
-        padding: 4px;
-        border: 1px solid #dddddd;
+  }
+}
+
+.printBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 6px;
+  color: $text-main;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover { background: #e2e8f0; }
+  i { font-size: 16px; }
+}
+
+.tableSection {
+  background: #fff;
+  max-height: 65vh;
+  overflow-y: auto;
+  
+  
+  /* Modern Scrollbar */
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+}
+
+.footerActions {
+  padding: 16px 24px;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+
+  .adjustBtn, .deliveryGroup {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+}
+
+.primaryBtn {
+  background: $primary;
+  color: white;
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover { background: $primary-hover; }
+}
+
+.secondaryBtn {
+  background: white;
+  color: $text-main;
+  padding: 9px 18px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover { background: $bg-super; }
+}
+
+.statusSelect {
+  padding: 8px 12px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* --- 2. SalesInvoiceTable.jsx Internal Styles --- */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+
+  .invoiceTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+
+    thead {
+      background: #f8fafc;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+
+      th {
+        padding: 12px 16px;
         text-align: left;
+        font-weight: 600;
+        color: $text-light;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        border-bottom: 2px solid $border-color;
+      }
     }
-    th {
-        background-color: #f4f4f4;
+
+    tbody tr {
+      border-bottom: 1px solid $border-color;
+      transition: background 0.2s;
+      &:hover { background-color: #fcfdfe; }
+
+      td {
+        padding: 14px 16px;
+        vertical-align: top;
+        color: $text-main;
+      }
     }
-    
+  }
 }
 
-.mobileMain{
-        display: none;
-    }
+/* Data Content Formatting */
+.primaryText { font-weight: 600; font-size: 14px; color: $text-main; }
+.secondaryText { color: $primary; font-weight: 500; font-size: 12px; }
+.subText { color: $text-light; font-size: 11px; margin-top: 2px; }
+
+.tag {
+  display: inline-block;
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  margin-top: 4px;
+  font-weight: 600;
 }
 
-@media screen and (max-width:1242px) {
-        .superMain{
-                .main{
-                display: none;
-            };
-            .mobileMain{
-                display: block;
-                background-color: v.$primary;
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color:v.$white;
-                font-family:v.$fs
-            }
-    }
+.productScroll {
+  .productItem {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 3px 0;
+    border-bottom: 1px dashed #f1f5f9;
+    font-family: monospace;
+    &:last-child { border: none; }
+    span:first-child { color: $text-main; }
+    span:last-child { color: $text-light; }
+  }
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 2px;
+  span { color: $text-light; }
+  b { color: $text-main; }
+}
+
+.dueCritical { color: $danger; font-weight: 700; font-size: 15px; }
+.dueClear { color: $success; font-weight: 700; font-size: 15px; }
+
+.statusBadge {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Loader & Mobile Fallback */
+.loaderContainer {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobileMain {
+  display: none;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    color: $text-light;
+    text-align: center;
+    i { font-size: 48px; margin-bottom: 10px; }
+  }
+}
+
+@media (max-width: 1024px) {
+  .main { display: none; }
 }

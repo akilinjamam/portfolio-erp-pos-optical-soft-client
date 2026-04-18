@@ -1,13 +1,55 @@
+import { useMemo } from 'react';
 import '../../../../global_style/global_style.css'
-import { addVendorBillData, openModal } from '../../../modal/imgmodal/imgModalSlice';
+import usePdfDownloader from '../../../../usePdfDownloader';
 import Pagination from '../../pagination/Pagination';
 import addVendorBill from './AddVendorBill.module.scss';
 import { vendorBillInput } from './addVendorBillInput';
+import NewFilterOption from './NewFilterOption';
 import useAddVendorBill from './useAddVendorBill';
 import VendorBillTable from './VendorBillTable';
 
 const AddVendorBill = () => {
-  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid, dispatch, setMonth, modifiedVendorDataWithIndexId, isLoading, paginatedDataContainer, setPaginatedDataContainer, setPaginatedIndex, isPending} = useAddVendorBill()
+  const {payrollData, setPayrollData, handleSubmit, allSuppliers, setSupplierId, allPayroll, lastBillingDate, lastPaymentDate, lastPaid, setMonth, modifiedVendorDataWithIndexId, isLoading, paginatedDataContainer, setPaginatedDataContainer, setPaginatedIndex, isPending, month} = useAddVendorBill()
+
+  const dataForPdf = useMemo(() => {
+      const result = modifiedVendorDataWithIndexId?.map((vendor) => {
+  
+  
+          return [
+              vendor?.indexId,
+              `${vendor?.supplierName?.supplierName}\n${vendor?.supplierName?.mobile}`,
+              vendor?.singleBillAmount,
+              vendor?.billAmount,
+              vendor?.billingDate,
+              vendor?.billNo,
+              // Summary (multi-line)
+              `Total Paid: ${vendor?.totalPaid}\nPaid: ${vendor?.paid}`,
+              `Due: ${vendor?.due}\nPrevious Due: ${vendor?.due}`,
+              `Payment Method: ${vendor?.paymentMethod}\nId: ${vendor?.transectionId}`,
+          ];
+      });
+  
+      return {
+          header: [
+              "SL",
+              "Supplier",
+              "Bill Amount",
+              "Total Bill Amount",
+              "Billing Date",
+              "Billing No",
+              "Payment Info",
+              "Due",
+              "Payment & Id",
+          ],
+          result
+      };
+  }, [modifiedVendorDataWithIndexId]);
+  
+     
+      
+  const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Vendor Bill", [], 30)
+
+
   
     return (
         <div className={`${addVendorBill.main} full_width`}>
@@ -81,28 +123,13 @@ const AddVendorBill = () => {
               </div>
             </div>
           </div> 
-          <section className={`${addVendorBill.navigationIcon} flex_between`}>
-                          { 
-                          <div className={`${addVendorBill.inputPart} flex_left`}>
-                              <i
-                              onClick={() => {
-                                dispatch(openModal('vendor-bill'))
-                                dispatch(addVendorBillData({vendorBillData:modifiedVendorDataWithIndexId}))
-                              }}
-                              title="print" className="uil uil-print"></i>
-                              <span>Total : {modifiedVendorDataWithIndexId?.length} </span>
-                          
-                             
-                              <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
-                          </div>
-                          }
-                          
-                    </section>
+          <NewFilterOption pdf={handleDownloadPDF} date={month} setDate={setMonth} totalCount={modifiedVendorDataWithIndexId?.length} />
+          
                     <section className={`${addVendorBill.navigationIcon} only_flex`}>
                     
                           
                     </section>
-                    <section style={{height: '42vh'}}  className={`${addVendorBill.tableArea}`}>
+                    <section style={{height: '38vh', overflowY: "scroll", scrollbarWidth: "none"}}  className={`${addVendorBill.tableArea}`}>
                         <VendorBillTable isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} />
                     </section>
                      {

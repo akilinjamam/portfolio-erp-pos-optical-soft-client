@@ -19,8 +19,8 @@ const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
                 <thead>
                     <tr>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>SL</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer Name</th>
-                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>Customer Phone</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left'}}>Customer</th>
+                        <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>Phone No</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Customer Address</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Invoice Number</th>
                         <th style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'400px'}}>Total Sales</th>
@@ -33,11 +33,14 @@ const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
                 <tbody>
                     {
                         paginatedDataContainer?.map((list, index) => {
-                            const {indexId, customerName, phoneNumber, address, invoiceBarcode, products, advance, discount,leftSph, leftCyl, leftAxis, rightSph, rightCyl, rightAxis, leftNear, rightNear } = list || {}
+                            const {sId, customerName, createdAt, phoneNumber, address, invoiceBarcode, products, advance, discount,leftSph, leftCyl, leftAxis, rightSph, rightCyl, rightAxis, leftNear, rightNear } = list || {}
                             return (
                                 <tr key={index+1}>
-                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{indexId}</td>
-                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{customerName}</td>
+                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{sId}</td>
+                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'100px'}}>
+                                        <p>{customerName}</p>
+                                        <p>{createdAt?.slice(0,10)}</p>
+                                    </td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left',paddingLeft:'5px'}}>{phoneNumber}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{address}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{invoiceBarcode}</td>

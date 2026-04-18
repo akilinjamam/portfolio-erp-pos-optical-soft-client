@@ -5,7 +5,7 @@ import { fetchGetSupplierData } from "../fetchedData/fetchSupplierData";
 
 const useGetSupplierData = (query) => {
 
-    const { data: getAllData, refetch, isLoading, error } = useQuery({ queryKey: ['fetchGetSupplierData'], queryFn: () => fetchGetSupplierData(query) })
+    const { data: getAllData, refetch, isLoading, error } = useQuery({ queryKey: ['fetchGetSupplierDataAll'], queryFn: () => fetchGetSupplierData(query) })
     const supplierData = getAllData
 
 

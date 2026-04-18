@@ -14,7 +14,7 @@ const useProductList = () => {
         to: '',
         priceFrom: '',
         priceTo: '',
-        limit: 50,
+        limit: 30,
         inStock: ''
     })
     const [pageNumber, setPageNumber] = useState(1);

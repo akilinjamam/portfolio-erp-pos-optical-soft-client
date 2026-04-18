@@ -1,36 +1,92 @@
 // import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import { useDispatch } from "react-redux";
 import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import Pagination from "../../pagination/Pagination";
 import {  textInput } from "../product_entry/productInput";
 import glassList from './GlassList.module.scss';
-import { openBarcode, openModal } from "../../../modal/imgmodal/imgModalSlice";
-import { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 import useGlassList from "./useGlassList";
-import GlassListTable from "./GlassListTable";
-import FilterOption from "./FilterOption";
+import NewFilterOption from "../product_list/NewFilterOption";
+import NewPagination from "../../pagination/NewPagination";
+import NewProductListTable from "../product_list/NewProductListTable";
+import { calculateTotalPrice } from "../../../calculation/calculateSum";
+import usePdfDownloader from "../../../../usePdfDownloader";
+import { useMemo } from "react";
 const GlassList = () => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder, fullScr, setFullScr, modifiedProductDataWithIndexId, setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts, setStocks, range ,setRange} = useGlassList();
-    const productData = modifiedProductDataWithIndexId
+    const {  updateProductData, setUdpateProductData,edit,setEdit,editProduct, initialProductData, uploading, setUploading,setImgHolder, imgHolder,  setQuery,query, setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,  range ,setRange, pageNumber, setPageNumber, count, setCount, products, isLoading} = useGlassList();
 
-    const dispatch = useDispatch();
+    const allSales = calculateTotalPrice(products?.result?.map((item) => (Number(item?.salesPrice) * Number(item?.quantity))));
+    const allPurchase = calculateTotalPrice(products?.result?.map((item) => (Number(item?.purchasePrice) * Number(item?.quantity))));
+    const totalStock = calculateTotalPrice(products?.result?.map((item) => (Number(item?.stockAmount))));
+    const availableStock = calculateTotalPrice(products?.result?.map((item) => (Number(item?.quantity))));
+    
+   
+    
+  const summary = {
+    totalSalesPrice : allSales,
+    totalPurchasePrice : allPurchase,
+    totalStock: totalStock,
+    totalQuantity: availableStock
+  }
 
-    const handlBarcode = () => {
-      dispatch(openModal('barcode'));
-      dispatch(openBarcode(productData))
-    }
+    const productData = products?.result?.map((item, index) => {
+      return {...item, sId:index+1}
+    })
 
-    const contentToPrint = useRef(null);
-    const handlePrint = useReactToPrint({
-        documentTitle: "Print This Document",
-        onBeforePrint: () => console.log("before printing..."),
-        onAfterPrint: () => console.log("after printing..."),
-        removeAfterPrint: true,
-    });
+
+
+    const dataForPdf = useMemo(() => {
+        const result = productData?.map((product) => {
+    
+            return [
+                product?.sId,
+                `${product?.productName}\n${product?.createdAt?.slice(0, 10)}`,
+                `Total: ${product?.stockAmount}\nStockout: ${Number(product?.stockAmount) - Number(product?.quantity)}\nAvailable: ${product?.quantity}`,
+                `Sales Price: ${product?.salesPrice}\nPurchase Price: ${product?.purchasePrice}\nCategory: ${product?.category}`,
+                `Size: ${product?.size}\nMaterial: ${product?.material}\nFrame Type: ${product?.frameType}\nFrame Shape: ${product?.shape}\nPower: ${product?.power}`,
+                `Supplier: ${product?.supplierName}\nCollector: ${product?.collectorName}\nRecorder: ${product?.recorderName}`,
+                product?.barcode
+            ];
+        });
+    
+        return {
+            header: [
+                "SL",
+                "Product Details",
+                "Stock",
+                "Pricing & Category",
+                "Features",
+                "Engaged By",
+                "Barcode"
+            ],
+            result
+        };
+    }, [productData]);
+  
+    
+    const summaryData = [
+      { label: "Total Sales", value: allSales },
+      { label: "Total Purchase", value: allPurchase },
+      { label: "Total Stock", value: totalStock},
+      { label: "Available Quantity", value: availableStock }
+    ];
+        
+      const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Glass List", summaryData)
+
+    // const dispatch = useDispatch();
+
+    // const handlBarcode = () => {
+    //   dispatch(openModal('barcode'));
+    //   dispatch(openBarcode(productData))
+    // }
+
+    // const contentToPrint = useRef(null);
+    // const handlePrint = useReactToPrint({
+    //     documentTitle: "Print This Document",
+    //     onBeforePrint: () => console.log("before printing..."),
+    //     onAfterPrint: () => console.log("after printing..."),
+    //     removeAfterPrint: true,
+    // });
     return (
         <div  className={`${glassList.main} full_width`}>
-             <div style={{display:`${fullScr ? 'none' : 'flex'}`, flexWrap: "wrap"}}  className={`flex_around`}>
+             <div style={{display:'flex', flexWrap: "wrap"}}  className={`flex_around`}>
                 <div className={`${glassList.inputAreaOne} flex_center`}>
                   <div className={`${glassList.container} `}>
                         <div className={`${glassList.titleName}`}>Product Update</div>
@@ -125,14 +181,16 @@ const GlassList = () => {
                   </div>
                 </div>
               </div>
-           <FilterOption setQuery={setQuery} query={query} productData={productData} setStocks={setStocks} fullScr={fullScr} handlBarcode={handlBarcode}  handlePrint={handlePrint}  contentToPrint={contentToPrint} setFullScr={setFullScr} range={range} setRange={setRange} />
-          <section style={{height: `${fullScr ? '80vh' : '35vh'}`}}  className={`${glassList.tableArea}`} ref={contentToPrint}>
-              <GlassListTable idsForDelete={idsForDelete} setIdsForDelete={setIdsForDelete} selectDeleted={selectDeleted} setSelectDeleted={setSelectDeleted} isLoading={isLoading} paginatedDataContainer={paginatedDataContainer} setEdit={setEdit} edit={edit} showData={productData} fullScr={fullScr}/>
+          <NewFilterOption pdf={handleDownloadPDF}  setHandleQuery={setQuery} handleQuery={query} data={products} range={range} setRange={setRange}  />
+          
+          <section style={{height: '35vh'}}  className={`${glassList.tableArea}`}>
+              <NewProductListTable edit={edit} idsForDelete={idsForDelete} paginatedDataContainer={productData} selectDeleted={selectDeleted} setEdit={setEdit} setIdsForDelete={setIdsForDelete} setSelectDeleted={setSelectDeleted} summary={summary} />
+              
           </section>
            {
-            !isLoading && !fullScr 
+            !isLoading
             &&
-            <Pagination showData={productData} setPaginatedDataContainer={setPaginatedDataContainer} setPaginatedIndex={setPaginatedIndex} limit={50}/>
+            <NewPagination data={products} count={count} setCount={setCount} pageNumber={pageNumber} setPageNumber={setPageNumber} limit={range.limit} />
            }      
         </div>
     );

@@ -1,20 +1,58 @@
 /* eslint-disable react/prop-types */
-import { useDispatch } from "react-redux";
 import Pagination from "../../pagination/Pagination";
 import vendorList from './VendorList.module.scss';
-import {  addVendorList, openModal } from "../../../modal/imgmodal/imgModalSlice";
 import useVendorList from "./useVendorList";
 import { vendorInput } from "../AddVendor/addVendorInput";
 import VendorListTable from "./VendorlistTable";
+import FilterOption from "../../hrAndPayroll/PayrollList/NewFilterOption";
+import { useMemo } from "react";
+import usePdfDownloader from "../../../../usePdfDownloader";
 
 
 const VendorList = ({hideSection, hideField}) => {
-    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData, totalPaid, location} = useVendorList();
+    const {paginatedDataContainer,isLoading,setPaginatedDataContainer, setPaginatedIndex, updateEmployeeData, setUdpateEmployeeData,edit,setEdit,editProduct, initialEmployeeData,  modifiedEmployeeDataWithIndexId,  setSelectDeleted,selectDeleted,idsForDelete, setIdsForDelete, deleteProducts,setMonth, setEmployeeId, supplierData, totalPaid, location, month, employeeId } = useVendorList();
     const vendorData = modifiedEmployeeDataWithIndexId
 
     const allEmployeeData =supplierData?.result?.sort((a, b) => a.supplierName.toLowerCase() > b.supplierName.toLowerCase() ? 1 : -1);
 
-    const dispatch = useDispatch();
+  const dataForPdf = useMemo(() => {
+        const result = vendorData?.map((vendor) => {
+    
+    
+            return [
+                vendor?.indexId,
+                `${vendor?.supplierName?.supplierName}\n${vendor?.supplierName?.mobile}`,
+                vendor?.singleBillAmount,
+                vendor?.billAmount,
+                vendor?.billingDate,
+                vendor?.paymentDate,
+                vendor?.billNo,
+                `Total Paid: ${vendor?.totalPaid}\nPaid: ${vendor?.paid}`,
+                `Due: ${vendor?.due}\nPrevious Due: ${vendor?.due}`,
+                `Payment Method: ${vendor?.paymentMethod}\nId: ${vendor?.transectionId}`,
+            ];
+        });
+    
+        return {
+            header: [
+                "SL",
+                "Supplier",
+                "Bill Amount",
+                "Total Bill Amount",
+                "Billing Date",
+                "Payment Date",
+                "Billing No",
+                "Payment Info",
+                "Due",
+                "Payment & Id",
+            ],
+            result
+        };
+    }, [vendorData]);
+    
+       
+        
+        const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Vendor List", [], 30)
 
     return (
         <div  className={`${vendorList.main} full_width`}>
@@ -61,44 +99,10 @@ const VendorList = ({hideSection, hideField}) => {
                       </form>
                   </div>
                 </div>
-                {/* <div className={`${vendorList.inputAreaTwo} flex_center`}>
-                  <div className={`${vendorList.container} `}>
-                        <div className={`${vendorList.titleName} flex_center`}></div>
-                        <div style={{width: '0'}} className={`${vendorList.border_remover}`}></div>
-                        <br />
-                            <div className={`${vendorList.inputAreaTwoContainer}`}>
-                            
-                              
-                            </div>
-                  </div>
-                </div> */}
+              
               </div>
-          <section className={`${vendorList.navigationIcon} flex_between`}>
-                { 
-                <div className={`${vendorList.inputPart} flex_left`}>
-                   <div>
-                      <i
-                      onClick={() => {
-                        dispatch(openModal('vendor'))
-                        dispatch(addVendorList(vendorData))
-                      }}
-                      title="print" className="uil uil-print"></i>
-                      <span>Total : {vendorData?.length} </span>
-                   </div>
-                
-                   <div>
-                      <select name="" id="" onChange={(e) => setEmployeeId(e.target.value)}>
-                          <option value="">Select SupplierName</option>
-                          {
-                              allEmployeeData?.map((employee, index) => <option key={index+1} value={employee?._id}>{employee?.supplierName}</option> )
-                          }
-                      </select>
-                      <input type="month" name="" id="" onChange={(e) => setMonth(e.target.value)}/>
-                   </div>
-                </div>
-                }
-                
-          </section>
+          <FilterOption downloadPdf={handleDownloadPDF} month={month} setMonth={setMonth} allEmployeeData={allEmployeeData} employeeId={employeeId} setEmployeeId={setEmployeeId} total={vendorData?.length}  />
+         
           <section className={`${vendorList.navigationIcon} only_flex`}>
           
                 

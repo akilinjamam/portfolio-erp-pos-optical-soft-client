@@ -1,136 +1,118 @@
-// import { updloadCloudinaryImage } from "../../../uploadCloudinaryImg";
-import stockAnalysis from './StockAnalysis.module.scss';
-
-
-import CommonLoading from '../../../commonLoagin/CommonLoading';
+import  { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addStockAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
-import { useEffect, useState } from 'react';
+import styles from './StockAnalysis.module.scss';
+import CommonLoading from '../../../commonLoagin/CommonLoading';
 import StockAnalysisChart from './StockAnalysisChart';
+import { addStockAnalysis, openModal } from '../../../modal/imgmodal/imgModalSlice';
 import { calculateTotalPrice } from '../../../calculation/calculateSum';
-import StockAnalysisChartRes from './StockAnalysisChartRes';
 import useProductOldData from '../../../../data/productData/useProductDataOld';
 
 const StockAnalysis = () => {
+    const dispatch = useDispatch();
+    const [date, setDate] = useState({ from: '', to: '' });
+    const [selectedCategory, setSelectedCategory] = useState('Optical Frame');
 
-  const [date, setDate] = useState({
-    from: '',
-    to: ''
-  })
+    const { products, refetch, isLoading } = useProductOldData('', date.from, date.to, '', '');
+    const analysisData = products?.result;
 
-  const { products, refetch, isLoading } = useProductOldData('', date?.from, date?.to, '', '')
-  const analysisData = products?.result
+    // Derived Data
+    const categoryCount = analysisData?.reduce((acc, item) => {
+        acc[item?.category] = (acc[item?.category] || 0) + Number(item?.quantity);
+        return acc;
+    }, {});
 
-  const categoryCount = analysisData?.reduce((acc, item) => {
-    acc[item?.category] = (acc[item?.category] || 0) + Number(item?.quantity);
-    return acc;
-  }, {});
+    const filteredByCategory = analysisData?.filter(item => item?.category === selectedCategory);
 
-  const [month, setMonth] = useState('Optical Frame');
+    const totalQty = calculateTotalPrice(filteredByCategory?.map(item => Number(item?.stockAmount)));
+    const availableQty = calculateTotalPrice(filteredByCategory?.map(item => Number(item?.quantity)));
+    const stockOutQty = totalQty - availableQty;
 
-  const findByCategory = products?.result?.filter(item => item?.category === month)
+    useEffect(() => {
+        refetch;
+    }, [refetch, selectedCategory, date]);
 
-  useEffect(() => {
-    refetch
-  }, [refetch, month, date])
+    if (isLoading) return <CommonLoading />;
 
-  const dispatch = useDispatch();
+    const handlePrint = () => {
+        dispatch(openModal('stock-analysis'));
+        dispatch(addStockAnalysis({ 
+            data: analysisData, 
+            categoryWishStockDetail: { 
+                categoryWiseAvailableQuantity: availableQty, 
+                categoryWiseTotalQuantity: totalQty, 
+                categoryWiseStockOunt: stockOutQty, 
+                categoryName: selectedCategory 
+            } 
+        }));
+    };
 
-
-  const categoryWiseAvailableQuantity = calculateTotalPrice(findByCategory?.map(item => Number(item?.quantity)))
-
-  const categoryWiseTotalQuantity = calculateTotalPrice(findByCategory?.map(item => Number(item?.stockAmount)))
-  const categoryWiseStockOunt = calculateTotalPrice(findByCategory?.map(item => Number(item?.stockAmount))) - calculateTotalPrice(findByCategory?.map(item => Number(item?.quantity)))
-
-  if (isLoading) {
-    return <CommonLoading />
-  }
-
-  return (
-    <div className={`${stockAnalysis.main} full_width`}>
-      <div style={{ display: 'flex', flexWrap: "wrap" }} className={`flex_around`}>
-        <div className={`${stockAnalysis.inputAreaOne} flex_center`}>
-          <div className={`${stockAnalysis.container} `}>
-            <div className={`${stockAnalysis.titleName}`}>Stock Analysis</div>
-            <div style={{ width: '123px' }} className={`${stockAnalysis.border_remover} `}></div>
-
-            <form action="">
-              <div className='flex_top'>
-
-                <div style={{ width: '100%', fontSize: '13px', padding: '10px 0' }}>
-                  <label style={{ marginRight: '5px' }} htmlFor="">Find By Category: </label>
-                  <select style={{ marginBottom: '3px' }} name="" id="" onChange={(e) => setMonth(e.target.value)}>
-                    {
-                      Object?.keys(categoryCount)?.map((item, index) => {
-                        return (
-                          <option key={index + 1} value={item}>{item}</option>
-                        )
-                      })
-                    }
-                  </select>
-                  <br />
-                  <label style={{ marginRight: '81px' }} htmlFor="">From:</label>
-                  <input style={{ marginBottom: '3px' }} type="date" name="" id="" onChange={(e) => setDate({ ...date, from: e.target.value })} />
-                  <br />
-                  <label style={{ marginRight: '98px' }} htmlFor="">To:</label>
-                  <input style={{ marginBottom: '3px' }} type="date" name="" id="" onChange={(e) => setDate({ ...date, to: e.target.value })} />
+    return (
+        <div className={styles.dashboardContainer}>
+            {/* Header Area */}
+            <header className={styles.header}>
+                <div className={styles.titleBlock}>
+                    <h1>Inventory Analytics</h1>
+                    <p>Track stock levels and category distributions</p>
                 </div>
-              </div>
-
-              <div className={`${stockAnalysis.inputAreaOne_footer} flex_right`}>
-                <div className={`${stockAnalysis.inputAreaOne_footer_container} flex_around`}>
-
+                <div className={styles.actions}>
+                    <button onClick={handlePrint} className={styles.printBtn}>
+                        <i className="uil uil-print"></i> Generate Stock Report
+                    </button>
                 </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className={`${stockAnalysis.inputAreaTwo} flex_center`}>
-          <div className={`${stockAnalysis.container} `}>
-            <div className={`${stockAnalysis.titleName} flex_center`}>Details</div>
-            <div style={{ width: '65px' }} className={`${stockAnalysis.border_remover}`}></div>
+            </header>
 
-            <div className={`${stockAnalysis.inputAreaTwoContainer}`}>
-              <h4>Category wise Stock</h4>
-              <br />
-              <p>Total: {categoryWiseTotalQuantity}</p>
-              <p>Available: {categoryWiseAvailableQuantity}</p>
-              <p>stockout: {categoryWiseStockOunt}</p>
+            {/* Filter & Metric Section */}
+            <div className={styles.topGrid}>
+                <div className={styles.filterCard}>
+                    <h3>Inventory Filters</h3>
+                    <div className={styles.filterGroup}>
+                        <div className={styles.inputBox}>
+                            <label>Category</label>
+                            <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                                {Object.keys(categoryCount || {}).map((cat, idx) => (
+                                    <option key={idx} value={cat}>{cat}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className={styles.inputBox}>
+                            <label>From</label>
+                            <input type="date" onChange={(e) => setDate({ ...date, from: e.target.value })} />
+                        </div>
+                        <div className={styles.inputBox}>
+                            <label>To</label>
+                            <input type="date" onChange={(e) => setDate({ ...date, to: e.target.value })} />
+                        </div>
+                    </div>
+                </div>
 
-              <div className={`${stockAnalysis.uploading}`}>
-
-              </div>
-
+                <div className={styles.metricsWrapper}>
+                    <div className={`${styles.metricCard} ${styles.total}`}>
+                        <span>Total Stocked</span>
+                        <h2>{totalQty.toLocaleString()} <small>units</small></h2>
+                    </div>
+                    <div className={`${styles.metricCard} ${styles.available}`}>
+                        <span>Available Now</span>
+                        <h2>{availableQty.toLocaleString()} <small>units</small></h2>
+                    </div>
+                    <div className={`${styles.metricCard} ${styles.stockout}`}>
+                        <span>Items Sold/Out</span>
+                        <h2>{stockOutQty.toLocaleString()} <small>units</small></h2>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            {/* Chart Visualization */}
+            <section className={styles.chartSection}>
+                <StockAnalysisChart 
+                    analysisData={analysisData} 
+                    categoryWiseAvailableQuantity={availableQty} 
+                    categoryWiseTotalQuantity={totalQty} 
+                    categoryWiseStockOunt={stockOutQty} 
+                    categoryName={selectedCategory} 
+                />
+            </section>
         </div>
-      </div>
-      <section className={`${stockAnalysis.navigationIcon} flex_between`}>
-        {
-          <div className={`${stockAnalysis.inputPart} flex_left`}>
-            <i title="print" className="uil uil-print" onClick={() => {
-              dispatch(openModal('stock-analysis'))
-              dispatch(addStockAnalysis({ data: analysisData, categoryWishStockDetail: { categoryWiseAvailableQuantity, categoryWiseTotalQuantity, categoryWiseStockOunt, categoryName: month } }))
-            }}></i>
-
-
-          </div>
-        }
-
-      </section>
-      <section className={`${stockAnalysis.navigationIcon} only_flex`}>
-
-
-      </section>
-      <section className={`${stockAnalysis.tableChart}`}>
-        <StockAnalysisChart analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseAvailableQuantity} categoryWiseTotalQuantity={categoryWiseTotalQuantity} categoryWiseStockOunt={categoryWiseStockOunt} categoryName={month} />
-      </section>
-      <section className={`${stockAnalysis.tableChartRes}`}>
-        <StockAnalysisChartRes analysisData={analysisData} categoryWiseAvailableQuantity={categoryWiseAvailableQuantity} categoryWiseTotalQuantity={categoryWiseTotalQuantity} categoryWiseStockOunt={categoryWiseStockOunt} categoryName={month} />
-      </section>
-
-    </div>
-  );
+    );
 };
 
 export default StockAnalysis;

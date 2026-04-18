@@ -59,22 +59,18 @@ const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edi
       <thead>
 
         <tr>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>SL</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Cash Sales Amount</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Due Sales Amount</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Starting Cash Reserved</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Total Sales Amount</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Date</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Expenses</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Total Expenses</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Ending Cash Reserved</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Deficit</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Cash Over</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Profit Allocation</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Bank</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Bkash</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>Nogod</th>
-          <th style={{ border: '1px solid #dddddd', textAlign: 'center' }}>total</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>SL</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Cash Sales Amount</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Starting Cash Reserved</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total Sales Amount</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Date</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Expenses</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total Expenses</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Ending Cash Reserved</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Deficit</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Cash & Profit</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Payment Type</th>
+          <th style={{ border: '1px solid #dddddd', textAlign: 'left' }}>total</th>
           <th style={{display: `${hideField ? 'none' : ''}`}}>Action</th>
         </tr>
       </thead>
@@ -87,9 +83,7 @@ const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edi
         <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
         <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
         <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total Expenses = {calculateAllExpenses}</td>
-        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
-        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
-        <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
+      
         <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}></td>
         <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>Total Profit = {calculatetotalProfit}</td>
         <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{totalBankAmount}</td>
@@ -102,34 +96,41 @@ const DailyCashExpenseTable = ({ paginatedDataContainer, isLoading, setEdit, edi
           data?.map((data, index) => {
             return (
               <tr style={{ background: `${(data?._id === edit ? 'lightgray' : '') || (idsForDelete?.find(f => f === data?._id) ? 'rgb(245, 177, 177)' : '')}` }} key={index + 1} >
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center', display: 'flex', justifyContent: 'space-around' }}>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left', display: 'flex', justifyContent: 'space-around' }}>
                   {(selectDeleted) ? <input checked={idsForDelete?.find(f => f === data?._id)} onDoubleClick={handleAllDelete} onClick={(e) => handleDelete(data?._id, e)} type="checkbox" name="" id="" /> : ''}
                   <span>{data?.indexId}</span>
                 </td>
 
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.salesAmount}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.dueSalesAmount}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.startingCashReserved}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.totalSalesAmount}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.date}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>
+                  <p>Cash: {data?.salesAmount}</p>
+                  <p>Due: {data?.dueSalesAmount}</p>
+                </td>
+                {/* <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.dueSalesAmount}</td> */}
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.startingCashReserved}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.totalSalesAmount}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.date}</td>
                 <td style={{ border: '1px solid #dddddd', textAlign: 'left', paddingLeft: '5px' }}>
                   {
                     data?.expenses?.map((expense, index) => <p key={index + 1}>{index + 1}. {expense?.expenseName} = {expense?.expenseAmount} </p>)
                   }
                 </td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center', paddingLeft: '5px' }}>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left', paddingLeft: '5px' }}>
                   {
                     calculateTotalPrice(data?.expenses?.map((expense) => Number(expense?.expenseAmount)))
                   }
                 </td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.endingCashReserved}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.deficit}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.cashOver}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.profitAllocation}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayBankValue}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayBkashValue}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayNogodValue}</td>
-                <td style={{ border: '1px solid #dddddd', textAlign: 'center' }}>{data?.todayNogodValue + data?.todayBkashValue + data?.todayBankValue + Number(data?.profitAllocation)}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.endingCashReserved}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.deficit}</td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>
+                  <p>Cash Over: {data?.cashOver}</p>
+                  <p>Profit Allocation: {data?.profitAllocation}</p>
+                </td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>
+                  <p>Total Bank: {data?.todayBankValue}</p>
+                  <p>Total Bkash: {data?.todayBkashValue}</p>
+                  <p>Total Nogod: {data?.todayNogodValue}</p>
+                </td>
+                <td style={{ border: '1px solid #dddddd', textAlign: 'left' }}>{data?.todayNogodValue + data?.todayBkashValue + data?.todayBankValue + Number(data?.profitAllocation)}</td>
                 <td style={{display: `${hideSection ? 'none' : ''}`}} className={`flex_around`}>
 
                   <i onClick={() => {
