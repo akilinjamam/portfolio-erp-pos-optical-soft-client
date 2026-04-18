@@ -20,6 +20,8 @@ const CustomerList = () => {
     })
     const {saleData, isLoading, refetch} = useOneMonthSaleDataPaginated(query, range.from, range.to, pageNumber, range.limit, '');
 
+    const {saleData:saleDataForPdf} = useOneMonthSaleDataPaginated(query, range.from, range.to, pageNumber, 1000, '');
+
    
     const total = saleData?.result?.map(sale => calculateTotalPrice(sale?.products?.map(item => (item?.quantity * item?.actualSalesPrice))))
     const totalSalesValue = calculateTotalPrice(total)
@@ -30,7 +32,7 @@ const CustomerList = () => {
 
 
     const dataForPdf = useMemo(() => {
-    const result = saleData?.result?.map((customer) => {
+    const result = saleDataForPdf?.result?.map((customer) => {
         const { rightSph, rightCyl, rightAxis, leftSph, leftCyl, leftAxis, rightNear, leftNear } = customer || {};
         
         const totalAmount = customer?.products?.reduce(
@@ -45,7 +47,7 @@ const CustomerList = () => {
         
         return [
             customer?.sId,                                 
-            `${customer?.customerName}\n${customer?.phoneNumber}`,
+            `${customer?.customerName}\n${customer?.phoneNumber}\n${customer?.createdAt?.slice(0,10)}`,
             customer?.address,                              
             customer?.invoiceBarcode,                      
             totalAmount,                                  
@@ -68,13 +70,24 @@ const CustomerList = () => {
         ],
         result
     };
-}, [saleData]);
+}, [saleDataForPdf]);
 
+    const today = new Date().toLocaleDateString();
     const summaryData = [
-        {label: "Total Sales", value: saleData?.summary?.totalSalesValue}
-    ]
+        {label: "Total Sales", value: saleData?.summary?.totalSalesValue},
+    ];
 
-     const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Customer List", summaryData, 35)
+    const from =
+  saleDataForPdf?.result?.length > 0
+    ? saleDataForPdf.result[saleDataForPdf.result.length - 1]?.createdAt?.slice(0, 10)
+    : "";
+
+const to =
+  saleDataForPdf?.result?.length > 0
+    ? saleDataForPdf.result[0]?.createdAt?.slice(0, 10)
+    : "";
+
+    const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, `Customer List-${today}`, summaryData, 35, from, to);
 
 
     return (

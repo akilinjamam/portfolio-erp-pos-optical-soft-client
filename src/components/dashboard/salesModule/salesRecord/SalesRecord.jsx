@@ -25,8 +25,18 @@ const SalesRecord = () => {
 
     // paginated data from server
     const {saleData, refetch, isLoading} = useOneMonthSaleDataPaginated(handleQuery, range.from, range.to, pageNumber, range.limit, '');
+    const {saleData:saleDataForPdf} = useOneMonthSaleDataPaginated(handleQuery, range.from, range.to, pageNumber, 1200, '' );
     const summary = saleData?.summary;
-    const {totalCash, totalBank, totalBkash, totalNogod, totalSalesValue, totalDiscount, total, totalSoldQuantity} = summary || {}
+    const {
+    totalCash = 0,
+    totalBank = 0,
+    totalBkash = 0,
+    totalNogod = 0,
+    totalSalesValue = 0,
+    totalDiscount = 0,
+    total = 0,
+    totalSoldQuantity = 0
+} = summary || {};
 
 
     useEffect(() => {
@@ -36,14 +46,14 @@ const SalesRecord = () => {
 
 
     const dataForPdf = useMemo(() => {
-    const result = saleData?.result?.map((sale) => {
+    const result = saleDataForPdf?.result?.map((sale) => {
 
         const totalAmount = sale?.products?.reduce(
-            (sum, item) => sum + (item.quantity * item.actualSalesPrice),
+            (sum, item) => sum + (item?.quantity * item?.actualSalesPrice),
             0
         );
 
-        const due = totalAmount - Number(sale?.advance) - Number(sale?.discount);
+        const due = totalAmount - Number(sale?.advance || 0) - Number(sale?.discount || 0);
 
         return [
             sale?.sId,
@@ -52,7 +62,7 @@ const SalesRecord = () => {
 
             // Products (multi-line)
             sale?.products
-                ?.map(item => `${item.productName} (${item.quantity}×${item.actualSalesPrice})`)
+                ?.map(item => `${item?.productName} (${item?.quantity}×${item?.actualSalesPrice})`)
                 .join("\n"),
 
             // Summary (multi-line)
@@ -79,7 +89,7 @@ const SalesRecord = () => {
         ],
         result
     };
-}, [saleData?.result]);
+}, [saleDataForPdf?.result]);
 
     const summaryData = [
   { label: "Total Sales", value: totalSalesValue },
@@ -93,8 +103,20 @@ const SalesRecord = () => {
   { label: "Bkash", value: totalBkash },
   { label: "Nogod", value: totalNogod },
 ];
+
+const today = new Date().toLocaleDateString();
+
+const from =
+  saleDataForPdf?.result?.length > 0
+    ? saleDataForPdf.result[saleDataForPdf.result.length - 1]?.createdAt?.slice(0, 10)
+    : "";
+
+const to =
+  saleDataForPdf?.result?.length > 0
+    ? saleDataForPdf.result[0]?.createdAt?.slice(0, 10)
+    : "";
     
-    const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, "Sales Record", summaryData)
+const {handleDownloadPDF} = usePdfDownloader(dataForPdf?.result, dataForPdf?.header, `Sales Record-${today}`, summaryData,60, from, to)
 
     return (
         <div className={salesRecord.main}>

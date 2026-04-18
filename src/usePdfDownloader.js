@@ -3,7 +3,7 @@ import autoTable from "jspdf-autotable";
 import useGetbranchData from "./data/branchData/useGetBranchData";
 import { jwtDecode } from "jwt-decode";
 
-const usePdfDownloader = (tableData, header, title, summaryData, tableTopGap = 60) => {
+const usePdfDownloader = (tableData, header, title, summaryData, tableTopGap = 60, from = 'date', to = 'date') => {
   const { branchData } = useGetbranchData();
   const token = localStorage.getItem("user");
   const splitToken = token?.split(' ')?.[1];
@@ -45,14 +45,14 @@ const usePdfDownloader = (tableData, header, title, summaryData, tableTopGap = 6
     }
 
     // 📅 Current Date
-    const today = new Date().toLocaleDateString();
+    const today = `${from} to ${to}`
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.text(`Date: ${today}`, pageWidth / 2, 22, { align: "center" });
 
     // Title
     doc.setFontSize(18);
-    doc.text(title, 14, 15);
+    doc.text(title?.split('-')?.[0], 14, 15);
 
     // Generate table
     autoTable(doc, {

@@ -33,11 +33,14 @@ const CustomerListTable = ({ paginatedDataContainer, isLoading}) => {
                 <tbody>
                     {
                         paginatedDataContainer?.map((list, index) => {
-                            const {sId, customerName, phoneNumber, address, invoiceBarcode, products, advance, discount,leftSph, leftCyl, leftAxis, rightSph, rightCyl, rightAxis, leftNear, rightNear } = list || {}
+                            const {sId, customerName, createdAt, phoneNumber, address, invoiceBarcode, products, advance, discount,leftSph, leftCyl, leftAxis, rightSph, rightCyl, rightAxis, leftNear, rightNear } = list || {}
                             return (
                                 <tr key={index+1}>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{sId}</td>
-                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{customerName}</td>
+                                    <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px', width:'100px'}}>
+                                        <p>{customerName}</p>
+                                        <p>{createdAt?.slice(0,10)}</p>
+                                    </td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left',paddingLeft:'5px'}}>{phoneNumber}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{address}</td>
                                     <td style={{border:'1px solid #dddddd',textAlign:'left', paddingLeft:'5px'}}>{invoiceBarcode}</td>
