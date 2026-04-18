@@ -58,11 +58,11 @@ export default function Sidebar() {
                 {/* Brand Header */}
                 <div className="sidebar-brand">
                     <div className="logo-box">
-                        <span className="logo-icon">BD</span>
+                        <span className="logo-icon">SN</span>
                     </div>
                     <div className="brand-text">
-                        <span className="brand-top">Byte</span>
-                        <span className="brand-bottom">Dynamo</span>
+                        <span className="brand-top">Software</span>
+                        <span className="brand-bottom">Name</span>
                     </div>
                     <i className="uil uil-multiply close-icon" onClick={() => setOpen(false)}></i>
                 </div>

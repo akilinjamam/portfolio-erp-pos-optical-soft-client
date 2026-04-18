@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import dashFooter from './DashboardFooter.module.scss';
 import '../../../global_style/global_style.css';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../../modal/imgmodal/imgModalSlice';
+// import { useDispatch } from 'react-redux';
+// import { openModal } from '../../modal/imgmodal/imgModalSlice';
 import decodeJwt from '../../../jwtDecoder/jwtDecoder';
 import { useEffect, useState, useRef } from 'react';
 
 const DashboardFooter = () => {
     const [remainingTime, setRemainingTime] = useState(null);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const branchId = useRef('');
 
     useEffect(() => {
@@ -77,7 +77,7 @@ const DashboardFooter = () => {
                     </div>
 
                     {/* Developer Credit */}
-                    <div 
+                    {/* <div 
                         className={dashFooter.brandCredit} 
                         onClick={() => dispatch(openModal('developer-info'))}
                     >
@@ -86,7 +86,7 @@ const DashboardFooter = () => {
                             <span className={dashFooter.b}>BYTE</span>
                             <span className={dashFooter.d}>DYNAMO</span>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>
