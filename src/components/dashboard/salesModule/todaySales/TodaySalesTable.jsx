@@ -24,7 +24,7 @@ const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue
                     <p>৳ {totalSalesValue}</p>
                 </div>
                 <div className={salesRecord.statCard}>
-                    <label>Total Paid</label>
+                    <label>Total Advance Paid</label>
                     <p style={{marginBottom: "5px"}} className={salesRecord.textSuccess}>৳ {totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</p>
                 </div>
                 <div className={salesRecord.statCard}>
@@ -32,7 +32,7 @@ const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue
                     <p>{totalSold}</p>
                 </div>
                 <div className={salesRecord.statCard}>
-                    <label>Method Summary</label>
+                    <label>Summary Advance</label>
                     <div className={salesRecord.miniStats}>
                         <span>Cash: {totalCashPaidValue}</span>
                         <span>Bank: {totalBankPaidValue}</span>
