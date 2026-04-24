@@ -112,8 +112,8 @@ const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue
                             <td>৳ {totalSalesValue}</td>
                             <td>Paid: {totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</td>
                             <td>Due: {totalSalesValue - totalDiscount - totalPaid}</td>
+                            <td>Total Paid: {totalPaid}</td>
                             <td>Discount: {totalDiscount}</td>
-                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
