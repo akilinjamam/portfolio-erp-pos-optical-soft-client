@@ -4,7 +4,6 @@
     width: 100%;
     position: absolute;
     bottom: 0;
-    left: 0;
     font-family: v.$fs;
     z-index: 50;
 }
@@ -34,13 +33,16 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        
+
         &.active {
             background: #10b981;
             box-shadow: 0 0 8px #10b981;
             animation: pulse 2s infinite;
         }
-        &.expired { background: #ef4444; }
+
+        &.expired {
+            background: #ef4444;
+        }
     }
 
     .timerWrapper {
@@ -68,8 +70,14 @@
             font-family: 'Courier New', Courier, monospace; // Monospace for numbers
             font-weight: 700;
 
-            .sep { color: #475569; }
-            .seconds { color: #6366f1; min-width: 25px; }
+            .sep {
+                color: #475569;
+            }
+
+            .seconds {
+                color: #6366f1;
+                min-width: 25px;
+            }
         }
 
         .branchBadge {
@@ -97,7 +105,10 @@
 
     &:hover {
         background: rgba(255, 255, 255, 0.05);
-        .logoSmall .d { color: #6366f1; }
+
+        .logoSmall .d {
+            color: #6366f1;
+        }
     }
 
     .poweredBy {
@@ -112,10 +123,13 @@
         font-weight: 900;
         font-size: 12px;
         letter-spacing: 0.5px;
-        
-        .b { color: #f8fafc; }
-        .d { 
-            color: v.$pest; 
+
+        .b {
+            color: #f8fafc;
+        }
+
+        .d {
+            color: v.$pest;
             transition: color 0.3s;
         }
     }
@@ -129,11 +143,24 @@
 }
 
 @keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
 }
 
 @media screen and (max-width: 1242px) {
-    .statusBar { display: none; }
+    .statusBar {
+        display: none;
+    }
 }
