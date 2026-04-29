@@ -24,10 +24,6 @@ const DashboardHome = () => {
     // --- Sales (today) ---
     const {
         lastSaleAndAccountsData,
-        totalCashValue,
-        totalBankValue,
-        totalBkashValue,
-        totalNogodValue,
         totalSalesValue: totalTodaySalesValue,
         isLoading: isLoadingTodaySales,
     } = useGetLastSalesAndAccountsData(today);
