@@ -57,7 +57,7 @@ const DashboardHome = () => {
     const { employeeData, isLoading: isLoadingEmployees } = useGetEmployeeData('', '', '', 1, 1);
     const { payroll: vendorsRes, isLoading: isLoadingVendors } = useGetAllVendorData('', onlyYear, onlyMonth);
 
-    const vendorBills = vendorsRes?.data?.result || [];
+    const vendorBills = useMemo(() => vendorsRes?.data?.result || [], [vendorsRes]);
     const vendorPaidThisMonth = useMemo(() => calculateTotalPrice(vendorBills?.map((b) => Number(b?.paid || 0))), [vendorBills]);
 
     const isAnyLoading =
