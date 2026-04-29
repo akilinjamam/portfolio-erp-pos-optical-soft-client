@@ -7,6 +7,8 @@ import Home from './components/dashboard/home/Home';
 import { useEffect, useState } from 'react';
 import Loading from './components/loading/Loading';
 import DashboardHome from './components/dashboard/dashboard_home/DashboardHome';
+import DashboardQuickModules from './components/dashboard/dashboard_home/DashboardQuickModules';
+import DashboardSalesInsights from './components/dashboard/dashboard_home/DashboardSalesInsights';
 import SalesModule from './components/dashboard/salesModule/SalesModule';
 import Administration from './components/dashboard/administration_module/Administration';
 import administrationRoute from './sub-routes/administration.route';
@@ -58,6 +60,8 @@ function App() {
       element: <Layout><Home/></Layout>,
       children: [
         {index: true, element:<DashboardHome/> },
+        {path: 'quick_modules', element: <DashboardQuickModules/>},
+        {path: 'sales_insights', element: <DashboardSalesInsights/>},
         {
           path: 'sales_module',
           element: <SalesModule/>,

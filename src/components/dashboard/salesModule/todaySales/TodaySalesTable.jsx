@@ -5,7 +5,7 @@ import CommonLoading from '../../../commonLoagin/CommonLoading';
 import salesRecord from '../salesRecord/Table.module.scss';
 
 
-const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashValue, totalBankValue, totalBkashValue, totalNogodValue, totalSold}) => {
+const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue, totalSalesItem, totalPaid, totalDiscount, totalCashPaidValue, totalBankPaidValue, totalBkashPaidValue, totalNogodPaidValue, totalSold}) => {
 
     if(isLoading){
         return (
@@ -24,20 +24,20 @@ const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue
                     <p>৳ {totalSalesValue}</p>
                 </div>
                 <div className={salesRecord.statCard}>
-                    <label>Total Paid</label>
-                    <p style={{marginBottom: "5px"}} className={salesRecord.textSuccess}>৳ {totalPaid}</p>
+                    <label>Total Advance Paid</label>
+                    <p style={{marginBottom: "5px"}} className={salesRecord.textSuccess}>৳ {totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</p>
                 </div>
                 <div className={salesRecord.statCard}>
                     <label>Sold Qty</label>
                     <p>{totalSold}</p>
                 </div>
                 <div className={salesRecord.statCard}>
-                    <label>Method Summary</label>
+                    <label>Summary Advance</label>
                     <div className={salesRecord.miniStats}>
-                        <span>Cash: {totalCashValue}</span>
-                        <span>Bank: {totalBankValue}</span>
-                        <span>Bkash: {totalBkashValue}</span>
-                        <span>Nogod: {totalNogodValue}</span>
+                        <span>Cash: {totalCashPaidValue}</span>
+                        <span>Bank: {totalBankPaidValue}</span>
+                        <span>Bkash: {totalBkashPaidValue}</span>
+                        <span>Nogod: {totalNogodPaidValue}</span>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,8 @@ const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue
                                             <span className={`${salesRecord.badge} ${sale?.delivered === 'Delivered' ? salesRecord.bgSuccess : salesRecord.bgWarning}`}>
                                                 {sale?.delivered}
                                             </span>
-                                            <span className={salesRecord.methodBadge}>{sale?.paymentMethodHistory}</span>
+                                            <span className={salesRecord.methodBadge}>+{sale?.paymentMethodHistory?.split('+')?.[1]}</span>
+                                            <span className={salesRecord.methodBadge}>+{sale?.paymentHistory?.split('+')?.[1]}</span>
                                         </div>
                                     </td>
                                     <td className={salesRecord.recorderName}>{sale?.referredBy}</td>
@@ -109,10 +110,10 @@ const NewTodaySalesTable = ({ paginatedDataContainer, isLoading, totalSalesValue
                         <tr className={salesRecord.footerRow}>
                             <td colSpan="4">Total Page Summary ({totalSalesItem} Items)</td>
                             <td>৳ {totalSalesValue}</td>
-                            <td>Paid: {totalPaid}</td>
+                            <td>Paid: {totalCashPaidValue + totalBankPaidValue + totalBkashPaidValue + totalNogodPaidValue}</td>
                             <td>Due: {totalSalesValue - totalDiscount - totalPaid}</td>
+                            <td>Total Paid: {totalPaid}</td>
                             <td>Discount: {totalDiscount}</td>
-                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
