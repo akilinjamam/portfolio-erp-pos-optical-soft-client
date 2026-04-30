@@ -137,8 +137,8 @@ const DashboardHome = () => {
                     <div className={dashhome.splitStats}>
                         <div className={dashhome.splitItem}>
                             <span className={dashhome.splitLabel}>Products</span>
-                            <b>{productsAll?.totalStock ?? '--'}</b>
-                            <span className={dashhome.splitHint}>In stock: {productsInStock?.totalStock ?? '--'}</span>
+                            <b>{productsAll?.total ?? '--'}</b>
+                            <span className={dashhome.splitHint}>In stock: {productsInStock?.total ?? '--'}</span>
                         </div>
                         <div className={dashhome.splitItem}>
                             <span className={dashhome.splitLabel}>Suppliers</span>
