@@ -57,7 +57,7 @@ const DashboardHome = () => {
     const { employeeData, isLoading: isLoadingEmployees } = useGetEmployeeData('', '', '', 1, 1);
     const { payroll: vendorsRes, isLoading: isLoadingVendors } = useGetAllVendorData('', onlyYear, onlyMonth);
 
-    const vendorBills = vendorsRes?.data?.result || [];
+    const vendorBills = useMemo(() => vendorsRes?.data?.result || [], [vendorsRes]);
     const vendorPaidThisMonth = useMemo(() => calculateTotalPrice(vendorBills?.map((b) => Number(b?.paid || 0))), [vendorBills]);
 
     const isAnyLoading =
@@ -137,8 +137,8 @@ const DashboardHome = () => {
                     <div className={dashhome.splitStats}>
                         <div className={dashhome.splitItem}>
                             <span className={dashhome.splitLabel}>Products</span>
-                            <b>{productsAll?.total ?? '--'}</b>
-                            <span className={dashhome.splitHint}>In stock: {productsInStock?.total ?? '--'}</span>
+                            <b>{productsAll?.totalStock ?? '--'}</b>
+                            <span className={dashhome.splitHint}>In stock: {productsInStock?.totalStock ?? '--'}</span>
                         </div>
                         <div className={dashhome.splitItem}>
                             <span className={dashhome.splitLabel}>Suppliers</span>
