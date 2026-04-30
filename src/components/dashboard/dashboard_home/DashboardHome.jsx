@@ -52,7 +52,6 @@ const DashboardHome = () => {
 
     // --- Counts ---
     const { products: productsAll, isLoading: isLoadingProductsAll } = useProductData('', '', '', '', '', 1, 1, '');
-    const { products: productsInStock, isLoading: isLoadingProductsInStock } = useProductData('', '', '', '', '', 1, 1, true);
     const { supplierData, isLoading: isLoadingSuppliers } = useGetSupplierDataPaginated('', 1, 1);
     const { employeeData, isLoading: isLoadingEmployees } = useGetEmployeeData('', '', '', 1, 1);
     const { payroll: vendorsRes, isLoading: isLoadingVendors } = useGetAllVendorData('', onlyYear, onlyMonth);
@@ -65,11 +64,9 @@ const DashboardHome = () => {
         isLoadingMonthSales ||
         isLoadingProfitExpense ||
         isLoadingProductsAll ||
-        isLoadingProductsInStock ||
         isLoadingSuppliers ||
         isLoadingEmployees ||
         isLoadingVendors;
-
     return (
         <div className={`${dashhome.main} full_width`}>
             <div className={dashhome.headerRow}>
@@ -137,8 +134,8 @@ const DashboardHome = () => {
                     <div className={dashhome.splitStats}>
                         <div className={dashhome.splitItem}>
                             <span className={dashhome.splitLabel}>Products</span>
-                            <b>{productsAll?.total ?? '--'}</b>
-                            <span className={dashhome.splitHint}>In stock: {productsInStock?.total ?? '--'}</span>
+                            <b>{productsAll?.totalStock ?? '--'}</b>
+                            <span className={dashhome.splitHint}>Available stock: {productsAll?.totalQuantity ?? '--'}</span>
                         </div>
                         <div className={dashhome.splitItem}>
                             <span className={dashhome.splitLabel}>Suppliers</span>
